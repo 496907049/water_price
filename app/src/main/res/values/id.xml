@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="main_view" />
+    <item type="id" name="main_view2" />
+     <item type="id" name="banner_img" />
+     <integer name="anim_length" >1000</integer>
+     <integer name="anim_half_length" >500</integer>
+</resources>

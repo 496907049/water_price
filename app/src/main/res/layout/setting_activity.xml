@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+	<include
+		layout="@layout/base_top_bar"
+		/>
+
+	<ImageView
+		style="@style/divider_hor_style.color"
+		android:layout_marginTop="@dimen/base_margin_small"
+		/>
+	<LinearLayout
+		android:id="@+id/view_clear"
+		style="@style/base_item_style.white">
+		<TextView
+			style="@style/base_text_content.match"
+			android:text="清理缓存"
+			/>
+
+		<TextView
+			android:id="@+id/text_cache"
+			style="@style/base_text_content.small.grey"
+			android:layout_marginRight="@dimen/base_margin_small"
+			/>
+		<ImageView
+			style="@style/base_item_img_tag" />
+	</LinearLayout>
+	<ImageView
+		style="@style/divider_hor_style.color"/>
+	<LinearLayout
+		android:id="@+id/view_aboutus"
+		style="@style/base_item_style.white">
+		<TextView
+			style="@style/base_text_content.match"
+			android:text="关于我们"
+			/>
+		<ImageView
+			style="@style/base_item_img_tag" />
+	</LinearLayout>
+	<ImageView
+		style="@style/divider_hor_style.color"/>
+	<LinearLayout
+		android:id="@+id/view_update"
+		style="@style/base_item_style.white">
+		<TextView
+			style="@style/base_text_content.match"
+			android:text="检查更新"
+			/>
+		<ImageView
+			style="@style/base_item_img_tag" />
+	</LinearLayout>
+	<ImageView
+		style="@style/divider_hor_style.color"/>
+
+	<LinearLayout
+		android:id="@+id/view_feedback"
+		style="@style/base_item_style.white">
+		<TextView
+			style="@style/base_text_content.match"
+			android:text="意见反馈"
+			/>
+		<ImageView
+			style="@style/base_item_img_tag" />
+	</LinearLayout>
+	<ImageView
+		style="@style/divider_hor_style.color"
+		android:visibility="gone"
+		/>
+	<LinearLayout
+		android:id="@+id/view_version"
+		style="@style/base_item_style.white"
+		android:visibility="gone"
+		>
+		<TextView
+			style="@style/base_text_content.match"
+			android:text="版本说明"
+			/>
+		<ImageView
+			style="@style/base_item_img_tag" />
+	</LinearLayout>
+	<ImageView
+		style="@style/divider_hor_style.color"/>
+	<Button
+		android:id="@+id/btn_logout"
+		style="@style/base_btn_match.margin_big"
+		android:layout_marginTop="@dimen/base_margin_xlarge"
+		android:layout_marginLeft="@dimen/base_margin_xlarge"
+		android:layout_marginRight="@dimen/base_margin_xlarge"
+		android:text="注销"
+		/>
+</LinearLayout>

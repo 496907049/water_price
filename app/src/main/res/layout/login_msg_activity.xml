@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/login_img_logo" />
+
+        <include
+            layout="@layout/base_top_bar"
+            />
+
+        <LinearLayout
+            style="@style/base_layout_m_w_v"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <ImageView
+                style="@style/base_icon_fitxy"
+                android:layout_height="100dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/login_img_logo" />
+
+            <TextView
+                style="@style/base_text_content.large"
+                android:layout_marginTop="@dimen/base_margin_mid"
+                android:text="U K L"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_margin_xlarge"
+            android:layout_marginLeft="@dimen/base_margin_xlarge"
+            android:layout_marginRight="@dimen/base_margin_xlarge"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/login_item_nopaddingtopbottom_style"
+                android:layout_marginTop="@dimen/base_margin_mid">
+
+
+                <ImageView
+                    style="@style/base_icon_mid"
+                    android:src="@drawable/login_icon_mobile"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_msgcode"
+                    style="@style/base_edit"
+                    android:layout_weight="1.0"
+                    android:inputType="number"
+                    android:hint="@string/login_msgcode_hint"
+                    android:singleLine="true"
+                    android:imeOptions="actionGo"
+                    />
+
+                <TextView
+                    android:id="@+id/text_msgcode"
+                    style="@style/login_btn_msgcode"
+                    android:text="@string/user_code_send"
+                    />
+            </LinearLayout>
+
+
+
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/login_btn"
+                android:layout_marginTop="@dimen/base_margin_xlarge"
+                android:text="@string/app_next" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_pressed"
+    android:gravity="bottom">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#e9eff2"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/base_item_textonly"
+            android:background="@color/transparent"
+            android:gravity="center"
+            android:text="@string/app_name" />
+
+        <LinearLayout style="@style/base_layout_m_w_h"
+            android:padding="@dimen/base_padding_mid"
+            >
+
+            <LinearLayout
+                android:id="@+id/view_copy"
+                style="@style/share_img_item"
+                android:visibility="visible"
+                >
+
+                <ImageView
+                    style="@style/share_img_item_icon"
+                    android:src="@drawable/share_icon_wechat" />
+
+                <TextView
+                    style="@style/share_img_item_text"
+                    android:text="复制链接" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_wechat"
+                style="@style/share_img_item"
+                android:visibility="visible"
+                >
+
+                <ImageView
+                    style="@style/share_img_item_icon"
+                    android:src="@drawable/share_icon_wechat" />
+
+                <TextView
+                    style="@style/share_img_item_text"
+                    android:text="微信好友" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_wxcircle"
+                style="@style/share_img_item"
+                android:visibility="visible"
+                >
+
+                <ImageView
+                    style="@style/share_img_item_icon"
+                    android:src="@drawable/share_icon_wxcircle" />
+
+                <TextView
+                    style="@style/share_img_item_text"
+                    android:text="朋友圈" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/share_img_item"
+                android:visibility="invisible">
+
+                <ImageView
+                    style="@style/share_img_item_icon"
+                    android:src="@drawable/share_icon_wechat" />
+
+                <TextView
+                    style="@style/share_img_item_text"
+                    android:text="微信好友" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/view_holder"
+                style="@style/share_img_item"
+                android:visibility="gone">
+
+                <ImageView
+                    style="@style/share_img_item_icon" />
+
+                <TextView
+                    style="@style/share_img_item_text"
+                    android:text="" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/btn_close"
+            style="@style/base_btn_match"
+            android:background="@drawable/base_btn_white"
+            android:text="取消分享"
+            android:textColor="@color/base_text_black" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    >
+
+
+    <include
+        layout="@layout/base_top_bar"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/base_margin_xlarge"
+            android:layout_marginLeft="@dimen/base_margin_xlarge"
+            android:layout_marginRight="@dimen/base_margin_xlarge"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <com.makeramen.roundedimageview.RoundedImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imageView1"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@color/white"
+                android:scaleType="fitXY"
+                app:riv_corner_radius="40dip"
+                app:riv_mutate_background="true" />
+
+            <LinearLayout style="@style/base_layout_m_w_h"
+                android:layout_marginTop="@dimen/base_margin_mid"
+                android:gravity="center_vertical"
+                android:background="@drawable/login_edit_bg"
+                >
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@drawable/login_icon_mobile"
+                    android:visibility="visible"
+                    />
+
+                <EditText
+                    android:id="@+id/eidt_user"
+                    style="@style/base_edit.small"
+                    android:drawablePadding="@dimen/base_padding_small"
+                    android:layout_weight="1.0"
+                    android:hint="@string/user_mobile_hint"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+
+            <LinearLayout style="@style/base_layout_m_w_h"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_margin_small"
+                android:background="@drawable/login_edit_bg"
+                >
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@drawable/login_icon_mobile"
+                    android:visibility="visible"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_msgcode"
+                    style="@style/base_edit.small"
+                    android:drawablePadding="@dimen/base_padding_small"
+                    android:background="@null"
+                    android:layout_weight="1.0"
+                    android:hint="@string/login_msgcode_hint"
+                    android:inputType="phone"
+                    android:singleLine="true" />
+
+                <TextView
+                    android:id="@+id/text_msgcode"
+                    style="@style/login_btn_msgcode"
+                    android:text="@string/user_code_send"
+                     />
+            </LinearLayout>
+            <LinearLayout style="@style/base_layout_m_w_h"
+                android:layout_marginTop="@dimen/base_margin_small"
+                android:gravity="center_vertical"
+                android:background="@drawable/login_edit_bg"
+                >
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@drawable/login_icon_pwd"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_pwd"
+                    style="@style/base_edit.small"
+                    android:layout_weight="1.0"
+                    android:hint="@string/regist_pwd_hint"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/base_layout_m_w_h"
+                android:layout_marginTop="@dimen/base_margin_small"
+                android:gravity="center_vertical"
+                android:background="@drawable/login_edit_bg"
+                >
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@drawable/login_icon_pwd"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_pwd_confirm"
+                    style="@style/base_edit.small"
+                    android:layout_weight="1.0"
+                    android:hint="@string/regist_pwd_againt_hint"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_margin_small"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/check_rule"
+                    style="@style/base_icon_small"
+                    android:src="@drawable/login_icon_checked"
+                    android:layout_marginRight="@dimen/base_padding_small"
+                    />
+                <TextView
+                    style="@style/base_text_content.xsmall"
+                    android:textColor="@color/white"
+                    android:text="@string/regist_alreadyread"/>
+                <TextView
+                    android:id="@+id/text_regist_rule"
+                    style="@style/base_text_content.xsmall"
+                    android:background="@drawable/base_item_shadow_selector"
+                    android:text="@string/regist_user_rules"
+                    android:textColor="@color/base_text_yellow" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/login_btn"
+                android:layout_marginBottom="@dimen/base_margin_mid"
+                android:layout_marginTop="@dimen/base_margin_large"
+                android:text="@string/app_confirm" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

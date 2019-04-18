@@ -1,0 +1,40 @@
+<resources>
+
+
+    <dimen name="base_bar_height">50dp</dimen>
+    <dimen name="base_title_logo_height">25dp</dimen>
+    <dimen name="base_bar_btn_width">50dp</dimen>
+    <dimen name="base_bar_btn_height">50dp</dimen>
+    <dimen name="base_title_icon_width">18dp</dimen>
+    <dimen name="base_tab_icon_width">28dp</dimen>
+    <dimen name="base_tab_icon_height">28dp</dimen>
+
+
+
+    <dimen name="base_margin_xsmall">4dp</dimen>
+    <dimen name="base_margin_small">8dp</dimen>
+    <dimen name="base_margin_mid">16dp</dimen>
+    <dimen name="base_margin_large">20dp</dimen>
+    <dimen name="base_margin_xlarge">30dp</dimen>
+    <dimen name="base_margin_xxlarge">50dp</dimen>
+    <dimen name="base_margin_xxxlarge">70dp</dimen>
+
+
+    <dimen name="base_textsize_xsmall">10sp</dimen>
+    <dimen name="base_textsize_small">12sp</dimen>
+    <dimen name="base_textsize_small_ex">14sp</dimen>
+    <dimen name="base_textsize_mid">16sp</dimen>
+    <dimen name="base_textsize_mid_18">18sp</dimen>
+    <dimen name="base_textsize_mid_ex">20sp</dimen>
+    <dimen name="base_textsize_large">24sp</dimen>
+    <dimen name="base_textsize_xlarge">30sp</dimen>
+
+    <dimen name="base_padding_xxsmall">3dp</dimen>
+    <dimen name="base_padding_xsmall">6dp</dimen>
+    <dimen name="base_padding_small">10dp</dimen>
+    <dimen name="base_padding_small_ex">14dp</dimen>
+    <dimen name="base_padding_mid">18dp</dimen>
+    <dimen name="base_padding_mid_ex">24dp</dimen>
+    <dimen name="base_padding_large">40dp</dimen>
+    <dimen name="base_padding_xlarge">60dp</dimen>
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <ScrollView style="@style/base_scroll_style">
+
+        <LinearLayout style="@style/base_layout_m_w_v">
+
+            <LinearLayout
+                style="@style/base_layout_m_w_v"
+                android:orientation="vertical"
+                android:padding="@dimen/base_padding_small">
+
+                <LinearLayout
+                    android:id="@+id/view_type"
+                    style="@style/base_item_style"
+                    android:background="@drawable/bg_white_round">
+
+                    <TextView
+                        android:id="@+id/text_type"
+                        style="@style/base_text_content"
+                        android:layout_weight="1.0"
+                        android:hint="请选择反馈类型" />
+
+                    <ImageView style="@style/base_item_img_tag" />
+                </LinearLayout>
+
+                <com.ffapp.view.HintEditText
+                    android:id="@+id/edit_custom"
+                    style="@style/base_layout_m_w"
+                    android:layout_marginTop="@dimen/base_margin_mid"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="top|left"
+                    />
+
+                <EditText
+                    android:id="@+id/edit_contact"
+                    style="@style/base_edit"
+                    android:layout_marginTop="@dimen/base_margin_mid"
+                    android:background="@drawable/bg_white_round"
+                    android:gravity="top|left"
+                    android:hint="手机/邮箱（选填）"
+                    android:padding="@dimen/base_padding_small" />
+
+                <TextView
+                    style="@style/base_text_content.small.dark_grey"
+                    android:layout_marginBottom="@dimen/base_margin_small"
+                    android:layout_marginTop="@dimen/base_margin_large"
+                    android:layout_marginLeft="@dimen/base_margin_mid"
+                    android:text="上传图片(最多6张)" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                     />
+
+                <Button
+                    android:id="@+id/btn_ok"
+                    style="@style/base_btn_match.margin_big"
+                    android:layout_marginBottom="@dimen/base_margin_large"
+                    android:layout_marginTop="@dimen/base_margin_xlarge"
+                    android:text="@string/app_post" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

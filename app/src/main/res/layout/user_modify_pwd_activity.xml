@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+
+        <include layout="@layout/base_top_bar" />
+
+        <LinearLayout style="@style/base_layout_m_w_v"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/base_margin_mid"
+            >
+
+            <ImageView
+                style="@style/divider_hor_style.color" />
+
+            <LinearLayout
+                style="@style/user_modify_item_style"
+                android:paddingLeft="@dimen/base_padding_mid">
+
+                <TextView
+                    style="@style/base_text_content.red"
+                    android:text="*"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/user_item_title"
+                    android:text="@string/user_old_password" />
+
+                <EditText
+                    android:id="@+id/edit_old_pwd"
+                    style="@style/base_item_edit_style"
+                    android:gravity="right"
+                    android:hint="@string/user_enter_old_password"
+                    android:inputType="textPassword" />
+
+            </LinearLayout>
+
+            <ImageView style="@style/user_item_divider" />
+
+            <LinearLayout
+                style="@style/user_modify_item_style"
+                android:paddingLeft="@dimen/base_padding_mid">
+                <TextView
+                    style="@style/base_text_content.red"
+                    android:text="*"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/user_item_title"
+                    android:text="@string/user_new_password" />
+
+                <EditText
+                    android:id="@+id/edit_new_pwd"
+                    style="@style/base_item_edit_style"
+                    android:gravity="right"
+                    android:hint="@string/user_enter_new_password_"
+                    android:inputType="textPassword" />
+
+            </LinearLayout>
+
+            <ImageView style="@style/user_item_divider" />
+
+            <LinearLayout
+                style="@style/user_modify_item_style"
+                android:paddingLeft="@dimen/base_padding_mid">
+
+                <TextView
+                    style="@style/base_text_content.red"
+                    android:text="*"
+                    android:visibility="gone" />
+
+                <TextView
+                    style="@style/user_item_title"
+                    android:text="@string/user_confirm_password" />
+
+                <EditText
+                    android:id="@+id/edit_pwd_confirm"
+                    style="@style/base_item_edit_style"
+                    android:gravity="right"
+                    android:hint="@string/user_enter_password_cofirm"
+                    android:inputType="textPassword" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:layout_marginTop="@dimen/base_margin_large"
+        android:layout_marginLeft="@dimen/base_margin_mid"
+        android:visibility="gone"
+        >
+        <ImageView
+            style="@style/base_icon_mid"
+            android:src="@drawable/icon_tip"
+            />
+        <TextView
+            style="@style/base_text_content.small.dark_grey"
+            android:layout_marginLeft="@dimen/base_margin_small"
+            android:text="密码长度应大于6位小于16位，填写时请留意大小写区分"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btn_ok"
+       style="@style/login_btn"
+        android:layout_marginTop="@dimen/base_margin_xlarge"
+        android:text="确认"
+        />
+
+</LinearLayout>

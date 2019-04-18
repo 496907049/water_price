@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 透明 -->
+    <color name="transparent">#00000000</color>
+    <!-- 透明 -->
+    <color name="transparent_mid">#72000000</color>
+    <!-- 黑色透明 -->
+    <color name="black_transparent">#99000000</color>
+
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    <!-- 亮天蓝色 -->
+    <color name="lightskyblue">#2190a3</color>
+    <!-- 天蓝色 -->
+    <color name="skyblue">#87ceeb</color>
+    <!-- 灰色 -->
+    <color name="grey">#808080</color>
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <!-- 白色 -->
+    <color name="white_pressed">#22000000</color>
+    <!-- 红色 -->
+    <color name="red">#ff0000</color>
+    <!-- 暗灰色 -->
+    <color name="darkgrey">#a9a9a9</color>
+
+
+    <color name="base_bg_yellow">#ffd815</color>
+    <color name="base_text_green">#5cca8b</color>
+    <color name="base_text_grey">#999999</color>
+    <color name="base_text_dark_grey">#a1a1a1</color>
+    <color name="base_text_black">#555555</color>
+    <color name="base_text_black_light">#727171</color>
+    <color name="base_text_black_grey">#555555</color>
+    <color name="base_bg_white">#f7f7f7</color>
+    <color name="base_text_red">#de3c3c</color>
+    <color name="base_text_hint">#FF999999</color>
+    <color name="base_bg_back">#f3f3f3</color>
+    <color name="base_blue">#4d7bf3</color>
+    <color name="base_blue_pressed">#355cef</color>
+    <color name="base_text_light_blue">#009fe9</color>
+    <color name="base_text_blue">#4D7BF3</color>
+    <color name="base_text_yellow">#fdcb4e</color>
+    <color name="base_text_purple">#9454ad</color>
+    <color name="base_color_red">#cb2d3e</color>
+    <color name="base_color_purple">#9454ad</color>
+    <color name="transpanrent_white">#33ffffff</color>
+    <color name="base_divider">#EEEEEE</color>
+
+</resources>

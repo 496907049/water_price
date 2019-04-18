@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_v"
+        android:layout_height="200dp"
+        android:gravity="center">
+
+        <ImageView
+            style="@style/base_icon_fitxy"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            style="@style/base_text_content"
+            android:layout_marginTop="@dimen/base_margin_large"
+            android:text="@string/app_name"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/text_version"
+            style="@style/base_text_content.small.grey"
+            android:layout_marginTop="@dimen/base_margin_xsmall"
+            android:text="@string/app_name" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/base_layout_m_w_v"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/view_company"
+            style="@style/base_item_style.smallpadding">
+
+            <TextView
+                style="@style/user_item_name"
+                android:text="公司概况" />
+
+            <ImageView style="@style/base_item_img_tag" />
+        </LinearLayout>
+
+        <ImageView style="@style/divider_hor_style.color" />
+
+        <LinearLayout
+            android:id="@+id/view_bussness"
+            style="@style/base_item_style.smallpadding"
+            android:visibility="gone"
+            >
+
+            <TextView
+                style="@style/user_item_name"
+                android:text="业务领域" />
+
+            <ImageView style="@style/base_item_img_tag" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

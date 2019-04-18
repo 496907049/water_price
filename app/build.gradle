@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.ffapp.baseapp"
+        minSdkVersion 17
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+                JPUSH_APPKEY : "a2b951a1e23740b7339bc9d0", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            assets.srcDirs = ['src/main/assets']
+            jniLibs.srcDir(['libs'])
+        }
+    }
+    dexOptions {
+        javaMaxHeapSize "4g"
+        maxProcessCount 8
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def releaseTime = new Date().format("MM-dd", TimeZone.getTimeZone("UTC"))
+//            def file = output.outputFile
+            def filename = "智慧灌溉app_Android_V" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + releaseTime + ".apk"
+            output.outputFileName = filename
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+    implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
+    implementation 'com.jakewharton:butterknife:8.8.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
+    implementation 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
+    //    compile 'com.github.bumptech.glide:glide:4.7.1'
+    //    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation 'com.alibaba:fastjson:1.2.10'
+    implementation 'com.mylhyl:acp:1.1.7'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.lzy.widget:imagepicker:0.6.1'
+    implementation 'com.android.support:multidex:1.0.3'
+    //图片选取
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+    implementation 'cn.yipianfengye.android:zxing-library:2.1'
+    implementation 'com.loopj.android:android-async-http:1.4.9'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'com.kaopiz:kprogresshud:1.1.0'
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+//    compile 'com.gyf.immersionbar:immersionbar:2.3.1'
+    implementation 'com.youth.banner:banner:1.4.10'
+    implementation 'com.luozm.captcha:captcha:1.1.1'
+    //Log日志格式美化包
+    //    compile 'com.orhanobut:logger:2.1.1'
+    implementation 'com.youth.banner:banner:1.4.10'
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
+    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
+    implementation files('libs/Amap_2DMap_V5.2.0_20170627.jar')
+    implementation files('libs/AMap_Location_V4.3.0_20181016.jar')
+    implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
+    implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
+    implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
+
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'//图表
+//    implementation 'com.amap.api:location:4.2.0'//高德定位
+//    implementation 'com.amap.api:3dmap:6.4.1'//高德定位3D
+
+    implementation 'com.contrarywind:Android-PickerView:4.1.6'//时间选择
+    implementation 'com.github.zcweng:switch-button:0.0.3@aar'//swtch开关
+
+    implementation 'com.github.iwgang:countdownview:2.1.6'//倒计时
+    implementation 'com.sunfusheng:marqueeview:1.3.3' //跑马灯
+
+    implementation files('libs/pinyin4j-2.5.0.jar')//汉字转拼音1
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <ScrollView
+        style="@style/base_scroll_style">
+        <LinearLayout
+            style="@style/base_layout_m_w_v">
+            <LinearLayout
+                style="@style/base_layout_m_w_v"
+                android:layout_height="120dp"
+                android:gravity="center">
+
+                <ImageView
+                    style="@style/base_icon_fitxy"
+                    android:layout_height="60dp"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/about_img_logoff" />
+
+            </LinearLayout>
+            <ImageView
+                style="@style/divider_hor_style.color"
+                android:background="#DDDDDD"
+                android:layout_marginLeft="@dimen/base_margin_large"
+                android:layout_marginRight="@dimen/base_margin_large"
+                android:layout_marginBottom="@dimen/base_margin_large"
+                />
+
+            <LinearLayout
+                style="@style/base_layout_m_w_v"
+                android:layout_marginLeft="@dimen/base_margin_xlarge"
+                android:layout_marginRight="@dimen/base_margin_xlarge"
+                >
+                <TextView
+                    style="@style/base_text_content"
+                    android:text="公司概况"
+                    />
+                <TextView
+                    style="@style/base_text_content.small.grey"
+                    android:layout_marginTop="@dimen/base_margin_small"
+                    android:lineSpacingExtra="@dimen/base_margin_small"
+                    android:text="厦门四信物联网科技有限公司专注于防灾减灾救灾信息化和安全生产信息化等垂直行业应用产品的研发、生产与服务。以创新为动力，以应用促研发，为政府管理部门和行业客户的物联网建设提供方案与智慧。经过多年行业洞察与实践经验的积累，是智慧城市、智慧消防、智慧地灾、智慧水务、数字水利、防汛抗旱信息化、安全生产信息化等行业解决方案提供商。"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

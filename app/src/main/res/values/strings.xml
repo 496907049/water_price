@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">智慧灌溉</string>
+    <string name="login_hint_mobile">手机号码</string>
+    <string name="login_hint_pwd">登录密码</string>
+    <string name="regist_pwd_hint">设置登录密码</string>
+    <string name="regist_pwd_againt_hint">确认登录密码</string>
+    <string name="login_msgcode_hint">短信验证码</string>
+    <string name="regist_alreadyread">已阅读并同意</string>
+    <string name="regist_user_rules">《用户服务协议》</string>
+
+    <string name="home_index">首页</string>
+    <string name="home_user">个人中心</string>
+    <string name="home_news">新闻资讯</string>
+    <string name="home_tab_user">我的</string>
+
+
+    <string name="user_mylike">我的收藏</string>
+    <string name="user_wallet">钱包地址</string>
+    <string name="user_addwechat">加微信客服</string>
+    <string name="user_addgroup">加电报群</string>
+    <string name="rate_apply">评级申请</string>
+    <string name="rate_explain">评级说明</string>
+    <string name="user_help">帮助中心</string>
+
+    <string name="info_nickname">昵&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;称</string>
+    <string name="info_modify_pwd">修改密码</string>
+    <string name="info_modify_mobile">修改手机</string>
+    <string name="info_modify_email">修改邮箱</string>
+    <string name="info_click_tomodify">点击修改头像</string>
+
+    <string name="join_number">参与码</string>
+
+
+    <string name="product_order_hint_one">1、转帐完成后请点击我已转账，并正确填写交易号后六位。</string>
+    <string name="product_order_hint_two">2、申请结果将在审核通过后以信息告知，或在个人中心-我的足迹中查询。</string>
+
+    <string name="order_transfer_hint_one">1、请先通过您转币的交易Hash输入以下地址查询转账状态，请先确保已经转币成功且被网络确认。\n比特币：https://blockchain.info/\n以太坊及以太坊类币：https://etherscan.io/</string>
+    <string name="order_transfer_hint_two">2、请填写交易单号后六位并提交，便于核对确认。</string>
+    <string name="product_order_post_hint_one">1、申请结果将在审核通过后以短信形式告知，或在“我的-我的足迹”中查询。</string>
+    <string name="product_order_success">提交成功</string>
+    <string name="product_receive_address">收款地址</string>
+    <string name="product_receive_address_qrcode">收款地址二维码:</string>
+    <string name="post_apply">提交申请</string>
+    <string name="post_join_apply">提交参与申请</string>
+    <string name="bind_wallet_address_hint">参与项目与领取福利需先绑定个人钱包（如ImToken）地址，不支持交易所钱包地址。</string>
+    <string name="user_wallet_address_hint">修改钱包地址后，参与项目与领取福利将使用新的钱包地址。</string>
+    <string name="modify_wallet_address">修改钱包地址</string>
+
+    <string name="integral_exchange_hint_one">1、100积分可兑换%1$sETH，满%2$s分起兑。</string>
+    <string name="integral_exchange_hint_two">2、100积分可兑换%sETH</string>
+    <string name="integral_exchange_hint_three">2、成功提交申请通过后，将在1~3个工作日内转币至您绑定的钱包地址。</string>
+    <string name="integral_exchange">积分兑换</string>
+    <string name="share_title">邀请好友下载APP送积分，积分可兑换ETH。</string>
+    <string name="share_content">UKL 您身边的区块链项目评级专家!</string>
+    <string name="share_copy_content">UKL 您身边的区块链项目评级专家。下载APP送积分，积分可兑换ETH。\n</string>
+
+    <string name="news_view_org">查看原文</string>
+    <string name="news_candy_enter">糖果入口：</string>
+    <string name="news_candy_begintime">开始时间：</string>
+    <string name="news_candy_end_time">结束时间：</string>
+    <string name="search_result_empty">本次搜索结果无内容</string>
+    <string name="search_history">历史记录</string>
+    <string name="search_please_input_searchkey">请输入搜索内容</string>
+    <string name="news_warning">声明：本内容仅供参考，不做任何投资建议使用。</string>
+
+</resources>

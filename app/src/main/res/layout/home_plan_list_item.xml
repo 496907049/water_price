@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:orientation="vertical" >
+    
+	<LinearLayout
+	    style="@style/base_layout_m_w_h_cv"
+		android:paddingLeft="@dimen/base_margin_mid"
+		android:paddingRight="@dimen/base_margin_mid"
+		android:paddingBottom="@dimen/base_margin_small"
+		android:paddingTop="@dimen/base_margin_small"
+	    >
+		<TextView
+			android:id="@+id/text_time_value"
+			style="@style/base_text_content.small"
+			android:layout_width="match_parent"
+			android:layout_weight="1.0"
+			android:text="灌溉时长"
+			/>
+
+		<TextView
+			android:id="@+id/text_water_value"
+			style="@style/base_text_content.small"
+			android:layout_width="match_parent"
+			android:layout_weight="1.1"
+			android:text="灌溉水量"
+			/>
+
+		<LinearLayout
+			style="@style/base_layout_m_w_h_cv"
+			android:layout_weight="1.0"
+			>
+			<TextView
+				android:id="@+id/text_day"
+				style="@style/base_text_content.bold"
+				android:textSize="@dimen/base_textsize_small"
+				android:textColor="@color/black"
+				android:text="0"
+				/>
+			<TextView
+				style="@style/base_text_content.small"
+				android:layout_marginLeft="@dimen/base_margin_xsmall"
+				android:text="天"
+				/>
+			<TextView
+				android:id="@+id/text_hour"
+				style="@style/base_text_content.bold"
+				android:layout_marginLeft="@dimen/base_margin_xsmall"
+				android:textSize="@dimen/base_textsize_small"
+				android:textColor="@color/black"
+				android:text="0"
+				/>
+			<TextView
+				style="@style/base_text_content.small"
+				android:layout_marginLeft="@dimen/base_margin_xsmall"
+				android:text="小时"
+				/>
+		</LinearLayout>
+
+	</LinearLayout>
+</LinearLayout>
