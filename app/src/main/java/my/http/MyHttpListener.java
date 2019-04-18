@@ -1,9 +1,9 @@
 package my.http;
 
 
-import com.ffapp.baseapp.basis.BasisApp;
-import com.ffapp.baseapp.bean.BasisBean;
-import com.ffapp.baseapp.login.LoginActivity;
+import com.ffapp.waterprice.basis.BasisApp;
+import com.ffapp.waterprice.bean.BasisBean;
+import com.ffapp.waterprice.login.LoginActivity;
 
 public abstract class MyHttpListener {
 

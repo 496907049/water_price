@@ -2,7 +2,7 @@ package my;
 
 import android.text.TextUtils;
 
-import com.ffapp.baseapp.basis.BasisApp;
+import com.ffapp.waterprice.basis.BasisApp;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -21,7 +21,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
-import com.ffapp.baseapp.basis.BasisApp;
+import com.ffapp.waterprice.basis.BasisApp;
 
 import java.io.File;
 import java.lang.reflect.Field;

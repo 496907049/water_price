@@ -1,11 +1,9 @@
 package my.http;
 
-import android.os.Build;
-
-import com.ffapp.baseapp.basis.BasisApp;
-import com.ffapp.baseapp.basis.Constants;
-import com.ffapp.baseapp.bean.LoginBean;
-import com.ffapp.baseapp.util.MyUtils;
+import com.ffapp.waterprice.basis.BasisApp;
+import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.LoginBean;
+import com.ffapp.waterprice.util.MyUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;

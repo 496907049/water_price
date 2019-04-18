@@ -24,8 +24,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ffapp.baseapp.R;
-import com.ffapp.baseapp.basis.BasisApp;
+import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.BasisApp;
 
 import java.io.File;
 import java.util.List;

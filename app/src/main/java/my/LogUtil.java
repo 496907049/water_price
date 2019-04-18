@@ -3,7 +3,7 @@ package my;
 
 import android.util.Log;
 
-import com.ffapp.baseapp.basis.Constants;
+import com.ffapp.waterprice.basis.Constants;
 
 public class LogUtil {
 

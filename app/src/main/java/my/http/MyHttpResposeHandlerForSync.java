@@ -3,9 +3,9 @@ package my.http;
 import android.text.TextUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.ffapp.baseapp.bean.BaseMsgBean;
-import com.ffapp.baseapp.bean.BasicBeanStr;
-import com.ffapp.baseapp.bean.BasisBean;
+import com.ffapp.waterprice.bean.BaseMsgBean;
+import com.ffapp.waterprice.bean.BasicBeanStr;
+import com.ffapp.waterprice.bean.BasisBean;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import cz.msebera.android.httpclient.Header;

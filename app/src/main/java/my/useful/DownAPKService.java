@@ -18,10 +18,10 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.FileProvider;
 import android.widget.Toast;
 
-import com.ffapp.baseapp.BuildConfig;
-import com.ffapp.baseapp.R;
-import com.ffapp.baseapp.basis.BasisApp;
-import com.ffapp.baseapp.basis.Constants;
+import com.ffapp.waterprice.BuildConfig;
+import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.BasisApp;
+import com.ffapp.waterprice.basis.Constants;
 import com.loopj.android.http.FileAsyncHttpResponseHandler;
 
 import java.io.File;
