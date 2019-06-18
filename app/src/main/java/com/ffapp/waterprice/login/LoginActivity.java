@@ -248,18 +248,7 @@ public class LoginActivity extends BasisActivity {
     long[] mHits = new long[MAX_HIT];
     boolean isDeveleper = false;
 
-    @OnClick(R.id.img_logo)
-    public void logoClick(){
-        System. arraycopy(mHits, 1, mHits, 0, mHits.length-1);
-        mHits[ mHits. length-1] = SystemClock. uptimeMillis();
-        if ( mHits[0] >= (SystemClock. uptimeMillis()-2000)) {
-//            Toast. makeText(this,"hello world from TreeClcik", 1).show();
-            isDeveleper = !isDeveleper;
-            showToast("恭喜你，成功"+ (isDeveleper?"开启":"关闭") +"开发者模式");
-            mHits = new long[MAX_HIT];
-            setDeveleperView();
-        }
-    }
+
     void setDeveleperView(){
         findViewById(R.id.view_server).setVisibility(isDeveleper? View.VISIBLE:View.GONE);
         findViewById(R.id.img_divder_server).setVisibility(isDeveleper? View.VISIBLE:View.GONE);

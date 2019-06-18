@@ -8,25 +8,9 @@
         android:id="@+id/img_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/loading_img_bg"
+        android:background="@mipmap/loading_img_bg"
         android:scaleType="fitXY"
         />
-
-    <LinearLayout
-        style="@style/base_layout_m_w_v"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center"
-        android:layout_marginBottom="60dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="180dp"
-            android:adjustViewBounds="true"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/loading_img_logo" />
-
-    </LinearLayout>
-
 
 
     <LinearLayout
@@ -46,7 +30,6 @@
             android:layout_marginBottom="3dp"
             android:textColor="@android:color/white"
             android:textSize="14sp" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

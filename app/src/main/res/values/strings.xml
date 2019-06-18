@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智慧灌溉</string>
+    <string name="app_name">农业水价</string>
     <string name="login_hint_mobile">手机号码</string>
     <string name="login_hint_pwd">登录密码</string>
     <string name="regist_pwd_hint">设置登录密码</string>
