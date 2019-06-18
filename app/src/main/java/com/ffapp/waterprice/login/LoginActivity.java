@@ -249,11 +249,6 @@ public class LoginActivity extends BasisActivity {
     boolean isDeveleper = false;
 
 
-    void setDeveleperView(){
-        findViewById(R.id.view_server).setVisibility(isDeveleper? View.VISIBLE:View.GONE);
-        findViewById(R.id.img_divder_server).setVisibility(isDeveleper? View.VISIBLE:View.GONE);
-    }
-
     @OnClick(R.id.view_server)
     void server_choose() {
         StringListChooseActivity.toStringListChoose(mContext, "请选择运行环境", listServers.getListString(), REQUEST_SERVER_CHOOSE);

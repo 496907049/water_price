@@ -99,7 +99,7 @@
 
                 <ImageView
                     style="@style/base_icon_wrap"
-                    android:src="@drawable/login_icon_pwd"
+                    android:src="@mipmap/login_icon_pwd"
                     />
 
                 <EditText
@@ -119,7 +119,7 @@
 
                 <ImageView
                     style="@style/base_icon_wrap"
-                    android:src="@drawable/login_icon_pwd"
+                    android:src="@mipmap/login_icon_pwd"
                     />
 
                 <EditText

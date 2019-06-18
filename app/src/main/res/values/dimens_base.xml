@@ -13,6 +13,7 @@
 
     <dimen name="base_margin_xsmall">4dp</dimen>
     <dimen name="base_margin_small">8dp</dimen>
+    <dimen name="base_margin_mall">12dp</dimen>
     <dimen name="base_margin_mid">16dp</dimen>
     <dimen name="base_margin_large">20dp</dimen>
     <dimen name="base_margin_xlarge">30dp</dimen>
