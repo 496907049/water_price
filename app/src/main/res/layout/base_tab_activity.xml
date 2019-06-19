@@ -75,12 +75,12 @@
                     <ImageView
                         android:id="@+id/main_tab_imge_1"
                         style="@style/base_tab_item_icon"
-                        android:src="@drawable/home_btn_index" />
+                        android:src="@drawable/home_btn_flow" />
 
                     <TextView
                         android:id="@+id/main_tab_text_1"
                         style="@style/base_tab_item_text"
-                        android:text="首页" />
+                        android:text="流量监控" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -92,47 +92,49 @@
                     <ImageView
                         android:id="@+id/main_tab_imge_2"
                         style="@style/base_tab_item_icon"
-                        android:src="@drawable/home_btn_notifymsg" />
+                        android:src="@drawable/home_btn_video" />
 
                     <TextView
                         android:id="@+id/main_tab_text_2"
                         style="@style/base_tab_item_text"
-                        android:text="通告" />
+                        android:text="实时视频" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/main_tab_but_3"
-                    style="@style/base_tab_item" >
+                    style="@style/base_tab_item"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
 
                     <ImageView
                         android:id="@+id/main_tab_imge_3"
+                        style="@style/base_tab_item_icon"
+                        android:src="@drawable/home_btn_data" />
+
+                    <TextView
+                        android:id="@+id/main_tab_text_3"
+                        style="@style/base_tab_item_text"
+                        android:text="数据分许"  />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_tab_but_4"
+                    style="@style/base_tab_item" >
+
+                    <ImageView
+                        android:id="@+id/main_tab_imge_4"
                         style="@style/base_tab_item_icon"
                         android:src="@drawable/home_btn_user"
                         />
 
                     <TextView
-                        android:id="@+id/main_tab_text_3"
+                        android:id="@+id/main_tab_text_4"
                         style="@style/base_tab_item_text"
                         android:text="我的"
                         />
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/main_tab_but_4"
-                    style="@style/base_tab_item"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:visibility="gone"
-                    >
 
-                    <ImageView
-                        android:id="@+id/main_tab_imge_4"
-                        style="@style/base_tab_item_icon"
-                        android:src="@drawable/base_home_btn_home" />
-
-                    <TextView
-                        android:id="@+id/main_tab_text_4"
-                        style="@style/base_tab_item_text"
-                        android:text="巡查"  />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/main_tab_but_5"
