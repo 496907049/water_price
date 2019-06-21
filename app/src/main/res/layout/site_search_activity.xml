@@ -13,12 +13,22 @@
         android:orientation="horizontal" >
 
         <LinearLayout
+            android:id="@+id/base_btn_back"
+            style="@style/base_btn_normal"
+            android:layout_gravity="left">
+
+            <ImageView
+                android:id="@+id/base_btn_back_icon"
+                style="@style/base_btn_icon"
+                android:src="@drawable/top_icon_back" />
+        </LinearLayout>
+
+        <LinearLayout
             style="@style/base_layout_m_w_h_cv"
             android:layout_weight="1.0"
             android:layout_marginTop="@dimen/base_padding_small"
             android:layout_marginBottom="@dimen/base_padding_small"
-            android:layout_marginLeft="@dimen/base_padding_mid"
-            android:background="@drawable/auto_btn_text_tag"
+            android:background="@drawable/base_search_bg"
             >
             <ImageView
                 android:id="@+id/img_search"

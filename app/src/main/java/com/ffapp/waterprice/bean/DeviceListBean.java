@@ -31,5 +31,12 @@ public class DeviceListBean extends BaseListBeanBc {
         setListBeanData(listbean);
     }
 
+    public void setAllCheckDefault(){
+        ArrayList<DeviceListData> list = getList();
+        for (DeviceListData data : list){
+            data.setCheck(false);
+        }
+    }
+
 
 }

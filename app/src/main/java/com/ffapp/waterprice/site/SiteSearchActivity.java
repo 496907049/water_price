@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.site;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -125,6 +126,10 @@ public class SiteSearchActivity extends BasisActivity {
     void searchCancel(){
         edit_search.setText("");
     }
+    @OnClick(R.id.base_btn_back)
+    void btnBack(){
+       finish();
+    }
     @OnClick(R.id.text_search)
     void search(){
             searchkey = edit_search.getText().toString().trim();
@@ -184,6 +189,9 @@ public class SiteSearchActivity extends BasisActivity {
             mListBean.addListBean(bean);
         }
         setListView();
+
+        hideLoading();
+        onListViewComplete();
     }
 
     private final static int HTTP_LIST = 11;
@@ -229,10 +237,7 @@ public class SiteSearchActivity extends BasisActivity {
         @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int position) {
-
             viewHolder.bind(position);
-            viewHolder.list_item.setBackground(getDrawable(R.drawable.site_btn_default));
-
         }
 
         //获取数据的数量
@@ -247,6 +252,8 @@ public class SiteSearchActivity extends BasisActivity {
             public View list_item;
             @BindView(R.id.tv_name)
             public TextView text_name;
+            @BindView(R.id.img_check)
+            public ImageView checkImg;
 
 
             public ViewHolder(View view) {
@@ -254,18 +261,30 @@ public class SiteSearchActivity extends BasisActivity {
                 ButterKnife.bind(this, view);
             }
 
+
+            @SuppressLint("NewApi")
             public void bind(int postion){
                 DeviceListData data = mListBean.getList().get(postion);
                 text_name.setText(data.getName()+"");
+                if (data.isCheck() == true){
+                    text_name.setTextColor(getColor(R.color.base_text_blue));
+                    list_item.setBackground(getDrawable(R.drawable.site_btn_select));
+                    checkImg.setVisibility(View.VISIBLE);
+                }else {
+                    text_name.setTextColor(getColor(R.color.base_text_black));
+                    list_item.setBackground(getDrawable(R.drawable.site_btn_default));
+                    checkImg.setVisibility(View.GONE);
+                }
                 list_item.setTag(data);
             }
 
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @OnClick(R.id.list_item)
             public void onItemClick(View v) {
+                mListBean.setAllCheckDefault();
                 DeviceListData data = (DeviceListData) v.getTag();
+                data.setCheck(true);
                 mAdapter.notifyDataSetChanged();
-                list_item.setBackground(getDrawable(R.drawable.site_btn_select));
             }
         }
     }

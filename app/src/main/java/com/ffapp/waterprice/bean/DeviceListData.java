@@ -15,6 +15,8 @@ public class DeviceListData extends BasisBean {
 	private String lttd;
 	private String stlc;
 	private String stnm;
+
+	private boolean isCheck;
 	private int dsfl;
 
 
@@ -53,6 +55,14 @@ public class DeviceListData extends BasisBean {
 		this.stnm = stnm;
 	}
 
+
+	public boolean isCheck() {
+		return isCheck;
+	}
+
+	public void setCheck(boolean check) {
+		isCheck = check;
+	}
 
 	public int getMapMarkerResid(){
 		switch (dsfl){
