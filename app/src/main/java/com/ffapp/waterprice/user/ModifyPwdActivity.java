@@ -88,7 +88,7 @@ public class ModifyPwdActivity extends BasisActivity {
         params.put("old_password", MD5.getMD5ofStrLowercase(pass));
         params.put("new_password", MD5.getMD5ofStrLowercase(passNew));
         showLoading();
-        HttpRestClient.post(Constants.URL_USER_MODIFY_PWD, params, new MyHttpListener() {
+        HttpRestClient.post(Constants.aaa, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
 //                showToast(((BasisBean)result).getResultData());

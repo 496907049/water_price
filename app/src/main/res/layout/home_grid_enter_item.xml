@@ -7,7 +7,7 @@
     
 	<LinearLayout
 		android:id="@+id/list_item"
-	    style="@style/base_layout_m_w_v_cv"
+	    style="@style/base_layout_m_w_h_cv"
 		android:gravity="center"
 		android:background="@drawable/base_item_shadow_selector"
 		android:paddingTop="@dimen/base_padding_small"
@@ -21,12 +21,28 @@
 			android:src="@drawable/icon_like"
 			/>
 
-	    <TextView 
-	        android:id="@+id/text_name"
-	        style="@style/base_text_content.small"
-			android:layout_marginTop="@dimen/base_margin_xsmall"
-	        android:maxLines="1"
-	        />
+		<LinearLayout
+			style="@style/base_layout_w_m_v">
+
+			<TextView
+				android:id="@+id/tv_name"
+				style="@style/base_text_content.small.dark_grey"
+				android:layout_marginTop="@dimen/base_margin_xsmall"
+				android:maxLines="1"
+				android:text="站点总数"
+				/>
+
+			<TextView
+				android:id="@+id/tv_value"
+				style="@style/base_text_content"
+				android:layout_marginTop="@dimen/base_margin_xsmall"
+				android:maxLines="1"
+				android:text="258"
+				/>
+
+		</LinearLayout>
+
+
 	    
 	</LinearLayout>
 </LinearLayout>

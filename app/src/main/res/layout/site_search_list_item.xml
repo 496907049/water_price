@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@drawable/site_btn_default"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="@dimen/base_margin_small"
+    >
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        style="@style/base_text_content"
+        android:text="XXX设备" />
+
+
+</LinearLayout>

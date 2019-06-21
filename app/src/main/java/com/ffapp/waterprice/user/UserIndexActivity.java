@@ -137,7 +137,7 @@ public class UserIndexActivity extends HomeBaseActivity {
 //        params.put("ticket", LoginBean.getInstance().getTicket().getValue());
         params.put("token", LoginBean.getUserToken());
         showLoadingDialog();
-        HttpRestClient.post(Constants.URL_LOGIN_LOGOUT, params, new MyHttpListener() {
+        HttpRestClient.post(Constants.aaa, params, new MyHttpListener() {
                     @Override
                     public void onSuccess(int httpWhat, Object result) {
 
@@ -212,7 +212,7 @@ public class UserIndexActivity extends HomeBaseActivity {
 
         RequestParams params = new RequestParams();
         params.put("versions_number", SystemParamsUtils.getAPPVersonCode(mContext));
-        HttpRestClient.get(Constants.URL_UPDATE, params, new MyHttpListener() {
+        HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 UpdateBean updateBean = (UpdateBean) result;

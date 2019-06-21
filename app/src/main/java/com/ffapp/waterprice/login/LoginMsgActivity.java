@@ -114,7 +114,7 @@ public class LoginMsgActivity extends BasisActivity {
         showProgress();
         params.put("mobile", mobile);
         params.put("country_code", country_code);
-        HttpRestClient.post(Constants.URL_LOGIN_MSGCODE, params, myHttpListener,
+        HttpRestClient.post(Constants.aaa, params, myHttpListener,
                 HTTP_SEND_MSGCODE, BasicBeanStr.class);
     }
 

@@ -123,7 +123,7 @@ public class UpdateBean extends BasisBean {
         if (isShowToast) {
             progressHUD.show();
         }
-        HttpRestClient.get(Constants.URL_UPDATE, params, new MyHttpListener() {
+        HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 UpdateBean updateBean = (UpdateBean) result;

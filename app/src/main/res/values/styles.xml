@@ -304,13 +304,6 @@
         <item name="android:text">定时</item>
     </style>
 
-    <style name="auto_plan_new_btn_period_add" parent="@style/base_icon_adjust">
-        <item name="android:layout_height">40dp</item>
-        <item name="android:layout_width">40dp</item>
-        <item name="android:padding">5dp</item>
-        <item name="android:src">@drawable/auto_plan_new_btn_numadd</item>
-    </style>
-
 
     <style name="manual_group_list_btn">
         <item name="android:layout_height">35dp</item>

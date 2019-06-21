@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/top_bar_bg"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            style="@style/base_layout_m_w_h_cv"
+            android:layout_weight="1.0"
+            android:layout_marginTop="@dimen/base_padding_small"
+            android:layout_marginBottom="@dimen/base_padding_small"
+            android:layout_marginLeft="@dimen/base_padding_mid"
+            android:background="@drawable/auto_btn_text_tag"
+            >
+            <ImageView
+                android:id="@+id/img_search"
+                style="@style/base_icon_fitxy"
+                android:background="@drawable/base_item_shadow_selector"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_marginLeft="@dimen/base_margin_small"
+                android:src="@drawable/icon_search_grey"
+                />
+            <EditText
+                android:id="@+id/edit_search"
+                style="@style/base_edit"
+                android:textSize="@dimen/base_textsize_small"
+                android:layout_weight="1.0"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"
+                />
+            <ImageView
+                android:id="@+id/img_cancel"
+                style="@style/base_icon_fitxy"
+                android:background="@drawable/base_item_shadow_selector"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:padding="5dp"
+                android:layout_marginRight="@dimen/base_margin_small"
+                android:src="@drawable/search_icon_delete"
+                />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/text_search"
+            style="@style/base_title_right_text"
+           android:text="搜索" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <include layout="@layout/site_search_refresh_view" />
+    </RelativeLayout>
+</LinearLayout>

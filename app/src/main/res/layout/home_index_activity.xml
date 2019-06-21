@@ -16,19 +16,210 @@
             android:background="@drawable/home_bg"
             >
 
-            <LinearLayout
-                style="@style/base_layout_m_w_v"
-                android:background="@drawable/home_item_white_bg"
-                android:layout_marginTop="@dimen/base_margin_small"
+            <LinearLayout style="@style/base_layout_m_w_v"
+                android:paddingLeft="@dimen/base_padding_small_ex"
+                android:paddingRight="@dimen/base_padding_small_ex"
                 >
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+
+                <LinearLayout
+                    style="@style/base_layout_m_w_v"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/base_margin_xlarge"
+                    >
+                    <TextView
+                        android:id="@+id/text_title_city"
+                        style="@style/base_text_content.white"
+                        android:text=""
+                        />
+                    <TextView
+                        android:id="@+id/text_title_time"
+                        style="@style/base_text_content.small"
+                        android:textColor="#9db5f7"
+                        android:text=""
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/view_weather"
+                    style="@style/base_layout_m_w_h_cv"
+                    android:layout_marginTop="@dimen/base_margin_xsmall"
+                    >
+
+                    <ImageView
+                        android:id="@+id/img_weather"
+                        style="@style/base_icon_adjust"
+                        android:src="@drawable/base_transparent"
+                        android:layout_height="50dp"
+                        />
+                    <LinearLayout
+                        style="@style/base_layout_w_w_v"
+                        android:layout_marginLeft="@dimen/base_margin_small"
+                        >
+                        <TextView
+                            android:id="@+id/text_weather"
+                            style="@style/base_text_content.white"
+                            android:text="--"
+                            />
+                        <TextView
+                            android:id="@+id/text_weather_temp"
+                            style="@style/base_text_content.white"
+                            android:textSize="@dimen/base_textsize_large"
+                            android:text="-℃"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/base_layout_m_m_h"
+                        android:gravity="center"
+                        android:layout_weight="1.0"
+                        >
+
+                        <ImageView
+                            style="@style/divider_ver_style.color"
+                            android:background="@color/white"
+                            android:layout_marginTop="@dimen/base_margin_mid"
+                            android:layout_marginBottom="@dimen/base_margin_mid"
+                            android:layout_marginLeft="@dimen/base_margin_mid"
+                            android:layout_marginRight="@dimen/base_margin_mid"
+                            />
+                    </LinearLayout>
+                    <LinearLayout
+                        style="@style/home_weather_item_style">
+                        <ImageView
+                            style="@style/home_weather_item_icon_style"
+                            android:src="@drawable/weather_icon_humidity"
+                            />
+                        <TextView
+                            style="@style/home_weather_item_text_name"
+                            android:text="湿度"
+                            />
+                        <TextView
+                            android:id="@+id/text_weather_wet"
+                            style="@style/home_weather_item_text_value"
+                            android:text="-%"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        style="@style/home_weather_item_style">
+                        <ImageView
+                            style="@style/home_weather_item_icon_style"
+                            android:src="@drawable/weather_icon_direction"
+                            />
+                        <TextView
+                            style="@style/home_weather_item_text_name"
+                            android:text="风向"
+                            />
+                        <TextView
+                            android:id="@+id/text_weather_wind_direction"
+                            style="@style/home_weather_item_text_value"
+                            android:text="--"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        style="@style/home_weather_item_style">
+                        <ImageView
+                            style="@style/home_weather_item_icon_style"
+                            android:src="@drawable/weather_icon_wind"
+                            />
+                        <TextView
+                            style="@style/home_weather_item_text_name"
+                            android:text="风力"
+                            />
+                        <TextView
+                            android:id="@+id/text_weather_wind_power"
+                            style="@style/home_weather_item_text_value"
+                            android:text="-级"
+                            />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/home_title_style"
+                    android:layout_marginTop="@dimen/base_margin_large"
+                    android:paddingTop="@dimen/base_padding_small_ex"
+                    android:paddingBottom="@dimen/base_padding_small_ex"
+                    android:background="@color/white"
+                    >
+                    <ImageView
+                        style="@style/home_title_img_blue" />
+                    <TextView
+                        style="@style/home_title_text"
+                        android:text="数据概览"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/base_layout_m_w_v"
+                    android:background="@drawable/home_item_white_bg"
+                    >
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_data"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/base_layout_m_w_v"
+                    android:background="@drawable/home_item_white_bg"
+                    android:layout_marginTop="@dimen/base_margin_large"
+                    android:visibility="gone"
+                    >
+
+                        <com.ffapp.waterprice.map.MyMapView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <com.amap.api.maps2d.MapView
+                                android:id="@+id/map_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="250dp"/>
+
+                        </com.ffapp.waterprice.map.MyMapView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/base_layout_m_w_v"
+                    android:background="@drawable/home_item_white_bg"
+                    android:layout_marginTop="@dimen/base_margin_mid"
+                    android:layout_marginBottom="@dimen/base_margin_mid"
+                    >
+                    <LinearLayout
+                        style="@style/home_title_style"
+                        android:layout_marginTop="@dimen/base_margin_small"
+                        android:layout_marginBottom="@dimen/base_margin_small"
+                        >
+                        <ImageView
+                            style="@style/home_title_img_blue" />
+                        <TextView
+                            style="@style/home_title_text"
+                            android:text="土壤墒情"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/divider_hor_style.color"
+                        android:layout_height="1dp"
+                        android:background="#eeeeee"
+                        />
+
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerview_soil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+                </LinearLayout>
+
             </LinearLayout>
-
-
         </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

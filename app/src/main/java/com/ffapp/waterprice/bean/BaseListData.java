@@ -12,6 +12,8 @@ public class BaseListData extends BasisBean {
 	private String appid;
 	private String authkey;
 
+	private String value;
+
 	private boolean isCheck = false;
 	private int resid = -1;
 	private int resBg = -1;
@@ -22,12 +24,18 @@ public class BaseListData extends BasisBean {
 		this.id = id;
 		this.name = name;
 	}
+
+	public BaseListData( String name, String value,int resid) {
+		this.name = name;
+		this.value = value;
+		this.resid = resid;
+	}
+
 	public BaseListData(String id, String name, int resid, int resBg) {
 		this.id = id;
 		this.name = name;
 		this.resid = resid;
 		this.resBg = resBg;
-
 	}
 
 	public String getId() {
@@ -84,5 +92,13 @@ public class BaseListData extends BasisBean {
 
 	public void setCheck(boolean check) {
 		isCheck = check;
+	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
 	}
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="visible"
+    >
+
+    <LinearLayout
+        style="@style/base_layout_m_w_v"
+        android:gravity="center" >
+
+        <ImageView
+            android:id="@+id/refresh_img"
+            android:layout_width="wrap_content"
+            android:layout_height="170dp"
+            android:layout_marginLeft="@dimen/base_margin_xlarge"
+            android:layout_marginRight="@dimen/base_margin_xlarge"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:src="@mipmap/null_img_searchresult" />
+
+        <LinearLayout
+            style="@style/base_layout_w_w_v"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/base_margin_xlarge"
+            >
+            <TextView
+                android:id="@+id/refresh_text_empty"
+                style="@style/base_text_content.small.grey"
+                android:text="暂无站点信息" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
