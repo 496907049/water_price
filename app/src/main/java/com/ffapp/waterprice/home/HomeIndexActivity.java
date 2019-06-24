@@ -50,7 +50,14 @@ import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.bean.WeatherInfoData;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,10 +75,10 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @BindView(R.id.recyclerview_data)
     RecyclerView recyclerview_data;
-    @BindView(R.id.recyclerview_soil)
-    RecyclerView recyclerview_soil;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.pic_chart)
+    PieChart picChart;
 
 
     BaseListDataListBean listEnter;
@@ -100,8 +107,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         setContentView(R.layout.home_index_activity);
         GridLayoutManager layoutManager = new GridLayoutManager(mContext,2);
         recyclerview_data.setLayoutManager(layoutManager);
-        GridLayoutManager layoutManagerS = new GridLayoutManager(mContext,2);
-        recyclerview_soil.setLayoutManager(layoutManagerS);
         swipeRefreshLayout.setColorSchemeResources(R.color.base_blue, R.color.base_text_green);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -138,6 +143,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 setMapView();
             }
         },2000);
+
+        initPicChart();
     }
 
     /**
@@ -153,6 +160,25 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 }
             });// 设置amap加载成功事件监听器
         }
+    }
+
+    private void initPicChart(){
+        List<PieEntry> strings = new ArrayList<>();
+        strings.add(new PieEntry(30f,"aaa"));
+        strings.add(new PieEntry(70f,"bbb"));
+
+        PieDataSet dataSet = new PieDataSet(strings,"Label");
+
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+        colors.add(getResources().getColor(R.color.red));
+        colors.add(getResources().getColor(R.color.base_blue));
+        dataSet.setColors(colors);
+
+        PieData pieData = new PieData(dataSet);
+        pieData.setDrawValues(true);
+
+        picChart.setData(pieData);
+        picChart.invalidate();
     }
 
 

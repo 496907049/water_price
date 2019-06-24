@@ -200,7 +200,7 @@
                             style="@style/home_title_img_blue" />
                         <TextView
                             style="@style/home_title_text"
-                            android:text="土壤墒情"
+                            android:text="用水情况"
                             />
 
                     </LinearLayout>
@@ -212,11 +212,12 @@
                         />
 
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_soil"
+                    <com.github.mikephil.charting.charts.PieChart
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        />
+                        android:layout_height="250dp"
+                        android:id="@+id/pic_chart"
+                        >
+                    </com.github.mikephil.charting.charts.PieChart>
                 </LinearLayout>
 
             </LinearLayout>
