@@ -15,10 +15,10 @@
     </item>
     <item>
         <shape>
-            <corners android:radius="10dp"/>
+            <corners android:radius="3dp"/>
             <solid android:color="@color/white"/>
             <stroke android:width="1px"
-                android:color="@color/base_text_grey"
+                android:color="@color/base_divider"
                 />
         </shape>
     </item>

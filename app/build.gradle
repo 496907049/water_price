@@ -100,4 +100,5 @@ dependencies {
 
     implementation files('libs/pinyin4j-2.5.0.jar')
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1
+    implementation project(path: ':adressselectorlib')
 }
