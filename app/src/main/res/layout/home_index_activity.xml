@@ -13,210 +13,228 @@
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll_view"
             style="@style/base_scroll_style"
-            android:background="@drawable/home_bg"
-            >
+            android:background="@drawable/home_bg">
 
-            <LinearLayout style="@style/base_layout_m_w_v"
+            <LinearLayout
+                style="@style/base_layout_m_w_v"
                 android:paddingLeft="@dimen/base_padding_small_ex"
-                android:paddingRight="@dimen/base_padding_small_ex"
-                >
+                android:paddingRight="@dimen/base_padding_small_ex">
 
                 <LinearLayout
                     style="@style/base_layout_m_w_v"
-                    android:gravity="center"
                     android:layout_marginTop="@dimen/base_margin_xlarge"
-                    >
+                    android:gravity="center">
+
                     <TextView
                         android:id="@+id/text_title_city"
                         style="@style/base_text_content.white"
-                        android:text=""
-                        />
+                        android:text="" />
+
                     <TextView
                         android:id="@+id/text_title_time"
                         style="@style/base_text_content.small"
-                        android:textColor="#9db5f7"
                         android:text=""
-                        />
+                        android:textColor="#9db5f7" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/view_weather"
                     style="@style/base_layout_m_w_h_cv"
-                    android:layout_marginTop="@dimen/base_margin_xsmall"
-                    >
+                    android:layout_marginTop="@dimen/base_margin_xsmall">
 
                     <ImageView
                         android:id="@+id/img_weather"
                         style="@style/base_icon_adjust"
-                        android:src="@drawable/base_transparent"
                         android:layout_height="50dp"
-                        />
+                        android:src="@drawable/base_transparent" />
+
                     <LinearLayout
                         style="@style/base_layout_w_w_v"
-                        android:layout_marginLeft="@dimen/base_margin_small"
-                        >
+                        android:layout_marginLeft="@dimen/base_margin_small">
+
                         <TextView
                             android:id="@+id/text_weather"
                             style="@style/base_text_content.white"
-                            android:text="--"
-                            />
+                            android:text="--" />
+
                         <TextView
                             android:id="@+id/text_weather_temp"
                             style="@style/base_text_content.white"
-                            android:textSize="@dimen/base_textsize_large"
                             android:text="-℃"
-                            />
+                            android:textSize="@dimen/base_textsize_large" />
                     </LinearLayout>
+
                     <LinearLayout
                         style="@style/base_layout_m_m_h"
-                        android:gravity="center"
                         android:layout_weight="1.0"
-                        >
+                        android:gravity="center">
 
                         <ImageView
                             style="@style/divider_ver_style.color"
-                            android:background="@color/white"
-                            android:layout_marginTop="@dimen/base_margin_mid"
-                            android:layout_marginBottom="@dimen/base_margin_mid"
                             android:layout_marginLeft="@dimen/base_margin_mid"
+                            android:layout_marginTop="@dimen/base_margin_mid"
                             android:layout_marginRight="@dimen/base_margin_mid"
-                            />
+                            android:layout_marginBottom="@dimen/base_margin_mid"
+                            android:background="@color/white" />
                     </LinearLayout>
-                    <LinearLayout
-                        style="@style/home_weather_item_style">
+
+                    <LinearLayout style="@style/home_weather_item_style">
+
                         <ImageView
                             style="@style/home_weather_item_icon_style"
-                            android:src="@drawable/weather_icon_humidity"
-                            />
+                            android:src="@drawable/weather_icon_humidity" />
+
                         <TextView
                             style="@style/home_weather_item_text_name"
-                            android:text="湿度"
-                            />
+                            android:text="湿度" />
+
                         <TextView
                             android:id="@+id/text_weather_wet"
                             style="@style/home_weather_item_text_value"
-                            android:text="-%"
-                            />
+                            android:text="-%" />
                     </LinearLayout>
 
 
-                    <LinearLayout
-                        style="@style/home_weather_item_style">
+                    <LinearLayout style="@style/home_weather_item_style">
+
                         <ImageView
                             style="@style/home_weather_item_icon_style"
-                            android:src="@drawable/weather_icon_direction"
-                            />
+                            android:src="@drawable/weather_icon_direction" />
+
                         <TextView
                             style="@style/home_weather_item_text_name"
-                            android:text="风向"
-                            />
+                            android:text="风向" />
+
                         <TextView
                             android:id="@+id/text_weather_wind_direction"
                             style="@style/home_weather_item_text_value"
-                            android:text="--"
-                            />
+                            android:text="--" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        style="@style/home_weather_item_style">
+                    <LinearLayout style="@style/home_weather_item_style">
+
                         <ImageView
                             style="@style/home_weather_item_icon_style"
-                            android:src="@drawable/weather_icon_wind"
-                            />
+                            android:src="@drawable/weather_icon_wind" />
+
                         <TextView
                             style="@style/home_weather_item_text_name"
-                            android:text="风力"
-                            />
+                            android:text="风力" />
+
                         <TextView
                             android:id="@+id/text_weather_wind_power"
                             style="@style/home_weather_item_text_value"
-                            android:text="-级"
-                            />
+                            android:text="-级" />
                     </LinearLayout>
                 </LinearLayout>
 
 
                 <LinearLayout
-                    style="@style/home_title_style"
-                    android:layout_marginTop="@dimen/base_margin_large"
-                    android:paddingTop="@dimen/base_padding_small_ex"
-                    android:paddingBottom="@dimen/base_padding_small_ex"
-                    android:background="@color/white"
-                    >
-                    <ImageView
-                        style="@style/home_title_img_blue" />
-                    <TextView
-                        style="@style/home_title_text"
-                        android:text="数据概览"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
                     style="@style/base_layout_m_w_v"
-                    android:background="@drawable/home_item_white_bg"
-                    >
+                    android:layout_marginTop="@dimen/base_margin_large"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        style="@style/home_title_style"
+                        android:background="@color/white"
+                        android:paddingTop="@dimen/base_padding_small_ex"
+                        android:paddingBottom="@dimen/base_padding_small_ex">
+
+                        <ImageView style="@style/home_title_img_blue" />
+
+                        <TextView
+                            style="@style/home_title_text"
+                            android:text="数据概览" />
+                    </LinearLayout>
+
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/recyclerview_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        />
+                        android:background="@drawable/home_item_white_bg" />
                 </LinearLayout>
 
 
-                <LinearLayout
+                <RelativeLayout
                     style="@style/base_layout_m_w_v"
-                    android:background="@drawable/home_item_white_bg"
                     android:layout_marginTop="@dimen/base_margin_large"
-                    android:visibility="gone"
-                    >
+                    android:background="@drawable/home_item_white_bg">
 
-                        <com.ffapp.waterprice.map.MyMapView
+                    <LinearLayout
+                        style="@style/base_layout_w_w_v"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/base_margin_mall"
+                        android:background="@drawable/ll_grey">
+                        <ImageView
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_choose"/>
+
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_listinfo"/>
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_layer"/>
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_zoomout"/>
+                    </LinearLayout>
+
+                    <com.ffapp.waterprice.map.MyMapView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <com.amap.api.maps2d.MapView
+                            android:id="@+id/map_view"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            >
+                            android:layout_height="250dp" />
 
-                            <com.amap.api.maps2d.MapView
-                                android:id="@+id/map_view"
-                                android:layout_width="match_parent"
-                                android:layout_height="250dp"/>
+                    </com.ffapp.waterprice.map.MyMapView>
 
-                        </com.ffapp.waterprice.map.MyMapView>
-
-                </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     style="@style/base_layout_m_w_v"
-                    android:background="@drawable/home_item_white_bg"
                     android:layout_marginTop="@dimen/base_margin_mid"
                     android:layout_marginBottom="@dimen/base_margin_mid"
-                    >
+                    android:background="@drawable/home_item_white_bg">
+
                     <LinearLayout
                         style="@style/home_title_style"
                         android:layout_marginTop="@dimen/base_margin_small"
-                        android:layout_marginBottom="@dimen/base_margin_small"
-                        >
-                        <ImageView
-                            style="@style/home_title_img_blue" />
+                        android:layout_marginBottom="@dimen/base_margin_small">
+
+                        <ImageView style="@style/home_title_img_blue" />
+
                         <TextView
                             style="@style/home_title_text"
-                            android:text="用水情况"
-                            />
+                            android:text="用水情况" />
 
                     </LinearLayout>
 
                     <ImageView
                         style="@style/divider_hor_style.color"
                         android:layout_height="1dp"
-                        android:background="#eeeeee"
-                        />
+                        android:background="#eeeeee" />
 
 
                     <com.github.mikephil.charting.charts.PieChart
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"
                         android:id="@+id/pic_chart"
-                        >
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
                     </com.github.mikephil.charting.charts.PieChart>
                 </LinearLayout>
 

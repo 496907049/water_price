@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_11B57C">#11B57C</color>
+    <color name="black_333333">#333333</color>
+    <color name="line_DDDDDD">#DDDDDD</color>
+    <color name="red">#cb2d3e</color>
+    <color name="blue">#3366ff</color>
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    <color name="base_text_grey">#999999</color>
+    <color name="base_grey">#f7f7f7</color>
+    <color name="line_grey">#eeeeee</color>
+    <color name="transparent">#00000000</color>
+    <color name="base_blue_pressed">#355cef</color>
+    <color name="base_divider">#EEEEEE</color>
+
+</resources>
