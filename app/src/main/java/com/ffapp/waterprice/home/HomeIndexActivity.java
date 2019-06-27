@@ -50,6 +50,7 @@ import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.bean.WeatherInfoData;
+import com.ffapp.waterprice.site.SiteActivity;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -73,17 +74,13 @@ import my.http.MyHttpListener;
  */
 public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationListener, LocationSource {
 
-    @BindView(R.id.recyclerview_data)
-    RecyclerView recyclerview_data;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.pic_chart)
     PieChart picChart;
 
-
     BaseListDataListBean listEnter;
     DeviceListBean mDeviceListBean;
-    DeviceListData mDeviceListData;
 
 
 
@@ -105,8 +102,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //        setDefautTrans(false);
         super.initViews();
         setContentView(R.layout.home_index_activity);
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext,2);
-        recyclerview_data.setLayoutManager(layoutManager);
         swipeRefreshLayout.setColorSchemeResources(R.color.base_blue, R.color.base_text_green);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -114,8 +109,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 refreshData();
             }
         });
-
-
     }
 
     @Override
@@ -130,7 +123,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         listEnter.getList().add(new BaseListData("核定水量","90.01"+"万m³",R.drawable.main_icon_auto));
         listEnter.getList().add(new BaseListData("实际用量","40"+"万m³",R.drawable.main_icon_auto));
         listEnter.getList().add(new BaseListData("剩余水量","50.01"+"万m³",R.drawable.main_icon_auto));
-        recyclerview_data.setAdapter(new MyAdapterListEnter());
 
         swipeRefreshLayout.setRefreshing(true);
         refreshData();
@@ -363,78 +355,22 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         mlocationClient = null;
     }
 
-    public class MyAdapterListEnter extends RecyclerView.Adapter<MyAdapterListEnter.ViewHolder> {
 
-        public MyAdapterListEnter() {
+    @OnClick(R.id.img_site)
+    public void toSite(){
+        ActivityTool.skipActivity(mContext,SiteActivity.class);
+    }
+    @OnClick(R.id.img_list)
+    public void toList(){
 
-        }
+    }
+    @OnClick(R.id.img_layer)
+    public void toLayer(){
 
-        //创建新View，被LayoutManager所调用
-        @Override
-        public MyAdapterListEnter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.home_grid_enter_item, viewGroup, false);
-            return new MyAdapterListEnter.ViewHolder(view);
-        }
+    }
+    @OnClick(R.id.img_zoom_in)
+    public void toZoonInIm(){
 
-
-        //将数据与界面进行绑定的操作
-        @Override
-        public void onBindViewHolder(MyAdapterListEnter.ViewHolder viewHolder, int position) {
-            viewHolder.bind(position);
-        }
-
-        //获取数据的数量
-        @Override
-        public int getItemCount() {
-            return listEnter == null ? 0 : listEnter.getList().size();
-        }
-
-        //自定义的ViewHolder，持有每个Item的的所有界面元素
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            @BindView(R.id.list_item)
-            public View list_item;
-            @BindView(R.id.tv_name)
-            public TextView text_name;
-            @BindView(R.id.tv_value)
-            public TextView text_value;
-            @BindView(R.id.img_icon)
-            public ImageView img_icon;
-
-            public ViewHolder(View view) {
-                super(view);
-                ButterKnife.bind(this, view);
-            }
-
-            public void bind(int position){
-                BaseListData data = listEnter.getList().get(position);
-//                list_item.setTag(position);
-                text_name.setText(data.getName());
-                text_value.setText(data.getValue());
-                img_icon.setImageResource(data.getResid());
-
-                list_item.setTag(position);
-
-            }
-
-            @OnClick(R.id.list_item)
-            public void viewDetail(View v) {
-                int position =  (int) v.getTag();
-                BaseListData data = listEnter.getList().get(position);
-                switch (data.getName()){
-                    case "自动灌溉":
-//                        ActivityTool.skipActivity(mContext, AutoWateringBaseActivity.class);
-                        break;
-                    case "手动灌溉":
-//                        ActivityTool.skipActivity(mContext, ManualBaseActivity.class);
-                        break;
-                    case "灌溉报告":
-//                        WateringReportActivity.newInstant(mContext,massifId);
-                        break;
-                    case "土壤墒情":
-                        break;
-                }
-            }
-        }
     }
 
 }

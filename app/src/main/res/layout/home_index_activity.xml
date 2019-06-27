@@ -131,8 +131,7 @@
 
                 <LinearLayout
                     style="@style/base_layout_m_w_v"
-                    android:layout_marginTop="@dimen/base_margin_large"
-                    android:visibility="gone">
+                    android:layout_marginTop="@dimen/base_margin_large">
 
                     <LinearLayout
                         style="@style/home_title_style"
@@ -147,11 +146,168 @@
                             android:text="数据概览" />
                     </LinearLayout>
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/recyclerview_data"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/home_item_white_bg" />
+                        android:layout_height="250dp"
+                        android:background="@color/white"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            style="@style/base_layout_m_m_h"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingTop="@dimen/base_padding_small"
+                                android:paddingBottom="@dimen/base_padding_small"
+                                android:layout_weight="1">
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@mipmap/main_icon_stationnum" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="站点总数" />
+
+                                    <TextView
+                                        android:id="@+id/tv_site_num"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="258" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingTop="@dimen/base_padding_small"
+                                android:paddingBottom="@dimen/base_padding_small"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@mipmap/main_icon_onlinenum" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="在线数量" />
+
+                                    <TextView
+                                        android:id="@+id/tv_ol_num"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="190" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            style="@style/base_layout_m_m_h"
+                            android:layout_weight="1">
+
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingTop="@dimen/base_padding_small"
+                                android:paddingBottom="@dimen/base_padding_small"
+                                android:layout_weight="1">
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@mipmap/main_icon_user" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="站点总数" />
+
+                                    <TextView
+                                        android:id="@+id/tv_water_user"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="350" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingTop="@dimen/base_padding_small"
+                                android:paddingBottom="@dimen/base_padding_small"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@mipmap/main_icon_checkwater" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="在线数量" />
+
+                                    <TextView
+                                        android:id="@+id/tv_ol_num"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="190" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+
                 </LinearLayout>
 
 
@@ -159,39 +315,6 @@
                     style="@style/base_layout_m_w_v"
                     android:layout_marginTop="@dimen/base_margin_large"
                     android:background="@drawable/home_item_white_bg">
-
-                    <LinearLayout
-                        style="@style/base_layout_w_w_v"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginRight="@dimen/base_margin_mall"
-                        android:background="@drawable/ll_grey">
-                        <ImageView
-                            style="@style/base_icon_fitxy"
-                            android:src="@mipmap/map_icon_choose"/>
-
-                        <ImageView
-                            style="@style/divider_hor_style.color"
-                            android:layout_height="1dp"
-                            android:background="#eeeeee" />
-                        <ImageView
-                            style="@style/base_icon_fitxy"
-                            android:src="@mipmap/map_icon_listinfo"/>
-                        <ImageView
-                            style="@style/divider_hor_style.color"
-                            android:layout_height="1dp"
-                            android:background="#eeeeee" />
-                        <ImageView
-                            style="@style/base_icon_fitxy"
-                            android:src="@mipmap/map_icon_layer"/>
-                        <ImageView
-                            style="@style/divider_hor_style.color"
-                            android:layout_height="1dp"
-                            android:background="#eeeeee" />
-                        <ImageView
-                            style="@style/base_icon_fitxy"
-                            android:src="@mipmap/map_icon_zoomout"/>
-                    </LinearLayout>
 
                     <com.ffapp.waterprice.map.MyMapView
                         android:layout_width="match_parent"
@@ -203,6 +326,49 @@
                             android:layout_height="250dp" />
 
                     </com.ffapp.waterprice.map.MyMapView>
+
+                    <LinearLayout
+                        style="@style/base_layout_w_w_v"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginRight="@dimen/base_margin_mall"
+                        android:background="@drawable/map_btn_ll_bg">
+                        <ImageView
+                            android:id="@+id/img_site"
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_choose"
+                            android:padding="@dimen/base_padding_xsmall"/>
+
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            android:id="@+id/img_list"
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_listinfo"
+                            android:padding="@dimen/base_padding_xsmall"/>
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            android:id="@+id/img_layer"
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_layer"
+                            android:padding="@dimen/base_padding_xsmall"/>
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            android:layout_height="1dp"
+                            android:background="#eeeeee" />
+                        <ImageView
+                            android:id="@+id/img_zoom_in"
+                            style="@style/base_icon_fitxy"
+                            android:src="@mipmap/map_icon_zoomin"
+                            android:padding="@dimen/base_padding_xsmall"/>
+                    </LinearLayout>
+
+
 
                 </RelativeLayout>
 
