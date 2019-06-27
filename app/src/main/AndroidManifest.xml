@@ -56,6 +56,9 @@
         <activity
             android:name=".util.StringListChooseActivity"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".home.HomeIndexActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".site.SiteSearchActivity"
