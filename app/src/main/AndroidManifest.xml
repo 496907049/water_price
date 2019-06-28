@@ -59,20 +59,21 @@
         <activity
             android:name=".home.HomeIndexActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity
+            android:name=".home.site.SiteSearchActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".home.site.SiteActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:name=".site.SiteSearchActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
-            android:name=".site.SiteActivity"
-            android:screenOrientation="portrait">
         </activity>
 
         <activity

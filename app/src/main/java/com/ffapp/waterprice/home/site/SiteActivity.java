@@ -1,8 +1,7 @@
-package com.ffapp.waterprice.site;
+package com.ffapp.waterprice.home.site;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;

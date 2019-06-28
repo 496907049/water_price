@@ -1,11 +1,10 @@
-package com.ffapp.waterprice.site;
+package com.ffapp.waterprice.home.site;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -22,19 +21,15 @@ import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
-import com.ffapp.waterprice.basis.Constants;
-import com.ffapp.waterprice.bean.BaseListBeanBc;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 
 /**
