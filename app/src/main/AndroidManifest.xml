@@ -58,7 +58,12 @@
             android:screenOrientation="portrait"/>
         <activity
             android:name=".home.HomeIndexActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".site.SiteSearchActivity"
@@ -68,10 +73,11 @@
         <activity
             android:name=".site.SiteActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".home.HomeTabActivity"
+            android:screenOrientation="portrait">
         </activity>
 
     </application>

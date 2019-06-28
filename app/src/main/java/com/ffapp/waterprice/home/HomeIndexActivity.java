@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -55,6 +56,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.jaygoo.bean.Site;
+import com.jaygoo.selector.MultiSelectPopWindow;
 import com.loopj.android.http.RequestParams;
 
 import java.util.ArrayList;
@@ -79,10 +82,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     @BindView(R.id.pic_chart)
     PieChart picChart;
 
-    BaseListDataListBean listEnter;
     DeviceListBean mDeviceListBean;
-
-
 
     private AMap aMap;
     @BindView(R.id.map_view)
@@ -95,11 +95,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     @BindView(R.id.scroll_view)
     NestedScrollView scroll_view;
 
-    private String massifId;
 
     @Override
     public void initViews() {
-//        setDefautTrans(false);
         super.initViews();
         setContentView(R.layout.home_index_activity);
         swipeRefreshLayout.setColorSchemeResources(R.color.base_blue, R.color.base_text_green);
@@ -116,25 +114,18 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         super.initData(savedInstanceState);
         mapView.onCreate(savedInstanceState); // 此方法必须重写
         initMap();
-        listEnter = new BaseListDataListBean();
-        listEnter.getList().add(new BaseListData("站点总数","258",R.drawable.main_icon_auto));
-        listEnter.getList().add(new BaseListData("在线数量","190",R.drawable.main_icon_auto));
-        listEnter.getList().add(new BaseListData("用水户","350",R.drawable.main_icon_auto));
-        listEnter.getList().add(new BaseListData("核定水量","90.01"+"万m³",R.drawable.main_icon_auto));
-        listEnter.getList().add(new BaseListData("实际用量","40"+"万m³",R.drawable.main_icon_auto));
-        listEnter.getList().add(new BaseListData("剩余水量","50.01"+"万m³",R.drawable.main_icon_auto));
 
-        swipeRefreshLayout.setRefreshing(true);
-        refreshData();
+//        swipeRefreshLayout.setRefreshing(true);
+//        refreshData();
 
 //        EventBus.getDefault().register(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(isFinishing())return;
-                setMapView();
-            }
-        },2000);
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if(isFinishing())return;
+//                setMapView();
+//            }
+//        },2000);
 
         initPicChart();
     }
@@ -151,6 +142,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
                 }
             });// 设置amap加载成功事件监听器
+            //去掉高德地图右下角隐藏的缩放按钮
+            aMap.getUiSettings().setZoomControlsEnabled(false);
         }
     }
 
@@ -182,7 +175,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @SuppressLint("StaticFieldLeak")
     void refreshData(){
-
 
         new AsyncTask<String, String, Object>() {
             @Override
@@ -230,34 +222,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             builder.include(DeviceListData.getLatlng());
 //            marker.showInfoWindow();
         }
-
-
         LatLngBounds bounds = builder.build();
         aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
     }
-
-//    @OnClick(R.id.view_soil_station)
-    void  onSoilChoose(View view){
-//        if(mBlockListBeanSoil == null || mBlockListBeanSoil.getList().size()<1){
-//            getListBlockSoil();
-//            return;
-//        }
-//        OptionsPickerView pickerView = new OptionsPickerBuilder(mContext, new OnOptionsSelectListener() {
-//            @Override
-//            public void onOptionsSelect(int options1, int options2, int options3, View v) {
-//                BlockListData blockListData = mBlockListBeanSoil.getList().get(options1);
-//                SoilStationListData soilStationListData = blockListData.getSoilMoistrue() == null?null:blockListData.getSoilMoistrue().get(options2);
-//                onSoilChoose(blockListData,soilStationListData);
-//            }
-//
-//        })
-//                .build();
-//        pickerView.setTitleText("选择地块和土壤墒情站");
-//        pickerView.setPicker(mBlockListBeanSoil.getListNames(),mBlockListBeanSoil.getListSoilStation());
-//        pickerView.show();
-    }
-
-
 
     void getWeather(){
         RequestParams params = new RequestParams();
@@ -295,11 +262,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         ((TextView)findViewById(R.id.text_weather_wet)).setText(weatherData.getHumidity()+"%");
         ((TextView)findViewById(R.id.text_weather_wind_direction)).setText(weatherData.getWindDir());
         ((TextView)findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevel()+"级");
-    }
-
-    @OnClick(R.id.view_weather)
-    void weather(){
-//        ActivityTool.skipActivity(mContext, WeatherActivity.class);
     }
 
     /**
@@ -366,11 +328,56 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
     @OnClick(R.id.img_layer)
     public void toLayer(){
+        ArrayList<Site> siteArrayList = new ArrayList<>();
+        Site site = new Site();
+        site.setId(1);
+        site.setName("水流流量站");
+        siteArrayList.add(site);
+        site = new Site();
+        site.setId(2);
+        site.setName("土壤墒情站");
+        siteArrayList.add(site);
+        site = new Site();
+        site.setId(3);
+        site.setName("气象站");
+        siteArrayList.add(site);
+        site = new Site();
+        site.setId(4);
+        site.setName("雨量站");
+        siteArrayList.add(site);
+        site = new Site();
+        site.setId(5);
+        site.setName("视频测试站");
+        siteArrayList.add(site);
 
+        new MultiSelectPopWindow.Builder(this)
+                .setArray(siteArrayList)
+                .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
+                    @Override
+                    public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
+                        String siteName ="";
+                        for (Site site : selectedList){
+                            siteName += site.getName()+",";
+                        }
+                        Toast.makeText(getApplication(), ""+siteName, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setCancel("取消")
+                .setConfirm("完成")
+                .setTitle("选择图层")
+                .build()
+                .show(findViewById(R.id.mBottom));
     }
+
     @OnClick(R.id.img_zoom_in)
     public void toZoonInIm(){
 
+
+    }
+
+    @OnClick(R.id.view_weather)
+    void weather(){
+//        ActivityTool.skipActivity(mContext, WeatherActivity.class);
     }
 
 }

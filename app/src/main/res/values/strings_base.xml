@@ -41,7 +41,6 @@
 
     <!-- 用户相关 -->
     <string name="user_login">登录</string>
-    <string name="user_no_login_yet">您尚未登录</string>
     <string name="user_login_now">立即登录</string>
     <string name="user_user_empty">用户名不能为空</string>
     <string name="user_user_hint">请输入用户名</string>
@@ -86,5 +85,10 @@
     <string name="user_enter_new_mobile">输入新的手机号码</string>
     <string name="user_enter_mobile">请输入手机号码</string>
     <string name="modify_mobile_hint">手机号码修改成功后需要使用新的手机号码进行登录。</string>
+
+
+
+
+    <string name="water_unit">%1$d万m³</string>
 
 </resources>

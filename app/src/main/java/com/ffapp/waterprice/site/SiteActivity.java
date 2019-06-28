@@ -1,6 +1,7 @@
 package com.ffapp.waterprice.site;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
@@ -32,6 +33,15 @@ public class SiteActivity extends BasisActivity {
     public void initViews() {
         super.initViews();
         setContentView(R.layout.activity_site);
+        setTitle("站点信息");
+        setTitleLeftButton(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+
     }
 
     @Override
@@ -43,6 +53,7 @@ public class SiteActivity extends BasisActivity {
           JSONArray jsonArray = JSON.parseArray(getString(R.string.cities1));
             for (int i = 0; i < jsonArray.size(); i++) {
 //                cities1.add(new Gson().fromJson(jsonArray.get(i).toString(), City.class));
+                City ac = JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {});
                 cities1.add( JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {}));
             }
         } catch (JSONException e) {

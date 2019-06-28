@@ -148,7 +148,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="250dp"
+                        android:layout_height="200dp"
                         android:background="@color/white"
                         android:orientation="vertical">
 
@@ -158,15 +158,15 @@
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
-                                android:gravity="center"
+                                android:gravity="center|left"
                                 android:background="@drawable/base_item_shadow_selector"
-                                android:paddingTop="@dimen/base_padding_small"
-                                android:paddingBottom="@dimen/base_padding_small"
-                                android:layout_weight="1">
+                                android:paddingLeft="@dimen/base_padding_small"
+                                android:layout_weight="1"
+                                >
                                 <ImageView
                                     style="@style/base_icon_fitxy"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:src="@mipmap/main_icon_stationnum" />
 
                                 <LinearLayout
@@ -191,16 +191,15 @@
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
-                                android:gravity="center"
+                                android:gravity="center|left"
                                 android:background="@drawable/base_item_shadow_selector"
-                                android:paddingTop="@dimen/base_padding_small"
-                                android:paddingBottom="@dimen/base_padding_small"
+                                android:paddingLeft="@dimen/base_padding_small"
                                 android:layout_weight="1">
 
                                 <ImageView
                                     style="@style/base_icon_fitxy"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:src="@mipmap/main_icon_onlinenum" />
 
                                 <LinearLayout
@@ -227,22 +226,20 @@
 
                         </LinearLayout>
 
-
                         <LinearLayout
                             style="@style/base_layout_m_m_h"
                             android:layout_weight="1">
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
-                                android:gravity="center"
+                                android:gravity="center|left"
                                 android:background="@drawable/base_item_shadow_selector"
-                                android:paddingTop="@dimen/base_padding_small"
-                                android:paddingBottom="@dimen/base_padding_small"
+                                android:paddingLeft="@dimen/base_padding_small"
                                 android:layout_weight="1">
                                 <ImageView
                                     style="@style/base_icon_fitxy"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:src="@mipmap/main_icon_user" />
 
                                 <LinearLayout
@@ -253,13 +250,13 @@
                                         style="@style/base_text_content.small.dark_grey"
                                         android:layout_marginTop="@dimen/base_margin_xsmall"
                                         android:maxLines="1"
-                                        android:text="站点总数" />
+                                        android:text="用水户" />
 
                                     <TextView
                                         android:id="@+id/tv_water_user"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="350" />
+                                        android:text="@string/water_unit" />
 
                                 </LinearLayout>
 
@@ -267,16 +264,15 @@
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
-                                android:gravity="center"
+                                android:gravity="center|left"
                                 android:background="@drawable/base_item_shadow_selector"
-                                android:paddingTop="@dimen/base_padding_small"
-                                android:paddingBottom="@dimen/base_padding_small"
+                                android:paddingLeft="@dimen/base_padding_small"
                                 android:layout_weight="1">
 
                                 <ImageView
                                     style="@style/base_icon_fitxy"
-                                    android:layout_width="30dp"
-                                    android:layout_height="30dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:src="@mipmap/main_icon_checkwater" />
 
                                 <LinearLayout
@@ -287,13 +283,13 @@
                                         style="@style/base_text_content.small.dark_grey"
                                         android:layout_marginTop="@dimen/base_margin_xsmall"
                                         android:maxLines="1"
-                                        android:text="在线数量" />
+                                        android:text="核定水量" />
 
                                     <TextView
-                                        android:id="@+id/tv_ol_num"
+                                        android:id="@+id/tv_water_num"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="190" />
+                                        android:text="@string/water_unit" />
 
                                 </LinearLayout>
 
@@ -303,13 +299,83 @@
 
                         </LinearLayout>
 
+                        <LinearLayout
+                            style="@style/base_layout_m_m_h"
+                            android:layout_weight="1">
 
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center|left"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingLeft="@dimen/base_padding_small"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/main_icon_actualwater" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="实际用量" />
+
+                                    <TextView
+                                        android:id="@+id/tv_actual_num"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="@string/water_unit" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                style="@style/base_layout_m_m"
+                                android:gravity="center|left"
+                                android:background="@drawable/base_item_shadow_selector"
+                                android:paddingLeft="@dimen/base_padding_small"
+                                android:layout_weight="1">
+
+                                <ImageView
+                                    style="@style/base_icon_fitxy"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@mipmap/main_icon_remainwater" />
+
+                                <LinearLayout
+                                    style="@style/base_layout_w_w_v"
+                                    android:layout_marginLeft="@dimen/base_margin_xsmall">
+
+                                    <TextView
+                                        style="@style/base_text_content.small.dark_grey"
+                                        android:layout_marginTop="@dimen/base_margin_xsmall"
+                                        android:maxLines="1"
+                                        android:text="剩余水量" />
+
+                                    <TextView
+                                        android:id="@+id/tv_water_surplus"
+                                        style="@style/base_text_content"
+                                        android:maxLines="1"
+                                        android:text="@string/water_unit" />
+
+                                </LinearLayout>
+
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
-
                 </LinearLayout>
-
 
                 <RelativeLayout
                     style="@style/base_layout_m_w_v"
@@ -407,4 +473,10 @@
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </android.support.v4.widget.SwipeRefreshLayout>
+
+    <View
+        android:id="@+id/mBottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 </LinearLayout>
