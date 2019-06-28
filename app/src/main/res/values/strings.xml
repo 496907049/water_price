@@ -413,4 +413,13 @@
         "isMunicipality": "0"
       }]</string>
 
+  <string-array name="site_type">
+    <item>站点类型</item>
+    <item>雨量站</item>
+    <item>水位流量站</item>
+    <item>视频监测站</item>
+    <item>气象站</item>
+    <item>突然墒情站</item>
+  </string-array>
+
 </resources>
