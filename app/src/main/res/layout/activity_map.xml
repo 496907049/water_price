@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        style="@style/base_layout_m_m_v"
+        android:layout_marginTop="@dimen/base_margin_large"
+        android:background="@drawable/home_item_white_bg">
+
+        <com.ffapp.waterprice.map.MyMapView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.amap.api.maps2d.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </com.ffapp.waterprice.map.MyMapView>
+
+        <LinearLayout
+            style="@style/base_layout_w_w_v"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="@dimen/base_margin_mall"
+            android:background="@drawable/map_btn_ll_bg"
+            android:layout_marginTop="@dimen/base_margin_large">
+            <ImageView
+                android:id="@+id/img_site"
+                style="@style/base_icon_fitxy"
+                android:src="@mipmap/map_icon_choose"
+                android:padding="@dimen/base_padding_xsmall"/>
+
+            <ImageView
+                style="@style/divider_hor_style.color"
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
+            <ImageView
+                android:id="@+id/img_list"
+                style="@style/base_icon_fitxy"
+                android:src="@mipmap/map_icon_listinfo"
+                android:padding="@dimen/base_padding_xsmall"/>
+            <ImageView
+                style="@style/divider_hor_style.color"
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
+            <ImageView
+                android:id="@+id/img_layer"
+                style="@style/base_icon_fitxy"
+                android:src="@mipmap/map_icon_layer"
+                android:padding="@dimen/base_padding_xsmall"/>
+            <ImageView
+                style="@style/divider_hor_style.color"
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
+            <ImageView
+                android:id="@+id/img_zoom_in"
+                style="@style/base_icon_fitxy"
+                android:src="@mipmap/map_icon_zoomout"
+                android:padding="@dimen/base_padding_xsmall"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/map_top_icon_back"
+            android:layout_margin="@dimen/base_margin_large"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/mBottom"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

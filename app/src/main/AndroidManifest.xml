@@ -70,6 +70,11 @@
         <activity
             android:name=".home.site.SiteActivity"
             android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".home.list.ListDataActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

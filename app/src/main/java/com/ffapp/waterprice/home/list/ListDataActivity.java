@@ -112,7 +112,7 @@ public class ListDataActivity extends BasisActivity {
             findViewById(R.id.refresh_view).setVisibility(View.VISIBLE);
             ((ImageView) findViewById(R.id.refresh_img)).setImageResource(R.mipmap.null_img_searchresult);
             ((TextView) findViewById(R.id.refresh_text_empty)).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.refresh_text_empty)).setText("暂没有任何数据");
+            ((TextView) findViewById(R.id.refresh_text_empty)).setText("没有搜到任何信息");
             findViewById(R.id.refresh_view).setOnClickListener(
                     new View.OnClickListener() {
                         public void onClick(View v) {
@@ -125,35 +125,36 @@ public class ListDataActivity extends BasisActivity {
     }
 
     private void getList() {
-        RequestParams params = new RequestParams();
-//        showProgress();
-        params.put(BaseListDataListBean.PAGE_NAME, mListBean.getNextPage());
-        params.put(BaseListDataListBean.PAGE_SIZE_NAME, BaseListDataListBean.PAGE_SIZE);
-        params.put("keyword", keyword);
-        HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {
-                    @Override
-                    public void onSuccess(int httpWhat, Object result) {
-                        DeviceListBean listBean = (DeviceListBean) result;
-                        mListBean = listBean;
-                        LogUtil.i("onSuccess---->" + listBean.getList().size());
-                        setListView();
-                    }
-
-                    @Override
-                    public void onFailure(int httpWhat, Object result) {
-                        super.onFailure(httpWhat, result);
-//            mListBean = new ServiceNewListBean();
-                        setListView();
-                    }
-
-                    @Override
-                    public void onFinish(int httpWhat) {
-                        hideLoading();
-                        onListViewComplete();
-                    }
-                },
-                0, DeviceListBean.class);
-
+//        RequestParams params = new RequestParams();
+////        showProgress();
+//        params.put(BaseListDataListBean.PAGE_NAME, mListBean.getNextPage());
+//        params.put(BaseListDataListBean.PAGE_SIZE_NAME, BaseListDataListBean.PAGE_SIZE);
+//        params.put("keyword", keyword);
+//        HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {
+//                    @Override
+//                    public void onSuccess(int httpWhat, Object result) {
+//                        DeviceListBean listBean = (DeviceListBean) result;
+//                        mListBean = listBean;
+//                        LogUtil.i("onSuccess---->" + listBean.getList().size());
+//                        setListView();
+//                    }
+//
+//                    @Override
+//                    public void onFailure(int httpWhat, Object result) {
+//                        super.onFailure(httpWhat, result);
+////            mListBean = new ServiceNewListBean();
+//                        setListView();
+//                    }
+//
+//                    @Override
+//                    public void onFinish(int httpWhat) {
+//                        hideLoading();
+//                        onListViewComplete();
+//                    }
+//                },
+//                0, DeviceListBean.class);
+        hideLoading();
+        onListViewComplete();
     }
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {
