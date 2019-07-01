@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisApp;
+import com.ffapp.waterprice.user.UserIndexActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.gyf.barlibrary.ImmersionBar;
 import com.loopj.android.http.RequestParams;
@@ -235,7 +236,7 @@ public class HomeTabActivity extends TabActivity implements
 
         mIntentSecond = new Intent(this, HomeIndexActivity.class);
         mIntentThird = new Intent(this, HomeIndexActivity.class);
-//        mIntentFourth = new Intent(this, PatrolIndexActivity.class);
+        mIntentFourth = new Intent(this, UserIndexActivity.class);
 //        mIntentFive = new Intent(this, UserIndexActivity.class);
 
         mTabHost = getTabHost();

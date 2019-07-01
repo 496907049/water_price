@@ -162,10 +162,10 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_site:
-                ActivityTool.skipActivity(mContext,SiteActivity.class);
+                ActivityTool.skipActivityAndFinish(mContext,SiteActivity.class);
                 break;
             case R.id.img_list:
-                ActivityTool.skipActivity(mContext,ListDataActivity.class);
+                ActivityTool.skipActivityAndFinish(mContext,ListDataActivity.class);
                 break;
             case R.id.img_layer:
 

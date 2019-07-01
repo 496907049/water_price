@@ -13,25 +13,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            style="@style/base_layout_m_m_v">
+        <LinearLayout style="@style/base_layout_m_m_v">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@mipmap/mine_img_bg"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
                 android:paddingTop="@dimen/base_margin_xsmall"
-                android:paddingBottom="@dimen/base_margin_xlarge"
-                android:orientation="horizontal">
+                android:paddingBottom="@dimen/base_margin_xlarge">
 
                 <ImageView
                     android:id="@+id/img_photo"
                     style="@style/base_icon_fitxy"
-                    android:layout_height="75dp"
                     android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:layout_marginLeft="@dimen/base_margin_mid"
-                    android:src="@drawable/mine_icon_userface_deafult" />
+                    android:src="@mipmap/mine_img_userface" />
 
                 <TextView
                     android:id="@+id/text_name"
@@ -40,8 +39,6 @@
                     android:text="名称"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
-
-
 
 
             </LinearLayout>
@@ -60,8 +57,41 @@
 
                 <LinearLayout style="@style/base_layout_m_w_v">
 
-                    <LinearLayout
-                        style="@style/base_layout_m_w_v">
+                    <LinearLayout style="@style/base_layout_m_w_v">
+
+                        <LinearLayout
+                            android:id="@+id/view_alarm"
+                            style="@style/user_item_style">
+
+                            <ImageView
+                                style="@style/user_item_img"
+                                android:src="@mipmap/mine_list_icon_alarm" />
+
+                            <TextView
+                                style="@style/user_item_name"
+                                android:text="报警预览" />
+
+                            <ImageView style="@style/base_item_img_tag" />
+                        </LinearLayout>
+
+                        <ImageView style="@style/user_item_divider" />
+
+                        <LinearLayout
+                            android:id="@+id/view_sys"
+                            style="@style/user_item_style">
+
+                            <ImageView
+                                style="@style/user_item_img"
+                                android:src="@mipmap/mine_list_icon_sys" />
+
+                            <TextView
+                                style="@style/user_item_name"
+                                android:text="通知公告" />
+
+                            <ImageView style="@style/base_item_img_tag" />
+                        </LinearLayout>
+
+                        <ImageView style="@style/user_item_divider" />
 
                         <LinearLayout
                             android:id="@+id/view_modifypwd"
@@ -69,7 +99,7 @@
 
                             <ImageView
                                 style="@style/user_item_img"
-                                android:src="@drawable/mine_icon_pwd" />
+                                android:src="@mipmap/mine_list_icon_pwd" />
 
                             <TextView
                                 style="@style/user_item_name"
@@ -82,7 +112,8 @@
 
                         <LinearLayout
                             android:id="@+id/view_clearcache"
-                            style="@style/user_item_style">
+                            style="@style/user_item_style"
+                            android:visibility="gone">
 
                             <ImageView
                                 style="@style/user_item_img"
@@ -161,8 +192,6 @@
         </LinearLayout>
 
     </android.support.v4.widget.SwipeRefreshLayout>
-
-
 
 
 </LinearLayout>
