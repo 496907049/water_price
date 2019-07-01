@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <LinearLayout
+       style="@style/base_layout_m_w_h_cv"
+        android:background="@color/white"
+        android:layout_margin="@dimen/base_margin_mall"
+        android:layout_height="50dp">
+
+        <LinearLayout
+            android:id="@+id/ll_spinner"
+            style="@style/base_layout_w_w_h"
+            android:gravity="center_vertical">
+
+            <com.jaredrummler.materialspinner.MaterialSpinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+        <ImageView
+            style="@style/base_icon_mid"
+            android:src="@mipmap/analysis_icon_calendar"
+            android:layout_marginLeft="@dimen/base_margin_small"
+            android:layout_marginRight="@dimen/base_margin_small"/>
+
+
+        <TextView
+            android:id="@+id/tv_start_timme"
+            style="@style/base_text_content.small.black"
+            android:hint="开始时间"
+            android:layout_weight="1"/>
+
+        <TextView
+            style="@style/base_text_content.small.grey"
+            android:hint=" ~ " />
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            style="@style/base_text_content.small.black"
+            android:hint="结束时间"
+            android:layout_weight="1"/>
+
+        <ImageView
+            style="@style/base_icon_btn"
+            android:src="@mipmap/icon_search_grey"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/base_layout_w_w_h"
+        android:layout_margin="@dimen/base_margin_mall">
+
+        <TextView
+            style="@style/base_text_content"
+            android:text="报警信息" />
+
+        <TextView
+            style="@style/base_text_content.small.grey"
+            android:text="@string/unread_msg"
+            android:layout_marginLeft="@dimen/base_margin_small"/>
+
+    </LinearLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+    <include layout="@layout/base_refresh_view" />
+</LinearLayout>

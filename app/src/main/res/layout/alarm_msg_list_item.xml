@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout style="@style/base_item_style.white">
+
+        <FrameLayout
+            style="@style/base_layout_w_w"
+            android:padding="@dimen/base_margin_mid"
+            >
+            <ImageView
+                android:id="@+id/img_icon"
+                style="@style/base_icon_adjust"
+                android:layout_height="50dp"
+                android:src="@mipmap/msg_icon_alarm"
+                />
+        </FrameLayout>
+
+        <LinearLayout
+            style="@style/base_layout_m_w_v"
+            android:layout_weight="1.0"
+            >
+
+                <TextView
+                    android:id="@+id/text_title"
+                    style="@style/base_text_content"
+                    android:textStyle="bold"
+                    android:text="消息标题" />
+
+            <TextView
+                android:id="@+id/text_connect"
+                style="@style/base_text_content.small.dark_grey"
+                android:layout_marginTop="@dimen/base_margin_xsmall"
+                android:text="阀门水位只查过" />
+
+            <LinearLayout
+                style="@style/base_layout_w_w_h"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_margin_xsmall">
+
+                <ImageView
+                    style="@style/base_icon_small"
+                    android:src="@mipmap/info_icon_date" />
+                
+                <TextView
+                    android:id="@+id/text_time"
+                    style="@style/base_text_content.small.grey"
+                    android:text="2018-11-09 12:00"
+                    android:layout_marginLeft="@dimen/base_margin_xsmall"/>
+
+                <ImageView
+                    style="@style/base_icon_small"
+                    android:src="@mipmap/info_icon_alarmmsg"
+                    android:layout_marginLeft="@dimen/base_margin_large"/>
+
+                <TextView
+                    android:id="@+id/text_type"
+                    style="@style/base_text_content.small.grey"
+                    android:text="闸上水位报警"
+                    android:layout_marginLeft="@dimen/base_margin_xsmall"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageView
+        style="@style/divider_hor_style.color" />
+
+</LinearLayout>

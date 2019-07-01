@@ -99,6 +99,7 @@
     <string name="Vmean">平均流速(m/s)</string>
     <string name="wink_flow">瞬间流量(m³/s)</string>
     <string name="total_flow">累计流量(m³/s)</string>
+    <string name="unread_msg">%1$d条未读</string>
 
 
 </resources>

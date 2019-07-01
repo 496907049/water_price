@@ -18,6 +18,7 @@ import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.loopj.android.http.RequestParams;
@@ -36,8 +37,8 @@ public class ListDataActivity extends BasisActivity {
     XRecyclerView mRecyclerView;
 
 
-    @BindView(R.id.spin_site_type)
-    Spinner mSpinSiteType;
+    @BindView(R.id.spinner)
+    MaterialSpinner spinner;
 
 
 
@@ -79,6 +80,14 @@ public class ListDataActivity extends BasisActivity {
         });
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadingMoreEnabled(true);
+
+        spinner.setItems("Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop", "Marshmallow");
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -268,16 +277,4 @@ public class ListDataActivity extends BasisActivity {
         }
     }
 
-
-    @OnClick(R.id.ll_spinner)
-    public void spinnerClick(){
-        SpinnerAdapter apsAdapter = mSpinSiteType.getAdapter();
-        int count = apsAdapter.getCount();
-        for (int i = 0; i < count; i++) {
-            if ("".equals(apsAdapter.getItem(i).toString())) {
-                mSpinSiteType.setSelection(i, true);
-                break;
-            }
-        }
-    }
 }

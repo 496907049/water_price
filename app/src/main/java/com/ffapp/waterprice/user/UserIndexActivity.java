@@ -15,6 +15,7 @@ import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.bean.UpdateBean;
 import com.ffapp.waterprice.home.HomeBaseActivity;
 import com.ffapp.waterprice.login.LoginActivity;
+import com.ffapp.waterprice.user.alarm.AlarmActivity;
 import com.ffapp.waterprice.util.glide.GlideCatchUtil;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.loopj.android.http.RequestParams;
@@ -58,13 +59,13 @@ public class UserIndexActivity extends HomeBaseActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
-        setUserView();
-
-        text_version.setText("v"+ SystemParamsUtils.getAppVersonName(mContext));
-
-        text_name.setText(""+LoginBean.getInstance().getRealname());
-
-        checkUpdata();
+//        setUserView();
+//
+//        text_version.setText("v"+ SystemParamsUtils.getAppVersonName(mContext));
+//
+//        text_name.setText(""+LoginBean.getInstance().getRealname());
+//
+//        checkUpdata();
     }
 
 
@@ -130,6 +131,11 @@ public class UserIndexActivity extends HomeBaseActivity {
                 postLogout();
             }
         },null);
+    }
+
+    @OnClick(R.id.view_alarm)
+    void toAlarm(){
+       ActivityTool.skipActivity(mContext,AlarmActivity.class);
     }
 
     void postLogout() {

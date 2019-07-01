@@ -11,7 +11,7 @@ android {
         multiDexEnabled true
         manifestPlaceholders = [
                 JPUSH_PKGNAME : applicationId,
-                JPUSH_APPKEY : "a2b951a1e23740b7339bc9d0", //JPush 上注册的包名对应的 Appkey.
+                JPUSH_APPKEY : "643f48ec7fc14998ce4689f2", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
     }
@@ -41,7 +41,7 @@ android {
         variant.outputs.all { output ->
             def releaseTime = new Date().format("MM-dd", TimeZone.getTimeZone("UTC"))
 //            def file = output.outputFile
-            def filename = "智慧灌溉app_Android_V" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + releaseTime + ".apk"
+            def filename = "农业水价app_Android_V" + defaultConfig.versionName + "_" + defaultConfig.versionCode + "_" + releaseTime + ".apk"
             output.outputFileName = filename
         }
     }
@@ -99,6 +99,7 @@ dependencies {
     implementation 'com.sunfusheng:marqueeview:1.3.3' //跑马灯
 
     implementation files('libs/pinyin4j-2.5.0.jar')
+    implementation 'com.jaredrummler:material-spinner:1.3.1'
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1
     implementation project(path: ':adressselectorlib')
     implementation project(path: ':MultiSelectlib')

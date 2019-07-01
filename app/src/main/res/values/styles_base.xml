@@ -203,6 +203,9 @@
     <style name="base_text_content.small.blue">
         <item name="android:textColor">@color/base_blue</item>
     </style>
+    <style name="base_text_content.small.black">
+        <item name="android:textColor">@color/black</item>
+    </style>
     <style name="base_text_content.small.light_blue">
         <item name="android:textColor">@color/base_text_light_blue</item>
     </style>
