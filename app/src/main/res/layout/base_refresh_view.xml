@@ -18,7 +18,7 @@
             android:layout_height="140dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/base_refresh_icon_click_round" />
+            android:src="@mipmap/null_img_searchresult" />
 
         <TextView
             android:id="@+id/refresh_text_empty"

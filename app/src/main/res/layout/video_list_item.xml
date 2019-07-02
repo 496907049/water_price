@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    style="@style/base_layout_m_w_v_cv"
+    android:layout_weight="1"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/img_online"
+        style="@style/base_icon_fitxy"
+        android:src="@mipmap/icon_equipment_offline" />
+
+    <TextView
+        android:id="@+id/tv_device_name"
+        style="@style/base_text_content"
+        android:layout_marginTop="@dimen/base_margin_xsmall"
+        android:text="设备1" />
+
+
+</LinearLayout>

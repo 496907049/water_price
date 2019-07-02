@@ -45,7 +45,10 @@
             android:name="com.ffapp.waterprice.loading.LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/welcomeTheme">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -80,10 +83,6 @@
         <activity
             android:name=".user.UserIndexActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 
@@ -96,6 +95,16 @@
             android:name=".home.HomeTabActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <activity
+            android:name=".other.WebViewX5Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="false"
+            android:screenOrientation="portrait" >
+
+        </activity>
+
+
 
         <!-- User defined.  For test only  用户自定义的广播接收器-->
         <receiver
@@ -111,6 +120,11 @@
                 <category android:name="com.ffapp.waterprice" />
             </intent-filter>
         </receiver>
+
+        <service
+            android:name="com.tencent.smtt.export.external.DexClassLoaderProviderService"
+            android:label="dexopt"
+            android:process=":dexopt" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"

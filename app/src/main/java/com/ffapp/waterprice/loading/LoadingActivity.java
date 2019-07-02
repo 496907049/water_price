@@ -22,6 +22,7 @@ import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.home.HomeTabActivity;
 import com.ffapp.waterprice.jpush.TagAliasOperatorHelper;
 import com.ffapp.waterprice.login.LoginActivity;
+import com.ffapp.waterprice.other.WebViewX5Activity;
 import com.ffapp.waterprice.util.MyUtils;
 
 /**
@@ -174,7 +175,7 @@ public class    LoadingActivity extends BasisOtherActivity {
                 LoadingActivity.this.finish();
 
         }else{
-            Intent intent = new Intent(mContext, LoginActivity.class);
+            Intent intent = new Intent(mContext, WebViewX5Activity.class);
             startActivity(intent);
 
             LoadingActivity.this.finish();

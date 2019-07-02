@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:background="@color/white"
+        android:layout_margin="@dimen/base_margin_mall"
+        android:layout_height="50dp">
+
+
+        <EditText
+            android:id="@+id/edit_search"
+            style="@style/base_edit"
+            android:textSize="@dimen/base_textsize_small"
+            android:hint="请输入设备名称..."
+            android:layout_weight="1.0"
+            android:singleLine="true"
+            android:imeOptions="actionSearch" />
+
+        <ImageView
+            android:id="@+id/img_search"
+            style="@style/base_icon_btn"
+            android:src="@mipmap/icon_search_grey"
+            />
+
+        <ImageView
+            style="@style/base_icon_wrap"
+            android:src="@mipmap/map_icon_choose"
+            android:padding="@dimen/base_padding_small"/>
+
+    </LinearLayout>
+
+    <com.flyco.tablayout.CommonTabLayout
+        xmlns:tl="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/base_margin_xsmall"
+        android:paddingTop="@dimen/base_margin_xsmall"
+        android:layout_gravity="bottom"
+        tl:tl_indicator_color="@color/base_text_blue"
+        tl:tl_textSelectColor="@color/base_text_blue"
+        tl:tl_textUnselectColor="@color/base_text_black"
+        tl:tl_underline_color="@color/base_text_blue"
+        tl:tl_textsize="@dimen/base_textsize_mid"
+        tl:tl_underline_height="0dp" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_weight="1.0"
+        />
+
+
+
+
+</LinearLayout>

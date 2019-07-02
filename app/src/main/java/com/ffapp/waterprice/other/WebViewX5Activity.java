@@ -132,6 +132,8 @@ public class WebViewX5Activity extends BasisActivity implements OnClickListener 
     private void initUrl() {
         wapurl = getIntent().getStringExtra("url");
          title = getIntent().getStringExtra("title");
+        wapurl = "https://new.qq.com/ch/finance/";
+        title= "设备1";
         if (wapurl == null || wapurl.equals("")) {
             BasisApp.showToast("网页地址不存在");
         }

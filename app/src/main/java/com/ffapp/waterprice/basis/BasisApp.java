@@ -25,6 +25,7 @@ import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.tencent.smtt.sdk.QbSdk;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -32,6 +33,7 @@ import java.lang.reflect.Method;
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
+import my.LogUtil;
 
 public class BasisApp extends MultiDexApplication {
     private static BasisApp APP;
@@ -189,18 +191,18 @@ public class BasisApp extends MultiDexApplication {
     }
 
     private void initX5() {
-//        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
-//            @Override
-//            public void onViewInitFinished(boolean arg0) {
-//                LogUtil.d("app", " onViewInitFinished is " + arg0);
-//            }
-//
-//            @Override
-//            public void onCoreInitFinished() {
-//            }
-//        };
-////		QbSdk.allowThirdPartyAppDownload(true);
-//        QbSdk.initX5Environment(getApplicationContext(), cb);
+        QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
+            @Override
+            public void onViewInitFinished(boolean arg0) {
+                LogUtil.d("app", " onViewInitFinished is " + arg0);
+            }
+
+            @Override
+            public void onCoreInitFinished() {
+            }
+        };
+//		QbSdk.allowThirdPartyAppDownload(true);
+        QbSdk.initX5Environment(getApplicationContext(), cb);
     }
 
     //防止button短时间内多次点击
