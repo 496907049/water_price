@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+   style="@style/base_layout_m_m_v"
+    android:background="@color/white">
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:layout_margin="@dimen/base_margin_mall"
+        android:layout_height="50dp"
+        android:background="@drawable/base_btn_grey">
+
+        <ImageView
+            style="@style/base_icon_xlarge"
+            android:src="@mipmap/analysis_icon_calendar"
+            android:layout_marginLeft="@dimen/base_margin_small"
+            android:layout_marginRight="@dimen/base_margin_small"/>
+
+        <TextView
+            android:id="@+id/tv_start_timme"
+            style="@style/base_text_content.small.black"
+            android:hint="开始时间"
+            android:layout_weight="1" />
+
+        <TextView
+            style="@style/base_text_content.small.grey"
+            android:hint="   ~   " />
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            style="@style/base_text_content.small.black"
+            android:hint="结束时间"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        style="@style/base_layout_m_w">
+
+    <Button
+        android:id="@+id/btn_line_char"
+        style="@style/base_btn_wrap"
+        android:text="切换柱状图"
+        android:layout_width="150dp"
+        android:layout_margin="@dimen/base_margin_large"
+        />
+
+        <Button
+            android:id="@+id/btn_bar_char"
+            style="@style/base_btn_wrap"
+            android:layout_width="150dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/base_margin_large"
+            android:text="列表按钮" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        style="@style/base_layout_m_m">
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/line_chart"
+            style="@style/base_layout_m_m"
+           />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/bar_chart"
+            style="@style/base_layout_m_m"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    style="@style/base_layout_m_w"
+    android:layout_weight="1"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/img_icon"
+        style="@style/base_icon_fitxy"
+        android:src="@mipmap/data_img_alarm" />
+
+</LinearLayout>

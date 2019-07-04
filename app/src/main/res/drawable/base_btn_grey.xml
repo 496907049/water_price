@@ -6,7 +6,7 @@
             <corners
                 android:radius="@dimen/base_default_radius"
                 />
-            <solid android:color="@color/base_blue"/>
+            <solid android:color="@color/base_divider"/>
         </shape>
     </item>
     <item android:state_enabled="false">
@@ -14,7 +14,7 @@
             <corners
                 android:radius="@dimen/base_default_radius"
                 />
-            <solid android:color="@color/base_blue"/>
+            <solid android:color="@color/base_divider"/>
         </shape>
     </item>
     <item>
@@ -22,7 +22,7 @@
             <corners
                 android:radius="@dimen/base_default_radius"
                 />
-            <solid android:color="@color/white"/>
+            <solid android:color="@color/base_divider"/>
         </shape>
     </item>
 </selector>

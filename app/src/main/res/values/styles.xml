@@ -296,7 +296,7 @@
     <style name="detail_edit_item_img_tag" parent="@style/base_item_img_tag">
     </style>
     <style name="auto_btn_text_tag" parent="@style/base_text_content.small">
-        <item name="android:background">@drawable/auto_btn_text_tag</item>
+        <item name="android:background">@drawable/base_fillet_white</item>
         <item name="android:textColor">@drawable/auto_btn_text_tag_color</item>
         <item name="android:layout_width">65dp</item>
         <item name="android:layout_height">30dp</item>
