@@ -17,7 +17,7 @@
                 android:id="@+id/img_icon"
                 style="@style/base_icon_adjust"
                 android:layout_height="50dp"
-                android:src="@drawable/msg_icon_new"
+                android:src="@mipmap/msg_icon_sys"
                 />
         </FrameLayout>
 
@@ -32,14 +32,15 @@
                     android:textStyle="bold"
                     android:text="消息标题" />
             <TextView
-                android:id="@+id/text_time"
-                style="@style/base_text_content.small.grey"
-                android:text="2018-11-09 12:00" />
-            <TextView
                 android:id="@+id/text_des"
                 style="@style/base_text_content.small.dark_grey"
                 android:layout_marginTop="@dimen/base_margin_xsmall"
-                android:text="" />
+                android:text="aaa" />
+            <TextView
+                android:id="@+id/text_time"
+                style="@style/base_text_content.small.grey"
+                android:text="2018-11-09 12:00" />
+
 
         </LinearLayout>
 
