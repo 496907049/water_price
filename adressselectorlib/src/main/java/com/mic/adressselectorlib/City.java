@@ -1,7 +1,4 @@
-package com.ffapp.waterprice.bean;
-
-
-import com.mic.adressselectorlib.CityInterface;
+package com.mic.adressselectorlib;
 
 /**
  * Author: Blincheng.

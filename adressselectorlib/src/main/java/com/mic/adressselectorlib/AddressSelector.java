@@ -12,6 +12,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,15 +31,19 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
     private int TextEmptyColor = Color.parseColor("#333333");
     //顶部的tab集合
     private ArrayList<Tab> tabs;
-    //列表的适配器
+    //列表的适配器  一行一个
     private AddressAdapter addressAdapter;
-    //列表的适配器
+    //列表的适配器   一行2个
     private AddressAdapterTwo addressAdapterTwo;
-    private ArrayList<CityInterface> cities;
+    //列表的适配器   一行多选
+    private addressAdapterThree addressAdapterThree;
+    private ArrayList<City> cities;
+    private ArrayList<City> selectedCityList;
     private OnItemClickListener onItemClickListener;
     private OnTabSelectedListener onTabSelectedListener;
     private RecyclerView list;
     private RecyclerView grid;
+    private Button okBtn;
     private LinearLayout right_layout;
     private LinearLayout top_layout;
     private LinearLayout top_top_layout;
@@ -177,14 +182,43 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         list_layout.addView(list);
 
         grid = new RecyclerView(mContext);
-        grid.setLayoutParams(new ViewGroup.LayoutParams(
-                LayoutParams.MATCH_PARENT,
-                LayoutParams.MATCH_PARENT));
+//        grid.setLayoutParams(new ViewGroup.LayoutParams(
+//                LayoutParams.MATCH_PARENT,
+//                LayoutParams.MATCH_PARENT));
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT,1);
+        grid.setLayoutParams(params);
+
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext,2);
         grid.setLayoutManager(gridLayoutManager);
         grid.setVisibility(GONE);
 //        addView(grid);
         list_layout.addView(grid);
+
+        okBtn = new Button(mContext);
+        okBtn.setLayoutParams(new ViewGroup.LayoutParams(
+                LayoutParams.MATCH_PARENT,
+                LayoutParams.WRAP_CONTENT));
+        okBtn.setPadding(0,40,0,40);
+        okBtn.setText("确定");
+        okBtn.setBackgroundResource(R.color.base_blue_pressed);
+        okBtn.setTextColor(mContext.getResources().getColor(R.color.white));
+        okBtn.setTextSize(16);
+        okBtn.setVisibility(GONE);
+        okBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onItemClickListener != null){
+                    try {
+                        onItemClickListener.itemClick(AddressSelector.this,selectedCityList);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        list_layout.addView(okBtn);
     }
     /**
      * 得到一个新的tab对象
@@ -220,7 +254,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         this.onItemClickListener = onItemClickListener;
     }
     /**
-     * 设置列表的数据源，设置后立即生效
+     * 设置列表的数据源，设置后立即生效   一行一个
      * */
     public void setCities(ArrayList cities) {
         if(cities == null||cities.size() <= 0)
@@ -241,7 +275,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
     }
 
     /**
-     * 设置列表的数据源，设置后立即生效
+     * 设置列表的数据源，设置后立即生效   一行2个
      * */
     public void setCitiesTwo(ArrayList cities) {
         if(cities == null||cities.size() <= 0)
@@ -256,6 +290,29 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                 grid.setAdapter(addressAdapterTwo);
             }
             addressAdapterTwo.notifyDataSetChanged();
+        }else{
+            throw new RuntimeException("AddressSelector cities must implements CityInterface");
+        }
+    }
+
+    /**
+     * 设置列表的数据源，设置后立即生效
+     * */
+    public void setCitiesThree(ArrayList cities) {
+        if(cities == null||cities.size() <= 0)
+            return;
+        list.setVisibility(GONE);
+        grid.setVisibility(VISIBLE);
+        mAddressTv.setText("选择站点");
+        okBtn.setVisibility(VISIBLE);
+        if(cities.get(0) instanceof CityInterface){
+            this.cities = cities;
+            selectedCityList = new ArrayList<>();
+            if(addressAdapterThree == null){
+                addressAdapterThree = new addressAdapterThree();
+                grid.setAdapter(addressAdapterThree);
+            }
+            addressAdapterThree.notifyDataSetChanged();
         }else{
             throw new RuntimeException("AddressSelector cities must implements CityInterface");
         }
@@ -288,12 +345,12 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
 
     private void resetAllTabs(int tabIndex){
         if(tabs != null)
-        for(int i =0;i<tabs.size();i++){
-            tabs.get(i).resetState();
-            if(i > tabIndex){
-                tabs.get(i).setText("");
+            for(int i =0;i<tabs.size();i++){
+                tabs.get(i).resetState();
+                if(i > tabIndex){
+                    tabs.get(i).setText("");
+                }
             }
-        }
     }
     /**
      * 设置Tab文字选中的颜色
@@ -476,21 +533,21 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                 holder.img.setImageResource(listItemIcon);
             if(listTextSize != -1)
                 holder.tv.setTextSize(listTextSize);
-            if(TextUtils.equals(tabs.get(tabIndex).getText(),cities.get(position).getCityName())){
+            if(TextUtils.equals(tabs.get(tabIndex).getText(),cities.get(position).getName())){
                 holder.img.setVisibility(View.VISIBLE);
                 holder.tv.setTextColor(listTextSelectedColor);
             }else{
                 holder.img.setVisibility(View.INVISIBLE);
                 holder.tv.setTextColor(listTextNormalColor);
             }
-            holder.tv.setText(cities.get(position).getCityName());
+            holder.tv.setText(cities.get(position).getName());
             holder.itemView.setTag(cities.get(position));
             holder.itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onItemClickListener != null){
                         try {
-                            onItemClickListener.itemClick(AddressSelector.this,(CityInterface) v.getTag(),tabIndex);
+                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),tabIndex);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -529,7 +586,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             MyViewHolder viewHolder = new MyViewHolder(LayoutInflater.from(mContext).inflate(
-                            R.layout.grid_list_item,parent,false));
+                    R.layout.grid_list_item,parent,false));
             return viewHolder;
         }
 
@@ -537,19 +594,19 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         public void onBindViewHolder(MyViewHolder holder, int position) {
             if(listTextSize != -1)
                 holder.tv.setTextSize(listTextSize);
-            if(TextUtils.equals(tabs.get(tabIndex).getText(),cities.get(position).getCityName())){
+            if(TextUtils.equals(tabs.get(tabIndex).getText(),cities.get(position).getName())){
                 holder.tv.setTextColor(listTextSelectedColor);
             }else{
                 holder.tv.setTextColor(listTextNormalColor);
             }
-            holder.tv.setText(cities.get(position).getCityName());
+            holder.tv.setText(cities.get(position).getName());
             holder.itemView.setTag(cities.get(position));
             holder.itemView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onItemClickListener != null){
                         try {
-                            onItemClickListener.itemClick(AddressSelector.this,(CityInterface) v.getTag(),tabIndex+1);
+                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),tabIndex+1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -569,6 +626,61 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                 super(itemView);
                 this.itemView = itemView;
                 tv = (TextView) itemView.findViewById(R.id.item_address_tv);
+            }
+        }
+    }
+
+
+    private class addressAdapterThree extends RecyclerView.Adapter<addressAdapterThree.MyViewHolder>{
+        @Override
+        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            MyViewHolder viewHolder = new MyViewHolder(LayoutInflater.from(mContext).inflate(
+                    R.layout.grid_list_item,parent,false));
+            return viewHolder;
+        }
+
+        @Override
+        public void onBindViewHolder(MyViewHolder holder, int position) {
+            if(listItemIcon != -1)
+                holder.img.setImageResource(listItemIcon);
+            if(listTextSize != -1)
+                holder.tv.setTextSize(listTextSize);
+
+            if(selectedCityList.contains(cities.get(position))){
+                holder.img.setVisibility(View.VISIBLE);
+                holder.tv.setTextColor(listTextSelectedColor);
+            }else {
+                holder.img.setVisibility(View.INVISIBLE);
+                holder.tv.setTextColor(listTextNormalColor);
+            }
+            holder.tv.setText(cities.get(position).getName());
+            holder.itemView.setTag(cities.get(position));
+            holder.itemView.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(selectedCityList.contains((City) v.getTag())){
+                        selectedCityList.remove((City) v.getTag());
+                    }else {
+                        selectedCityList.add((City) v.getTag());
+                    }
+                    addressAdapterThree.notifyDataSetChanged();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return cities.size();
+        }
+        class MyViewHolder extends RecyclerView.ViewHolder{
+            public TextView tv;
+            public ImageView img;
+            public View itemView;
+            public MyViewHolder(View itemView) {
+                super(itemView);
+                this.itemView = itemView;
+                tv = (TextView) itemView.findViewById(R.id.item_address_tv);
+                img = (ImageView) itemView.findViewById(R.id.img_check);
             }
         }
     }

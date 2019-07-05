@@ -1,7 +1,8 @@
-package com.ffapp.waterprice.home.site;
+package com.ffapp.waterprice.data.area;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class SiteActivity extends BasisActivity {
+public class AreaActivity extends BasisActivity {
 
     private ArrayList<City> cities1 = new ArrayList<>();
     private ArrayList<City> cities2 = new ArrayList<>();
@@ -31,8 +32,8 @@ public class SiteActivity extends BasisActivity {
     @Override
     public void initViews() {
         super.initViews();
-        setContentView(R.layout.activity_site);
-        setTitle("站点信息");
+        setContentView(R.layout.activity_area);
+        setTitle("区域信息");
         setTitleLeftButton(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,6 +111,11 @@ public class SiteActivity extends BasisActivity {
                         showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
                         break;
                 }
+            }
+
+            @Override
+            public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws org.json.JSONException {
+                Toast.makeText(mContext, "aaaaa=== "+cityList.toString() , Toast.LENGTH_SHORT).show();
             }
         });
         addressSelector.setOnTabSelectedListener(new AddressSelector.OnTabSelectedListener() {

@@ -2,6 +2,8 @@ package com.mic.adressselectorlib;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
+
 /**
  * Author: Blincheng.
  * Date: 2017/5/9.
@@ -14,4 +16,9 @@ public interface OnItemClickListener {
      * @param tabPosition 对应tab的位置
      * */
     void itemClick(AddressSelector addressSelector,CityInterface city, int tabPosition) throws JSONException;
+
+    /**
+     * @param cityList 返回地址列表对应点击的集合
+     * */
+    void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws JSONException;
 }
