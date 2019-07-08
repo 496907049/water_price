@@ -3,6 +3,7 @@ package com.ffapp.waterprice.home;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -37,6 +38,8 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.jaygoo.bean.Site;
 import com.jaygoo.selector.MultiSelectPopWindow;
 import com.loopj.android.http.RequestParams;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,7 +97,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //        swipeRefreshLayout.setRefreshing(true);
 //        refreshData();
 
-//        EventBus.getDefault().register(this);
+        EventBus.getDefault().register(this);
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -104,6 +107,27 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //        },2000);
 
         initPicChart();
+    }
+
+    private void getDataOverview(){    //获取数据概况数据
+        RequestParams params = new RequestParams();
+        params.put("token", LoginBean.getUserToken());
+        params.put("type", 0);
+
+        HttpRestClient.get(Constants.URL_HOME_WEATHER, params, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+//                mBlockListBeanSoil = (BlockListBean) result;
+                WeatherInfoData weatherData = (WeatherInfoData) result;
+                setWeatherView(weatherData);
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+
+            }
+        },0, WeatherInfoData.class);
+
     }
 
     /**

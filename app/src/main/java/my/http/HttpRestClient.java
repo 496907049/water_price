@@ -160,41 +160,41 @@ public class HttpRestClient {
     private static final String HEADER_HTTP_AuthKey = "SN68jqYEhdU4v8Dp";
 
     private static void setHeader(AsyncHttpClient client, RequestParams params,boolean isGet) {
-        long time = new Date().getTime()/1000;
-        client.addHeader("APP-ID", HEADER_HTTP_SourceID);
-//        client.addHeader(
-//                "APP-SIGN",
-//                MD5.getMD5ofStr(
-//                        HEADER_HTTP_AuthKey + time + HEADER_HTTP_SourceID)
-//                        .substring(0, 32));
-        client.addHeader("APP-AUTHTIME", time + "");
-        client.addHeader("APP-VERSION",SystemParamsUtils.getAPPVersonCode(BasisApp.mContext)+"");
-        client.addHeader("APP-TYPE",  "android");
-        client.addHeader("APP-IMEI",  SystemParamsUtils.getIMEI());
-        client.addHeader("APP-DEVICE",
-                SystemParamsUtils.getPhoneModel() + "");
-//        if(LoginBean.isLogin()){
-//            client.addHeader("APP-TOKEN", LoginBean.getUserToken());
+//        long time = new Date().getTime()/1000;
+//        client.addHeader("APP-ID", HEADER_HTTP_SourceID);
+////        client.addHeader(
+////                "APP-SIGN",
+////                MD5.getMD5ofStr(
+////                        HEADER_HTTP_AuthKey + time + HEADER_HTTP_SourceID)
+////                        .substring(0, 32));
+//        client.addHeader("APP-AUTHTIME", time + "");
+//        client.addHeader("APP-VERSION",SystemParamsUtils.getAPPVersonCode(BasisApp.mContext)+"");
+//        client.addHeader("APP-TYPE",  "android");
+//        client.addHeader("APP-IMEI",  SystemParamsUtils.getIMEI());
+//        client.addHeader("APP-DEVICE",
+//                SystemParamsUtils.getPhoneModel() + "");
+////        if(LoginBean.isLogin()){
+////            client.addHeader("APP-TOKEN", LoginBean.getUserToken());
+////        }
+//        client.addHeader("APP-TOKEN", LoginBean.getUserToken());
+//
+//        ArrayList<String> listP = new ArrayList<>();
+//        listP.add("header_app_id="+HEADER_HTTP_SourceID);
+//            listP.add("header_app_token="+LoginBean.getUserToken());
+//        listP.add("header_app_authtime="+time+"");
+//        if(isGet){
+//            if(params !=null){
+//                String[] pramsStrs = params.toString().split("&");
+//                for(String data:pramsStrs){
+//                    if(data.startsWith("file["))continue;
+//                    if(data.startsWith("uploadFile"))continue;
+////                listP.add(data.substring(data.indexOf("=")+1));
+//                    listP.add(data);
+//                }
+//            }
 //        }
-        client.addHeader("APP-TOKEN", LoginBean.getUserToken());
-
-        ArrayList<String> listP = new ArrayList<>();
-        listP.add("header_app_id="+HEADER_HTTP_SourceID);
-            listP.add("header_app_token="+LoginBean.getUserToken());
-        listP.add("header_app_authtime="+time+"");
-        if(isGet){
-            if(params !=null){
-                String[] pramsStrs = params.toString().split("&");
-                for(String data:pramsStrs){
-                    if(data.startsWith("file["))continue;
-                    if(data.startsWith("uploadFile"))continue;
-//                listP.add(data.substring(data.indexOf("=")+1));
-                    listP.add(data);
-                }
-            }
-        }
-
-        client.addHeader("APP-SIGN",getSecretStr(listP));
+//
+//        client.addHeader("APP-SIGN",getSecretStr(listP));
 //        LogUtil.i("APP-TOKEN", LoginBean.getUserToken());
     }
 

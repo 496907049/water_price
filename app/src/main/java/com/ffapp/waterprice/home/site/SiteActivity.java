@@ -111,6 +111,11 @@ public class SiteActivity extends BasisActivity {
                         break;
                 }
             }
+
+            @Override
+            public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws org.json.JSONException {
+
+            }
         });
         addressSelector.setOnTabSelectedListener(new AddressSelector.OnTabSelectedListener() {
             @Override

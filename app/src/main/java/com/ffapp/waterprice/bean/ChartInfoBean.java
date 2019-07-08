@@ -15,6 +15,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
@@ -648,14 +649,14 @@ public class ChartInfoBean extends BasisBean {
         set1.setValueTextSize(9f);
 //        set1.setFormLineWidth(1f);
 //        set1.setFormSize(15.f);
-        set1.setValueFormatter(new IValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-                LogUtil.i("getFormattedValue--->"+value +"---->"+entry.getY()+"");
-                return entry.getY()+"";
-            }
-        });
-//        set1.setValueFormatter(new DefaultValueFormatter(3));
+//        set1.setValueFormatter(new IValueFormatter() {
+//            @Override
+//            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
+//                LogUtil.i("getFormattedValue--->"+value +"---->"+entry.getY()+"");
+//                return entry.getY()+"";
+//            }
+//        });
+        set1.setValueFormatter(new DefaultValueFormatter(3));
 //        set1.setValueFormatter(new StackedValueFormatter(true,"",3));
 
         return set1;

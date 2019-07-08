@@ -11,7 +11,7 @@ public class Constants {
 	public static String URL_API = "";
 
 	//登录-登录
-	public static String URL_LOGIN = URL_API+"User/login";
+	public static String URL_LOGIN = URL_API+"login";
 
 	//首页-天气
 	public static String URL_HOME_WEATHER = URL_API+"weather/get";

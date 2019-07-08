@@ -28,6 +28,7 @@ public class BasisBean implements Serializable {
 	 * "08", "未登录或已超时"
 	 * */
 	private String code;
+	private String uuid;
 
 	public static int CODE_LOGIN_PAST = 402;
 	public static int CODE_TOKEN_PAST = 401;
@@ -114,6 +115,14 @@ public class BasisBean implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getUuid() {
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
 	}
 
 }

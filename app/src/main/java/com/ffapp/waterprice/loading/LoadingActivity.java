@@ -175,7 +175,7 @@ public class    LoadingActivity extends BasisOtherActivity {
                 LoadingActivity.this.finish();
 
         }else{
-            Intent intent = new Intent(mContext, WebViewX5Activity.class);
+            Intent intent = new Intent(mContext, LoginActivity.class);
             startActivity(intent);
 
             LoadingActivity.this.finish();

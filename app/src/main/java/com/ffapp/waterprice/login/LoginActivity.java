@@ -20,7 +20,9 @@ import com.ffapp.waterprice.basis.BasisApp;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
+import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.LoginBean;
+import com.ffapp.waterprice.bean.test;
 import com.ffapp.waterprice.home.HomeTabActivity;
 import com.ffapp.waterprice.jpush.TagAliasOperatorHelper;
 import com.ffapp.waterprice.util.MyUtils;
@@ -142,14 +144,16 @@ public class LoginActivity extends BasisActivity {
         listServers = new BaseListDataListBean();
         BaseListData data;
 
+        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（内网）");
+        data.setAppid("");
+        data.setAuthkey("");
+        listServers.getList().add(data);
+
         data = new BaseListData("http://api.dev.gk100.ff-cloud.net/", "开发环境");
         data.setAppid("");
         data.setAuthkey("");
         listServers.getList().add(data);
-        data = new BaseListData("http://api.test.gk100.ff-cloud.net/", "测试环境（内网）");
-        data.setAppid("");
-        data.setAuthkey("");
-        listServers.getList().add(data);
+
         data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
         data.setAppid("");
         data.setAuthkey("");
@@ -194,7 +198,7 @@ public class LoginActivity extends BasisActivity {
         }
 
         if(TextUtils.isEmpty(msp.getUser())){
-            edit_user.setText("zyy");
+            edit_user.setText("admin");
             edit_pwd.setText("123456");
         }
 
@@ -329,7 +333,8 @@ public class LoginActivity extends BasisActivity {
 
         RequestParams params = new RequestParams();
         params.put("username", userName);
-        params.put("password", MD5.getMD5ofStrLowercase(password));
+//        params.put("password", MD5.getMD5ofStrLowercase(password));
+        params.put("password", password);
         showProgress();
         HttpRestClient.post(Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, LoginBean.class);
 
