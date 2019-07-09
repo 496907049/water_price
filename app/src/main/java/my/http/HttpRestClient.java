@@ -109,6 +109,25 @@ public class HttpRestClient {
                 mListener, what, class1));
     }
 
+    public static void post2(String url, RequestParams params,
+                            MyHttpListener mListener, int what, Class<?> class1) {
+        AsyncHttpClient client = new AsyncHttpClient(true, 80, 443);
+        client .addHeader("Content-Type", "application/json");
+        client         .addHeader("User-Agent", "PostmanRuntime/7.15.0");
+        client       .addHeader("Accept", "*/*");
+        client         .addHeader("Cache-Control", "no-cache");
+        client          .addHeader("Host", "192.168.25.245:8081");
+        client          .addHeader("accept-encoding", "gzip, deflate");
+        client           .addHeader("content-length", "98");
+        client           .addHeader("Connection", "keep-alive");
+        client           .addHeader("cache-control", "no-cache");
+//        client.addHeader("Content-Type","application/x-www-form-urlencoded");
+        setCommentParams(params);
+
+        client.post(getAbsoluteUrl(url), params, new MyHttpResposeHandler(
+                mListener, what, class1));
+    }
+
     public static void postSync(String url, RequestParams params,
                                 MyHttpListener mListener, int what, Class<?> class1) {
 //        SyncHttpClient syncHttpClient = new SyncHttpClient(true, 80, 443);
@@ -141,16 +160,16 @@ public class HttpRestClient {
     }
 
     private static String getAbsoluteUrl(String relativeUrl) {
-        if (relativeUrl.startsWith("http")) {
-            LogUtil.i(tag,relativeUrl);
-            return relativeUrl;
-        } else {
-
-//			return Constants.getServerIp() + relativeUrl;
-            LogUtil.i(tag, MyUtils.getServiceAPI()+relativeUrl);
-            return MyUtils.getServiceAPI()+relativeUrl;
+//        if (relativeUrl.startsWith("http")) {
+//            LogUtil.i(tag,relativeUrl);
 //            return relativeUrl;
-        }
+//        } else {
+//
+////			return Constants.getServerIp() + relativeUrl;
+//            LogUtil.i(tag, MyUtils.getServiceAPI()+relativeUrl);
+//            return MyUtils.getServiceAPI()+relativeUrl;
+//        }
+            return relativeUrl;
     }
 
     private static final String HEADER_PARAMS1 = "XF-API-app_id";
@@ -160,41 +179,40 @@ public class HttpRestClient {
     private static final String HEADER_HTTP_AuthKey = "SN68jqYEhdU4v8Dp";
 
     private static void setHeader(AsyncHttpClient client, RequestParams params,boolean isGet) {
-//        long time = new Date().getTime()/1000;
-//        client.addHeader("APP-ID", HEADER_HTTP_SourceID);
-////        client.addHeader(
-////                "APP-SIGN",
-////                MD5.getMD5ofStr(
-////                        HEADER_HTTP_AuthKey + time + HEADER_HTTP_SourceID)
-////                        .substring(0, 32));
-//        client.addHeader("APP-AUTHTIME", time + "");
-//        client.addHeader("APP-VERSION",SystemParamsUtils.getAPPVersonCode(BasisApp.mContext)+"");
-//        client.addHeader("APP-TYPE",  "android");
-//        client.addHeader("APP-IMEI",  SystemParamsUtils.getIMEI());
-//        client.addHeader("APP-DEVICE",
-//                SystemParamsUtils.getPhoneModel() + "");
-////        if(LoginBean.isLogin()){
-////            client.addHeader("APP-TOKEN", LoginBean.getUserToken());
-////        }
-//        client.addHeader("APP-TOKEN", LoginBean.getUserToken());
-//
-//        ArrayList<String> listP = new ArrayList<>();
-//        listP.add("header_app_id="+HEADER_HTTP_SourceID);
-//            listP.add("header_app_token="+LoginBean.getUserToken());
-//        listP.add("header_app_authtime="+time+"");
-//        if(isGet){
-//            if(params !=null){
-//                String[] pramsStrs = params.toString().split("&");
-//                for(String data:pramsStrs){
-//                    if(data.startsWith("file["))continue;
-//                    if(data.startsWith("uploadFile"))continue;
-////                listP.add(data.substring(data.indexOf("=")+1));
-//                    listP.add(data);
-//                }
-//            }
+        long time = new Date().getTime()/1000;
+        client.addHeader("APP-ID", HEADER_HTTP_SourceID);
+//        client.addHeader(
+//                "APP-SIGN",
+//                MD5.getMD5ofStr(
+//                        HEADER_HTTP_AuthKey + time + HEADER_HTTP_SourceID)
+//                        .substring(0, 32));
+        client.addHeader("APP-AUTHTIME", time + "");
+        client.addHeader("APP-VERSION",SystemParamsUtils.getAPPVersonCode(BasisApp.mContext)+"");
+        client.addHeader("APP-TYPE",  "android");
+        client.addHeader("APP-IMEI",  SystemParamsUtils.getIMEI());
+        client.addHeader("APP-DEVICE",
+                SystemParamsUtils.getPhoneModel() + "");
+//        if(LoginBean.isLogin()){
+//            client.addHeader("APP-TOKEN", LoginBean.getUserToken());
 //        }
-//
-//        client.addHeader("APP-SIGN",getSecretStr(listP));
+        client.addHeader("APP-TOKEN", LoginBean.getUserToken());
+
+        ArrayList<String> listP = new ArrayList<>();
+        listP.add("header_app_id="+HEADER_HTTP_SourceID);
+            listP.add("header_app_token="+LoginBean.getUserToken());
+        listP.add("header_app_authtime="+time+"");
+        if(isGet){
+            if(params !=null){
+                String[] pramsStrs = params.toString().split("&");
+                for(String data:pramsStrs){
+                    if(data.startsWith("file["))continue;
+                    if(data.startsWith("uploadFile"))continue;
+//                listP.add(data.substring(data.indexOf("=")+1));
+                    listP.add(data);
+                }
+            }
+        }
+        client.addHeader("APP-SIGN",getSecretStr(listP));
 //        LogUtil.i("APP-TOKEN", LoginBean.getUserToken());
     }
 
@@ -225,14 +243,14 @@ public class HttpRestClient {
 //        String time = TimeUtils.getCurrentTimeByFormat("yyyyMMddHHmmss");
         String time = new Date().getTime()/1000+"";
 //        hashMap.put(HEADER_PARAMS1, HEADER_HTTP_SourceID);
-        hashMap.put(HEADER_PARAMS1, MyUtils.getAppid());
+        hashMap.put(HEADER_PARAMS1, MyUtils.getTenant());
         hashMap.put(HEADER_PARAMS2, time + "");
         hashMap.put("XF-API-app_type", "android");
         hashMap.put("XF-API-app_os", SystemParamsUtils.getPhoneModel());
         hashMap.put("XF-API-app_version", SystemParamsUtils.getAppVersonName(BasisApp.mContext) + "");
 
         ArrayList<String> listP = new ArrayList<>();
-        listP.add(MyUtils.getAuthKey());
+        listP.add(MyUtils.getAccessKey());
         listP.add(time);
         if(LoginBean.isLogin()){
             listP.add(LoginBean.getUserToken());

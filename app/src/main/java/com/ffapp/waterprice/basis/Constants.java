@@ -8,10 +8,25 @@ public class Constants {
 	//开发地址
 	 public static final String URL_SERVICE = "http://api.dev.gk100.ff-cloud.net/";
 
-	public static String URL_API = "";
+	public static String URL_API = "http://192.168.25.245:8081/";
 
 	//登录-登录
-	public static String URL_LOGIN = URL_API+"login";
+	public static String URL_LOGIN = URL_API+"api/security/login";
+
+	//TOKEN接口
+	public static String URL_GET_TOKEN = URL_API+"api/token";
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//首页-天气
 	public static String URL_HOME_WEATHER = URL_API+"weather/get";

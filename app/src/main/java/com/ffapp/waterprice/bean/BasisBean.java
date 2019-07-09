@@ -39,7 +39,7 @@ public class BasisBean implements Serializable {
 	
 	public static final String NULL = "null";
 
-	public static final int CODE_OK = 200;
+	public static final int CODE_OK = 1;
 
 	public String getResultData() {
 		return resultData;

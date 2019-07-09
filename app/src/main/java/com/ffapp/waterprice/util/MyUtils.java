@@ -14,9 +14,9 @@ import my.MySharedPreferences;
 
 public class MyUtils {
 
-    private static final String SP_APPID= "sp_appid";
+    private static final String SP_ACCESSKEY= "sp_accessKey";
     private static final String SP_IP= "app_ip";
-    private static final String SP_AUTHKEY= "sp_authkey";
+    private static final String SP_TENANT= "sp_tenant";
     private static final String SP_AMBIENT= "sp_ambient";
 
 
@@ -67,18 +67,18 @@ public class MyUtils {
 //        return  msp.getString(SP_SERVERURL);
 //    }
 
-    public static String getAppid( ){
+    public static String getTenant( ){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
-        return  msp.getString(SP_APPID,"10001");
+        return  msp.getString(SP_TENANT,"");
     }
-    public static void putAppid( String appid){
+    public static void putTenant( String tenant){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
-          msp.putString(SP_APPID,appid);
+          msp.putString(SP_TENANT,tenant);
     }
 
-    public static String getAuthKey( ){
+    public static String getAccessKey( ){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
-        return  msp.getString(SP_AUTHKEY,"");
+        return  msp.getString(SP_ACCESSKEY,"");
     }
 
     public static String getAmbient( ){
@@ -86,16 +86,16 @@ public class MyUtils {
         return  msp.getString(SP_AMBIENT,"");
     }
 
-    public static void putAuthKey( String key){
+    public static void putAccessKey( String key){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
-        msp.putString(SP_AUTHKEY,key);
+        msp.putString(SP_ACCESSKEY,key);
     }
 
     public static  void putSerciceData(BaseListData data){
         if(data == null)return;
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
-        msp.putString(SP_APPID,data.getAppid());
-        msp.putString(SP_AUTHKEY,data.getAuthkey());
+        msp.putString(SP_ACCESSKEY,data.getAccessKey());
+        msp.putString(SP_TENANT,data.getTenant());
         msp.putString(SP_AMBIENT,data.getName());
         msp.putString(SP_IP,data.getId());
     }

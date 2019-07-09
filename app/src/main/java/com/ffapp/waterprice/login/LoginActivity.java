@@ -5,10 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.text.TextUtils;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +20,13 @@ import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.LoginBean;
-import com.ffapp.waterprice.bean.test;
 import com.ffapp.waterprice.home.HomeTabActivity;
 import com.ffapp.waterprice.jpush.TagAliasOperatorHelper;
 import com.ffapp.waterprice.util.MyUtils;
 import com.ffapp.waterprice.util.StringListChooseActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
@@ -37,9 +36,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
 import my.ActivityTool;
 import my.DialogUtils;
-import my.MD5;
 import my.MySharedPreferences;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
@@ -145,18 +145,18 @@ public class LoginActivity extends BasisActivity {
         BaseListData data;
 
         data = new BaseListData("http://192.168.25.245:8081/", "测试环境（内网）");
-        data.setAppid("");
-        data.setAuthkey("");
+        data.setTenant("app");
+        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
 
         data = new BaseListData("http://api.dev.gk100.ff-cloud.net/", "开发环境");
-        data.setAppid("");
-        data.setAuthkey("");
+        data.setTenant("");
+        data.setAccessKey("");
         listServers.getList().add(data);
 
         data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
-        data.setAppid("");
-        data.setAuthkey("");
+        data.setTenant("");
+        data.setAccessKey("");
         listServers.getList().add(data);
 
 
@@ -164,7 +164,7 @@ public class LoginActivity extends BasisActivity {
         if (dataCurrent != null) {
             text_servername.setText(dataCurrent.getName());
             MyUtils.putSerciceData(dataCurrent);
-        }else {
+        } else {
             dataCurrent = listServers.getList().get(0);
             MyUtils.putSerciceData(data);
             text_servername.setText(dataCurrent.getName());
@@ -190,14 +190,14 @@ public class LoginActivity extends BasisActivity {
                     }
                 });
         MySharedPreferences msp = new MySharedPreferences(mContext);
-        if(msp.getRememberUser()){
+        if (msp.getRememberUser()) {
             edit_user.setText(msp.getUser());
         }
-        if(msp.getRememberPwd()){
+        if (msp.getRememberPwd()) {
             edit_pwd.setText(msp.getPassword());
         }
 
-        if(TextUtils.isEmpty(msp.getUser())){
+        if (TextUtils.isEmpty(msp.getUser())) {
             edit_user.setText("admin");
             edit_pwd.setText("123456");
         }
@@ -278,45 +278,42 @@ public class LoginActivity extends BasisActivity {
     }
 
 
-
     @BindView(R.id.img_check_usere)
     ImageView img_check_usere;
     @BindView(R.id.img_check_pwd)
     ImageView img_check_pwd;
 
     @OnClick(R.id.view_remember_user)
-    void rememberUser(){
+    void rememberUser() {
         MySharedPreferences msp = new MySharedPreferences(mContext);
         msp.putRememberUser(!msp.getRememberUser());
-        if(!msp.getRememberUser()){
+        if (!msp.getRememberUser()) {
             msp.putRememberPwd(false);
         }
         setCheckView();
     }
+
     @OnClick(R.id.view_remember_pwd)
-    void rememberPwd(){
+    void rememberPwd() {
         MySharedPreferences msp = new MySharedPreferences(mContext);
         msp.putRememberPwd(!msp.getRememberPwd());
-        if(msp.getRememberPwd()){
+        if (msp.getRememberPwd()) {
             msp.putRememberUser(true);
         }
         setCheckView();
 
     }
 
-    void setCheckView(){
+    void setCheckView() {
         MySharedPreferences msp = new MySharedPreferences(mContext);
 
-        img_check_usere.setImageResource(msp.getRememberUser()?R.drawable.btn_radio_select:R.drawable.btn_radio_default);
-        img_check_pwd.setImageResource(msp.getRememberPwd()?R.drawable.btn_radio_select:R.drawable.btn_radio_default);
+        img_check_usere.setImageResource(msp.getRememberUser() ? R.drawable.btn_radio_select : R.drawable.btn_radio_default);
+        img_check_pwd.setImageResource(msp.getRememberPwd() ? R.drawable.btn_radio_select : R.drawable.btn_radio_default);
     }
 
     String userName, password;
 
     void doLogin() {
-
-//        ActivityTool.skipActivity(mContext,HomeTabActivity.class);
-//        finish();
 
         userName = edit_user.getText().toString().trim();
         if (TextUtils.isEmpty(userName)) {
@@ -336,8 +333,7 @@ public class LoginActivity extends BasisActivity {
 //        params.put("password", MD5.getMD5ofStrLowercase(password));
         params.put("password", password);
         showProgress();
-        HttpRestClient.post(Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, LoginBean.class);
-
+        HttpRestClient.post(Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, BasisBean.class);
     }
 
     static final int HTTP_LOGIN = 12;
@@ -347,8 +343,7 @@ public class LoginActivity extends BasisActivity {
         public void onSuccess(int httpWhat, Object result) {
             switch (httpWhat) {
                 case HTTP_LOGIN:
-                    LoginBean loginBean = (LoginBean) result;
-                    onLoginSuccess(loginBean);
+                  getToken();
                     break;
 //                case HTTP_SMS:
 ////                    showToast("短信验证码获取成功");
@@ -374,19 +369,44 @@ public class LoginActivity extends BasisActivity {
         setResult(Activity.RESULT_OK);
         loginBean.save();
         MySharedPreferences mSp = new MySharedPreferences(this);
-        if(mSp.getRememberUser()){
+        if (mSp.getRememberUser()) {
             mSp.putUser(userName);
-        }else{
+        } else {
             mSp.putUser("");
         }
-        if (mSp.getRememberPwd() ) {
+        if (mSp.getRememberPwd()) {
             mSp.putPassword(password);
-        }else{
+        } else {
             mSp.putPassword("");
         }
         ActivityTool.skipActivity(mContext, HomeTabActivity.class);
         TagAliasOperatorHelper.getInstance().setAlias(LoginBean.getInstance().getJpushAlias());
         finish();
+    }
+
+    void getToken() {
+        RequestParams params = new RequestParams();
+        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
+        params.put("accessKey", dataCurrent.getAccessKey());
+        params.put("account", userName);
+        params.put("tenant", dataCurrent.getTenant());
+        showProgress();
+
+
+        HttpRestClient.post2(Constants.URL_GET_TOKEN, params, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                LoginBean loginBean = (LoginBean) result;
+                onLoginSuccess(loginBean);
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, LoginBean.class);
+
+
     }
 
     private void onResultOk() {

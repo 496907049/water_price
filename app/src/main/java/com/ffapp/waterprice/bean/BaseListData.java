@@ -9,8 +9,8 @@ public class BaseListData extends BasisBean {
 
 	private String id;
 	private String name;
-	private String appid;
-	private String authkey;
+	private String tenant;
+	private String accessKey;
 
 	private String value;
 
@@ -70,21 +70,6 @@ public class BaseListData extends BasisBean {
         this.resBg = resBg;
     }
 
-	public String getAppid() {
-		return appid;
-	}
-
-	public void setAppid(String appid) {
-		this.appid = appid;
-	}
-
-	public String getAuthkey() {
-		return authkey;
-	}
-
-	public void setAuthkey(String authkey) {
-		this.authkey = authkey;
-	}
 
 	public boolean isCheck() {
 		return isCheck;
@@ -100,5 +85,21 @@ public class BaseListData extends BasisBean {
 
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	public String getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(String tenant) {
+		this.tenant = tenant;
+	}
+
+	public String getAccessKey() {
+		return accessKey;
+	}
+
+	public void setAccessKey(String accessKey) {
+		this.accessKey = accessKey;
 	}
 }

@@ -20,7 +20,7 @@ public class MyBaseBean {
 
 	private int recordsTotal;
 
-	private String code;
+//	private String code;
 
 	public static final int CODE_OK = 200;
 
@@ -55,12 +55,12 @@ public class MyBaseBean {
 		this.statusInfo = statusInfo;
 	}
 
-	@JSONField(name="status")
+	@JSONField(name="code")
 	public int getStatusCode() {
 		return statusCode;
 	}
 
-	@JSONField(name="status")
+	@JSONField(name="code")
 	public void setStatusCode(int statusCode) {
 		this.statusCode = statusCode;
 	}
@@ -87,13 +87,13 @@ public class MyBaseBean {
 		this.errCode = errCode;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
+//	public String getCode() {
+//		return code;
+//	}
+//
+//	public void setCode(String code) {
+//		this.code = code;
+//	}
 
 	public int getRecordsTotal() {
 		return recordsTotal;
