@@ -20,7 +20,8 @@
             android:id="@+id/tv_start_timme"
             style="@style/base_text_content.small.black"
             android:hint="开始时间"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:gravity="right"/>
 
         <TextView
             style="@style/base_text_content.small.grey"

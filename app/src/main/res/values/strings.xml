@@ -422,4 +422,61 @@
     <item>突然墒情站</item>
   </string-array>
 
+  <string-array name="flow_array">
+    <item>瞬间流量</item>
+    <item>累计流量</item>
+    <item>流速</item>
+    <item>水位</item>
+    <item>闸上水位</item>
+    <item>闸上水位</item>
+  </string-array>
+
+  <string-array name="water_array">
+    <item>核定用水量</item>
+    <item>实际用水量</item>
+    <item>剩余用水量</item>
+  </string-array>
+
+  <string-array name="soil_array">
+    <item>土壤温度</item>
+    <item>土壤湿度</item>
+    <item>土壤盐分</item>
+    <item>土壤PH</item>
+  </string-array>
+
+  <string-array name="envir_array">
+    <item>温度</item>
+    <item>降雨量</item>
+    <item>大气压力</item>
+    <item>风速</item>
+    <item>土壤温度</item>
+    <item>土壤湿度</item>
+  </string-array>
+
+  <string-array name="rain_array">
+    <item>降雨量</item>
+  </string-array>
+
+  <string-array name="alarm_array">
+    <item>雨量</item>
+    <item>水位</item>
+    <item>闸上水位</item>
+    <item>闸下水位</item>
+    <item>瞬间流速</item>
+    <item>平均流速</item>
+    <item>瞬间流量</item>
+    <item>累计流量</item>
+    <item>土壤温度</item>
+    <item>土壤湿度</item>
+    <item>土壤盐分</item>
+    <item>土壤PH</item>
+    <item>气温</item>
+    <item>水温</item>
+    <item>大气压力</item>
+    <item>风速</item>
+    <item>风向</item>
+  </string-array>
+
+
+
 </resources>

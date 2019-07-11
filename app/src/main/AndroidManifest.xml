@@ -64,8 +64,20 @@
         <activity
             android:name=".home.HomeIndexActivity"
             android:screenOrientation="portrait">
-
         </activity>
+        <activity
+            android:name=".video.VideoIndexActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".user.UserIndexActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".data.DataIndexActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
 
         <activity
             android:name=".home.site.SiteSearchActivity"
@@ -81,12 +93,6 @@
             android:name=".user.alarm.AlarmActivity"
             android:screenOrientation="portrait">
         </activity>
-
-        <activity
-            android:name=".user.UserIndexActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
 
         <activity
             android:name=".home.list.ListDataActivity"

@@ -17,6 +17,7 @@ import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 import java.util.ArrayList;
 
@@ -25,8 +26,13 @@ import butterknife.OnClick;
 
 public class DataAnalysisActivity extends BasisActivity {
 
+    String title;
+    String siteType;
+
     @BindView(R.id.tablayout)
     CommonTabLayout tablayout;
+    @BindView(R.id.spinner)
+    MaterialSpinner spinner;
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     MyViewPagerAdapter myViewPagerAdapter;
@@ -37,9 +43,9 @@ public class DataAnalysisActivity extends BasisActivity {
     DataChartFragment monthFragment;
     DataChartFragment yearFragment;
 
-    public static void newInstant(Context mContext, String data) {
+    public static void newInstant(Context mContext, String title) {
         Intent intent = new Intent(mContext, DataAnalysisActivity.class);
-        intent.putExtra("data", data);
+        intent.putExtra("title", title);
         mContext.startActivity(intent);
     }
 
@@ -47,7 +53,6 @@ public class DataAnalysisActivity extends BasisActivity {
     public void initViews() {
         super.initViews();
         setContentView(R.layout.data_analysis_activity);
-        setTitle("流量分析");
         setTitleLeftButton(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +64,46 @@ public class DataAnalysisActivity extends BasisActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            return;
+        }
+        title = extras.getString("title");
+        setTitle(""+title);
+        switch (title){
+            case "流量分析":
+                String[] flows = getResources().getStringArray(R.array.flow_array);
+                spinner.setItems(flows);
+                break;
+            case "用水户分析":
+                String[] waters = getResources().getStringArray(R.array.water_array);
+                spinner.setItems(waters);
+                break;
+            case "土壤墒情分析":
+                String[] soils = getResources().getStringArray(R.array.soil_array);
+                spinner.setItems(soils);
+                break;
+            case "环境分析":
+                String[] envirs = getResources().getStringArray(R.array.envir_array);
+                spinner.setItems(envirs);
+                break;
+            case "降雨量分析":
+                String[] rains = getResources().getStringArray(R.array.rain_array);
+                spinner.setItems(rains);
+                break;
+            case "报警分析":
+                String[] alarms = getResources().getStringArray(R.array.alarm_array);
+                spinner.setItems(alarms);
+                break;
+        }
+
+        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+            @Override
+            public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                getChart(item);
+            }
+        });
+
         setView();
     }
 
@@ -120,8 +165,6 @@ public class DataAnalysisActivity extends BasisActivity {
 
         viewpager.setCurrentItem(0);
     }
-
-
     public static  class TabEntity implements CustomTabEntity {
         public String title;
         public int selectedIcon;
@@ -147,6 +190,11 @@ public class DataAnalysisActivity extends BasisActivity {
         public int getTabUnselectedIcon() {
             return unSelectedIcon;
         }
+    }
+
+
+    private void getChart(String siteType){
+
     }
 
 }

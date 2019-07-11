@@ -28,7 +28,7 @@ public class DataIndexActivity extends HomeBaseActivity {
     public void initViews() {
         super.initViews();
         setContentView(R.layout.data_index_activity);
-
+        setTitle("数据分析");
         GridLayoutManager layoutManager = new GridLayoutManager(mContext,2);
         recycler.setLayoutManager(layoutManager);
     }
@@ -95,7 +95,7 @@ public class DataIndexActivity extends HomeBaseActivity {
                 listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
                 listEnter.getList().add(new BaseListData("","环境分析",R.mipmap.data_img_environment,0));
                 listEnter.getList().add(new BaseListData("","降雨量分析",R.mipmap.data_img_rain,0));
-                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
+//                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
                 listEnter.getList().add(new BaseListData("","报警分析",R.mipmap.data_img_alarm,0));
             }
 
@@ -104,21 +104,35 @@ public class DataIndexActivity extends HomeBaseActivity {
                 BaseListData data = (BaseListData) v.getTag();
                 switch (data.getName()){
                     case "流量分析":
+                    DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                     case "用水户分析":
+                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                     case "土壤墒情分析":
+                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                     case "环境分析":
+                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                     case "降雨量分析":
+                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
-                    case "泵房分析":
-                        break;
+//                    case "泵房分析":
+//                        DataAnalysisActivity.newInstant(mContext,data.getName());
+//                        break;
                     case "报警分析":
+                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                 }
             }
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        getImmersionBar().statusBarDarkFont(true,0.5f);
+        getImmersionBar().statusBarDarkFont(true).init();
     }
 }
