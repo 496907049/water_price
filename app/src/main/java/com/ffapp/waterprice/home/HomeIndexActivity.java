@@ -27,6 +27,7 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisApp;
 import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.bean.LoginBean;
@@ -111,27 +112,28 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //            }
 //        },2000);
 
+        getDataOverview();//  获取数据概况数据
+
+
         initPicChart();
     }
 
     private void getDataOverview(){    //获取数据概况数据
         RequestParams params = new RequestParams();
         params.put("token", LoginBean.getUserToken());
-        params.put("type", 0);
 
-        HttpRestClient.get(Constants.URL_HOME_WEATHER, params, new MyHttpListener() {
+        OkGoClient.get(mContext,Constants.URL_GET_DATA_OVERVIEW, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
 //                mBlockListBeanSoil = (BlockListBean) result;
-                WeatherInfoData weatherData = (WeatherInfoData) result;
-                setWeatherView(weatherData);
+                DataOverviewBean bean = (DataOverviewBean) result;
             }
 
             @Override
             public void onFinish(int httpWhat) {
 
             }
-        },0, WeatherInfoData.class);
+        },0, DataOverviewBean.class);
 
     }
 

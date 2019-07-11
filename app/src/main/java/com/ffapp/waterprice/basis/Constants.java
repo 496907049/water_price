@@ -19,6 +19,10 @@ public class Constants {
 	//首页-天气
 	public static String URL_HOME_WEATHER = URL_API+"api/weather";
 
+	//获取设备信息分页数据
+	public static String URL_DEVICE_PAGE = URL_API+"api/device/page";
+	//获取数据概况数据
+	public static String URL_GET_DATA_OVERVIEW = URL_API+"api/dashboard/getDataOverview";
 
 
 

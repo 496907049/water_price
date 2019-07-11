@@ -9,6 +9,12 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.TypeReference;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.BasisBean;
+import com.ffapp.waterprice.bean.LoginBean;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.AddressSelector;
 import com.mic.adressselectorlib.CityInterface;
@@ -17,6 +23,9 @@ import com.mic.adressselectorlib.OnItemClickListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class SiteActivity extends BasisActivity {
 
@@ -46,6 +55,28 @@ public class SiteActivity extends BasisActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
+
+        String token = LoginBean.getUserToken();
+
+        MediaType mediaType = MediaType.parse("application/json");
+//        RequestBody body = RequestBody.create(mediaType, "{ \"accessKey\": \"45bd5cc0c8694cdc92c43a6edc094089\", \"account\": \"admin\", \"tenant\": \"app\"}");
+//        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
+//
+//        showProgress();
+//        OkGoClient.post(mContext,Constants.URL_DEVICE_PAGE, body, new StringCallback() {
+//            @Override
+//            public void onSuccess(Response<String> response) {
+//                String a =response.body();
+//                LoginBean bean = JSON.parseObject(a, LoginBean.class);
+//                if(bean.getAccessToken() == null){
+//                    showToast(""+bean.getMessage());
+//                    return;
+//                }else {
+//                    onLoginSuccess(bean);
+//                }
+//            }
+//        }, 0, LoginBean.class);
+
 
       //  拿到本地JSON 并转成String
         try {

@@ -153,14 +153,14 @@ public class LoginActivity extends BasisActivity {
         listServers = new BaseListDataListBean();
         BaseListData data;
 
-        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（内网）");
+        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（重阳）");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
 
-        data = new BaseListData("http://api.dev.gk100.ff-cloud.net/", "开发环境");
-        data.setTenant("");
-        data.setAccessKey("");
+        data = new BaseListData("http://192.168.25.32:8090/", "测试环境（钟磊）");
+        data.setTenant("app");
+        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
 
         data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
@@ -207,7 +207,7 @@ public class LoginActivity extends BasisActivity {
         }
 
         if (TextUtils.isEmpty(msp.getUser())) {
-            edit_user.setText("admin");
+            edit_user.setText("root");
             edit_pwd.setText("123456");
         }
 
