@@ -14,6 +14,8 @@ public class BaseListData extends BasisBean {
 
 	private String value;
 
+	private String account;
+
 	private boolean isCheck = false;
 	private int resid = -1;
 	private int resBg = -1;
@@ -101,5 +103,13 @@ public class BaseListData extends BasisBean {
 
 	public void setAccessKey(String accessKey) {
 		this.accessKey = accessKey;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 }

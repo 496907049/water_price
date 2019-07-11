@@ -10,6 +10,7 @@ public class WeatherInfoData extends BasisBean {
 	 */
 	private static final long serialVersionUID = 1L;
 
+
 	/**
 	 * counname : 中国
 	 * province : 福建省
@@ -24,122 +25,154 @@ public class WeatherInfoData extends BasisBean {
 	 * windLevel : 2
 	 */
 
-	private String counname;
-	private String province;
-	private String cityName;
-	private String areaName;
-	private String condition;
-	private String icon;
-	private String iconSrc;
-	private String temp;
+
+
+//	{
+//		"secondaryname": "厦门市",
+//			"conditionDay": "小雨",
+//			"conditionIdDay": "7",
+//			"conditionIdNight": "7",
+//			"conditionNight": "小雨",
+//			"humidity": "90",
+//			"predictDate": "2019-07-10",
+//			"tempDay": "32",
+//			"tempNight": "25",
+//			"updatetime": "2019-07-10 15:10:00",
+//			"windDegreesDay": "225",
+//			"windDegreesNight": "225",
+//			"windDirDay": "西南风",
+//			"windDirNight": "西南风",
+//			"windLevelDay": "3-4",
+//			"windLevelNight": "3-4"
+//	}
+
+
+
+	private String secondaryname;
+	private String conditionDay;
+	private String conditionIdDay;
+	private String conditionIdNight;
+	private String conditionNight;
 	private String humidity;
-	private String windDir;
-	private String windLevel;
-
-	private ArrayList<WeatherInfoDataHour> hourly;
-	private List<WeatherInfoDataDay> forecast;
-
-	public String getCounname() {
-		return counname;
+	private String predictDate;
+	private String tempDay;
+	private String tempNight;
+	private String updatetime;
+	private String windDegreesDay;
+	private String windDegreesNight;
+	private String windDirDay;
+	private String windDirNight;
+	private String windLevelDay;
+	private String windLevelNight;
+	public void setSecondaryname(String secondaryname) {
+		this.secondaryname = secondaryname;
+	}
+	public String getSecondaryname() {
+		return secondaryname;
 	}
 
-	public void setCounname(String counname) {
-		this.counname = counname;
+	public void setConditionDay(String conditionDay) {
+		this.conditionDay = conditionDay;
+	}
+	public String getConditionDay() {
+		return conditionDay;
 	}
 
-	public String getProvince() {
-		return province;
+	public void setConditionIdDay(String conditionIdDay) {
+		this.conditionIdDay = conditionIdDay;
+	}
+	public String getConditionIdDay() {
+		return conditionIdDay;
 	}
 
-	public void setProvince(String province) {
-		this.province = province;
+	public void setConditionIdNight(String conditionIdNight) {
+		this.conditionIdNight = conditionIdNight;
+	}
+	public String getConditionIdNight() {
+		return conditionIdNight;
 	}
 
-	public String getCityName() {
-		return cityName;
+	public void setConditionNight(String conditionNight) {
+		this.conditionNight = conditionNight;
 	}
-
-	public void setCityName(String cityName) {
-		this.cityName = cityName;
-	}
-
-	public String getAreaName() {
-		return areaName;
-	}
-
-	public void setAreaName(String areaName) {
-		this.areaName = areaName;
-	}
-
-	public String getCondition() {
-		return condition;
-	}
-
-	public void setCondition(String condition) {
-		this.condition = condition;
-	}
-
-	public String getIcon() {
-		return icon;
-	}
-
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
-
-	public String getIconSrc() {
-		return iconSrc;
-	}
-
-	public void setIconSrc(String iconSrc) {
-		this.iconSrc = iconSrc;
-	}
-
-	public String getTemp() {
-		return temp;
-	}
-
-	public void setTemp(String temp) {
-		this.temp = temp;
-	}
-
-	public String getHumidity() {
-		return humidity;
+	public String getConditionNight() {
+		return conditionNight;
 	}
 
 	public void setHumidity(String humidity) {
 		this.humidity = humidity;
 	}
-
-	public String getWindDir() {
-		return windDir;
+	public String getHumidity() {
+		return humidity;
 	}
 
-	public void setWindDir(String windDir) {
-		this.windDir = windDir;
+	public void setPredictDate(String predictDate) {
+		this.predictDate = predictDate;
+	}
+	public String getPredictDate() {
+		return predictDate;
 	}
 
-	public String getWindLevel() {
-		return windLevel;
+	public void setTempDay(String tempDay) {
+		this.tempDay = tempDay;
+	}
+	public String getTempDay() {
+		return tempDay;
 	}
 
-	public void setWindLevel(String windLevel) {
-		this.windLevel = windLevel;
+	public void setTempNight(String tempNight) {
+		this.tempNight = tempNight;
+	}
+	public String getTempNight() {
+		return tempNight;
 	}
 
-	public ArrayList<WeatherInfoDataHour> getHourly() {
-		return hourly;
+	public void setUpdatetime(String updatetime) {
+		this.updatetime = updatetime;
+	}
+	public String getUpdatetime() {
+		return updatetime;
 	}
 
-	public void setHourly(ArrayList<WeatherInfoDataHour> hourly) {
-		this.hourly = hourly;
+	public void setWindDegreesDay(String windDegreesDay) {
+		this.windDegreesDay = windDegreesDay;
+	}
+	public String getWindDegreesDay() {
+		return windDegreesDay;
 	}
 
-	public List<WeatherInfoDataDay> getForecast() {
-		return forecast;
+	public void setWindDegreesNight(String windDegreesNight) {
+		this.windDegreesNight = windDegreesNight;
+	}
+	public String getWindDegreesNight() {
+		return windDegreesNight;
 	}
 
-	public void setForecast(List<WeatherInfoDataDay> forecast) {
-		this.forecast = forecast;
+	public void setWindDirDay(String windDirDay) {
+		this.windDirDay = windDirDay;
+	}
+	public String getWindDirDay() {
+		return windDirDay;
+	}
+
+	public void setWindDirNight(String windDirNight) {
+		this.windDirNight = windDirNight;
+	}
+	public String getWindDirNight() {
+		return windDirNight;
+	}
+
+	public void setWindLevelDay(String windLevelDay) {
+		this.windLevelDay = windLevelDay;
+	}
+	public String getWindLevelDay() {
+		return windLevelDay;
+	}
+
+	public void setWindLevelNight(String windLevelNight) {
+		this.windLevelNight = windLevelNight;
+	}
+	public String getWindLevelNight() {
+		return windLevelNight;
 	}
 }

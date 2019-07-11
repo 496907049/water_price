@@ -16,12 +16,6 @@ import my.MySharedPreferences;
 public class LoginBean extends BasisBean implements Cloneable {
     private static final long serialVersionUID = 1L;
 
-    public static final int ERRO_CODE_DEVICE = -3001;
-
-
-    public static final int LOGIN_TYPE_PERSON = 0;
-    public static final int LOGIN_TYPE_FA = 1;
-
     public static final String FILE_CACHE = Constants.DIR_FILECACHE
             + "login.data";
     private static LoginBean sLoginBean;
@@ -35,11 +29,15 @@ public class LoginBean extends BasisBean implements Cloneable {
      */
 
     private String username;
+
+    private String password;
     private String realname;
     private String mobile;
     private String nickname;
-    private String token;
-    private long token_expire_time;
+    private String accessToken;
+    private String message;
+
+    private long expiresAt;
 
 
     public LoginBean() {
@@ -106,8 +104,8 @@ public class LoginBean extends BasisBean implements Cloneable {
     }
 
     public boolean isLoginPast(){
-        if(token_expire_time == 0)return true;
-        return  new Date().getTime() > token_expire_time;
+        if(expiresAt == 0)return true;
+        return  new Date().getTime() > expiresAt;
     }
 
     public Object clone() {
@@ -144,6 +142,14 @@ public class LoginBean extends BasisBean implements Cloneable {
 //        this.jpushAlias = jpushAlias;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -177,20 +183,30 @@ public class LoginBean extends BasisBean implements Cloneable {
     }
 
     public String getToken() {
-        return token;
+        return accessToken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public long getExpiresAt() {
+        return expiresAt;
     }
 
-    public long getToken_expire_time() {
-        return token_expire_time;
+    public void setExpiresAt(long expiresAt) {
+        this.expiresAt = expiresAt;
     }
 
-    public void setToken_expire_time(long token_expire_time) {
-        this.token_expire_time = token_expire_time;
+    public String getAccessToken() {
+        return accessToken;
     }
 
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
 }

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.BasisApp;
@@ -28,6 +29,10 @@ import com.flyco.dialog.listener.OnBtnClickL;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
@@ -42,7 +47,11 @@ import my.ActivityTool;
 import my.DialogUtils;
 import my.MySharedPreferences;
 import my.http.HttpRestClient;
+import my.http.MyBaseBean;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class LoginActivity extends BasisActivity {
 
@@ -321,19 +330,18 @@ public class LoginActivity extends BasisActivity {
             return;
         }
 
-
         password = edit_pwd.getText().toString().trim();
         if (TextUtils.isEmpty(password)) {
             showToast(R.string.user_password_empty);
             return;
         }
 
-        RequestParams params = new RequestParams();
+        HttpParams params = new HttpParams();
         params.put("username", userName);
-//        params.put("password", MD5.getMD5ofStrLowercase(password));
         params.put("password", password);
         showProgress();
-        HttpRestClient.post(Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, BasisBean.class);
+        OkGoClient.post(mContext,Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, BasisBean.class);
+
     }
 
     static final int HTTP_LOGIN = 12;
@@ -385,24 +393,25 @@ public class LoginActivity extends BasisActivity {
     }
 
     void getToken() {
-        RequestParams params = new RequestParams();
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
-        params.put("accessKey", dataCurrent.getAccessKey());
-        params.put("account", userName);
-        params.put("tenant", dataCurrent.getTenant());
+        dataCurrent.setAccount(userName);
+
+        MediaType mediaType = MediaType.parse("application/json");
+//        RequestBody body = RequestBody.create(mediaType, "{ \"accessKey\": \"45bd5cc0c8694cdc92c43a6edc094089\", \"account\": \"admin\", \"tenant\": \"app\"}");
+        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
+
         showProgress();
-
-
-        HttpRestClient.post2(Constants.URL_GET_TOKEN, params, new MyHttpListener() {
+        OkGoClient.post(mContext,Constants.URL_GET_TOKEN, body, new StringCallback() {
             @Override
-            public void onSuccess(int httpWhat, Object result) {
-                LoginBean loginBean = (LoginBean) result;
-                onLoginSuccess(loginBean);
-            }
-
-            @Override
-            public void onFinish(int httpWhat) {
-                dismissProgress();
+            public void onSuccess(Response<String> response) {
+                String a =response.body();
+                LoginBean bean = JSON.parseObject(a, LoginBean.class);
+                if(bean.getAccessToken() == null){
+                    showToast(""+bean.getMessage());
+                    return;
+                }else {
+                    onLoginSuccess(bean);
+                }
             }
         }, 0, LoginBean.class);
 

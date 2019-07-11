@@ -23,17 +23,27 @@ import com.flyco.animation.BounceEnter.BounceBottomEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.view.CropImageView;
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheEntity;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.cookie.CookieJarImpl;
+import com.lzy.okgo.cookie.store.SPCookieStore;
+import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.tencent.smtt.sdk.QbSdk;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
 
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import cn.jpush.android.api.BasicPushNotificationBuilder;
 import cn.jpush.android.api.JPushInterface;
 import my.LogUtil;
+import my.TokenInterceptor;
+import okhttp3.OkHttpClient;
 
 public class BasisApp extends MultiDexApplication {
     private static BasisApp APP;
@@ -64,7 +74,7 @@ public class BasisApp extends MultiDexApplication {
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(mContext);
         ImageLoader.getInstance().init(configuration);
         initX5();
-
+        initOkGo();
         initJpush();
 
 //        initUmeng();
@@ -74,6 +84,43 @@ public class BasisApp extends MultiDexApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(base);
+    }
+
+    private void initOkGo() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor("OkGo");
+        //log打印级别，决定了log显示的详细程度
+        loggingInterceptor.setPrintLevel(HttpLoggingInterceptor.Level.BODY);
+        //log颜色级别，决定了log在控制台显示的颜色
+        loggingInterceptor.setColorLevel(Level.INFO);
+        builder.addInterceptor(loggingInterceptor);
+        //全局的读取超时时间
+        builder.readTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+//全局的写入超时时间
+        builder.writeTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+//全局的连接超时时间
+        builder.connectTimeout(OkGo.DEFAULT_MILLISECONDS, TimeUnit.MILLISECONDS);
+        //使用sp保持cookie，如果cookie不过期，则一直有效
+        builder.cookieJar(new CookieJarImpl(new SPCookieStore(this)));
+//使用数据库保持cookie，如果cookie不过期，则一直有效
+//        builder.cookieJar(new CookieJarImpl(new DBCookieStore(this)));
+//使用内存保持cookie，app退出后，cookie消失
+//        builder.cookieJar(new CookieJarImpl(new MemoryCookieStore()));
+        //---------这里给出的是示例代码,告诉你可以这么传,实际使用的时候,根据需要传,不需要就不传-------------//
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.put("commonHeaderKey1", "commonHeaderValue1");    //header不支持中文，不允许有特殊字符
+//        headers.put("commonHeaderKey2", "commonHeaderValue2");
+        OkHttpClient client = new OkHttpClient.Builder()
+                .addInterceptor(new TokenInterceptor())//添加获取token的拦截器
+                .build();
+        OkGo.getInstance().init(this)                       //必须调用初始化
+                .setOkHttpClient(builder.build())               //建议设置OkHttpClient，不设置将使用默认的
+                .setCacheMode(CacheMode.NO_CACHE)               //全局统一缓存模式，默认不使用缓存，可以不传
+                .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)   //全局统一缓存时间，默认永不过期，可以不传
+                .setOkHttpClient(client)
+                .setRetryCount(3);                    //全局统一超时重连次数，默认为三次，那么最差的情况会请求4次(一次原始请求，三次重连请求)，不需要可以设置为0
+
+
     }
 
     private void initJpush() {
@@ -91,7 +138,7 @@ public class BasisApp extends MultiDexApplication {
 //        JPushInterface.setPushNotificationBuilder(2, builder);
 
         //        JPushInterface.init(this);     		// 初始化 JPush
-        JPushInterface.setDebugMode(Constants.DEBUG); 	// 设置开启日志,发布时请关闭日志
+        JPushInterface.setDebugMode(Constants.DEBUG);    // 设置开启日志,发布时请关闭日志
         BasicPushNotificationBuilder builderB = new BasicPushNotificationBuilder(this);
         builderB.statusBarDrawable = R.drawable.icon_notification_small;
         builderB.notificationFlags = Notification.FLAG_AUTO_CANCEL
@@ -101,7 +148,7 @@ public class BasisApp extends MultiDexApplication {
                 | Notification.DEFAULT_LIGHTS;  // 设置为铃声、震动、呼吸灯闪烁都要
         JPushInterface.setPushNotificationBuilder(1, builderB);
 
-      //  极光统计
+        //  极光统计
         JAnalyticsInterface.init(this);
         JAnalyticsInterface.setDebugMode(Constants.DEBUG);
         JAnalyticsInterface.initCrashHandler(this);
@@ -248,7 +295,7 @@ public class BasisApp extends MultiDexApplication {
         activity.getWindow().getDecorView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                proxyOnlick(activity.getWindow().getDecorView(),5);
+                proxyOnlick(activity.getWindow().getDecorView(), 5);
             }
         });
     }
@@ -280,6 +327,7 @@ public class BasisApp extends MultiDexApplication {
 
     /**
      * 通过反射  查找到view 的clicklistener
+     *
      * @param view
      */
     public static void getClickListenerForView(View view) {
@@ -306,7 +354,7 @@ public class BasisApp extends MultiDexApplication {
                     View.OnClickListener onClickListenerProxy = new ProxyOnclickListener(mOnClickListener);
                     //更换
                     onClickListenerField.set(listenerInfoObj, onClickListenerProxy);
-                }else{
+                } else {
                     Log.e("OnClickListenerProxy", "setted proxy listener ");
                 }
             }
@@ -333,7 +381,7 @@ public class BasisApp extends MultiDexApplication {
             long currentTime = System.currentTimeMillis();
             if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
                 lastClickTime = currentTime;
-                Log.e("OnClickListenerProxy", "OnClickListenerProxy"+this);
+                Log.e("OnClickListenerProxy", "OnClickListenerProxy" + this);
                 if (onclick != null) onclick.onClick(v);
             }
         }

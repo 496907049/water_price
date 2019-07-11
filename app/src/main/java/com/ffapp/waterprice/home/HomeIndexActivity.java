@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
@@ -38,6 +39,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.jaygoo.bean.Site;
 import com.jaygoo.selector.MultiSelectPopWindow;
 import com.loopj.android.http.RequestParams;
+import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -49,7 +53,9 @@ import butterknife.OnClick;
 import my.ActivityTool;
 import my.TimeUtils;
 import my.http.HttpRestClient;
+import my.http.MyBaseBean;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
 
 /**
  * 首页
@@ -94,10 +100,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         mapView.onCreate(savedInstanceState); // 此方法必须重写
         initMap();
 
-//        swipeRefreshLayout.setRefreshing(true);
-//        refreshData();
+        swipeRefreshLayout.setRefreshing(true);
+        refreshData();
 
-        EventBus.getDefault().register(this);
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
@@ -227,41 +232,37 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     void getWeather(){
-        RequestParams params = new RequestParams();
-        params.put("token", LoginBean.getUserToken());
-        params.put("type", 0);
-
-        HttpRestClient.get(Constants.URL_HOME_WEATHER, params, new MyHttpListener() {
+        HttpParams params = new HttpParams();
+        OkGoClient.get(mContext, Constants.URL_HOME_WEATHER, params, new StringCallback() {
             @Override
-            public void onSuccess(int httpWhat, Object result) {
-//                mBlockListBeanSoil = (BlockListBean) result;
-                WeatherInfoData weatherData = (WeatherInfoData) result;
+            public void onSuccess(Response<String> response) {
+                WeatherInfoData weatherData = JSON.parseObject(response.body(), WeatherInfoData.class);
                 setWeatherView(weatherData);
             }
 
             @Override
-            public void onFinish(int httpWhat) {
+            public void onError(Response<String> response) {
+                super.onError(response);
 
             }
-        },0, WeatherInfoData.class);
 
+            @Override
+            public void onFinish() {
+                super.onFinish();
+            }
+        }, 0, WeatherInfoData.class);
     }
 
     void setWeatherView(WeatherInfoData weatherData){
         if(weatherData == null)return;
-        if(weatherData.getCityName().equals(weatherData.getAreaName())){
-            ((TextView)findViewById(R.id.text_title_city)).setText(weatherData.getCityName());
-        }else {
-            ((TextView)findViewById(R.id.text_title_city)).setText(weatherData.getCityName()+weatherData.getAreaName());
-        }
+            ((TextView)findViewById(R.id.text_title_city)).setText(weatherData.getSecondaryname());
         ((TextView)findViewById(R.id.text_title_time)).setText(TimeUtils.getCurrentTimeByFormat("yyyy/MM/dd")+"    "+TimeUtils.getWeekName());
-        BasisApp.loadImg(mContext,weatherData.getIconSrc(),((ImageView)findViewById(R.id.img_weather)));
-
-        ((TextView)findViewById(R.id.text_weather)).setText(weatherData.getCondition());
-        ((TextView)findViewById(R.id.text_weather_temp)).setText(weatherData.getTemp()+"℃");
+//        BasisApp.loadImg(mContext,weatherData.getIconSrc(),((ImageView)findViewById(R.id.img_weather)));
+        ((TextView)findViewById(R.id.text_weather)).setText(weatherData.getConditionDay());
+        ((TextView)findViewById(R.id.text_weather_temp)).setText(weatherData.getTempDay()+"℃");
         ((TextView)findViewById(R.id.text_weather_wet)).setText(weatherData.getHumidity()+"%");
-        ((TextView)findViewById(R.id.text_weather_wind_direction)).setText(weatherData.getWindDir());
-        ((TextView)findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevel()+"级");
+        ((TextView)findViewById(R.id.text_weather_wind_direction)).setText(weatherData.getWindDirDay());
+        ((TextView)findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevelDay()+"级");
     }
 
     /**

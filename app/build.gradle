@@ -97,7 +97,8 @@ dependencies {
 
     implementation 'com.github.iwgang:countdownview:2.1.6'//倒计时
     implementation 'com.sunfusheng:marqueeview:1.3.3' //跑马灯
-
+    //必须使用
+    implementation 'com.lzy.net:okgo:3.0.4'
     implementation files('libs/pinyin4j-2.5.0.jar')
     implementation 'com.jaredrummler:material-spinner:1.3.1'
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1

@@ -16,20 +16,19 @@ public class Constants {
 	//TOKEN接口
 	public static String URL_GET_TOKEN = URL_API+"api/token";
 
-
-
-
-
-
-
-
-
-
-
-
-
 	//首页-天气
-	public static String URL_HOME_WEATHER = URL_API+"weather/get";
+	public static String URL_HOME_WEATHER = URL_API+"api/weather";
+
+
+
+
+
+
+
+
+
+
+
 
 	public static String aaa = URL_API+"aaat";
 
