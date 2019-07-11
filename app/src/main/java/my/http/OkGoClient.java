@@ -44,8 +44,6 @@ public class OkGoClient {
 
     public static void get(Context context, String url, HttpParams params,
                             MyHttpListener mListener, int what, Class<?> class1) {
-
-
         OkGo.<String>get(url)
                 .tag(context)
                 .retryCount(3)
@@ -55,16 +53,22 @@ public class OkGoClient {
                 .execute(new OkGoCallBack(mListener,what,class1));
     }
 
-    public static void get(Context context, String url, HttpParams params,
-                            StringCallback mListener, int what, Class<?> class1) {
-
-
+    public static void get(Context context, String url, StringCallback mListener, int what, Class<?> class1) {
         OkGo.<String>get(url)
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
                 .headers("Authorization","Bearer\""+LoginBean.getUserToken()+"\"")
                 .execute(mListener);
+    }
+
+    public static void get(Context context, String url, MyHttpListener mListener, int what, Class<?> class1) {
+        OkGo.<String>get(url)
+                .tag(context)
+                .retryCount(3)
+                .cacheTime(5000)
+                .headers("Authorization","Bearer\""+LoginBean.getUserToken()+"\"")
+                .execute(new OkGoCallBack(mListener,what,class1));
     }
 
     public static void post(Context context, String url, HttpParams params,
