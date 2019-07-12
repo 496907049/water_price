@@ -35,12 +35,12 @@ public class MyBaseBean {
 		this.api_time = api_time;
 	}
 	
-	@JSONField(name="result")
+	@JSONField(name="data")
 	public String getResultData() {
 		return resultData;
 	}
 
-	@JSONField(name="result")
+	@JSONField(name="data")
 	public void setResultData(String resultData) {
 		this.resultData = resultData;
 	}

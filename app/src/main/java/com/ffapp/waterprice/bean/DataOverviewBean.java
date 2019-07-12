@@ -1,12 +1,12 @@
 package com.ffapp.waterprice.bean;
 
 public class DataOverviewBean extends BasisBean{
-    private int sumWaterUser;
-    private int sumLineDevice;
-    private String sumRatifiedWaterConsumption;
-    private String sumRealWaterConsumption;
-    private String lastWaterConsumption;
-    private int sumDevice;
+    private int sumWaterUser;     //用水户数量
+    private int sumLineDevice;          //在线数量
+    private String sumRatifiedWaterConsumption;   //统计指标用水量
+    private String sumRealWaterConsumption;     //实际水量
+    private String lastWaterConsumption;     //剩余水量
+    private int sumDevice;      //站点数量
     public void setSumWaterUser(int sumWaterUser) {
         this.sumWaterUser = sumWaterUser;
     }

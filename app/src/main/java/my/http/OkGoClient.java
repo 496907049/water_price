@@ -44,7 +44,7 @@ public class OkGoClient {
 
     public static void get(Context context, String url, HttpParams params,
                 MyHttpListener mListener, int what, Class<?> class1) {
-            OkGo.<String>get(url)
+            OkGo.<String>get(getAbsoluteUrl(url))
                     .tag(context)
                     .retryCount(3)
                     .cacheTime(5000)
@@ -55,7 +55,7 @@ public class OkGoClient {
 
     public static void get(Context context, String url, HttpParams params,
                            StringCallback mListener, int what, Class<?> class1) {
-        OkGo.<String>get(url)
+        OkGo.<String>get(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -65,7 +65,7 @@ public class OkGoClient {
     }
 
     public static void get(Context context, String url, StringCallback mListener, int what, Class<?> class1) {
-        OkGo.<String>get(url)
+        OkGo.<String>get(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -74,7 +74,8 @@ public class OkGoClient {
     }
 
     public static void get(Context context, String url, MyHttpListener mListener, int what, Class<?> class1) {
-        OkGo.<String>get(url)
+        String a = LoginBean.getUserToken();
+        OkGo.<String>get(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -85,7 +86,7 @@ public class OkGoClient {
     public static void post(Context context, String url, HttpParams params,
                             MyHttpListener mListener, int what, Class<?> class1) {
 
-        OkGo.<String>post(url)
+        OkGo.<String>post(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -97,7 +98,7 @@ public class OkGoClient {
     public static void post(Context context, String url, RequestBody body,
                             MyHttpListener mListener, int what, Class<?> class1) {
 
-        OkGo.<String>post(url)
+        OkGo.<String>post(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -109,7 +110,7 @@ public class OkGoClient {
 
     public static void post(Context context, String url, RequestBody body,
                             StringCallback mListener, int what, Class<?> class1) {
-        OkGo.<String>post(url)
+        OkGo.<String>post(getAbsoluteUrl(url))
                 .tag(context)
                 .retryCount(3)
                 .cacheTime(5000)
@@ -122,16 +123,15 @@ public class OkGoClient {
 
 
     private static String getAbsoluteUrl(String relativeUrl) {
-//        if (relativeUrl.startsWith("http")) {
-//            LogUtil.i(tag,relativeUrl);
-//            return relativeUrl;
-//        } else {
-//
-////			return Constants.getServerIp() + relativeUrl;
-//            LogUtil.i(tag, MyUtils.getServiceAPI()+relativeUrl);
-//            return MyUtils.getServiceAPI()+relativeUrl;
-//        }
+        if (relativeUrl.startsWith("http")) {
+            LogUtil.i(tag,relativeUrl);
             return relativeUrl;
+        } else {
+
+//			return Constants.getServerIp() + relativeUrl;
+            LogUtil.i(tag, MyUtils.getServiceAPI()+relativeUrl);
+            return MyUtils.getServiceAPI()+relativeUrl;
+        }
     }
 
     private static final String HEADER_PARAMS1 = "XF-API-app_id";

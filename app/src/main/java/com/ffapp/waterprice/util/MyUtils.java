@@ -18,6 +18,7 @@ public class MyUtils {
     private static final String SP_IP= "app_ip";
     private static final String SP_TENANT= "sp_tenant";
     private static final String SP_AMBIENT= "sp_ambient";
+    private static final String SP_KEY_USER = "user";
 
 
     public static String getIp(){
@@ -27,6 +28,14 @@ public class MyUtils {
         }
 
         return msp.getString(SP_IP);
+    }
+
+    public static String getUser(){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.mContext);
+        if(TextUtils.isEmpty(msp.getString(SP_KEY_USER))){
+            return "";
+        }
+        return msp.getString(SP_KEY_USER);
     }
 
     public static void putIP( String ip){

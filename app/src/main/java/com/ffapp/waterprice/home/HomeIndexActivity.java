@@ -7,7 +7,6 @@ import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +24,11 @@ import com.amap.api.maps2d.model.LatLngBounds;
 import com.amap.api.maps2d.model.Marker;
 import com.amap.api.maps2d.model.MarkerOptions;
 import com.ffapp.waterprice.R;
-import com.ffapp.waterprice.basis.BasisApp;
 import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.AreaBean;
 import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
-import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.bean.WeatherInfoData;
 import com.ffapp.waterprice.home.site.SiteActivity;
 import com.github.mikephil.charting.charts.PieChart;
@@ -39,22 +37,18 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.jaygoo.bean.Site;
 import com.jaygoo.selector.MultiSelectPopWindow;
-import com.loopj.android.http.RequestParams;
 import com.lzy.okgo.callback.StringCallback;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
 import my.TimeUtils;
-import my.http.HttpRestClient;
-import my.http.MyBaseBean;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
 
@@ -69,6 +63,20 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     PieChart picChart;
 
     DeviceListBean mDeviceListBean;
+
+    @BindView(R.id.tv_site_num)
+    TextView tvSiteNum;
+    @BindView(R.id.tv_ol_num)
+    TextView tvOlNum;
+    @BindView(R.id.tv_water_user)
+    TextView tvWaterUser;
+    @BindView(R.id.tv_water_num)
+    TextView tvWaterNum;
+    @BindView(R.id.tv_actual_num)
+    TextView tvActualNum;
+    @BindView(R.id.tv_water_surplus)
+    TextView tvWaterSurplus;
+
 
     private AMap aMap;
     @BindView(R.id.map_view)
@@ -112,30 +120,50 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //            }
 //        },2000);
 
-        getDataOverview();//  获取数据概况数据
-
-
         initPicChart();
     }
 
-    private void getDataOverview(){    //获取数据概况数据
-        RequestParams params = new RequestParams();
-        params.put("token", LoginBean.getUserToken());
-
-        OkGoClient.get(mContext,Constants.URL_GET_DATA_OVERVIEW, new MyHttpListener() {
+    private void getDataOverview() {    //获取数据概况数据
+        OkGoClient.get(mContext, Constants.URL_GET_DATA_OVERVIEW, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
-//                mBlockListBeanSoil = (BlockListBean) result;
                 DataOverviewBean bean = (DataOverviewBean) result;
+                setDataOverview(bean);
             }
 
             @Override
             public void onFinish(int httpWhat) {
 
             }
-        },0, DataOverviewBean.class);
+        }, 0, DataOverviewBean.class);
+    }
+    private void setDataOverview(DataOverviewBean bean) {
+        if (bean == null) return;
+        tvSiteNum.setText(""+bean.getSumDevice());
+        tvOlNum.setText(""+bean.getSumLineDevice());
+        tvWaterUser.setText(""+bean.getSumWaterUser());
+        tvWaterNum.setText(""+bean.getSumRatifiedWaterConsumption());
+        tvSiteNum.setText(""+bean.getSumDevice()+"万m³");
+        tvActualNum.setText(bean.getSumRealWaterConsumption()+"万m³");
+        tvWaterSurplus.setText(""+bean.getLastWaterConsumption()+"万m³");
+    }
+
+    private void getArea() {    //当前登录用户区域信息
+        OkGoClient.get(mContext, Constants.URL_API_AREA, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                AreaBean bean = (AreaBean) result;
+
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+
+            }
+        }, 0, AreaBean.class);
 
     }
+
 
     /**
      * 初始化AMap对象
@@ -154,12 +182,12 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         }
     }
 
-    private void initPicChart(){
+    private void initPicChart() {
         List<PieEntry> strings = new ArrayList<>();
-        strings.add(new PieEntry(30f,"aaa"));
-        strings.add(new PieEntry(70f,"bbb"));
+        strings.add(new PieEntry(30f, "aaa"));
+        strings.add(new PieEntry(70f, "bbb"));
 
-        PieDataSet dataSet = new PieDataSet(strings,"Label");
+        PieDataSet dataSet = new PieDataSet(strings, "Label");
 
         ArrayList<Integer> colors = new ArrayList<Integer>();
         colors.add(getResources().getColor(R.color.red));
@@ -181,7 +209,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     @SuppressLint("StaticFieldLeak")
-    void refreshData(){
+    void refreshData() {
 
         new AsyncTask<String, String, Object>() {
             @Override
@@ -213,7 +241,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         refreshData();
     }
 
-    void setMapView(){
+    void setMapView() {
         // 设置所有maker显示在当前可视区域地图中
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         DeviceListData DeviceListData;
@@ -233,13 +261,14 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
     }
 
-    void getWeather(){
+    void getWeather() {    //获取天气
         HttpParams params = new HttpParams();
         OkGoClient.get(mContext, Constants.URL_HOME_WEATHER, params, new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 WeatherInfoData weatherData = JSON.parseObject(response.body(), WeatherInfoData.class);
                 setWeatherView(weatherData);
+                getDataOverview();//  获取数据概况数据
             }
 
             @Override
@@ -255,16 +284,16 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         }, 0, WeatherInfoData.class);
     }
 
-    void setWeatherView(WeatherInfoData weatherData){
-        if(weatherData == null)return;
-            ((TextView)findViewById(R.id.text_title_city)).setText(weatherData.getSecondaryname());
-        ((TextView)findViewById(R.id.text_title_time)).setText(TimeUtils.getCurrentTimeByFormat("yyyy/MM/dd")+"    "+TimeUtils.getWeekName());
+    void setWeatherView(WeatherInfoData weatherData) {
+        if (weatherData == null) return;
+        ((TextView) findViewById(R.id.text_title_city)).setText(weatherData.getSecondaryname());
+        ((TextView) findViewById(R.id.text_title_time)).setText(TimeUtils.getCurrentTimeByFormat("yyyy/MM/dd") + "    " + TimeUtils.getWeekName());
 //        BasisApp.loadImg(mContext,weatherData.getIconSrc(),((ImageView)findViewById(R.id.img_weather)));
-        ((TextView)findViewById(R.id.text_weather)).setText(weatherData.getConditionDay());
-        ((TextView)findViewById(R.id.text_weather_temp)).setText(weatherData.getTempDay()+"℃");
-        ((TextView)findViewById(R.id.text_weather_wet)).setText(weatherData.getHumidity()+"%");
-        ((TextView)findViewById(R.id.text_weather_wind_direction)).setText(weatherData.getWindDirDay());
-        ((TextView)findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevelDay()+"级");
+        ((TextView) findViewById(R.id.text_weather)).setText(weatherData.getConditionDay());
+        ((TextView) findViewById(R.id.text_weather_temp)).setText(weatherData.getTempDay() + "℃");
+        ((TextView) findViewById(R.id.text_weather_wet)).setText(weatherData.getHumidity() + "%");
+        ((TextView) findViewById(R.id.text_weather_wind_direction)).setText(weatherData.getWindDirDay());
+        ((TextView) findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevelDay() + "级");
     }
 
     /**
@@ -322,15 +351,17 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
 
     @OnClick(R.id.img_site)
-    public void toSite(){
-        ActivityTool.skipActivity(mContext,SiteActivity.class);
+    public void toSite() {
+        ActivityTool.skipActivity(mContext, SiteActivity.class);
     }
+
     @OnClick(R.id.img_list)
-    public void toList(){
+    public void toList() {
 
     }
+
     @OnClick(R.id.img_layer)
-    public void toLayer(){
+    public void toLayer() {
         ArrayList<Site> siteArrayList = new ArrayList<>();
         Site site = new Site();
         site.setId(1);
@@ -358,11 +389,11 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
                     @Override
                     public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
-                        String siteName ="";
-                        for (Site site : selectedList){
-                            siteName += site.getName()+",";
+                        String siteName = "";
+                        for (Site site : selectedList) {
+                            siteName += site.getName() + ",";
                         }
-                        Toast.makeText(getApplication(), ""+siteName, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplication(), "" + siteName, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setCancel("取消")
@@ -373,13 +404,13 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     @OnClick(R.id.img_zoom_in)
-    public void toZoonInIm(){
+    public void toZoonInIm() {
 
 
     }
 
     @OnClick(R.id.view_weather)
-    void weather(){
+    void weather() {
 //        ActivityTool.skipActivity(mContext, WeatherActivity.class);
     }
 

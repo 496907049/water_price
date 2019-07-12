@@ -65,14 +65,14 @@ public class TokenInterceptor implements Interceptor {
         BaseListDataListBean listServers = new BaseListDataListBean();
         BaseListData data;
 
-        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（内网）");
+        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（重阳）");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
 
-        data = new BaseListData("http://api.dev.gk100.ff-cloud.net/", "开发环境");
-        data.setTenant("");
-        data.setAccessKey("");
+        data = new BaseListData("http://192.168.25.32:8090/", "测试环境（钟磊）");
+        data.setTenant("app");
+        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
 
         data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
@@ -80,14 +80,13 @@ public class TokenInterceptor implements Interceptor {
         data.setAccessKey("");
         listServers.getList().add(data);
 
-        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
-        dataCurrent.setAccount(msp.getUser());
+        dataCurrent.setAccount(MyUtils.getUser());
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
 
-        Response response =  OkGo.<String>post(Constants.URL_GET_TOKEN)
+        Response response =  OkGo.<String>post(dataCurrent.getId()+Constants.URL_GET_TOKEN)
                 .tag(BasisApp.getInstance())
                 .retryCount(3)
                 .cacheTime(5000)
@@ -100,8 +99,8 @@ public class TokenInterceptor implements Interceptor {
 //
 //        loginInfo.setPassword(password);
 //        CacheManager.saveLoginInfo(loginInfo);
-        String a = response.body().string();
-        LoginBean bean = JSON.parseObject(a, LoginBean.class);
+        String b = response.body().string();
+        LoginBean bean = JSON.parseObject(b, LoginBean.class);
         LoginBean.getInstance().setAccessToken(bean.getToken());
         return bean.getToken();
     }

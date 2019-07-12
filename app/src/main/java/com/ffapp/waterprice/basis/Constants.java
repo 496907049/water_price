@@ -8,7 +8,8 @@ public class Constants {
 	//开发地址
 	 public static final String URL_SERVICE = "http://api.dev.gk100.ff-cloud.net/";
 
-	public static String URL_API = "http://192.168.25.245:8081/";
+//	public static String URL_API = "http://192.168.25.245:8081/";
+	public static String URL_API = "";
 
 	//登录-登录
 	public static String URL_LOGIN = URL_API+"api/security/login";
@@ -23,8 +24,8 @@ public class Constants {
 	public static String URL_DEVICE_PAGE = URL_API+"api/device/page";
 	//获取数据概况数据
 	public static String URL_GET_DATA_OVERVIEW = URL_API+"api/dashboard/getDataOverview";
-
-
+	//当前登录用户区域信息
+	public static String URL_API_AREA = URL_API+"api/area";
 
 
 
