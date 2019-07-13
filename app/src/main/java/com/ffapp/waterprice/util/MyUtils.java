@@ -15,6 +15,7 @@ import my.MySharedPreferences;
 public class MyUtils {
 
     private static final String SP_ACCESSKEY= "sp_accessKey";
+    private static final String SP_AREAID= "sp_areaId";
     private static final String SP_IP= "app_ip";
     private static final String SP_TENANT= "sp_tenant";
     private static final String SP_AMBIENT= "sp_ambient";
@@ -100,12 +101,33 @@ public class MyUtils {
         msp.putString(SP_ACCESSKEY,key);
     }
 
+    public static void putAreaId( String areaId){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        msp.putString(SP_AREAID,areaId);
+    }
+    public static String getAreaId( ){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+       return msp.getString(SP_AREAID);
+    }
+
     public static  void putSerciceData(BaseListData data){
         if(data == null)return;
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        msp.putString(SP_IP,data.getId());
         msp.putString(SP_ACCESSKEY,data.getAccessKey());
         msp.putString(SP_TENANT,data.getTenant());
         msp.putString(SP_AMBIENT,data.getName());
-        msp.putString(SP_IP,data.getId());
     }
+
+    public static BaseListData  getSerciceData(){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        BaseListData data = new BaseListData();
+        data.setAccessKey(msp.getString(SP_ACCESSKEY));
+        data.setTenant(msp.getString(SP_TENANT));
+        data.setAccount(msp.getString(SP_KEY_USER));
+        data.setId(msp.getString(SP_IP));
+        data.setName(msp.getString(SP_AMBIENT));
+        return data;
+    }
+
 }

@@ -146,6 +146,12 @@
                             android:text="数据概览" />
                     </LinearLayout>
 
+                    <ImageView
+                        style="@style/divider_hor_style.color"
+                        android:layout_height="3dp"
+                        android:background="@drawable/char_line_fade_grey"
+                        />
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
@@ -159,7 +165,6 @@
                             <LinearLayout
                                 style="@style/base_layout_m_m"
                                 android:gravity="center|left"
-                                android:background="@drawable/base_item_shadow_selector"
                                 android:paddingLeft="@dimen/base_padding_small"
                                 android:layout_weight="1"
                                 >
@@ -188,6 +193,10 @@
                                 </LinearLayout>
 
                             </LinearLayout>
+
+                            <ImageView
+                                style="@style/divider_ver_style.color"
+                                />
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
@@ -226,6 +235,10 @@
 
                         </LinearLayout>
 
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            />
+
                         <LinearLayout
                             style="@style/base_layout_m_m_h"
                             android:layout_weight="1">
@@ -256,11 +269,15 @@
                                         android:id="@+id/tv_water_user"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="@string/water_unit" />
+                                        />
 
                                 </LinearLayout>
 
                             </LinearLayout>
+
+                            <ImageView
+                                style="@style/divider_ver_style.color"
+                                />
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
@@ -289,7 +306,7 @@
                                         android:id="@+id/tv_water_num"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="@string/water_unit" />
+                                        android:text="" />
 
                                 </LinearLayout>
 
@@ -298,6 +315,10 @@
                             </LinearLayout>
 
                         </LinearLayout>
+
+                        <ImageView
+                            style="@style/divider_hor_style.color"
+                            />
 
                         <LinearLayout
                             style="@style/base_layout_m_m_h"
@@ -330,11 +351,15 @@
                                         android:id="@+id/tv_actual_num"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="@string/water_unit" />
+                                        android:text="" />
 
                                 </LinearLayout>
 
                             </LinearLayout>
+
+                            <ImageView
+                                style="@style/divider_ver_style.color"
+                                />
 
                             <LinearLayout
                                 style="@style/base_layout_m_m"
@@ -363,7 +388,7 @@
                                         android:id="@+id/tv_water_surplus"
                                         style="@style/base_text_content"
                                         android:maxLines="1"
-                                        android:text="@string/water_unit" />
+                                        android:text="" />
 
                                 </LinearLayout>
 
@@ -463,11 +488,12 @@
                         android:background="#eeeeee" />
 
 
-                    <com.github.mikephil.charting.charts.PieChart
-                        android:id="@+id/pic_chart"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp">
-                    </com.github.mikephil.charting.charts.PieChart>
+                  <com.github.mikephil.chart_3_0_1v.charts.PieChart
+                      android:id="@+id/pic_chart"
+                      android:layout_width="match_parent"
+                      android:layout_height="250dp">
+                  </com.github.mikephil.chart_3_0_1v.charts.PieChart>
+
                 </LinearLayout>
 
             </LinearLayout>

@@ -3,7 +3,6 @@ package com.ffapp.waterprice.home;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -29,12 +28,12 @@ import com.ffapp.waterprice.bean.AreaBean;
 import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
+import com.ffapp.waterprice.bean.DeviceTypeListBean;
+import com.ffapp.waterprice.bean.WaterUserListData;
 import com.ffapp.waterprice.bean.WeatherInfoData;
 import com.ffapp.waterprice.home.site.SiteActivity;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
+import com.ffapp.waterprice.util.MyUtils;
+import com.github.mikephil.chart_3_0_1v.charts.PieChart;
 import com.jaygoo.bean.Site;
 import com.jaygoo.selector.MultiSelectPopWindow;
 import com.lzy.okgo.callback.StringCallback;
@@ -42,10 +41,8 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
 import my.TimeUtils;
@@ -120,10 +117,10 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 //            }
 //        },2000);
 
-        initPicChart();
     }
 
     private void getDataOverview() {    //获取数据概况数据
+        showProgress();
         OkGoClient.get(mContext, Constants.URL_GET_DATA_OVERVIEW, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
@@ -131,9 +128,10 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 setDataOverview(bean);
             }
 
+
             @Override
             public void onFinish(int httpWhat) {
-
+                dismissProgress();
             }
         }, 0, DataOverviewBean.class);
     }
@@ -143,22 +141,24 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         tvOlNum.setText(""+bean.getSumLineDevice());
         tvWaterUser.setText(""+bean.getSumWaterUser());
         tvWaterNum.setText(""+bean.getSumRatifiedWaterConsumption());
-        tvSiteNum.setText(""+bean.getSumDevice()+"万m³");
         tvActualNum.setText(bean.getSumRealWaterConsumption()+"万m³");
         tvWaterSurplus.setText(""+bean.getLastWaterConsumption()+"万m³");
     }
 
     private void getArea() {    //当前登录用户区域信息
+        showProgress();
         OkGoClient.get(mContext, Constants.URL_API_AREA, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 AreaBean bean = (AreaBean) result;
-
+                if(bean!=null){
+                    MyUtils.putAreaId(bean.getId());
+                }
             }
 
             @Override
             public void onFinish(int httpWhat) {
-
+                dismissProgress();
             }
         }, 0, AreaBean.class);
 
@@ -183,22 +183,26 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     private void initPicChart() {
-        List<PieEntry> strings = new ArrayList<>();
-        strings.add(new PieEntry(30f, "aaa"));
-        strings.add(new PieEntry(70f, "bbb"));
 
-        PieDataSet dataSet = new PieDataSet(strings, "Label");
+        showProgress();
+        HttpParams params = new HttpParams();
+        params.put("topNum",5);
 
-        ArrayList<Integer> colors = new ArrayList<Integer>();
-        colors.add(getResources().getColor(R.color.red));
-        colors.add(getResources().getColor(R.color.base_blue));
-        dataSet.setColors(colors);
+        OkGoClient.get(mContext, Constants.URL_GET_WATER_USER,params, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                WaterUserListData listBean = (WaterUserListData) result;
+                    listBean.setPicChart(mContext,picChart);
 
-        PieData pieData = new PieData(dataSet);
-        pieData.setDrawValues(true);
+            }
 
-        picChart.setData(pieData);
-        picChart.invalidate();
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, WaterUserListData.class);
+
     }
 
 
@@ -269,6 +273,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 WeatherInfoData weatherData = JSON.parseObject(response.body(), WeatherInfoData.class);
                 setWeatherView(weatherData);
                 getDataOverview();//  获取数据概况数据
+                initPicChart();//获取用水情况
+                getArea();//获取个人区域信息
             }
 
             @Override
@@ -362,45 +368,38 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @OnClick(R.id.img_layer)
     public void toLayer() {
-        ArrayList<Site> siteArrayList = new ArrayList<>();
-        Site site = new Site();
-        site.setId(1);
-        site.setName("水流流量站");
-        siteArrayList.add(site);
-        site = new Site();
-        site.setId(2);
-        site.setName("土壤墒情站");
-        siteArrayList.add(site);
-        site = new Site();
-        site.setId(3);
-        site.setName("气象站");
-        siteArrayList.add(site);
-        site = new Site();
-        site.setId(4);
-        site.setName("雨量站");
-        siteArrayList.add(site);
-        site = new Site();
-        site.setId(5);
-        site.setName("视频测试站");
-        siteArrayList.add(site);
+        showProgress();
+        OkGoClient.post(mContext, Constants.URL_DEVICE_TYPE, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceTypeListBean listBean = (DeviceTypeListBean) result;
+                new MultiSelectPopWindow.Builder(mContext)
+                        .setArray(listBean.getList())
+                        .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
+                            @Override
+                            public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
+                                String siteName = "";
+                                for (Site site : selectedList) {
+                                    siteName += site.getName() + ",";
+                                }
+                                Toast.makeText(getApplication(), "" + siteName, Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setCancel("取消")
+                        .setConfirm("完成")
+                        .setTitle("选择图层")
+                        .build()
+                        .show(findViewById(R.id.mBottom));
+            }
 
-        new MultiSelectPopWindow.Builder(this)
-                .setArray(siteArrayList)
-                .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
-                    @Override
-                    public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
-                        String siteName = "";
-                        for (Site site : selectedList) {
-                            siteName += site.getName() + ",";
-                        }
-                        Toast.makeText(getApplication(), "" + siteName, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .setCancel("取消")
-                .setConfirm("完成")
-                .setTitle("选择图层")
-                .build()
-                .show(findViewById(R.id.mBottom));
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, DeviceTypeListBean.class);
+
+
+
     }
 
     @OnClick(R.id.img_zoom_in)

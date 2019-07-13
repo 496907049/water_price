@@ -59,14 +59,16 @@
 
     <LinearLayout
         style="@style/base_layout_m_m">
-        <com.github.mikephil.charting.charts.LineChart
+        <com.github.mikephil.chart_3_0_1v.charts.LineChart
             android:id="@+id/line_chart"
-            style="@style/base_layout_m_m"
-           />
+            style="@style/base_layout_m_m">
+        </com.github.mikephil.chart_3_0_1v.charts.LineChart>
 
-        <com.github.mikephil.charting.charts.BarChart
+        <com.github.mikephil.chart_3_0_1v.charts.BarChart
             android:id="@+id/bar_chart"
-            style="@style/base_layout_m_m"/>
+            style="@style/base_layout_m_m">
+        </com.github.mikephil.chart_3_0_1v.charts.BarChart>
+
 
     </LinearLayout>
 

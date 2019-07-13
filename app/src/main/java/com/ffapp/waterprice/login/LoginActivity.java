@@ -159,13 +159,8 @@ public class LoginActivity extends BasisActivity {
         listServers.getList().add(data);
 
         data = new BaseListData("http://192.168.25.32:8090/", "测试环境（钟磊）");
-        data.setTenant("app");
-        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
-        listServers.getList().add(data);
-
-        data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
-        data.setTenant("");
-        data.setAccessKey("");
+        data.setTenant("test");
+        data.setAccessKey("e982564349e34384b359b18600aaace4");
         listServers.getList().add(data);
 
 

@@ -80,12 +80,13 @@ public class TokenInterceptor implements Interceptor {
         data.setAccessKey("");
         listServers.getList().add(data);
 
-        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
-        dataCurrent.setAccount(MyUtils.getUser());
+//        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
+//        dataCurrent.setAccount(MyUtils.getUser());
+        BaseListData dataCurrent = MyUtils.getSerciceData();
 
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
-
+        String url =""+ dataCurrent.getId()+Constants.URL_GET_TOKEN ;
         Response response =  OkGo.<String>post(dataCurrent.getId()+Constants.URL_GET_TOKEN)
                 .tag(BasisApp.getInstance())
                 .retryCount(3)
@@ -102,6 +103,7 @@ public class TokenInterceptor implements Interceptor {
         String b = response.body().string();
         LoginBean bean = JSON.parseObject(b, LoginBean.class);
         LoginBean.getInstance().setAccessToken(bean.getToken());
+        LoginBean.getInstance().save();
         return bean.getToken();
     }
 

@@ -10,11 +10,10 @@ import com.alibaba.fastjson.TypeReference;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.BaseListBean;
 import com.ffapp.waterprice.bean.BasisBean;
-import com.ffapp.waterprice.bean.LoginBean;
-import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.HttpParams;
-import com.lzy.okgo.model.Response;
+import com.ffapp.waterprice.bean.DeviceTreeListBean;
+import com.ffapp.waterprice.bean.DeviceTreeListData;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.AddressSelector;
 import com.mic.adressselectorlib.CityInterface;
@@ -23,11 +22,13 @@ import com.mic.adressselectorlib.OnItemClickListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import my.http.MyHttpListener;
 import my.http.OkGoClient;
-import okhttp3.MediaType;
-import okhttp3.RequestBody;
 
 public class SiteActivity extends BasisActivity {
+
+    ArrayList<DeviceTreeListData> treeList = new ArrayList<>();
+    ArrayList<DeviceTreeListData> selectTreeList = new ArrayList<>();
 
     private ArrayList<City> cities1 = new ArrayList<>();
     private ArrayList<City> cities2 = new ArrayList<>();
@@ -56,39 +57,27 @@ public class SiteActivity extends BasisActivity {
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
 
-        String token = LoginBean.getUserToken();
-
-        MediaType mediaType = MediaType.parse("application/json");
-//        RequestBody body = RequestBody.create(mediaType, "{ \"accessKey\": \"45bd5cc0c8694cdc92c43a6edc094089\", \"account\": \"admin\", \"tenant\": \"app\"}");
-//        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
-//
-//        showProgress();
-//        OkGoClient.post(mContext,Constants.URL_DEVICE_PAGE, body, new StringCallback() {
-//            @Override
-//            public void onSuccess(Response<String> response) {
-//                String a =response.body();
-//                LoginBean bean = JSON.parseObject(a, LoginBean.class);
-//                if(bean.getAccessToken() == null){
-//                    showToast(""+bean.getMessage());
-//                    return;
-//                }else {
-//                    onLoginSuccess(bean);
-//                }
-//            }
-//        }, 0, LoginBean.class);
-
-
-      //  拿到本地JSON 并转成String
-        try {
-          JSONArray jsonArray = JSON.parseArray(getString(R.string.cities1));
-            for (int i = 0; i < jsonArray.size(); i++) {
-//                cities1.add(new Gson().fromJson(jsonArray.get(i).toString(), City.class));
-                City ac = JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {});
-                cities1.add( JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {}));
+        showProgress();
+        OkGoClient.get(mContext, Constants.URL_GET_TREE, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceTreeListBean listBean = (DeviceTreeListBean) result;
+                treeList = listBean.getList();
+                 City city;
+                    for (int i = 0; i < treeList.size(); i++) {
+                        city = new City();
+                        city.setName(treeList.get(i).getName());
+                        cities1.add(city);
+                    }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, BaseListBean.class);
+
+
         AddressSelector addressSelector = (AddressSelector) findViewById(R.id.address);
         addressSelector.setTabAmount(3);
         addressSelector.setTopImg(com.mic.adressselectorlib.R.mipmap.tab_icon_station);
@@ -102,7 +91,8 @@ public class SiteActivity extends BasisActivity {
                             JSONArray jsonArray2 = JSON.parseArray(getString(R.string.cities2));
                             for (int i = 0; i < jsonArray2.size(); i++) {
 //                                cities2.add(new Gson().fromJson(jsonArray2.get(i).toString(), City.class));
-                                cities2.add( JSON.parseObject(jsonArray2.get(i).toString(), new TypeReference<City>() {}));
+                                cities2.add(JSON.parseObject(jsonArray2.get(i).toString(), new TypeReference<City>() {
+                                }));
                             }
                             addressSelector.setCities(cities2);
                         } catch (JSONException e) {
@@ -116,7 +106,8 @@ public class SiteActivity extends BasisActivity {
                             JSONArray jsonArray3 = JSON.parseArray(getString(R.string.cities3));
                             for (int i = 0; i < jsonArray3.size(); i++) {
 //                                cities3.add(new Gson().fromJson(jsonArray3.get(i).toString(), City.class));
-                                cities3.add( JSON.parseObject(jsonArray3.get(i).toString(), new TypeReference<City>() {}));
+                                cities3.add(JSON.parseObject(jsonArray3.get(i).toString(), new TypeReference<City>() {
+                                }));
                             }
                             addressSelector.setCities(cities3);
                         } catch (JSONException e) {
@@ -129,7 +120,8 @@ public class SiteActivity extends BasisActivity {
                             JSONArray jsonArray4 = JSON.parseArray(getString(R.string.cities4));
                             for (int i = 0; i < jsonArray4.size(); i++) {
 //                                cities4.add(new Gson().fromJson(jsonArray4.get(i).toString(), City.class));
-                                cities4.add( JSON.parseObject(jsonArray4.get(i).toString(), new TypeReference<City>() {}));
+                                cities4.add(JSON.parseObject(jsonArray4.get(i).toString(), new TypeReference<City>() {
+                                }));
                             }
                             addressSelector.setCitiesTwo(cities4);
                         } catch (JSONException e) {

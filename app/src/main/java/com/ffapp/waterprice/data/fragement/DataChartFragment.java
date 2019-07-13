@@ -13,8 +13,8 @@ import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisFragment;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.ChartInfoBean;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.chart_3_0_1v.charts.BarChart;
+import com.github.mikephil.chart_3_0_1v.charts.LineChart;
 import com.loopj.android.http.RequestParams;
 
 import java.util.Calendar;
@@ -108,8 +108,8 @@ public class DataChartFragment extends BasisFragment {
                     @Override
                     public void onSuccess(int httpWhat, Object result) {
                         ChartInfoBean chartInfoBean = (ChartInfoBean) result;
-                        chartInfoBean.setChartLine(mContext, lineChart);
-                        chartInfoBean.setChartBar(mContext, barChart);
+//                        chartInfoBean.setChartLine(mContext, lineChart);
+//                        chartInfoBean.setChartBar(mContext, barChart);
                     }
 
                     @Override

@@ -88,7 +88,7 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
     implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
 
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'///图表
+//    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'///图表
 //    implementation 'com.amap.api:location:4.2.0'//高德定位
 //    implementation 'com.amap.api:3dmap:6.4.1'//高德定位3D
 
@@ -104,4 +104,5 @@ dependencies {
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1
     implementation project(path: ':adressselectorlib')
     implementation project(path: ':MultiSelectlib')
+    implementation project(path: ':MPChartLib')
 }

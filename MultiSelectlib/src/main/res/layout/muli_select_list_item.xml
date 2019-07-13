@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:orientation="horizontal"
+             android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-    android:gravity="center_vertical">
-    <TextView
-        android:id="@+id/choiceNameBtn"
-        android:layout_width="wrap_content"
-        android:elevation="0dp"
-        android:layout_height="30dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:textColor="@drawable/list_text_color_selector"
-        android:layout_centerInParent="true"
-        android:textSize="16sp"
-        android:layout_weight="1"
-        android:text="aaaa"
-    />
+                android:layout_height="50dp">
 
-    <ImageView
-        android:id="@+id/item_address_img"
-        android:paddingLeft="12.5dp"
-        android:src="@drawable/list_btn_tick"
-        android:layout_width="wrap_content"
-        android:visibility="invisible"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/choiceNameBtn"
+            android:layout_width="wrap_content"
+            android:elevation="0dp"
+            android:layout_height="30dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:textColor="@drawable/list_text_color_selector"
+            android:layout_centerInParent="true"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:text="aaaa"
+            />
+
+        <ImageView
+            android:id="@+id/item_address_img"
+            android:paddingRight="12.5dp"
+            android:src="@drawable/list_btn_tick"
+            android:layout_width="45dp"
+            android:visibility="invisible"
+            android:layout_height="15dp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/base_gree"></View>
+
+
 
 </LinearLayout>

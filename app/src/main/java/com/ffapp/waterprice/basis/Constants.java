@@ -26,6 +26,14 @@ public class Constants {
 	public static String URL_GET_DATA_OVERVIEW = URL_API+"api/dashboard/getDataOverview";
 	//当前登录用户区域信息
 	public static String URL_API_AREA = URL_API+"api/area";
+	//获取设备类型数据
+	public static String URL_DEVICE_TYPE = URL_API+"api/device/type";
+	//用水情况信息查询
+	public static String URL_GET_WATER_USER = URL_API+"api/dashboard/getWaterUser";
+	//获取设备数
+	public static String URL_GET_TREE = URL_API+"api/area/getDeviceTree";
+
+
 
 
 

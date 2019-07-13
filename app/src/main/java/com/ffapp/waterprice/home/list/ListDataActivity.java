@@ -1,5 +1,7 @@
 package com.ffapp.waterprice.home.list;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +20,7 @@ import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
+import com.ffapp.waterprice.data.DataAnalysisActivity;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
@@ -36,10 +39,8 @@ public class ListDataActivity extends BasisActivity {
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;
 
-
     @BindView(R.id.spinner)
     MaterialSpinner spinner;
-
 
 
     private MyAdapterList mAdapter;
