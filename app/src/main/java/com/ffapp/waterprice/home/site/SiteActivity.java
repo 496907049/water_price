@@ -3,20 +3,16 @@ package com.ffapp.waterprice.home.site;
 import android.os.Bundle;
 import android.view.View;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.TypeReference;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
-import com.ffapp.waterprice.bean.BaseListBean;
-import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.DeviceTreeListBean;
 import com.ffapp.waterprice.bean.DeviceTreeListData;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.AddressSelector;
 import com.mic.adressselectorlib.CityInterface;
+import com.mic.adressselectorlib.DeviceTreeChildListData;
 import com.mic.adressselectorlib.OnItemClickListener;
 
 import java.util.ArrayList;
@@ -28,12 +24,15 @@ import my.http.OkGoClient;
 public class SiteActivity extends BasisActivity {
 
     ArrayList<DeviceTreeListData> treeList = new ArrayList<>();
-    ArrayList<DeviceTreeListData> selectTreeList = new ArrayList<>();
+
 
     private ArrayList<City> cities1 = new ArrayList<>();
     private ArrayList<City> cities2 = new ArrayList<>();
+    ArrayList<DeviceTreeChildListData> cityList2 = new ArrayList<>();
     private ArrayList<City> cities3 = new ArrayList<>();
+    ArrayList<DeviceTreeChildListData> cityList3 = new ArrayList<>();
     private ArrayList<City> cities4 = new ArrayList<>();
+    ArrayList<DeviceTreeChildListData> cityList4 = new ArrayList<>();
 
     @BindView(R.id.address)
     AddressSelector addressSelector;
@@ -51,6 +50,7 @@ public class SiteActivity extends BasisActivity {
         });
 
 
+
     }
 
     @Override
@@ -64,70 +64,40 @@ public class SiteActivity extends BasisActivity {
                 DeviceTreeListBean listBean = (DeviceTreeListBean) result;
                 treeList = listBean.getList();
                  City city;
-                    for (int i = 0; i < treeList.size(); i++) {
-                        city = new City();
-                        city.setName(treeList.get(i).getName());
-                        cities1.add(city);
-                    }
+                 for (DeviceTreeChildListData children : treeList.get(0).getChildren()){
+                     city = new City();
+                     city.setName(children.getName());
+                     city.setId(children.getValue());
+                     city.setChildren(children.getChildren());
+                     cities1.add(city);
+                 }
+                initAddressSelector();
             }
 
             @Override
             public void onFinish(int httpWhat) {
                 dismissProgress();
             }
-        }, 0, BaseListBean.class);
+        }, 0, DeviceTreeListBean.class);
+    }
 
-
-        AddressSelector addressSelector = (AddressSelector) findViewById(R.id.address);
+    
+    void initAddressSelector(){
         addressSelector.setTabAmount(3);
         addressSelector.setTopImg(com.mic.adressselectorlib.R.mipmap.tab_icon_station);
         addressSelector.setCities(cities1);
         addressSelector.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void itemClick(AddressSelector addressSelector, CityInterface city, int tabPosition) throws JSONException {
+            public void itemClick(AddressSelector addressSelector, CityInterface city,int position, int tabPosition) throws JSONException {
                 switch (tabPosition) {
                     case 0:
-                        try {
-                            JSONArray jsonArray2 = JSON.parseArray(getString(R.string.cities2));
-                            for (int i = 0; i < jsonArray2.size(); i++) {
-//                                cities2.add(new Gson().fromJson(jsonArray2.get(i).toString(), City.class));
-                                cities2.add(JSON.parseObject(jsonArray2.get(i).toString(), new TypeReference<City>() {
-                                }));
-                            }
-                            addressSelector.setCities(cities2);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        addressSelector.setCities(getCityList(cities2,city.getCityChildren()));
                         break;
                     case 1:
-
-                        try {
-                            JSONArray jsonArray3 = JSON.parseArray(getString(R.string.cities3));
-                            for (int i = 0; i < jsonArray3.size(); i++) {
-//                                cities3.add(new Gson().fromJson(jsonArray3.get(i).toString(), City.class));
-                                cities3.add(JSON.parseObject(jsonArray3.get(i).toString(), new TypeReference<City>() {
-                                }));
-                            }
-                            addressSelector.setCities(cities3);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
                         break;
                     case 2:
-                        try {
-                            JSONArray jsonArray4 = JSON.parseArray(getString(R.string.cities4));
-                            for (int i = 0; i < jsonArray4.size(); i++) {
-//                                cities4.add(new Gson().fromJson(jsonArray4.get(i).toString(), City.class));
-                                cities4.add(JSON.parseObject(jsonArray4.get(i).toString(), new TypeReference<City>() {
-                                }));
-                            }
-                            addressSelector.setCitiesTwo(cities4);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-//                        Toast.makeText(MainActivity.this, "tabPosition ：" + tabPosition + " " + city.getCityName(), Toast.LENGTH_SHORT).show();
+                        addressSelector.setCitiesTwo(getCityList(cities4,city.getCityChildren()));
                         break;
                     case 3:
                         showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
@@ -161,5 +131,22 @@ public class SiteActivity extends BasisActivity {
 
             }
         });
+    }
+
+    private ArrayList<City> getCityList(ArrayList<City> cityList,ArrayList<DeviceTreeChildListData> currentTreeList){
+        cityList.clear();
+        if(currentTreeList == null){
+            return cityList;
+        }
+
+        City children;
+        for (int i = 0; i < currentTreeList.size(); i++) {
+            children = new City();
+            children.setName(currentTreeList.get(i).getName());
+            children.setId(currentTreeList.get(i).getValue());
+            children.setChildren(currentTreeList.get(i).getChildren());
+            cityList.add(children);
+        }
+        return cityList;
     }
 }

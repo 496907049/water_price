@@ -1,5 +1,7 @@
 package com.mic.adressselectorlib;
 
+import java.util.ArrayList;
+
 /**
  * Author: Blincheng.
  * Date: 2017/5/9.
@@ -8,44 +10,41 @@ package com.mic.adressselectorlib;
 
 public class City implements CityInterface {
     private String name;
-//    private String id;
-//    private String Grade;
-//    private String IsMunicipality;
+    private String id;
+    private ArrayList<DeviceTreeChildListData> children;
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        name = name;
+        this.name = name;
     }
 
-//    public String getIsMunicipality() {
-//        return IsMunicipality;
-//    }
-//
-//    public void setIsMunicipality(String isMunicipality) {
-//        IsMunicipality = isMunicipality;
-//    }
-//
-//    public String getId() {
-//        return id;
-//    }
-//
-//    public void setId(String id) {
-//        this.id = id;
-//    }
-//
-//    public String getGrade() {
-//        return Grade;
-//    }
-//
-//    public void setGrade(String grade) {
-//        Grade = grade;
-//    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public ArrayList<DeviceTreeChildListData> getChildren() {
+        return children;
+    }
+
+    public void setChildren(ArrayList<DeviceTreeChildListData> children) {
+        this.children = children;
+    }
 
     @Override
     public String getCityName() {
         return name;
     }
+
+    @Override
+    public ArrayList<DeviceTreeChildListData> getCityChildren() {
+        return children;
+    }
+
 }

@@ -65,7 +65,7 @@ public class AreaActivity extends BasisActivity {
         addressSelector.setCities(cities1);
         addressSelector.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void itemClick(AddressSelector addressSelector, CityInterface city, int tabPosition) throws JSONException {
+            public void itemClick(AddressSelector addressSelector, CityInterface city, int position, int tabPosition) throws org.json.JSONException {
                 switch (tabPosition) {
                     case 0:
                         try {
@@ -112,6 +112,7 @@ public class AreaActivity extends BasisActivity {
                         break;
                 }
             }
+
 
             @Override
             public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws org.json.JSONException {

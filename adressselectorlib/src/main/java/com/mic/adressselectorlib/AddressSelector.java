@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 
@@ -43,6 +44,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
     private OnTabSelectedListener onTabSelectedListener;
     private RecyclerView list;
     private RecyclerView grid;
+    private LinearLayout emptyLayout;
     private Button okBtn;
     private LinearLayout right_layout;
     private LinearLayout top_layout;
@@ -180,7 +182,6 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         list.setLayoutManager(new LinearLayoutManager(mContext));
         list.setBackgroundResource(R.color.white);
         list_layout.addView(list);
-
         grid = new RecyclerView(mContext);
 //        grid.setLayoutParams(new ViewGroup.LayoutParams(
 //                LayoutParams.MATCH_PARENT,
@@ -195,6 +196,16 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         grid.setVisibility(GONE);
 //        addView(grid);
         list_layout.addView(grid);
+
+
+
+        LinearLayout.LayoutParams emptyParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT,1);
+        LayoutInflater inflater = LayoutInflater.from(mContext);
+        emptyLayout = (LinearLayout) inflater.inflate(R.layout.base_refresh_view,null);
+        emptyLayout.setLayoutParams(emptyParams);
+        emptyLayout.setVisibility(GONE);
+        list_layout.addView(emptyLayout);
 
         okBtn = new Button(mContext);
         okBtn.setLayoutParams(new ViewGroup.LayoutParams(
@@ -257,8 +268,13 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
      * 设置列表的数据源，设置后立即生效   一行一个
      * */
     public void setCities(ArrayList cities) {
-        if(cities == null||cities.size() <= 0)
+        if(cities == null||cities.size() <= 0){
+            Toast.makeText(mContext,"没数据",Toast.LENGTH_LONG).show();
+            list.setVisibility(GONE);
+            emptyLayout.setVisibility(VISIBLE);
             return;
+        }
+        emptyLayout.setVisibility(GONE);
         list.setVisibility(VISIBLE);
         grid.setVisibility(GONE);
         mAddressTv.setText("选择镇/街道");
@@ -528,7 +544,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             if(listItemIcon != -1)
                 holder.img.setImageResource(listItemIcon);
             if(listTextSize != -1)
@@ -547,7 +563,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                 public void onClick(View v) {
                     if(onItemClickListener != null){
                         try {
-                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),tabIndex);
+                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),position,tabIndex);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -591,7 +607,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             if(listTextSize != -1)
                 holder.tv.setTextSize(listTextSize);
             if(TextUtils.equals(tabs.get(tabIndex).getText(),cities.get(position).getName())){
@@ -606,7 +622,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                 public void onClick(View v) {
                     if(onItemClickListener != null){
                         try {
-                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),tabIndex+1);
+                            onItemClickListener.itemClick(AddressSelector.this,(City) v.getTag(),position,tabIndex+1);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

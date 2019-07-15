@@ -1,9 +1,13 @@
 package com.ffapp.waterprice.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.util.ArrayList;
+import java.util.List;
 
-public class DeviceTreeListBean extends BaseListBean {
+public class DeviceTreeListBean extends BaseListBeanBc{
 
+    @JSONField(name = "list")
     private ArrayList<DeviceTreeListData> list = new ArrayList<DeviceTreeListData>();
 
     public ArrayList<DeviceTreeListData> getList() {
@@ -14,16 +18,6 @@ public class DeviceTreeListBean extends BaseListBean {
         this.list = list;
     }
 
-    public void addListBean(DeviceTreeListBean listbean) {
-        if (listbean == null)
-            return;
-        if (this.getCurrentPage() == INIT_PAGE) {
-            setList(listbean.getList());
-        } else {
-            if (list == null)
-                list = new ArrayList<DeviceTreeListData>();
-            list.addAll(listbean.getList());
-        }
-        setListBeanData(listbean);
-    }
+
+
 }
