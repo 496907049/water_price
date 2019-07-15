@@ -1,6 +1,7 @@
 package com.ffapp.waterprice.home;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
@@ -135,14 +136,15 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             }
         }, 0, DataOverviewBean.class);
     }
+
     private void setDataOverview(DataOverviewBean bean) {
         if (bean == null) return;
-        tvSiteNum.setText(""+bean.getSumDevice());
-        tvOlNum.setText(""+bean.getSumLineDevice());
-        tvWaterUser.setText(""+bean.getSumWaterUser());
-        tvWaterNum.setText(""+bean.getSumRatifiedWaterConsumption());
-        tvActualNum.setText(bean.getSumRealWaterConsumption()+"万m³");
-        tvWaterSurplus.setText(""+bean.getLastWaterConsumption()+"万m³");
+        tvSiteNum.setText("" + bean.getSumDevice());
+        tvOlNum.setText("" + bean.getSumLineDevice());
+        tvWaterUser.setText("" + bean.getSumWaterUser());
+        tvWaterNum.setText("" + bean.getSumRatifiedWaterConsumption());
+        tvActualNum.setText(bean.getSumRealWaterConsumption() + "万m³");
+        tvWaterSurplus.setText("" + bean.getLastWaterConsumption() + "万m³");
     }
 
     private void getArea() {    //当前登录用户区域信息
@@ -151,7 +153,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 AreaBean bean = (AreaBean) result;
-                if(bean!=null){
+                if (bean != null) {
                     MyUtils.putAreaId(bean.getId());
                 }
             }
@@ -186,13 +188,13 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
         showProgress();
         HttpParams params = new HttpParams();
-        params.put("topNum",5);
+        params.put("topNum", 5);
 
-        OkGoClient.get(mContext, Constants.URL_GET_WATER_USER,params, new MyHttpListener() {
+        OkGoClient.get(mContext, Constants.URL_GET_WATER_USER, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 WaterUserListData listBean = (WaterUserListData) result;
-                    listBean.setPicChart(mContext,picChart);
+                listBean.setPicChart(mContext, picChart);
 
             }
 
@@ -358,7 +360,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @OnClick(R.id.img_site)
     public void toSite() {
-        ActivityTool.skipActivity(mContext, SiteActivity.class);
+        ActivityTool.skipActivityForResult(mContext, SiteActivity.class, Constants.SITE_CALLBACK);
     }
 
     @OnClick(R.id.img_list)
@@ -399,7 +401,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         }, 0, DeviceTypeListBean.class);
 
 
-
     }
 
     @OnClick(R.id.img_zoom_in)
@@ -408,9 +409,12 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     }
 
-    @OnClick(R.id.view_weather)
-    void weather() {
-//        ActivityTool.skipActivity(mContext, WeatherActivity.class);
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Constants.SITE_CALLBACK) {
+           String deviceAreaId = data.getStringExtra("areaId");
+           String a = data.getStringExtra("areaId");
+        }
     }
-
 }

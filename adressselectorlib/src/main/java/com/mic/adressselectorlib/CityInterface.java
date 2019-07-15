@@ -12,4 +12,6 @@ public interface CityInterface {
     String getCityName();
 
     ArrayList<DeviceTreeChildListData> getCityChildren();
+
+    String getAreaId();
 }

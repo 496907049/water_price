@@ -69,5 +69,12 @@ public class Constants {
 	public static final String DIR_FILECACHE = DIR + "file/";
 
 
+	/**
+	 * 返回参数
+	 */
+	//站点信息返回
+	public static int SITE_CALLBACK = 23;
+
+
 
 }

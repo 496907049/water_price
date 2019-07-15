@@ -1,5 +1,7 @@
 package com.ffapp.waterprice.home.site;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -48,8 +50,6 @@ public class SiteActivity extends BasisActivity {
                 finish();
             }
         });
-
-
 
     }
 
@@ -100,7 +100,11 @@ public class SiteActivity extends BasisActivity {
                         addressSelector.setCitiesTwo(getCityList(cities4,city.getCityChildren()));
                         break;
                     case 3:
-                        showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
+//                        showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
+                        Intent data = new Intent();
+                        data.putExtra("areaId",city.getAreaId());
+                        setResult(Constants.SITE_CALLBACK,data);
+                        finish();
                         break;
                 }
             }

@@ -47,4 +47,9 @@ public class City implements CityInterface {
         return children;
     }
 
+    @Override
+    public String getAreaId() {
+        return id;
+    }
+
 }
