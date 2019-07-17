@@ -47,7 +47,6 @@ public class SiteSearchActivity extends BasisActivity {
     EditText edit_search;
     String searchkey;
 
-    AsyncHttpClient mAsyncHttpClient;
     @Override
     public void initViews() {
         setDefautTrans(false);
@@ -93,10 +92,6 @@ public class SiteSearchActivity extends BasisActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                if(mAsyncHttpClient != null){
-                    mAsyncHttpClient.cancelRequests(mContext,true);
-                }
                 search();
             }
 

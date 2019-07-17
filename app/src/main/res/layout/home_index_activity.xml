@@ -9,7 +9,6 @@
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         style="@style/base_layout_m_m">
-
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll_view"
             style="@style/base_scroll_style"

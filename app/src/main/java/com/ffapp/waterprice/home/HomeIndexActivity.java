@@ -32,6 +32,7 @@ import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.bean.DeviceTypeListBean;
 import com.ffapp.waterprice.bean.WaterUserListData;
 import com.ffapp.waterprice.bean.WeatherInfoData;
+import com.ffapp.waterprice.home.list.ListDataActivity;
 import com.ffapp.waterprice.home.site.SiteActivity;
 import com.ffapp.waterprice.util.MyUtils;
 import com.github.mikephil.chart_3_0_1v.charts.PieChart;
@@ -365,7 +366,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @OnClick(R.id.img_list)
     public void toList() {
-
+        ActivityTool.skipActivity(mContext, ListDataActivity.class);
     }
 
     @OnClick(R.id.img_layer)
@@ -414,7 +415,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.SITE_CALLBACK) {
            String deviceAreaId = data.getStringExtra("areaId");
-           String a = data.getStringExtra("areaId");
         }
     }
 }

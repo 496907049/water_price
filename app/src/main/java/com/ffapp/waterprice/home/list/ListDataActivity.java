@@ -4,35 +4,49 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
+import com.ffapp.waterprice.bean.DeviceTypeListBean;
 import com.ffapp.waterprice.data.DataAnalysisActivity;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.jaygoo.bean.Site;
+import com.jaygoo.selector.MultiSelectPopWindow;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.loopj.android.http.RequestParams;
+import com.lzy.okgo.model.HttpParams;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
 import my.LogUtil;
+import my.TimeUtils;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class ListDataActivity extends BasisActivity {
 
@@ -41,11 +55,15 @@ public class ListDataActivity extends BasisActivity {
 
     @BindView(R.id.spinner)
     MaterialSpinner spinner;
+    @BindView(R.id.edit_search)
+    EditText mSearchEt;
 
 
     private MyAdapterList mAdapter;
     private DeviceListBean mListBean;
     private String keyword = "";
+    private String areaId = "";
+    private String deviceTypeId = "";
 
     @Override
     public void initViews() {
@@ -59,9 +77,8 @@ public class ListDataActivity extends BasisActivity {
             }
         });
 
-
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 2);
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setVerticalScrollBarEnabled(true);
         mRecyclerView.setLayoutManager(layoutManager);
 //        mRecyclerView.setEmptyView(findViewById(R.id.refresh_view));
@@ -82,13 +99,6 @@ public class ListDataActivity extends BasisActivity {
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadingMoreEnabled(true);
 
-        spinner.setItems("Ice Cream Sandwich", "Jelly Bean", "KitKat", "Lollipop", "Marshmallow");
-        spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-//                Snackbar.make(view, "Clicked " + item, Snackbar.LENGTH_LONG).show();
-            }
-        });
     }
 
     @Override
@@ -96,8 +106,37 @@ public class ListDataActivity extends BasisActivity {
         super.initData(savedInstanceState);
         mListBean = new DeviceListBean();
         setListView();
-//        mRecyclerView.refresh();
-        getList();
+        getDeviceType();
+    }
+
+    private void getDeviceType(){
+        showProgress();
+        OkGoClient.post(mContext, Constants.URL_DEVICE_TYPE, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceTypeListBean listBean = (DeviceTypeListBean) result;
+                final ArrayList<Site> siteList = listBean.getList();
+                ArrayList<String> deviceNameList = new ArrayList<>();
+                for (Site site : siteList){
+                    deviceNameList.add(site.getName());
+                }
+                spinner.setItems(deviceNameList);
+                spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+                    @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+//                        showToast(siteList.get(position).getName()+"====id=="+);
+                        deviceTypeId = String.valueOf(siteList.get(position).getId());
+                    }
+                });
+                deviceTypeId = String.valueOf(siteList.get(0).getId()) ;
+                mRecyclerView.refresh();
+
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, DeviceTypeListBean.class);
     }
 
     private void setListView() {
@@ -135,36 +174,32 @@ public class ListDataActivity extends BasisActivity {
     }
 
     private void getList() {
-//        RequestParams params = new RequestParams();
-////        showProgress();
-//        params.put(BaseListDataListBean.PAGE_NAME, mListBean.getNextPage());
-//        params.put(BaseListDataListBean.PAGE_SIZE_NAME, BaseListDataListBean.PAGE_SIZE);
-//        params.put("keyword", keyword);
-//        HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {
-//                    @Override
-//                    public void onSuccess(int httpWhat, Object result) {
-//                        DeviceListBean listBean = (DeviceListBean) result;
-//                        mListBean = listBean;
-//                        LogUtil.i("onSuccess---->" + listBean.getList().size());
-//                        setListView();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int httpWhat, Object result) {
-//                        super.onFailure(httpWhat, result);
-////            mListBean = new ServiceNewListBean();
-//                        setListView();
-//                    }
-//
-//                    @Override
-//                    public void onFinish(int httpWhat) {
-//                        hideLoading();
-//                        onListViewComplete();
-//                    }
-//                },
-//                0, DeviceListBean.class);
-        hideLoading();
-        onListViewComplete();
+        keyword = mSearchEt.getText().toString().trim();
+        MediaType mediaType = MediaType.parse("application/json");
+        String param ="{\"areaId\": \""+areaId+"\",\"deviceCode\": \""+keyword+"\",\"deviceTypeId\":\""+deviceTypeId+"\"," +
+                "\""+BaseListDataListBean.PAGE_NAME+"\":"+mListBean.getNextPage()+",\""+BaseListDataListBean.PAGE_SIZE_NAME+"\":"+BaseListDataListBean.PAGE_SIZE+"}";
+        RequestBody body = RequestBody.create(mediaType,param);
+        showProgress();
+        OkGoClient.post(mContext,Constants.URL_MONITOR_PAGE, body, new MyHttpListener() {
+                    @Override
+                    public void onSuccess(int httpWhat, Object result) {
+                        DeviceListBean listBean = (DeviceListBean) result;
+                        mListBean = listBean;
+                        setListView();
+                    }
+
+                    @Override
+                    public void onFailure(int httpWhat, Object result) {
+                        super.onFailure(httpWhat, result);
+                        setListView();
+                    }
+
+                    @Override
+                    public void onFinish(int httpWhat) {
+                        hideLoading();
+                        onListViewComplete();
+                    }
+                }, 0, DeviceListBean.class);
     }
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {
@@ -252,6 +287,8 @@ public class ListDataActivity extends BasisActivity {
             ImageView imgTotalFlow;
             @BindView(R.id.ll_total_flow)
             LinearLayout llTotalFlow;
+            @BindView(R.id.tv_device_name)
+            TextView tvDeviceName;
 
 
             public ViewHolder(View view) {
@@ -261,6 +298,26 @@ public class ListDataActivity extends BasisActivity {
 
             public void bind(int position) {
                 DeviceListData listData = mListBean.getList().get(position);
+                tvDeviceCode.setText(getString(R.string.device_code)+"  "+listData.getDeviceCode());
+                tvDeviceName.setText(""+listData.getDeviceName());
+                tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
+                switch (listData.getState()){
+                    case 0:
+                        imgOnline.setBackgroundResource(R.mipmap.list_img_offline);
+                        break;
+                    case 1:
+                        imgOnline.setBackgroundResource(R.mipmap.list_img_online);
+                        break;
+                }
+                tvTemperature.setText((listData.getTemperature()== null)?"":listData.getTemperature());
+                tvWaterLevel.setText((listData.getWaterLevel()== null)?"":listData.getWaterLevel());
+                tvGetUpWaterLevel.setText((listData.getGateUp()== null)?"":listData.getGateUp());
+                tvGetDownWaterLevel.setText((listData.getGateDown()== null)?"":listData.getGateDown());
+                tvCurrentSpeed.setText((listData.getFlowVelocity()== null)?"":listData.getFlowVelocity());
+                tvVmean.setText((listData.getAverageFlowVelocity()== null)?"":listData.getAverageFlowVelocity());
+                tvWinkFlow.setText((listData.getFlow()== null)?"":listData.getFlow());
+                tvTotalFlow.setText((listData.getTotalFlow()== null)?"":listData.getTotalFlow());
+                tvTotalFlow.setText((listData.getTotalFlow()== null)?"":listData.getTotalFlow());
                 list_item.setTag(position);
             }
 
@@ -276,6 +333,12 @@ public class ListDataActivity extends BasisActivity {
 //                ActivityTool.skipActivity(mContext, VideoInfoActivity.class, extras);
             }
         }
+    }
+
+
+    @OnClick(R.id.img_search)
+    public  void search(){
+        getList();
     }
 
 }

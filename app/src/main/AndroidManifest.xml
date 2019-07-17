@@ -78,7 +78,6 @@
             android:screenOrientation="portrait">
         </activity>
 
-
         <activity
             android:name=".home.site.SiteSearchActivity"
             android:screenOrientation="portrait">

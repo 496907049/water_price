@@ -28,10 +28,18 @@
             android:singleLine="true"
             android:imeOptions="actionSearch" />
 
-        <ImageView
-            style="@style/base_icon_btn"
-            android:src="@mipmap/icon_search_grey"
-         />
+        <LinearLayout
+            android:id="@+id/img_search"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <ImageView
+                style="@style/base_icon_adjust"
+                android:src="@mipmap/txt_btn_search" />
+        </LinearLayout>
+
+
 
         <ImageView
             style="@style/base_icon_wrap"
@@ -40,11 +48,11 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="wrap_content">
+    </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     <include layout="@layout/base_refresh_view" />
 </LinearLayout>

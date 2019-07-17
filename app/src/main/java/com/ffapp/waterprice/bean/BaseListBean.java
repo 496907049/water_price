@@ -12,7 +12,7 @@ public abstract class BaseListBean extends BasisBean {
 	public static final int INIT_PAGE = 0;
 	public static final int PAGE_SIZE = Constants.PAGE_SIZE;
 	public static final String PAGE_SIZE_NAME = "pageSize";
-	public static final String PAGE_NAME = "page";
+	public static final String PAGE_NAME = "pageNo";
 
 	public BasePageInfoBean getPage_info() {
 		return page_info;

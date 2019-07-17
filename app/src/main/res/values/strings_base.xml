@@ -89,8 +89,8 @@
 
 
 
-    <string name="water_unit">%1$d万m³</string>
-    <string name="device_code">设备编码%1$d</string>
+    <string name="water_unit">万m³</string>
+    <string name="device_code">设备编码</string>
     <string name="temperature">温度(°C)</string>
     <string name="water_level">水位(m)</string>
     <string name="get_up_water_level">闸上水位(m)</string>

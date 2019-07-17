@@ -5,6 +5,7 @@
     android:id="@+id/list_item"
     android:orientation="vertical"
     android:layout_marginTop="@dimen/base_margin_small"
+    android:layout_marginBottom="@dimen/base_margin_xsmall"
     android:padding="@dimen/base_padding_small"
     android:background="@color/white">
 
@@ -31,6 +32,7 @@
                     android:src="@mipmap/info_icon_point"/>
 
                 <TextView
+                    android:id="@+id/tv_device_name"
                    style="@style/base_text_content.small.grey"
                     android:layout_marginLeft="@dimen/base_margin_xsmall"
                     android:text="演示站点"/>
@@ -56,7 +58,7 @@
           <ImageView
               android:id="@+id/img_online"
               style="@style/base_icon_wrap"
-              android:src="@mipmap/list_img_online"/>
+              android:background="@mipmap/list_img_offline"/>
 
         </LinearLayout>
 
@@ -84,10 +86,11 @@
 
             <ImageView
                 android:id="@+id/img_temperature"
-               style="@style/base_icon_mid"
+                style="@style/base_icon_mid"
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -119,6 +122,7 @@
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -150,6 +154,7 @@
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -181,6 +186,7 @@
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -212,6 +218,7 @@
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -243,6 +250,7 @@ v
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -274,6 +282,7 @@ v
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
 
@@ -305,6 +314,7 @@ v
                 android:src="@mipmap/infolist_icon_alarm"
                 android:layout_marginRight="@dimen/base_margin_large"
                 android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
                 />
         </LinearLayout>
     </LinearLayout>

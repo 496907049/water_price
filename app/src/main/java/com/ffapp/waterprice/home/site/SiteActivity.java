@@ -20,6 +20,7 @@ import com.mic.adressselectorlib.OnItemClickListener;
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import my.ActivityTool;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
 
@@ -30,11 +31,8 @@ public class SiteActivity extends BasisActivity {
 
     private ArrayList<City> cities1 = new ArrayList<>();
     private ArrayList<City> cities2 = new ArrayList<>();
-    ArrayList<DeviceTreeChildListData> cityList2 = new ArrayList<>();
     private ArrayList<City> cities3 = new ArrayList<>();
-    ArrayList<DeviceTreeChildListData> cityList3 = new ArrayList<>();
     private ArrayList<City> cities4 = new ArrayList<>();
-    ArrayList<DeviceTreeChildListData> cityList4 = new ArrayList<>();
 
     @BindView(R.id.address)
     AddressSelector addressSelector;
@@ -50,7 +48,12 @@ public class SiteActivity extends BasisActivity {
                 finish();
             }
         });
-
+        setTitleRightButton(R.mipmap.top_icon_search, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityTool.skipActivityForResult(mContext,SiteSearchActivity.class,Constants.SITE_CALLBACK);
+            }
+        });
     }
 
     @Override
@@ -100,7 +103,6 @@ public class SiteActivity extends BasisActivity {
                         addressSelector.setCitiesTwo(getCityList(cities4,city.getCityChildren()));
                         break;
                     case 3:
-//                        showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
                         Intent data = new Intent();
                         data.putExtra("areaId",city.getAreaId());
                         setResult(Constants.SITE_CALLBACK,data);

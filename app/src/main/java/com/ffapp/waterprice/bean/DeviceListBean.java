@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public class DeviceListBean extends BaseListBeanBc {
 
-    @JSONField(name = "stImgMonits")
     private ArrayList<DeviceListData> list = new ArrayList<DeviceListData>();
 
     public ArrayList<DeviceListData> getList() {
