@@ -28,6 +28,7 @@ import java.util.ArrayList;
  * Description:收货地址选择器
  */
 public class AddressSelector extends LinearLayout implements View.OnClickListener{
+    private String allSiteName;
     private int TextSelectedColor = getResources().getColor(R.color.blue);
     private int TextEmptyColor = Color.parseColor("#333333");
     //顶部的tab集合
@@ -197,8 +198,6 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
 //        addView(grid);
         list_layout.addView(grid);
 
-
-
         LinearLayout.LayoutParams emptyParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
                 LayoutParams.MATCH_PARENT,1);
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -222,7 +221,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
             public void onClick(View v) {
                 if(onItemClickListener != null){
                     try {
-                        onItemClickListener.itemClick(AddressSelector.this,selectedCityList);
+                        onItemClickListener.itemClick(AddressSelector.this,selectedCityList,allSiteName.replace("null",""));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -278,6 +277,8 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         list.setVisibility(VISIBLE);
         grid.setVisibility(GONE);
         mAddressTv.setText("选择镇/街道");
+        okBtn.setVisibility(GONE);
+        allSiteName ="";
         if(cities.get(0) instanceof CityInterface){
             this.cities = cities;
             if(addressAdapter == null){
@@ -568,6 +569,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                             e.printStackTrace();
                         }
                         tabs.get(tabIndex).setText(((CityInterface) v.getTag()).getCityName());
+                        allSiteName+=" "+((CityInterface) v.getTag()).getCityName();
                         tabs.get(tabIndex).setTag(v.getTag());
                         if(tabIndex+1 < tabs.size()){
                             tabIndex ++;

@@ -1,25 +1,33 @@
 package com.ffapp.waterprice.data.area;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
-import com.alibaba.fastjson.TypeReference;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.DeviceTreeListBean;
+import com.ffapp.waterprice.bean.DeviceTreeListData;
+import com.ffapp.waterprice.home.site.SiteSearchActivity;
 import com.mic.adressselectorlib.City;
 import com.mic.adressselectorlib.AddressSelector;
 import com.mic.adressselectorlib.CityInterface;
+import com.mic.adressselectorlib.DeviceTreeChildListData;
 import com.mic.adressselectorlib.OnItemClickListener;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
+import my.ActivityTool;
+import my.http.MyHttpListener;
+import my.http.OkGoClient;
 
 public class AreaActivity extends BasisActivity {
+
+    ArrayList<DeviceTreeListData> treeList = new ArrayList<>();
+
 
     private ArrayList<City> cities1 = new ArrayList<>();
     private ArrayList<City> cities2 = new ArrayList<>();
@@ -32,7 +40,7 @@ public class AreaActivity extends BasisActivity {
     @Override
     public void initViews() {
         super.initViews();
-        setContentView(R.layout.activity_area);
+        setContentView(R.layout.activity_site);
         setTitle("区域信息");
         setTitleLeftButton(new View.OnClickListener() {
             @Override
@@ -40,83 +48,82 @@ public class AreaActivity extends BasisActivity {
                 finish();
             }
         });
-
-
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
 
-      //  拿到本地JSON 并转成String
-        try {
-          JSONArray jsonArray = JSON.parseArray(getString(R.string.cities1));
-            for (int i = 0; i < jsonArray.size(); i++) {
-//                cities1.add(new Gson().fromJson(jsonArray.get(i).toString(), City.class));
-                City ac = JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {});
-                cities1.add( JSON.parseObject(jsonArray.get(i).toString(), new TypeReference<City>() {}));
+        showProgress();
+        OkGoClient.get(mContext, Constants.URL_GET_TREE, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceTreeListBean listBean = (DeviceTreeListBean) result;
+                treeList = listBean.getList();
+                City city;
+                for (DeviceTreeChildListData children : treeList.get(0).getChildren()){
+                    city = new City();
+                    city.setName(children.getName());
+                    city.setId(children.getValue());
+                    city.setChildren(children.getChildren());
+                    cities1.add(city);
+                }
+                initAddressSelector();
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        AddressSelector addressSelector = (AddressSelector) findViewById(R.id.address);
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, DeviceTreeListBean.class);
+    }
+
+
+    void initAddressSelector(){
         addressSelector.setTabAmount(3);
-        addressSelector.setTopImg(com.mic.adressselectorlib.R.mipmap.tab_icon_station);
+        addressSelector.setTopImg(com.mic.adressselectorlib.R.mipmap.tab_icon_area);
         addressSelector.setCities(cities1);
         addressSelector.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void itemClick(AddressSelector addressSelector, CityInterface city, int position, int tabPosition) throws org.json.JSONException {
+            public void itemClick(AddressSelector addressSelector, CityInterface city,int position, int tabPosition) throws JSONException {
                 switch (tabPosition) {
                     case 0:
-                        try {
-                            JSONArray jsonArray2 = JSON.parseArray(getString(R.string.cities2));
-                            for (int i = 0; i < jsonArray2.size(); i++) {
-//                                cities2.add(new Gson().fromJson(jsonArray2.get(i).toString(), City.class));
-                                cities2.add( JSON.parseObject(jsonArray2.get(i).toString(), new TypeReference<City>() {}));
-                            }
-                            addressSelector.setCities(cities2);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        addressSelector.setCities(getCityList(cities2,city.getCityChildren()));
                         break;
                     case 1:
-
-                        try {
-                            JSONArray jsonArray3 = JSON.parseArray(getString(R.string.cities3));
-                            for (int i = 0; i < jsonArray3.size(); i++) {
-//                                cities3.add(new Gson().fromJson(jsonArray3.get(i).toString(), City.class));
-                                cities3.add( JSON.parseObject(jsonArray3.get(i).toString(), new TypeReference<City>() {}));
-                            }
-                            addressSelector.setCities(cities3);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
                         break;
                     case 2:
-                        try {
-                            JSONArray jsonArray4 = JSON.parseArray(getString(R.string.cities4));
-                            for (int i = 0; i < jsonArray4.size(); i++) {
-//                                cities4.add(new Gson().fromJson(jsonArray4.get(i).toString(), City.class));
-                                cities4.add( JSON.parseObject(jsonArray4.get(i).toString(), new TypeReference<City>() {}));
-                            }
-                            addressSelector.setCitiesTwo(cities4);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-//                        Toast.makeText(MainActivity.this, "tabPosition ：" + tabPosition + " " + city.getCityName(), Toast.LENGTH_SHORT).show();
+                        addressSelector.setCitiesThree(getCityList(cities4,city.getCityChildren()));
                         break;
                     case 3:
-                        showToast("tabPosition ：" + tabPosition + " " + city.getCityName());
+
                         break;
                 }
             }
 
-
             @Override
             public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws org.json.JSONException {
-                Toast.makeText(mContext, "aaaaa=== "+cityList.toString() , Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList, String allSiteName) throws org.json.JSONException {
+
+                if (cityList.size()>5){
+                    showToast("最多选5个");
+                    return;
+                }
+
+                ArrayList<String> areeIdList = new ArrayList<>();
+                for (City city : cityList){
+                    areeIdList.add(city.getAreaId());
+                }
+                Intent data = new Intent();
+                data.putStringArrayListExtra("areeIdList",areeIdList);
+                data.putExtra("allSiteName",allSiteName);
+                setResult(Constants.AREA_CALLBACK,data);
+                finish();
             }
         });
         addressSelector.setOnTabSelectedListener(new AddressSelector.OnTabSelectedListener() {
@@ -125,6 +132,7 @@ public class AreaActivity extends BasisActivity {
                 switch (tab.getIndex()) {
                     case 0:
                         addressSelector.setCities(cities1);
+
                         break;
                     case 1:
                         addressSelector.setCities(cities2);
@@ -140,5 +148,22 @@ public class AreaActivity extends BasisActivity {
 
             }
         });
+    }
+
+    private ArrayList<City> getCityList(ArrayList<City> cityList,ArrayList<DeviceTreeChildListData> currentTreeList){
+        cityList.clear();
+        if(currentTreeList == null){
+            return cityList;
+        }
+
+        City children;
+        for (int i = 0; i < currentTreeList.size(); i++) {
+            children = new City();
+            children.setName(currentTreeList.get(i).getName());
+            children.setId(currentTreeList.get(i).getValue());
+            children.setChildren(currentTreeList.get(i).getChildren());
+            cityList.add(children);
+        }
+        return cityList;
     }
 }

@@ -35,6 +35,21 @@ public class Constants {
 	//获取流量列表分页数据
 	public static String URL_MONITOR_PAGE = URL_API+"api/monitor/page";
 
+	/**
+	 * 分析接口
+	 */
+	public static String ANALYSIS_BASE_URL_STATT=URL_API+"api/stats/";
+	public static String ANALYSIS_BASE_URL_END_PORT=URL_API+"/loadReport";
+	public static String ANALYSIS_BASE_URL_END_PAGE=URL_API+"/page";
+
+	//用水户分析
+	public static String URL_WATER= ANALYSIS_BASE_URL_STATT+"waterconsumption";
+	//流量分析分页
+	public static String URL_FLOW= ANALYSIS_BASE_URL_STATT+"flow";
+	//环境分析分页
+	public static String URL_MOTEOROLOGY= ANALYSIS_BASE_URL_STATT+"meteorology";
+	//雨量分析分页
+	public static String URL_RAIN= ANALYSIS_BASE_URL_STATT+"rainfall";
 
 
 
@@ -77,6 +92,8 @@ public class Constants {
 	 */
 	//站点信息返回
 	public static int SITE_CALLBACK = 23;
+	//区域信息返回
+	public static int AREA_CALLBACK = 24;
 
 
 

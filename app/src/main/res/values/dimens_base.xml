@@ -28,6 +28,7 @@
     <dimen name="base_textsize_mid_18">18sp</dimen>
     <dimen name="base_textsize_mid_ex">20sp</dimen>
     <dimen name="base_textsize_large">24sp</dimen>
+    <dimen name="base_textsize_mlarge">26sp</dimen>
     <dimen name="base_textsize_xlarge">30sp</dimen>
 
     <dimen name="base_padding_xxsmall">3dp</dimen>

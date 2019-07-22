@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.home.HomeBaseActivity;
@@ -37,12 +38,13 @@ public class DataIndexActivity extends HomeBaseActivity {
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         listEnter = new BaseListDataListBean();
+
         listEnter.getList().add(new BaseListData("","流量分析",R.mipmap.data_img_flow,0));
         listEnter.getList().add(new BaseListData("","用水户分析",R.mipmap.data_img_user,0));
-        listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
+//                listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
         listEnter.getList().add(new BaseListData("","环境分析",R.mipmap.data_img_environment,0));
         listEnter.getList().add(new BaseListData("","降雨量分析",R.mipmap.data_img_rain,0));
-        listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
+//                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
         listEnter.getList().add(new BaseListData("","报警分析",R.mipmap.data_img_alarm,0));
         recycler.setAdapter(new MyAdapterListEnter());
     }
@@ -90,13 +92,6 @@ public class DataIndexActivity extends HomeBaseActivity {
                 img_icon.setImageResource(data.getResid());
                 list_item.setTag(data);
 
-                listEnter.getList().add(new BaseListData("","流量分析",R.mipmap.data_img_flow,0));
-                listEnter.getList().add(new BaseListData("","用水户分析",R.mipmap.data_img_user,0));
-                listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
-                listEnter.getList().add(new BaseListData("","环境分析",R.mipmap.data_img_environment,0));
-                listEnter.getList().add(new BaseListData("","降雨量分析",R.mipmap.data_img_rain,0));
-//                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
-                listEnter.getList().add(new BaseListData("","报警分析",R.mipmap.data_img_alarm,0));
             }
 
             @OnClick(R.id.list_item)
@@ -104,25 +99,25 @@ public class DataIndexActivity extends HomeBaseActivity {
                 BaseListData data = (BaseListData) v.getTag();
                 switch (data.getName()){
                     case "流量分析":
-                    DataAnalysisActivity.newInstant(mContext,data.getName());
+                    DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_FLOW);
                         break;
                     case "用水户分析":
-                        DataAnalysisActivity.newInstant(mContext,data.getName());
+                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_WATER);
                         break;
                     case "土壤墒情分析":
-                        DataAnalysisActivity.newInstant(mContext,data.getName());
+//                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants);
                         break;
                     case "环境分析":
-                        DataAnalysisActivity.newInstant(mContext,data.getName());
+                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_MOTEOROLOGY);
                         break;
                     case "降雨量分析":
-                        DataAnalysisActivity.newInstant(mContext,data.getName());
+                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_RAIN);
                         break;
 //                    case "泵房分析":
 //                        DataAnalysisActivity.newInstant(mContext,data.getName());
 //                        break;
                     case "报警分析":
-                        DataAnalysisActivity.newInstant(mContext,data.getName());
+//                        DataAnalysisActivity.newInstant(mContext,data.getName());
                         break;
                 }
             }

@@ -11,7 +11,7 @@
         android:background="@drawable/base_btn_grey">
 
         <ImageView
-            style="@style/base_icon_xlarge"
+            style="@style/base_icon_mlarge"
             android:src="@mipmap/analysis_icon_calendar"
             android:layout_marginLeft="@dimen/base_margin_small"
             android:layout_marginRight="@dimen/base_margin_small"/>
@@ -41,7 +41,7 @@
     <Button
         android:id="@+id/btn_line_char"
         style="@style/base_btn_wrap"
-        android:text="切换柱状图"
+        android:text="显示图表"
         android:layout_width="150dp"
         android:layout_margin="@dimen/base_margin_large"
         />
@@ -59,15 +59,17 @@
 
     <LinearLayout
         style="@style/base_layout_m_m">
-        <com.github.mikephil.chart_3_0_1v.charts.LineChart
+
+        <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/line_chart"
             style="@style/base_layout_m_m">
-        </com.github.mikephil.chart_3_0_1v.charts.LineChart>
+        </com.github.mikephil.charting.charts.LineChart>
 
-        <com.github.mikephil.chart_3_0_1v.charts.BarChart
+        <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bar_chart"
             style="@style/base_layout_m_m">
-        </com.github.mikephil.chart_3_0_1v.charts.BarChart>
+        </com.github.mikephil.charting.charts.BarChart>
+
 
 
     </LinearLayout>

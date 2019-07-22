@@ -21,4 +21,10 @@ public interface OnItemClickListener {
      * @param cityList 返回地址列表对应点击的集合
      * */
     void itemClick(AddressSelector addressSelector, ArrayList<City> cityList) throws JSONException;
+
+    /**
+     * @param cityList 返回地址列表对应点击的集合
+     *     @param allSiteName   地址
+     * */
+    void itemClick(AddressSelector addressSelector, ArrayList<City> cityList,String allSiteName) throws JSONException;
 }

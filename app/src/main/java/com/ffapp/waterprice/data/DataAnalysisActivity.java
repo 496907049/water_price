@@ -2,33 +2,46 @@ package com.ffapp.waterprice.data;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.basis.MyViewPagerAdapter;
+import com.ffapp.waterprice.data.area.AreaActivity;
 import com.ffapp.waterprice.data.fragement.DataChartFragment;
+import com.ffapp.waterprice.home.site.SiteActivity;
 import com.ffapp.waterprice.video.VideoFragment;
 import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+import com.mic.adressselectorlib.City;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import my.ActivityTool;
+import my.StringUtil;
 
 public class DataAnalysisActivity extends BasisActivity {
 
     String title;
+    String url;
     String siteType;
+    int reportType = 1;
 
+    @BindView(R.id.tv_address)
+    TextView mAddressTv;
     @BindView(R.id.tablayout)
     CommonTabLayout tablayout;
     @BindView(R.id.spinner)
@@ -43,9 +56,12 @@ public class DataAnalysisActivity extends BasisActivity {
     DataChartFragment monthFragment;
     DataChartFragment yearFragment;
 
-    public static void newInstant(Context mContext, String title) {
+    String treeIdList = null;
+
+    public static void newInstant(Context mContext, String title,String url) {
         Intent intent = new Intent(mContext, DataAnalysisActivity.class);
         intent.putExtra("title", title);
+        intent.putExtra("url", url);
         mContext.startActivity(intent);
     }
 
@@ -69,6 +85,7 @@ public class DataAnalysisActivity extends BasisActivity {
             return;
         }
         title = extras.getString("title");
+        url = extras.getString("url");
         setTitle(""+title);
         switch (title){
             case "流量分析":
@@ -101,6 +118,7 @@ public class DataAnalysisActivity extends BasisActivity {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                 getChart(item);
+                reportType = position;
             }
         });
 
@@ -112,9 +130,9 @@ public class DataAnalysisActivity extends BasisActivity {
         fms = new Fragment[3];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        dayFragment =  new DataChartFragment();
-        monthFragment =  new DataChartFragment();
-        yearFragment =  new DataChartFragment();
+        dayFragment =  DataChartFragment.newInstance("day",url);
+        monthFragment =  DataChartFragment.newInstance("month",url);
+        yearFragment =  DataChartFragment.newInstance("year",url);
         fms[0] = dayFragment;
         fms[1] = monthFragment;
         fms[2] = yearFragment;
@@ -155,6 +173,7 @@ public class DataAnalysisActivity extends BasisActivity {
             public void onPageSelected(int position) {
                 tablayout.setCurrentTab(position);
                 currentPosition = position;
+                tabChange(position);
             }
 
             @Override
@@ -195,6 +214,37 @@ public class DataAnalysisActivity extends BasisActivity {
 
     private void getChart(String siteType){
 
+    }
+
+    @OnClick(R.id.img_address)
+    public void toAreaActvity(){
+        ActivityTool.skipActivityForResult(mContext, AreaActivity.class, Constants.AREA_CALLBACK);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Constants.AREA_CALLBACK) {
+            ArrayList<String>  stringList = data.getStringArrayListExtra("areeIdList");
+            treeIdList = StringUtil.listToString(stringList);
+            mAddressTv.setText(data.getStringExtra("allSiteName"));
+            tabChange(currentPosition);
+        }
+    }
+
+    private void tabChange(int position){
+        switch (position){
+            case 0:
+                dayFragment.tabChange(position,treeIdList,reportType);
+                break;
+            case  1:
+                monthFragment.tabChange(position,treeIdList,reportType);
+                break;
+            case 2:
+                yearFragment.tabChange(position,treeIdList,reportType);
+                break;
+        }
     }
 
 }

@@ -92,6 +92,10 @@
             android:name=".user.alarm.AlarmActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".data.area.AreaActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <activity
             android:name=".home.list.ListDataActivity"

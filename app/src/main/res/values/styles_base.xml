@@ -289,6 +289,11 @@
         <item name="android:layout_height">@dimen/base_textsize_xlarge</item>
         <item name="android:scaleType">fitXY</item>
     </style>
+    <style name="base_icon_mlarge">
+        <item name="android:layout_width">@dimen/base_textsize_mlarge</item>
+        <item name="android:layout_height">@dimen/base_textsize_mlarge</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
 
     <style name="base_icon_btn">
         <item name="android:layout_width">28dp</item>

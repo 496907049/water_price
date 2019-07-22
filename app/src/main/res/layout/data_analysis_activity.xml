@@ -38,7 +38,7 @@
                 <TextView
                     android:id="@+id/tv_address"
                     style="@style/base_text_content.small.black"
-                    android:hint="地址"
+                    android:hint=""
                     android:layout_weight="1"/>
 
                 <ImageView
