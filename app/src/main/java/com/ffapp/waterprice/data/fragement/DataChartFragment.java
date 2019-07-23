@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.data.fragement;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisFragment;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.ChartInfoBean;
+import com.ffapp.waterprice.data.list.ListDetailActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.lzy.okgo.callback.StringCallback;
@@ -24,6 +26,7 @@ import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import my.ActivityTool;
 import my.TimeUtils;
 import my.http.OkGoClient;
 import okhttp3.MediaType;
@@ -143,7 +146,7 @@ public class DataChartFragment extends BasisFragment {
                 break;
             case R.id.btn_line_char:
                 if (deviceArr == null) {
-                    showToast("请区域地址");
+                    showToast("请选择区域地址");
                     return;
                 }
 
@@ -173,8 +176,29 @@ public class DataChartFragment extends BasisFragment {
                 }
                 break;
             case R.id.btn_bar_char:
-                lineChart.setVisibility(View.GONE);
-                barChart.setVisibility(View.VISIBLE);
+
+                if (deviceArr == null) {
+                    showToast("请区域地址");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(tvStartTimme.getText().toString().trim())) {
+                    showToast("请选择开始时间");
+                    return;
+                }
+                if (TextUtils.isEmpty(tvEndTime.getText().toString().trim())) {
+                    showToast("请选择结束时间");
+                    return;
+                }
+
+                Bundle extras = new Bundle();
+                extras.putString("beginTime",tvStartTimme.getText().toString().trim());
+                extras.putString("dateType", dateType);
+                extras.putString("deviceArr", deviceArr);
+                extras.putString("endTime", tvEndTime.getText().toString().trim());
+                extras.putInt("reportType",reportType);
+                extras.putString("url",url);
+                ActivityTool.skipActivity(mContext, ListDetailActivity.class, extras);
                 break;
         }
     }

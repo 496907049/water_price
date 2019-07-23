@@ -14,4 +14,8 @@ public interface CityInterface {
     ArrayList<DeviceTreeChildListData> getCityChildren();
 
     String getAreaId();
+
+    String getDeviceCode();
+
+
 }

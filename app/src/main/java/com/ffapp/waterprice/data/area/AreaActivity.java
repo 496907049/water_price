@@ -115,12 +115,12 @@ public class AreaActivity extends BasisActivity {
                     return;
                 }
 
-                ArrayList<String> areeIdList = new ArrayList<>();
+                ArrayList<String> deviceCodeList = new ArrayList<>();
                 for (City city : cityList){
-                    areeIdList.add(city.getAreaId());
+                    deviceCodeList.add(city.getDeviceCode());
                 }
                 Intent data = new Intent();
-                data.putStringArrayListExtra("areeIdList",areeIdList);
+                data.putStringArrayListExtra("deviceCodeList",deviceCodeList);
                 data.putExtra("allSiteName",allSiteName);
                 setResult(Constants.AREA_CALLBACK,data);
                 finish();
@@ -162,6 +162,8 @@ public class AreaActivity extends BasisActivity {
             children.setName(currentTreeList.get(i).getName());
             children.setId(currentTreeList.get(i).getValue());
             children.setChildren(currentTreeList.get(i).getChildren());
+            children.setCode(currentTreeList.get(i).getCode());
+
             cityList.add(children);
         }
         return cityList;

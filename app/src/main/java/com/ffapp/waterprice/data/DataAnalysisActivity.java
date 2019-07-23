@@ -56,7 +56,7 @@ public class DataAnalysisActivity extends BasisActivity {
     DataChartFragment monthFragment;
     DataChartFragment yearFragment;
 
-    String treeIdList = null;
+    String deviceCodes = null;
 
     public static void newInstant(Context mContext, String title,String url) {
         Intent intent = new Intent(mContext, DataAnalysisActivity.class);
@@ -226,8 +226,8 @@ public class DataAnalysisActivity extends BasisActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.AREA_CALLBACK) {
-            ArrayList<String>  stringList = data.getStringArrayListExtra("areeIdList");
-            treeIdList = StringUtil.listToString(stringList);
+            ArrayList<String>  deviceCodeList = data.getStringArrayListExtra("deviceCodeList");
+            deviceCodes = StringUtil.listToString(deviceCodeList);
             mAddressTv.setText(data.getStringExtra("allSiteName"));
             tabChange(currentPosition);
         }
@@ -236,13 +236,13 @@ public class DataAnalysisActivity extends BasisActivity {
     private void tabChange(int position){
         switch (position){
             case 0:
-                dayFragment.tabChange(position,treeIdList,reportType);
+                dayFragment.tabChange(position,deviceCodes,reportType);
                 break;
             case  1:
-                monthFragment.tabChange(position,treeIdList,reportType);
+                monthFragment.tabChange(position,deviceCodes,reportType);
                 break;
             case 2:
-                yearFragment.tabChange(position,treeIdList,reportType);
+                yearFragment.tabChange(position,deviceCodes,reportType);
                 break;
         }
     }

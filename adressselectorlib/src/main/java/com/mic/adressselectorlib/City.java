@@ -13,6 +13,8 @@ public class City implements CityInterface {
     private String id;
     private ArrayList<DeviceTreeChildListData> children;
 
+    private String code;
+
     public String getName() {
         return name;
     }
@@ -37,6 +39,14 @@ public class City implements CityInterface {
         this.children = children;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
     @Override
     public String getCityName() {
         return name;
@@ -50,6 +60,11 @@ public class City implements CityInterface {
     @Override
     public String getAreaId() {
         return id;
+    }
+
+    @Override
+    public String getDeviceCode() {
+        return code;
     }
 
 }
