@@ -110,29 +110,6 @@ public class ModifyPwdActivity extends BasisActivity {
                 hideLoading();
             }
         }, 22, BasisBean.class);
-
-//        RequestParams params = new RequestParams();
-//        params.put("token", LoginBean.getUserToken());
-//        params.put("old_password", MD5.getMD5ofStrLowercase(pass));
-//        params.put("new_password", MD5.getMD5ofStrLowercase(passNew));
-//        showLoading();
-//        HttpRestClient.post(Constants.aaa, params, new MyHttpListener() {
-//            @Override
-//            public void onSuccess(int httpWhat, Object result) {
-////                showToast(((BasisBean)result).getResultData());
-////                finish();
-//                if(new MySharedPreferences(mContext).getRememberPwd()){
-//                    new MySharedPreferences(mContext).putPassword(pass);
-//                }
-//                DialogUtils.DialogOKmsgFinish(mContext,((BasisBean)result).getStatusInfo());
-//            }
-//
-//            @Override
-//            public void onFinish(int httpWhat) {
-//                hideLoading();
-//            }
-//        }, 0, BasisBean.class);
-
     }
 
 
