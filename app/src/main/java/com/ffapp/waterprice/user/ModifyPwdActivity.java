@@ -91,7 +91,7 @@ public class ModifyPwdActivity extends BasisActivity {
         params.put("newPassword", passNew);
         params.put("oldPassword", pass);
         showProgress();
-        OkGoClient.post(mContext, Constants.URL_LOGIN, params, new MyHttpListener() {
+        OkGoClient.post(mContext, Constants.URL_RESET, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 if(new MySharedPreferences(mContext).getRememberPwd()){

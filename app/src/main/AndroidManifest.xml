@@ -105,6 +105,10 @@
             android:name=".data.list.ListDetailActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".user.ModifyPwdActivity"
+            android:screenOrientation="portrait">
+        </activity>
 
         <activity
             android:name=".home.HomeTabActivity"

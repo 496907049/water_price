@@ -211,9 +211,7 @@ public class UserIndexActivity extends HomeBaseActivity {
         img_update_point.setVisibility(View.GONE);
     }
 
-
     public  void checkUpdata() {
-
         RequestParams params = new RequestParams();
         params.put("versions_number", SystemParamsUtils.getAPPVersonCode(mContext));
         HttpRestClient.get(Constants.aaa, params, new MyHttpListener() {

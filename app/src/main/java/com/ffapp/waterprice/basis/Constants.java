@@ -13,6 +13,8 @@ public class Constants {
 
 	//登录-登录
 	public static String URL_LOGIN = URL_API+"api/security/login";
+	//修改密码
+	public static String URL_RESET = URL_API+"api/security/reset";
 
 	//TOKEN接口
 	public static String URL_GET_TOKEN = URL_API+"api/token";
