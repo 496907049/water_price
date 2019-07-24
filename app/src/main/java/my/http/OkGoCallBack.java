@@ -122,7 +122,6 @@ class OkGoCallBack  extends StringCallback {
                     if (bean.getResultData().startsWith("[\"")) {
                         bean.setResultData("{\"list\":[]}");
                     } else {
-
                         bean.setResultData("{\"list\":" + bean.getResultData() + "}");
                     }
                 }
@@ -161,7 +160,7 @@ class OkGoCallBack  extends StringCallback {
             resultBean.setStatusInfo(bean.getStatusInfo());
             resultBean.setResultData(bean.getResultData());
 //            resultBean.setApi_time(bean.getApi_time());
-//            resultBean.setRecordsTotal(bean.getRecordsTotal());
+            resultBean.setRecordsTotal(bean.getRecordsTotal());
             return resultBean;
         } catch (Exception e) {
             e.printStackTrace();

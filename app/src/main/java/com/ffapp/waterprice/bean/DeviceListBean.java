@@ -2,7 +2,7 @@ package com.ffapp.waterprice.bean;
 
 import java.util.ArrayList;
 
-public class DeviceListBean extends BaseListBeanBc {
+public class DeviceListBean extends BaseListBeanYL {
 
     private ArrayList<DeviceListData> list = new ArrayList<DeviceListData>();
 

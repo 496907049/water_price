@@ -2,6 +2,7 @@ package com.ffapp.waterprice.bean;
 
 import android.text.TextUtils;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.ffapp.waterprice.basis.BasisApp;
 
 import java.io.Serializable;
@@ -33,8 +34,6 @@ public class BasisBean implements Serializable {
 	public static int CODE_LOGIN_PAST = 402;
 	public static int CODE_TOKEN_PAST = 401;
 
-	private int recordsTotal;
-	
 	public static final int TRUE = 1,FALSE = 0;
 	
 	public static final String NULL = "null";
@@ -123,6 +122,21 @@ public class BasisBean implements Serializable {
 
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
+	}
+
+
+
+	@JSONField(name="total")
+	private int recordsTotal;
+
+	@JSONField(name="total")
+	public int getRecordsTotal() {
+		return recordsTotal;
+	}
+
+	@JSONField(name="total")
+	public void setRecordsTotal(int total) {
+		this.recordsTotal = total;
 	}
 
 }

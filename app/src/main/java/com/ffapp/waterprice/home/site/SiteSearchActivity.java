@@ -71,7 +71,7 @@ public class SiteSearchActivity extends BasisActivity {
             }
         });
         mRecyclerView.setPullRefreshEnabled(true);
-        mRecyclerView.setLoadingMoreEnabled(true);
+        mRecyclerView.setLoadingMoreEnabled(false);
 
 
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -142,8 +142,8 @@ public class SiteSearchActivity extends BasisActivity {
 
     private void onListViewComplete() {
         mRecyclerView.refreshComplete();
-        mRecyclerView.loadMoreComplete();
-        mRecyclerView.setLoadingMoreEnabled(mListBean.hasNextPage());
+//        mRecyclerView.loadMoreComplete();
+//        mRecyclerView.setLoadingMoreEnabled(mListBean.hasNextPage());
         setEmptyView();
     }
 

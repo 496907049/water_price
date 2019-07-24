@@ -9,6 +9,7 @@ import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.LoginBean;
 import com.loopj.android.http.RequestParams;
+import com.lzy.okgo.model.HttpParams;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -17,6 +18,9 @@ import my.MD5;
 import my.MySharedPreferences;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
+
+import static com.ffapp.waterprice.user.UserIndexActivity.HTTP_LOGIN;
 
 public class ModifyPwdActivity extends BasisActivity {
 
@@ -83,16 +87,13 @@ public class ModifyPwdActivity extends BasisActivity {
             return;
         }
 
-        RequestParams params = new RequestParams();
-        params.put("token", LoginBean.getUserToken());
-        params.put("old_password", MD5.getMD5ofStrLowercase(pass));
-        params.put("new_password", MD5.getMD5ofStrLowercase(passNew));
-        showLoading();
-        HttpRestClient.post(Constants.aaa, params, new MyHttpListener() {
+        HttpParams params = new HttpParams();
+        params.put("newPassword", passNew);
+        params.put("oldPassword", pass);
+        showProgress();
+        OkGoClient.post(mContext, Constants.URL_LOGIN, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
-//                showToast(((BasisBean)result).getResultData());
-//                finish();
                 if(new MySharedPreferences(mContext).getRememberPwd()){
                     new MySharedPreferences(mContext).putPassword(pass);
                 }
@@ -100,10 +101,37 @@ public class ModifyPwdActivity extends BasisActivity {
             }
 
             @Override
+            public void onFailure(int httpWhat, Object result) {
+                super.onFailure(httpWhat, result);
+            }
+
+            @Override
             public void onFinish(int httpWhat) {
                 hideLoading();
             }
-        }, 0, BasisBean.class);
+        }, 22, BasisBean.class);
+
+//        RequestParams params = new RequestParams();
+//        params.put("token", LoginBean.getUserToken());
+//        params.put("old_password", MD5.getMD5ofStrLowercase(pass));
+//        params.put("new_password", MD5.getMD5ofStrLowercase(passNew));
+//        showLoading();
+//        HttpRestClient.post(Constants.aaa, params, new MyHttpListener() {
+//            @Override
+//            public void onSuccess(int httpWhat, Object result) {
+////                showToast(((BasisBean)result).getResultData());
+////                finish();
+//                if(new MySharedPreferences(mContext).getRememberPwd()){
+//                    new MySharedPreferences(mContext).putPassword(pass);
+//                }
+//                DialogUtils.DialogOKmsgFinish(mContext,((BasisBean)result).getStatusInfo());
+//            }
+//
+//            @Override
+//            public void onFinish(int httpWhat) {
+//                hideLoading();
+//            }
+//        }, 0, BasisBean.class);
 
     }
 

@@ -14,6 +14,7 @@ import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListBeanBc;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -137,14 +138,15 @@ public class ListDetailActivity extends BasisActivity {
     private void getList() {
         MediaType mediaType = MediaType.parse("application/json");
 
-        String param = "{\"beginTime\": \"" + beginTime + "\",\"dateType\": \"" + dateType + "\",\"deviceArr\":\"" + deviceArr + "\",\"endTime\":\"" + endTime + "\",\"reportType\":" + reportType + "\"," +
-                "\""+BaseListBeanBc.PAGE_NAME+"\":"+mListBean.getNextPage()+",\""+BaseListBeanBc.PAGE_SIZE_NAME+"\":"+BaseListBeanBc.PAGE_SIZE+"}";
+        String param = "{\"beginTime\":\"" + beginTime + "\",\"dateType\":\"" + dateType + "\",\"deviceArr\":\"" + deviceArr + "\",\"endTime\":\"" + endTime + "\",\"reportType\":\"" + reportType + "\"," +
+                "\""+BaseListBeanYL.PAGE_NAME+"\":"+mListBean.getNextPage()+",\""+BaseListBeanYL.PAGE_SIZE_NAME+"\":"+BaseListBeanYL.PAGE_SIZE+"}";
+
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, url + Constants.ANALYSIS_BASE_URL_END_PAGE, body, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 DeviceListBean listBean = (DeviceListBean) result;
-                mListBean = listBean;
+                mListBean.addListBean(listBean);
                 setListView();
             }
 

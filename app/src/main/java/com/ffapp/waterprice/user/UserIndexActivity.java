@@ -46,14 +46,12 @@ public class UserIndexActivity extends HomeBaseActivity {
     public void initViews() {
         super.initViews();
         setContentView(R.layout.user_index_activity);
-        setTitleBg(R.color.white);
-        findViewById(R.id.base_title_divider).setVisibility(View.GONE);
-        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                refreshLoginBean();
-            }
-        });
+//        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                refreshLoginBean();
+//            }
+//        });
     }
 
     @Override
@@ -127,8 +125,8 @@ public class UserIndexActivity extends HomeBaseActivity {
         DialogUtils.DialogTwo(mContext, "", "退出当前账号？", "立即退出", "取消", new OnBtnClickL() {
             @Override
             public void onBtnClick() {
-//                LoginActivity.toLoginAllClear(mContext);
-                postLogout();
+                LoginActivity.toLoginAllClear(mContext);
+//                postLogout();
             }
         },null);
     }

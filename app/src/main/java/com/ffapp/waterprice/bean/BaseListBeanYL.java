@@ -13,7 +13,7 @@ public abstract class BaseListBeanYL extends BasisBean {
 	public static final int INIT_PAGE = 0;
 	public static final int PAGE_SIZE = Constants.PAGE_SIZE;
 	public static final String PAGE_SIZE_NAME = "pageSize";
-	public static final String PAGE_NAME = "page";
+	public static final String PAGE_NAME = "pageNo";
 
 
 	/**
@@ -51,13 +51,15 @@ public abstract class BaseListBeanYL extends BasisBean {
 
 
 
-	@JSONField(name="total")
-	private int recordsTotal;
+
 	private int per_page;
 	private int last_page;
 
 	@JSONField(name="page")
 	private int current_page;
+
+	@JSONField(name="total")
+	private int recordsTotal;
 
 	@JSONField(name="total")
 	public int getRecordsTotal() {

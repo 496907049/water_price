@@ -18,6 +18,7 @@ public class MyBaseBean {
 	
 	private int errCode = -1;
 
+	@JSONField(name="total")
 	private int recordsTotal;
 
 //	private String code;
