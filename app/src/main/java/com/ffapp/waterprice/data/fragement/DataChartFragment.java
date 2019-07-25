@@ -161,6 +161,12 @@ public class DataChartFragment extends BasisFragment {
                     return;
                 }
 
+                if(beginDate.equals(endDate)){
+                    showToast("开始时间和结束时间不能相同");
+                    return;
+                }
+
+
                 switch (mLineCharBtn.getText().toString().trim()) {
                     case "切换柱状图":
                         getLineCharge(beginDate, endDate);
@@ -188,6 +194,11 @@ public class DataChartFragment extends BasisFragment {
                 }
                 if (TextUtils.isEmpty(tvEndTime.getText().toString().trim())) {
                     showToast("请选择结束时间");
+                    return;
+                }
+
+                if(tvStartTimme.getText().toString().trim().equals(tvEndTime.getText().toString().trim())){
+                    showToast("开始时间和结束时间不能相同");
                     return;
                 }
 

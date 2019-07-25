@@ -9,7 +9,7 @@
     <ImageView
         android:id="@+id/img_online"
         style="@style/base_icon_fitxy"
-        android:src="@mipmap/icon_equipment_offline" />
+        android:background="@mipmap/icon_equipment_offline" />
 
     <TextView
         android:id="@+id/tv_device_name"

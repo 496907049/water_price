@@ -109,6 +109,9 @@
             android:name=".user.ModifyPwdActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".video.VideoDetailActivity"
+            android:screenOrientation="landscape" />
 
         <activity
             android:name=".home.HomeTabActivity"

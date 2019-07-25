@@ -60,8 +60,8 @@ public class VideoIndexActivity extends HomeBaseActivity {
         fms = new Fragment[2];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        allFragment = VideoFragment.newInstance(0);
-        olFragment = VideoFragment.newInstance(1);
+        allFragment = VideoFragment.newInstance("");
+        olFragment = VideoFragment.newInstance("1");
         fms[0] = allFragment;
         fms[1] = olFragment;
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),fms);

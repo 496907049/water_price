@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.AreaBean;
 import com.ffapp.waterprice.bean.BaseListBeanBc;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
@@ -239,56 +241,49 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         refreshData();
     }
 
+    private void getCoordinateByAreaId(String areaId,String deviceId){
+        MediaType mediaType = MediaType.parse("application/json");
+        String param = "{\"areaId\":\"" + isNullOrEmpty(areaId) + "\",\"deviceId\":\""+isNullOrEmpty(deviceId)+"\",\"" + BaseListBeanYL.PAGE_NAME + "\":" + mDeviceListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
+        RequestBody body = RequestBody.create(mediaType, param);
+        OkGoClient.post(mContext, Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                mDeviceListBean = (DeviceListBean) result;
+//                setMapView();
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                hideLoading();
+            }
+        }, 0, DeviceListBean.class);
+    }
+
+    private String isNullOrEmpty(String name){
+        if(TextUtils.isEmpty(name)){
+            return "";
+        }
+        return name;
+    }
+
     void setMapView() {
-
-//        MediaType mediaType = MediaType.parse("application/json");
-//        String areaId =  MyUtils.getAreaId();
-//        String param ="{\"areaId\": \""+areaId+"\",\"dashBoardState\": \""+keyword+"\"}";
-//        RequestBody body = RequestBody.create(mediaType,param);
-//        showProgress();
-//        OkGoClient.post(mContext,Constants.URL_MONITOR_PAGE, body, new MyHttpListener() {
-//            @Override
-//            public void onSuccess(int httpWhat, Object result) {
-//                DeviceListBean listBean = (DeviceListBean) result;
-//                mListBean = listBean;
-//                setListView();
-//            }
-//
-//            @Override
-//            public void onFailure(int httpWhat, Object result) {
-//                super.onFailure(httpWhat, result);
-//                setListView();
-//            }
-//
-//            @Override
-//            public void onFinish(int httpWhat) {
-//                hideLoading();
-//                onListViewComplete();
-//            }
-//        }, 0, DeviceListBean.class);
-
-
-
-
-
-//
-//        // 设置所有maker显示在当前可视区域地图中
-//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-//        DeviceListData DeviceListData;
-//        for (int i = 0, l = mDeviceListBean.getList().size(); i < l; i++) {
-//            DeviceListData = mDeviceListBean.getList().get(i);
-//            MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
-//                    .fromResource(DeviceListData.getMapMarkerResid()))
-//                    .position(DeviceListData.getLatlng())
-//                    .title(DeviceListData.getStnm())
-//                    .snippet(DeviceListData.getStlc());
-//            Marker marker = aMap.addMarker(markerOption);
-//            marker.setObject(DeviceListData);
-//            builder.include(DeviceListData.getLatlng());
-////            marker.showInfoWindow();
-//        }
-//        LatLngBounds bounds = builder.build();
-//        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
+        // 设置所有maker显示在当前可视区域地图中
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        DeviceListData DeviceListData;
+        for (int i = 0, l = mDeviceListBean.getList().size(); i < l; i++) {
+            DeviceListData = mDeviceListBean.getList().get(i);
+            MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
+                    .fromResource(DeviceListData.getMapMarkerResid()))
+                    .position(DeviceListData.getLatlng())
+                    .title(DeviceListData.getStnm())
+                    .snippet(DeviceListData.getStlc());
+            Marker marker = aMap.addMarker(markerOption);
+            marker.setObject(DeviceListData);
+            builder.include(DeviceListData.getLatlng());
+//            marker.showInfoWindow();
+        }
+        LatLngBounds bounds = builder.build();
+        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
     }
 
     void getWeather() {    //获取天气
@@ -301,7 +296,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 getDataOverview();//  获取数据概况数据
                 initPicChart();//获取用水情况
                 getArea();//获取个人区域信息
-                setMapView();  //回去监控地图设备
             }
 
             @Override

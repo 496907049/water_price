@@ -26,6 +26,7 @@ import com.loopj.android.http.RequestParams;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.ActivityTool;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
@@ -34,13 +35,13 @@ import okhttp3.RequestBody;
 
 public class VideoFragment extends BasisFragment {
 
-    public static VideoFragment newInstance(int state) {
+    public static VideoFragment newInstance(String state) {
         VideoFragment fragment = new VideoFragment();
         fragment.state = state;
         return fragment;
     }
 
-    private int state;    //1表示在线  其他就是不在线
+    private String state;    //1表示在线  其他就是不在线
     private String deviceName;
     private String deviceId;
     @BindView(R.id.recyclerview)
@@ -221,6 +222,9 @@ public class VideoFragment extends BasisFragment {
             @OnClick(R.id.list_item)
             public void viewFile(View v) {
                 DeviceListData data = (DeviceListData) v.getTag();
+                Bundle extras = new Bundle();
+                extras.putSerializable("url",data.getVideoUrl());
+                ActivityTool.skipActivity(mContext,VideoDetailActivity.class,extras);
 //                WebViewX5Activity.toWebView(mContext,url,getTitle());
             }
         }
