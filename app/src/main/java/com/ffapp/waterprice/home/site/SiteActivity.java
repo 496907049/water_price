@@ -104,7 +104,7 @@ public class SiteActivity extends BasisActivity {
                         break;
                     case 3:
                         Intent data = new Intent();
-                        data.putExtra("areaId",city.getAreaId());
+                        data.putExtra("id",city.getAreaId());
                         setResult(Constants.SITE_CALLBACK,data);
                         finish();
                         break;
@@ -159,5 +159,18 @@ public class SiteActivity extends BasisActivity {
             cityList.add(children);
         }
         return cityList;
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Constants.SITE_CALLBACK) {
+            String deviceId = data.getStringExtra("id");
+            Intent intent = new Intent();
+            intent.putExtra("id",deviceId);
+            setResult(Constants.SITE_CALLBACK,intent);
+            finish();
+        }
     }
 }

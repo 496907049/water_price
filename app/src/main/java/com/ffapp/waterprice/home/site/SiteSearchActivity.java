@@ -1,6 +1,8 @@
 package com.ffapp.waterprice.home.site;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
@@ -30,7 +34,11 @@ import com.loopj.android.http.AsyncHttpClient;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import my.StringUtil;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 站点演示
@@ -71,7 +79,7 @@ public class SiteSearchActivity extends BasisActivity {
             }
         });
         mRecyclerView.setPullRefreshEnabled(true);
-        mRecyclerView.setLoadingMoreEnabled(false);
+        mRecyclerView.setLoadingMoreEnabled(true);
 
 
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -84,23 +92,6 @@ public class SiteSearchActivity extends BasisActivity {
             }
         });
 
-        edit_search.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                search();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
     }
@@ -110,6 +101,7 @@ public class SiteSearchActivity extends BasisActivity {
         super.initData(savedInstanceState);
         mListBean = new DeviceListBean();
         setListView();
+        mRecyclerView.refresh();
     }
 
     @OnClick(R.id.img_cancel)
@@ -142,8 +134,8 @@ public class SiteSearchActivity extends BasisActivity {
 
     private void onListViewComplete() {
         mRecyclerView.refreshComplete();
-//        mRecyclerView.loadMoreComplete();
-//        mRecyclerView.setLoadingMoreEnabled(mListBean.hasNextPage());
+        mRecyclerView.loadMoreComplete();
+        mRecyclerView.setLoadingMoreEnabled(mListBean.hasNextPage());
         setEmptyView();
     }
 
@@ -162,51 +154,39 @@ public class SiteSearchActivity extends BasisActivity {
     }
 
     private void getList() {
-//        RequestParams params = new RequestParams();
-////        showProgress();
-//        params.put("word", searchkey);
-//        params.put(BaseListBeanBc.PAGE_NAME, mListBean.getNextPage());
-//        params.put(BaseListBeanBc.PAGE_SIZE_NAME, BaseListBeanBc.PAGE_SIZE);
-//       HttpRestClient.post(Constants.aaa, params, myHttpListener,
-//                HTTP_LIST, DeviceListBean.class);
+        MediaType mediaType = MediaType.parse("application/json");
+        String param = "{\"deviceName\":\"" + isEmptyRetrunNull(searchkey) + "\",\""+BaseListBeanYL.PAGE_NAME+"\":"+mListBean.getNextPage()+",\""+BaseListBeanYL.PAGE_SIZE_NAME+"\":"+BaseListBeanYL.PAGE_SIZE+"}";
+        RequestBody body = RequestBody.create(mediaType, param);
+        OkGoClient.post(mContext,Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceListBean listBean = (DeviceListBean) result;
+                mListBean.addListBean(listBean);
+                setListView();
+            }
 
-        DeviceListBean bean = new DeviceListBean();
-        DeviceListData data;
-        for (int i =0;i<6;i++){
-            data = new DeviceListData();
-            data.setName("展示厅"+i);
-            bean.getList().add(data);
-            mListBean.addListBean(bean);
-        }
-        setListView();
+            @Override
+            public void onFailure(int httpWhat, Object result) {
+                super.onFailure(httpWhat, result);
+                setListView();
+            }
 
-        hideLoading();
-        onListViewComplete();
+            @Override
+            public void onFinish(int httpWhat) {
+                hideLoading();
+                onListViewComplete();
+            }
+        }, 0, DeviceListBean.class);
+
     }
 
-    private final static int HTTP_LIST = 11;
-    MyHttpListener myHttpListener = new MyHttpListener() {
-        @Override
-        public void onSuccess(int httpWhat, Object result) {
-//            DeviceListBean bean = (DeviceListBean) result;
-//            DeviceListData data = new
-//            bean.addListBean(new Bas);
-//            mListBean.addListBean(bean);
-//            setListView();
+    private String isEmptyRetrunNull(String name){
+        if(TextUtils.isEmpty(name)){
+            return "";
         }
+        return name;
+    }
 
-        @Override
-        public void onFailure(int httpWhat, Object result) {
-            super.onFailure(httpWhat, result);
-            setListView();
-        }
-
-        @Override
-        public void onFinish(int httpWhat) {
-            hideLoading();
-            onListViewComplete();
-        }
-    };
 
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {
@@ -255,26 +235,19 @@ public class SiteSearchActivity extends BasisActivity {
             @SuppressLint("NewApi")
             public void bind(int postion){
                 DeviceListData data = mListBean.getList().get(postion);
-                text_name.setText(data.getName()+"");
-                if (data.isCheck() == true){
-                    text_name.setTextColor(getColor(R.color.base_text_blue));
-                    list_item.setBackground(getDrawable(R.drawable.site_btn_select));
-                    checkImg.setVisibility(View.VISIBLE);
-                }else {
-                    text_name.setTextColor(getColor(R.color.base_text_black));
-                    list_item.setBackground(getDrawable(R.drawable.site_btn_default));
-                    checkImg.setVisibility(View.GONE);
-                }
+                text_name.setText(data.getDeviceName()+"");
                 list_item.setTag(data);
             }
 
+            @TargetApi(Build.VERSION_CODES.M)
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @OnClick(R.id.list_item)
             public void onItemClick(View v) {
-                mListBean.setAllCheckDefault();
                 DeviceListData data = (DeviceListData) v.getTag();
-                data.setCheck(true);
-                mAdapter.notifyDataSetChanged();
+                Intent intent = new Intent();
+                intent.putExtra("id",data.getId());
+                setResult(Constants.SITE_CALLBACK,intent);
+                finish();
             }
         }
     }

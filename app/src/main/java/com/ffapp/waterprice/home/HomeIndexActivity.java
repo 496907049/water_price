@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -26,6 +27,7 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.AreaBean;
+import com.ffapp.waterprice.bean.BaseListBeanBc;
 import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
@@ -50,6 +52,8 @@ import my.ActivityTool;
 import my.TimeUtils;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 /**
  * 首页
@@ -108,16 +112,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         mapView.onCreate(savedInstanceState); // 此方法必须重写
         initMap();
 
+        if(isFinishing())return;
         swipeRefreshLayout.setRefreshing(true);
         refreshData();
-
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                if(isFinishing())return;
-//                setMapView();
-//            }
-//        },2000);
 
     }
 
@@ -186,7 +183,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     private void initPicChart() {
-
         showProgress();
         HttpParams params = new HttpParams();
         params.put("topNum", 5);
@@ -196,16 +192,13 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             public void onSuccess(int httpWhat, Object result) {
                 WaterUserListData listBean = (WaterUserListData) result;
                 listBean.setPicChart(mContext, picChart);
-
             }
-
 
             @Override
             public void onFinish(int httpWhat) {
                 dismissProgress();
             }
         }, 0, WaterUserListData.class);
-
     }
 
 
@@ -217,7 +210,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @SuppressLint("StaticFieldLeak")
     void refreshData() {
-
         new AsyncTask<String, String, Object>() {
             @Override
             protected Object doInBackground(String... strings) {
@@ -236,7 +228,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             }
         }.execute("");
 
-
         getWeather();
     }
 
@@ -249,23 +240,55 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     void setMapView() {
-        // 设置所有maker显示在当前可视区域地图中
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        DeviceListData DeviceListData;
-        for (int i = 0, l = mDeviceListBean.getList().size(); i < l; i++) {
-            DeviceListData = mDeviceListBean.getList().get(i);
-            MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
-                    .fromResource(DeviceListData.getMapMarkerResid()))
-                    .position(DeviceListData.getLatlng())
-                    .title(DeviceListData.getStnm())
-                    .snippet(DeviceListData.getStlc());
-            Marker marker = aMap.addMarker(markerOption);
-            marker.setObject(DeviceListData);
-            builder.include(DeviceListData.getLatlng());
-//            marker.showInfoWindow();
-        }
-        LatLngBounds bounds = builder.build();
-        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
+
+//        MediaType mediaType = MediaType.parse("application/json");
+//        String areaId =  MyUtils.getAreaId();
+//        String param ="{\"areaId\": \""+areaId+"\",\"dashBoardState\": \""+keyword+"\"}";
+//        RequestBody body = RequestBody.create(mediaType,param);
+//        showProgress();
+//        OkGoClient.post(mContext,Constants.URL_MONITOR_PAGE, body, new MyHttpListener() {
+//            @Override
+//            public void onSuccess(int httpWhat, Object result) {
+//                DeviceListBean listBean = (DeviceListBean) result;
+//                mListBean = listBean;
+//                setListView();
+//            }
+//
+//            @Override
+//            public void onFailure(int httpWhat, Object result) {
+//                super.onFailure(httpWhat, result);
+//                setListView();
+//            }
+//
+//            @Override
+//            public void onFinish(int httpWhat) {
+//                hideLoading();
+//                onListViewComplete();
+//            }
+//        }, 0, DeviceListBean.class);
+
+
+
+
+
+//
+//        // 设置所有maker显示在当前可视区域地图中
+//        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+//        DeviceListData DeviceListData;
+//        for (int i = 0, l = mDeviceListBean.getList().size(); i < l; i++) {
+//            DeviceListData = mDeviceListBean.getList().get(i);
+//            MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
+//                    .fromResource(DeviceListData.getMapMarkerResid()))
+//                    .position(DeviceListData.getLatlng())
+//                    .title(DeviceListData.getStnm())
+//                    .snippet(DeviceListData.getStlc());
+//            Marker marker = aMap.addMarker(markerOption);
+//            marker.setObject(DeviceListData);
+//            builder.include(DeviceListData.getLatlng());
+////            marker.showInfoWindow();
+//        }
+//        LatLngBounds bounds = builder.build();
+//        aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
     }
 
     void getWeather() {    //获取天气
@@ -278,6 +301,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 getDataOverview();//  获取数据概况数据
                 initPicChart();//获取用水情况
                 getArea();//获取个人区域信息
+                setMapView();  //回去监控地图设备
             }
 
             @Override
@@ -414,7 +438,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.SITE_CALLBACK) {
-           String deviceAreaId = data.getStringExtra("areaId");
+           String deviceId = data.getStringExtra("id");
+           String aa = data.getStringExtra("id");
         }
     }
 }

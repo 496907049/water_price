@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisFragment;
+import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.other.WebViewX5Activity;
@@ -25,17 +28,21 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
+import my.http.OkGoClient;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 
 public class VideoFragment extends BasisFragment {
 
-    public static VideoFragment newInstance(String allOrOl) {
+    public static VideoFragment newInstance(int state) {
         VideoFragment fragment = new VideoFragment();
-        fragment.allOrOl = allOrOl;
+        fragment.state = state;
         return fragment;
     }
 
-    private String allOrOl;
+    private int state;    //1表示在线  其他就是不在线
     private String deviceName;
+    private String deviceId;
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;
     private MyAdapterList mAdapter;
@@ -46,7 +53,7 @@ public class VideoFragment extends BasisFragment {
         super.initViews();
         setContentView(R.layout.base_xrecycler_with_empty);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext,3);
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3);
         mRecyclerView.setVerticalScrollBarEnabled(true);
         mRecyclerView.setLayoutManager(layoutManager);
 //        mRecyclerView.setEmptyView(findViewById(R.id.refresh_view));
@@ -56,12 +63,12 @@ public class VideoFragment extends BasisFragment {
             @Override
             public void onRefresh() {
                 mListBean.refresh();
-                getList(deviceName);
+                getList();
             }
 
             @Override
             public void onLoadMore() {
-                getList(deviceName);
+                getList();
             }
         });
         mRecyclerView.setPullRefreshEnabled(true);
@@ -89,7 +96,6 @@ public class VideoFragment extends BasisFragment {
         mRecyclerView.refreshComplete();
         mRecyclerView.loadMoreComplete();
         mRecyclerView.setLoadingMoreEnabled(mListBean.hasNextPage());
-//        mRecyclerView.setLoadingMoreEnabled(false);
         setEmptyView();
     }
 
@@ -107,42 +113,52 @@ public class VideoFragment extends BasisFragment {
         }
     }
 
-    public void getList(String deviceName) {
+    public void getListFromName(String deviceName){
         this.deviceName = deviceName;
-//        RequestParams params = new RequestParams();
-//        showProgress();
-//        params.put("token", LoginBean.getUserToken());
-//        params.put("allOrOl", allOrOl);
-//        params.put("deviceName", deviceName);
-//        params.put(BaseListBeanYL.PAGE_NAME, mListBean.getNextPage());
-//        params.put(BaseListBeanYL.PAGE_SIZE_NAME, BaseListBeanYL.PAGE_SIZE);
-//        HttpRestClient.post(Constants.URL_IRR_LIST, params, myHttpListener,
-//                HTTP_LIST, IrrGroupListBean.class);
+        this.deviceId = "";
+        mListBean.refresh();
+        getList();
     }
 
-    private final static int HTTP_LIST = 11;
-//    MyHttpListener myHttpListener = new MyHttpListener() {
-//        @Override
-//        public void onSuccess(int httpWhat, Object result) {
-//            IrrGroupListBean bean = (IrrGroupListBean) result;
-//            mListBean.addListBean(bean);
-//            setListView();
-//        }
-//
-//        @Override
-//        public void onFailure(int httpWhat, Object result) {
-//            super.onFailure(httpWhat, result);
-////            mListBean = new ServiceNewListBean();
-//            setListView();
-//        }
-//
-//        @Override
-//        public void onFinish(int httpWhat) {
-//            hideLoading();
-//            onListViewComplete();
-//        }
-//    };
+    public void getListFromDeviceId(String deviceId){
+        this.deviceName = "";
+        this.deviceId = deviceId;
+        mListBean.refresh();
+        getList();
+    }
 
+    public void getList() {
+        MediaType mediaType = MediaType.parse("application/json");
+        String param = "{\"deviceName\":\"" + isNullReturnEmpty(deviceName) + "\",\"deviceId\":\""+isNullReturnEmpty(deviceId)+"\",\"state\":\""+state+"\",\"" + BaseListBeanYL.PAGE_NAME + "\":" + mListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
+        RequestBody body = RequestBody.create(mediaType, param);
+        OkGoClient.post(mContext, Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                DeviceListBean listBean = (DeviceListBean) result;
+                mListBean.addListBean(listBean);
+                setListView();
+            }
+
+            @Override
+            public void onFailure(int httpWhat, Object result) {
+                super.onFailure(httpWhat, result);
+                setListView();
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                hideLoading();
+                onListViewComplete();
+            }
+        }, 0, DeviceListBean.class);
+    }
+
+    private String isNullReturnEmpty(String name){
+        if(TextUtils.isEmpty(name)){
+            return "";
+        }
+        return name;
+    }
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {
 
@@ -189,8 +205,16 @@ public class VideoFragment extends BasisFragment {
 
             public void bind(int position) {
                 DeviceListData data = mListBean.getList().get(position);
-                imgOnLine.setBackgroundResource(R.mipmap.icon_equipment_offline);
-                deviceNameTv.setText(data.getName());
+                switch (data.getState()) {
+                    case 1:    //1表示在线
+                        imgOnLine.setBackgroundResource(R.mipmap.icon_equipment_online);
+                        break;
+                    default:
+                        imgOnLine.setBackgroundResource(R.mipmap.icon_equipment_offline);
+                        break;
+                }
+
+                deviceNameTv.setText(data.getDeviceName());
                 listItem.setTag(data);
             }
 

@@ -27,11 +27,12 @@
 
         <ImageView
             android:id="@+id/img_search"
-            style="@style/base_icon_btn"
-            android:src="@mipmap/icon_search_grey"
+            style="@style/base_icon_adjust"
+            android:src="@mipmap/txt_btn_search"
             />
 
         <ImageView
+            android:id="@+id/img_site"
             style="@style/base_icon_wrap"
             android:src="@mipmap/map_icon_choose"
             android:padding="@dimen/base_padding_small"/>
@@ -60,6 +61,8 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_weight="1.0"
+        android:paddingLeft="@dimen/base_padding_xsmall"
+        android:paddingRight="@dimen/base_padding_xsmall"
         />
 
 

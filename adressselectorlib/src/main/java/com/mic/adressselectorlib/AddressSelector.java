@@ -279,7 +279,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         mAddressTv.setText("选择镇/街道");
         okBtn.setVisibility(GONE);
         allSiteName ="";
-        if(cities.get(0) instanceof CityInterface){
+        if(cities.get(0) instanceof City){
             this.cities = cities;
             if(addressAdapter == null){
                 addressAdapter = new AddressAdapter();
@@ -287,7 +287,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
             }
             addressAdapter.notifyDataSetChanged();
         }else{
-            throw new RuntimeException("AddressSelector cities must implements CityInterface");
+            throw new RuntimeException("AddressSelector cities must implements City");
         }
     }
 
@@ -300,7 +300,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         list.setVisibility(GONE);
         grid.setVisibility(VISIBLE);
         mAddressTv.setText("选择站点");
-        if(cities.get(0) instanceof CityInterface){
+        if(cities.get(0) instanceof City){
             this.cities = cities;
             if(addressAdapterTwo == null){
                 addressAdapterTwo = new AddressAdapterTwo();
@@ -308,7 +308,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
             }
             addressAdapterTwo.notifyDataSetChanged();
         }else{
-            throw new RuntimeException("AddressSelector cities must implements CityInterface");
+            throw new RuntimeException("AddressSelector cities must implements City");
         }
     }
 
@@ -322,7 +322,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         grid.setVisibility(VISIBLE);
         mAddressTv.setText("选择站点");
         okBtn.setVisibility(VISIBLE);
-        if(cities.get(0) instanceof CityInterface){
+        if(cities.get(0) instanceof City){
             this.cities = cities;
             selectedCityList = new ArrayList<>();
             if(addressAdapterThree == null){
@@ -331,7 +331,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
             }
             addressAdapterThree.notifyDataSetChanged();
         }else{
-            throw new RuntimeException("AddressSelector cities must implements CityInterface");
+            throw new RuntimeException("AddressSelector cities must implements City");
         }
     }
 
@@ -568,8 +568,8 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        tabs.get(tabIndex).setText(((CityInterface) v.getTag()).getCityName());
-                        allSiteName+=" "+((CityInterface) v.getTag()).getCityName();
+                        tabs.get(tabIndex).setText(((City) v.getTag()).getCityName());
+                        allSiteName+=" "+((City) v.getTag()).getCityName();
                         tabs.get(tabIndex).setTag(v.getTag());
                         if(tabIndex+1 < tabs.size()){
                             tabIndex ++;

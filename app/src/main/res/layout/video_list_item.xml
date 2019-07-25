@@ -3,7 +3,8 @@
     android:id="@+id/list_item"
     style="@style/base_layout_m_w_v_cv"
     android:layout_weight="1"
-    android:gravity="center">
+    android:gravity="center"
+    android:layout_marginTop="@dimen/base_margin_large">
 
     <ImageView
         android:id="@+id/img_online"
@@ -12,9 +13,10 @@
 
     <TextView
         android:id="@+id/tv_device_name"
-        style="@style/base_text_content"
-        android:layout_marginTop="@dimen/base_margin_xsmall"
-        android:text="设备1" />
+        style="@style/base_text_content.small"
+        android:layout_marginTop="@dimen/base_margin_small"
+        android:text="设备1"
+        android:maxLines="1"/>
 
 
 </LinearLayout>

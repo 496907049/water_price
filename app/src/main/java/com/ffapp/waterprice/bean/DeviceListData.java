@@ -25,7 +25,7 @@ public class DeviceListData extends BasisBean {
 	private String deviceTypeId;
 	private String id;
 	private long messageAt;
-	private int state;
+	private int state;     //1是在线，其他都是不在线
 
 	private String rainfall;//降雨量(mm)
 	private String waterLevel;//水位(m)
@@ -383,5 +383,148 @@ public class DeviceListData extends BasisBean {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
+
+
+
+
+	private String address;
+	private String areaId;
+	private int cameraChannel;
+	private String cameraType;
+	private String contact;
+	private long createTime;
+	private String dvrCode;
+	private int isDisable;
+	private String latitude;
+	private String longitude;
+	private String modelId;
+	private String password;
+	private String phone;
+	private String remark;
+	private String serverAddress;
+	private String typeId;
+	private String watershed;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAreaId(String areaId) {
+		this.areaId = areaId;
+	}
+	public String getAreaId() {
+		return areaId;
+	}
+
+	public void setCameraChannel(int cameraChannel) {
+		this.cameraChannel = cameraChannel;
+	}
+	public int getCameraChannel() {
+		return cameraChannel;
+	}
+
+	public void setCameraType(String cameraType) {
+		this.cameraType = cameraType;
+	}
+	public String getCameraType() {
+		return cameraType;
+	}
+
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public String getContact() {
+		return contact;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setDvrCode(String dvrCode) {
+		this.dvrCode = dvrCode;
+	}
+	public String getDvrCode() {
+		return dvrCode;
+	}
+
+	public void setIsDisable(int isDisable) {
+		this.isDisable = isDisable;
+	}
+	public int getIsDisable() {
+		return isDisable;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setModelId(String modelId) {
+		this.modelId = modelId;
+	}
+	public String getModelId() {
+		return modelId;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setServerAddress(String serverAddress) {
+		this.serverAddress = serverAddress;
+	}
+	public String getServerAddress() {
+		return serverAddress;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setWatershed(String watershed) {
+		this.watershed = watershed;
+	}
+	public String getWatershed() {
+		return watershed;
+	}
+
+
 
 }

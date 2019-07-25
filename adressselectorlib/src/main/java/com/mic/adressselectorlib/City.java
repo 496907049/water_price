@@ -1,5 +1,6 @@
 package com.mic.adressselectorlib;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +9,7 @@ import java.util.ArrayList;
  * Description:
  */
 
-public class City implements CityInterface {
+public class City implements CityInterface,Serializable {
     private String name;
     private String id;
     private ArrayList<DeviceTreeChildListData> children;

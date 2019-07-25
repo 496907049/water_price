@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.video;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -7,8 +8,10 @@ import android.text.TextUtils;
 import android.widget.EditText;
 
 import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.basis.MyViewPagerAdapter;
 import com.ffapp.waterprice.home.HomeBaseActivity;
+import com.ffapp.waterprice.home.site.SiteActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import my.ActivityTool;
 
 
 public class VideoIndexActivity extends HomeBaseActivity {
@@ -53,12 +57,11 @@ public class VideoIndexActivity extends HomeBaseActivity {
 
 
     private  void setView(){
-
         fms = new Fragment[2];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        allFragment = VideoFragment.newInstance("all");
-        olFragment = VideoFragment.newInstance("ol");
+        allFragment = VideoFragment.newInstance(0);
+        olFragment = VideoFragment.newInstance(1);
         fms[0] = allFragment;
         fms[1] = olFragment;
         myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),fms);
@@ -137,18 +140,35 @@ public class VideoIndexActivity extends HomeBaseActivity {
 
     @OnClick(R.id.img_search)
     public void search(){
-        if(TextUtils.isEmpty(mSearchEdit.getText().toString().trim())){
-            showToast("请输入设备名称");
-            return;
-        }
       switch (currentPosition){
           case 0:
-              allFragment.getList(mSearchEdit.getText().toString().trim());
+              allFragment.getListFromName(mSearchEdit.getText().toString().trim());
               break;
           case 1:
-              olFragment.getList(mSearchEdit.getText().toString().trim());
+              olFragment.getListFromName(mSearchEdit.getText().toString().trim());
               break;
       }
+    }
+
+    @OnClick(R.id.img_site)
+    public void getSite(){
+        ActivityTool.skipActivityForResult(mContext, SiteActivity.class, Constants.SITE_CALLBACK);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Constants.SITE_CALLBACK) {
+            String deviceId = data.getStringExtra("id");
+            switch (currentPosition){
+                case 0:
+                    allFragment.getListFromDeviceId(deviceId);
+                    break;
+                case 1:
+                    olFragment.getListFromDeviceId(deviceId);
+                    break;
+            }
+        }
     }
 
 
