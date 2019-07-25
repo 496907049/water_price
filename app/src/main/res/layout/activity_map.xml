@@ -5,10 +5,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <RelativeLayout
         style="@style/base_layout_m_m_v"
-        android:layout_marginTop="@dimen/base_margin_large"
         android:background="@drawable/home_item_white_bg">
 
         <com.ffapp.waterprice.map.MyMapView
@@ -27,7 +25,8 @@
             android:layout_alignParentEnd="true"
             android:layout_marginRight="@dimen/base_margin_mall"
             android:background="@drawable/map_btn_ll_bg"
-            android:layout_marginTop="@dimen/base_margin_large">
+            android:layout_marginTop="@dimen/base_margin_large"
+            android:visibility="gone">
             <ImageView
                 android:id="@+id/img_site"
                 style="@style/base_icon_fitxy"

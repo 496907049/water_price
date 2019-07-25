@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
@@ -49,21 +50,23 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
     public void initViews() {
         super.initViews();
         setContentView(R.layout.activity_map);
+        //全屏
+        getWindow().setFlags(WindowManager.LayoutParams. FLAG_FULLSCREEN ,
+                WindowManager.LayoutParams. FLAG_FULLSCREEN);
     }
 
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         mapView.onCreate(savedInstanceState); // 此方法必须重写
-        initMap();
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (isFinishing()) return;
-                setMapView();
-            }
-        }, 2000);
+        Bundle extras = getIntent().getExtras();
+        if (extras == null) {
+            finish();
+        }
+        mDeviceListBean = (DeviceListBean) extras.getSerializable("mDeviceListBean");
+        initMap();
+        setMapView();
     }
 
     /**

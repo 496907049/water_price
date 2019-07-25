@@ -37,6 +37,7 @@ import com.ffapp.waterprice.bean.DeviceTypeListBean;
 import com.ffapp.waterprice.bean.WaterUserListData;
 import com.ffapp.waterprice.bean.WeatherInfoData;
 import com.ffapp.waterprice.home.list.ListDataActivity;
+import com.ffapp.waterprice.home.map.MapActivity;
 import com.ffapp.waterprice.home.site.SiteActivity;
 import com.ffapp.waterprice.util.MyUtils;
 import com.github.mikephil.chart_3_0_1v.charts.PieChart;
@@ -67,6 +68,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     @BindView(R.id.pic_chart)
     PieChart picChart;
 
+
+    DeviceListBean oldDeviceListBean = new DeviceListBean();
     DeviceListBean mDeviceListBean;
 
     @BindView(R.id.tv_site_num)
@@ -81,6 +84,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     TextView tvActualNum;
     @BindView(R.id.tv_water_surplus)
     TextView tvWaterSurplus;
+
+    private ArrayList<String> typeList = new ArrayList<>();
 
 
     private AMap aMap;
@@ -155,6 +160,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 AreaBean bean = (AreaBean) result;
                 if (bean != null) {
                     MyUtils.putAreaId(bean.getId());
+                    getCoordinateById(bean.getId(),"");
                 }
             }
 
@@ -241,15 +247,16 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         refreshData();
     }
 
-    private void getCoordinateByAreaId(String areaId,String deviceId){
+    private void getCoordinateById(String areaId,String deviceId){
         MediaType mediaType = MediaType.parse("application/json");
-        String param = "{\"areaId\":\"" + isNullOrEmpty(areaId) + "\",\"deviceId\":\""+isNullOrEmpty(deviceId)+"\",\"" + BaseListBeanYL.PAGE_NAME + "\":" + mDeviceListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
+        String param = "{\"areaId\":\"" + isNullOrEmpty(areaId) + "\",\"deviceId\":\""+isNullOrEmpty(deviceId)+"\"}";
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
                 mDeviceListBean = (DeviceListBean) result;
-//                setMapView();
+                oldDeviceListBean = mDeviceListBean;
+                setMapView();
             }
 
             @Override
@@ -267,19 +274,20 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
     void setMapView() {
+        aMap.clear();
         // 设置所有maker显示在当前可视区域地图中
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
-        DeviceListData DeviceListData;
+        DeviceListData deviceListData;
         for (int i = 0, l = mDeviceListBean.getList().size(); i < l; i++) {
-            DeviceListData = mDeviceListBean.getList().get(i);
-            MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
-                    .fromResource(DeviceListData.getMapMarkerResid()))
-                    .position(DeviceListData.getLatlng())
-                    .title(DeviceListData.getStnm())
-                    .snippet(DeviceListData.getStlc());
-            Marker marker = aMap.addMarker(markerOption);
-            marker.setObject(DeviceListData);
-            builder.include(DeviceListData.getLatlng());
+                deviceListData = mDeviceListBean.getList().get(i);
+                MarkerOptions markerOption = new MarkerOptions().icon(BitmapDescriptorFactory
+                        .fromResource(deviceListData.getMapMarkerResid()))
+                        .position(deviceListData.getLatlng())
+                        .title(deviceListData.getStnm())
+                        .snippet(deviceListData.getStlc());
+                Marker marker = aMap.addMarker(markerOption);
+                marker.setObject(deviceListData);
+                builder.include(deviceListData.getLatlng());
 //            marker.showInfoWindow();
         }
         LatLngBounds bounds = builder.build();
@@ -390,6 +398,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     @OnClick(R.id.img_layer)
     public void toLayer() {
         showProgress();
+        typeList.clear();
         OkGoClient.post(mContext, Constants.URL_DEVICE_TYPE, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
@@ -399,11 +408,18 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                         .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
                             @Override
                             public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
-                                String siteName = "";
+                                mDeviceListBean = oldDeviceListBean;
                                 for (Site site : selectedList) {
-                                    siteName += site.getName() + ",";
+                                    typeList.add(""+site.getId());
                                 }
-                                Toast.makeText(getApplication(), "" + siteName, Toast.LENGTH_SHORT).show();
+                                DeviceListBean deviceListBean = new DeviceListBean();
+                                for(int i =0;i<mDeviceListBean.getList().size();i++){
+                                    if(typeList.contains(mDeviceListBean.getList().get(i).getTypeId())){
+                                        deviceListBean.getList().add(mDeviceListBean.getList().get(i));
+                                    }
+                                }
+                                mDeviceListBean = deviceListBean;
+                                setMapView();
                             }
                         })
                         .setCancel("取消")
@@ -424,8 +440,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @OnClick(R.id.img_zoom_in)
     public void toZoonInIm() {
-
-
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("mDeviceListBean",mDeviceListBean);
+        ActivityTool.skipActivity(mContext,MapActivity.class,bundle);
     }
 
     @Override
@@ -433,7 +450,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.SITE_CALLBACK) {
            String deviceId = data.getStringExtra("id");
-           String aa = data.getStringExtra("id");
+            getCoordinateById("",deviceId);
         }
     }
 }

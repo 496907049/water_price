@@ -86,7 +86,7 @@ public class ListDetailActivity extends BasisActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras == null) {
-            return;
+            finish();
         }
         beginTime = extras.getString("beginTime");
         dateType = extras.getString("dateType");

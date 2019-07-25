@@ -330,7 +330,7 @@ public class DeviceListData extends BasisBean {
     }
 
     public String getStlc() {
-        if (TextUtils.isEmpty(stlc)) return "-";
+        if (TextUtils.isEmpty(stlc)) return "";   //此处显示内容
         return stlc;
     }
 
@@ -339,8 +339,8 @@ public class DeviceListData extends BasisBean {
     }
 
     public String getStnm() {
-        if (TextUtils.isEmpty(stnm)) return "-";
-        return stnm;
+        if (TextUtils.isEmpty(deviceName)) return "-";
+        return deviceName;
     }
 
     public void setStnm(String stnm) {
@@ -358,25 +358,39 @@ public class DeviceListData extends BasisBean {
 
     public int getMapMarkerResid() {
         switch (typeId) {
-//            case "1":
-//                return R.drawable.map_icon_location_grey;
-//            case "2" :
-//                return R.drawable.map_icon_location_blue;
-//            case "3":
-//                return R.drawable.map_icon_location_red;
-//            case "4":
-//                return R.drawable.map_icon_location_blue;
-//            default:
-//                return R.drawable.map_icon_location_grey;
+            case "1":
+                if(state != 1){
+                    return R.mipmap.map_icon_rain_offline;
+                }
+                return R.mipmap.map_icon_rain;
+            case "2" :
+                if(state != 1){
+                    return R.mipmap.map_icon_water_offline;
+                }
+                return R.mipmap.map_icon_water;
+            case "3":
+                if(state != 1){
+                    return R.mipmap.map_icon_video_offline;
+                }
+                return R.mipmap.map_icon_video;
+            case "4":
+                if(state != 1){
+                    return R.mipmap.map_icon_weather_offline;
+                }
+                return R.mipmap.map_icon_weather;
+            default:
+                if(state != 1){
+                    return R.mipmap.map_icon_soil_offline;
+                }
+                return R.mipmap.map_icon_soil;
         }
-        return 0;
     }
 
     public LatLng getLatlng() {
-        if (TextUtils.isEmpty(lttd)) {
+        if (TextUtils.isEmpty(latitude)) {
             return new LatLng(0, 0);
         }
-        LatLng latLng = new LatLng(Double.valueOf(lttd), Double.valueOf(lgtd));
+        LatLng latLng = new LatLng(Double.valueOf(latitude), Double.valueOf(longitude));
         return latLng;
     }
 
