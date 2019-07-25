@@ -171,5 +171,12 @@ public class VideoIndexActivity extends HomeBaseActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        getImmersionBar().statusBarDarkFont(true,0.5f);
+        getImmersionBar().statusBarDarkFont(true).init();
+    }
+
 
 }
