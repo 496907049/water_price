@@ -23,4 +23,5 @@
     <color name="home_tab_text_color_grey">#999999</color>
     <color name="loading_bg">#6cb3e2</color>
 
+    <color name="video_pause_bg">#22000000</color>
 </resources>

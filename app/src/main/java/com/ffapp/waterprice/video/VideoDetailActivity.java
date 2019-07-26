@@ -14,6 +14,8 @@ import com.ffapp.waterprice.basis.BasisActivity;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import cn.nodemedia.NodePlayer;
+import cn.nodemedia.NodePlayerView;
 import my.LogUtil;
 
 /***
