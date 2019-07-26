@@ -559,8 +559,8 @@ public class DeviceListData extends BasisBean {
 
 
     public String getVideoUrl(){
-//        String url = String.format("rtmp://%s/dvrlive/%s_%s.live",getServerAddress(),getDeviceCode(),0+"");
-        String url = "rtmp://47.99.32.215:9592/dvrlive/2019051003_0.live";
+        String url = String.format("rtmp://%s/dvrlive/%s_%s.live",getServerAddress(),getDeviceCode(),0+"");
+//        String url = "rtmp://47.99.32.215:9592/dvrlive/2019051003_0.live";
 //		String url = String.format("rtmp://%s:%s/dvrlive/%s_%s.live",loginBean.getDvrVideoHost(),loginBean.getDvrVideoPort(),getStcd(),params+"");
         return url;
     }

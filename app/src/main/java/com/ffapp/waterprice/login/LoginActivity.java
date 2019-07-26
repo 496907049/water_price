@@ -21,6 +21,7 @@ import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.LoginBean;
+import com.ffapp.waterprice.bean.UserBean;
 import com.ffapp.waterprice.home.HomeTabActivity;
 import com.ffapp.waterprice.jpush.TagAliasOperatorHelper;
 import com.ffapp.waterprice.util.MyUtils;
@@ -329,7 +330,7 @@ public class LoginActivity extends BasisActivity {
         params.put("username", userName);
         params.put("password", password);
         showProgress();
-        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, BasisBean.class);
+        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
 
     }
 
@@ -340,6 +341,8 @@ public class LoginActivity extends BasisActivity {
         public void onSuccess(int httpWhat, Object result) {
             switch (httpWhat) {
                 case HTTP_LOGIN:
+                    UserBean userBean = (UserBean) result;
+                    MyUtils.putUserName(userBean.getRealname());
                   getToken();
                     break;
 //                case HTTP_SMS:

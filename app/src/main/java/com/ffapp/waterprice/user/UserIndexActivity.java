@@ -16,6 +16,7 @@ import com.ffapp.waterprice.bean.UpdateBean;
 import com.ffapp.waterprice.home.HomeBaseActivity;
 import com.ffapp.waterprice.login.LoginActivity;
 import com.ffapp.waterprice.user.alarm.AlarmActivity;
+import com.ffapp.waterprice.util.MyUtils;
 import com.ffapp.waterprice.util.glide.GlideCatchUtil;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.loopj.android.http.RequestParams;
@@ -62,6 +63,7 @@ public class UserIndexActivity extends HomeBaseActivity {
 //        text_version.setText("v"+ SystemParamsUtils.getAppVersonName(mContext));
 //
 //        text_name.setText(""+LoginBean.getInstance().getRealname());
+        text_name.setText(""+MyUtils.getUserName());
 //
 //        checkUpdata();
     }

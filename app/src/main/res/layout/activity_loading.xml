@@ -8,7 +8,7 @@
         android:id="@+id/img_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@mipmap/loading"
+        android:background="@mipmap/bg_loading"
         android:scaleType="fitXY"
         />
 
@@ -16,26 +16,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="24dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="60dp"
         android:gravity="center"
-        android:visibility="gone"
         android:orientation="vertical" >
 
+        <ImageView
+            style="@style/base_icon_wrap"
+            android:src="@mipmap/icon_loading" />
         <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="主办： "
-            android:layout_marginBottom="3dp"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="承办："
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            style="@style/base_text_content.white"
+            android:text="农业水价改革综合信息监管"
+            />
     </LinearLayout>
 
 </FrameLayout>

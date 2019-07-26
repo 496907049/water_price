@@ -16,6 +16,7 @@ public class MyUtils {
 
     private static final String SP_ACCESSKEY= "sp_accessKey";
     private static final String SP_AREAID= "sp_areaId";
+    private static final String SP_USER_NAME= "sp_username";
     private static final String SP_IP= "app_ip";
     private static final String SP_TENANT= "sp_tenant";
     private static final String SP_AMBIENT= "sp_ambient";
@@ -108,6 +109,16 @@ public class MyUtils {
     public static String getAreaId( ){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
        return msp.getString(SP_AREAID);
+    }
+
+
+    public static void putUserName( String userName){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        msp.putString(SP_USER_NAME,userName);
+    }
+    public static String getUserName( ){
+        MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        return msp.getString(SP_USER_NAME);
     }
 
     public static  void putSerciceData(BaseListData data){
