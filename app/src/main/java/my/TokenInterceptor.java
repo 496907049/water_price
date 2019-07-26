@@ -62,26 +62,6 @@ public class TokenInterceptor implements Interceptor {
      */
     private String getNewToken() throws IOException {
         // 通过一个特定的接口获取新的token，此处要用到同步的retrofit请求
-        BaseListDataListBean listServers = new BaseListDataListBean();
-        BaseListData data;
-
-        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（重阳）");
-        data.setTenant("app");
-        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
-        listServers.getList().add(data);
-
-        data = new BaseListData("http://192.168.25.32:8090/", "测试环境（钟磊）");
-        data.setTenant("app");
-        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
-        listServers.getList().add(data);
-
-        data = new BaseListData("http://218.85.131.36:7229/api.php/", "测试环境（外网）");
-        data.setTenant("");
-        data.setAccessKey("");
-        listServers.getList().add(data);
-
-//        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
-//        dataCurrent.setAccount(MyUtils.getUser());
         BaseListData dataCurrent = MyUtils.getSerciceData();
 
         MediaType mediaType = MediaType.parse("application/json");

@@ -153,16 +153,10 @@ public class LoginActivity extends BasisActivity {
         listServers = new BaseListDataListBean();
         BaseListData data;
 
-        data = new BaseListData("http://192.168.25.245:8081/", "测试环境（重阳）");
+        data = new BaseListData("http://192.168.25.245:8081/", "测试环境");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
         listServers.getList().add(data);
-
-        data = new BaseListData("http://192.168.25.32:8090/", "测试环境（钟磊）");
-        data.setTenant("test");
-        data.setAccessKey("e982564349e34384b359b18600aaace4");
-        listServers.getList().add(data);
-
 
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
         if (dataCurrent != null) {
@@ -335,7 +329,7 @@ public class LoginActivity extends BasisActivity {
         params.put("username", userName);
         params.put("password", password);
         showProgress();
-        OkGoClient.post(mContext,Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, BasisBean.class);
+        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, BasisBean.class);
 
     }
 

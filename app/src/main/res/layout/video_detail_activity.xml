@@ -5,75 +5,49 @@
     android:background="@color/black"
     android:orientation="vertical"
     >
-    <com.pili.pldroid.player.widget.PLVideoView
+    <cn.nodemedia.NodePlayerView
         android:id="@+id/playerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></com.pili.pldroid.player.widget.PLVideoView>
-
-    <ImageView
-        android:id="@+id/CoverView"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerInside"
-        android:layout_gravity="center"
-        android:src="@mipmap/ic_launcher" />
-
+        ></cn.nodemedia.NodePlayerView>
     <LinearLayout
-        android:id="@+id/view_top_bar"
-        style="@style/base_layout_m_w_h_cv"
-        android:layout_height="@dimen/base_bar_height"
-        android:background="@color/black_transparent"
-        android:visibility="gone"
+        android:id="@+id/view_play"
+        style="@style/base_layout_m_m_v"
+        android:gravity="center"
         >
-        <LinearLayout
-            android:id="@+id/btn_back"
-            style="@style/base_btn_normal"
-            android:layout_gravity="left" >
-
-            <ImageView
-                android:id="@+id/base_btn_back_icon"
-                style="@style/base_btn_icon"
-                android:src="@mipmap/map_top_icon_back" />
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/img_play_icon"
+            style="@style/base_icon_adjust"
+            android:layout_height="40dp"
+            android:src="@mipmap/video_icon_pause"
+            />
+    </LinearLayout>
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingTop="@dimen/base_margin_large"
+        android:layout_marginRight="@dimen/base_margin_xxxlarge"
+        >
         <TextView
             android:id="@+id/text_time"
             style="@style/base_text_content.small.white"
             android:layout_weight="1.0"
             android:visibility="invisible"
             />
+        <ImageView
+            android:id="@+id/btn_pic"
+            style="@style/base_icon_adjust"
+            android:layout_height="30dp"
+            android:src="@mipmap/video_icon_videopic"
+            android:visibility="gone"
+            />
 
         <ImageView
             android:id="@+id/btn_video"
             style="@style/base_icon_adjust"
             android:layout_height="30dp"
-            android:src="@drawable/icon_search_white"
+            android:src="@mipmap/video_icon_storp"
             android:layout_marginLeft="@dimen/base_margin_xxlarge"
-            android:visibility="gone"
             />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LoadingView"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="请稍等"
-            android:textColor="@android:color/white"
-            android:textSize="20sp" />
     </LinearLayout>
 </FrameLayout>

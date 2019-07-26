@@ -95,6 +95,18 @@ public class OkGoClient {
     }
 
     public static void post(Context context, String url, HttpParams params,
+                            StringCallback stringCallback, int what, Class<?> class1) {
+
+        OkGo.<String>post(getAbsoluteUrl(url))
+                .tag(context)
+                .retryCount(3)
+                .cacheTime(5000)
+                .params(params)
+                .headers("Authorization","Bearer\""+LoginBean.getUserToken()+"\"")
+                .execute(stringCallback);
+    }
+
+    public static void post(Context context, String url, HttpParams params,
                             MyHttpListener mListener, int what, Class<?> class1) {
 
         OkGo.<String>post(getAbsoluteUrl(url))

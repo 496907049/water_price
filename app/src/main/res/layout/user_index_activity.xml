@@ -59,7 +59,8 @@
 
                         <LinearLayout
                             android:id="@+id/view_alarm"
-                            style="@style/user_item_style">
+                            style="@style/user_item_style"
+                            android:visibility="gone">
 
                             <ImageView
                                 style="@style/user_item_img"
@@ -72,11 +73,12 @@
                             <ImageView style="@style/base_item_img_tag" />
                         </LinearLayout>
 
-                        <ImageView style="@style/user_item_divider" />
+                        <!--<ImageView style="@style/user_item_divider" />-->
 
                         <LinearLayout
                             android:id="@+id/view_sys"
-                            style="@style/user_item_style">
+                            style="@style/user_item_style"
+                            android:visibility="gone">
 
                             <ImageView
                                 style="@style/user_item_img"
@@ -89,7 +91,7 @@
                             <ImageView style="@style/base_item_img_tag" />
                         </LinearLayout>
 
-                        <ImageView style="@style/user_item_divider" />
+                        <!--<ImageView style="@style/user_item_divider" />-->
 
                         <LinearLayout
                             android:id="@+id/view_modifypwd"
@@ -129,7 +131,7 @@
                         <LinearLayout
                             android:id="@+id/view_update"
                             style="@style/user_item_style"
-                            android:visibility="visible">
+                            android:visibility="gone">
 
                             <ImageView
                                 style="@style/user_item_img"
