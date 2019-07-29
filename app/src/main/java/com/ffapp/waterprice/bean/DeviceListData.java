@@ -418,6 +418,7 @@ public class DeviceListData extends BasisBean {
     private String phone;
     private String remark;
     private String serverAddress;
+    private String appAddress;
     private String typeId;
     private String watershed;
 
@@ -557,9 +558,16 @@ public class DeviceListData extends BasisBean {
         return watershed;
     }
 
+    public String getAppAddress() {
+        return appAddress;
+    }
+
+    public void setAppAddress(String appAddress) {
+        this.appAddress = appAddress;
+    }
 
     public String getVideoUrl(){
-        String url = String.format("rtmp://%s/dvrlive/%s_%s.live",getServerAddress(),getDeviceCode(),0+"");
+        String url = String.format("rtmp://%s/dvrlive/%s_%s.live",getAppAddress(),getDeviceCode(),0+"");
 //        String url = "rtmp://47.99.32.215:9592/dvrlive/2019051003_0.live";
 //		String url = String.format("rtmp://%s:%s/dvrlive/%s_%s.live",loginBean.getDvrVideoHost(),loginBean.getDvrVideoPort(),getStcd(),params+"");
         return url;
