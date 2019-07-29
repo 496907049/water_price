@@ -1,12 +1,12 @@
 package com.ffapp.waterprice.util.chart;
 
-import com.github.mikephil.chart_3_0_1v.animation.Easing;
-import com.github.mikephil.chart_3_0_1v.charts.PieChart;
-import com.github.mikephil.chart_3_0_1v.components.Legend;
-import com.github.mikephil.chart_3_0_1v.data.PieData;
-import com.github.mikephil.chart_3_0_1v.data.PieDataSet;
-import com.github.mikephil.chart_3_0_1v.data.PieEntry;
-import com.github.mikephil.chart_3_0_1v.formatter.PercentFormatter;
+import com.ffapp.waterprice.piechart.PieChart;
+import com.ffapp.waterprice.piechart.animation.Easing;
+import com.ffapp.waterprice.piechart.components.Legend;
+import com.ffapp.waterprice.piechart.data.PieData;
+import com.ffapp.waterprice.piechart.data.PieDataSet;
+import com.ffapp.waterprice.piechart.data.PieEntry;
+import com.ffapp.waterprice.piechart.formatter.PercentFormatter;
 
 import java.util.List;
 

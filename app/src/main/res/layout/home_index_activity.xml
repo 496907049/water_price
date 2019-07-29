@@ -486,12 +486,12 @@
                         android:layout_height="1dp"
                         android:background="#eeeeee" />
 
+                    <com.ffapp.waterprice.piechart.PieChart
+                        android:id="@+id/pic_chart"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp">
+                    </com.ffapp.waterprice.piechart.PieChart>
 
-                  <com.github.mikephil.chart_3_0_1v.charts.PieChart
-                      android:id="@+id/pic_chart"
-                      android:layout_width="match_parent"
-                      android:layout_height="250dp">
-                  </com.github.mikephil.chart_3_0_1v.charts.PieChart>
 
                 </LinearLayout>
 

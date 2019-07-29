@@ -4,10 +4,10 @@ import android.content.Context;
 import android.graphics.Color;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.ffapp.waterprice.piechart.PieChart;
+import com.ffapp.waterprice.piechart.data.PieDataSet;
+import com.ffapp.waterprice.piechart.data.PieEntry;
 import com.ffapp.waterprice.util.chart.PieChartEntity;
-import com.github.mikephil.chart_3_0_1v.charts.PieChart;
-import com.github.mikephil.chart_3_0_1v.data.PieDataSet;
-import com.github.mikephil.chart_3_0_1v.data.PieEntry;
 
 import java.util.ArrayList;
 import java.util.List;

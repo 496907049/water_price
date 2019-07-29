@@ -1,1 +1,1 @@
-include ':app', ':adressselectorlib', ':MultiSelectlib', ':MPChartLib'
+include ':app', ':adressselectorlib', ':MultiSelectlib'
