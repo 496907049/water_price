@@ -117,8 +117,8 @@ public class DataAnalysisActivity extends BasisActivity {
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                getChart(item);
-                reportType = position;
+                reportType = position+1;
+                tabChange(currentPosition);
             }
         });
 
@@ -211,10 +211,6 @@ public class DataAnalysisActivity extends BasisActivity {
         }
     }
 
-
-    private void getChart(String siteType){
-
-    }
 
     @OnClick(R.id.img_address)
     public void toAreaActvity(){

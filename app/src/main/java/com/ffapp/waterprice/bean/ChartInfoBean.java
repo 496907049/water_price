@@ -528,19 +528,18 @@ public class ChartInfoBean extends BasisBean {
             dataSets.add(getBarDataSet(mContext, legend.get(i), data.get(i), listColor.get(i),i));
         }
         // create a data object with the datasets
-        BarData data = new BarData(dataSets);
-        data.setBarWidth(0.4f);
-//        data.setValueFormatter(new IValueFormatter() {
-//            @Override
-//            public String getFormattedValue(float value, Entry entry, int dataSetIndex, ViewPortHandler viewPortHandler) {
-//                LogUtil.i("getFormattedValue--->"+value +"---->"+entry.getY()+"");
-////                return null;);
-//                return entry.getY()+"";
-//            }
-//        });
+        BarData mBarData  = new BarData(dataSets);
+//        mBarData.setBarWidth(0.4f);
+        chartBar.setData(mBarData);
 
-        // set data
-        chartBar.setData(data);
+        float groupSpace = 0.06f;
+        float barSpace = 0.02f;
+        float barWidth = 0.25f;
+        // 设置 柱子宽度
+        mBarData.setBarWidth(barWidth);
+        chartBar.groupBars(0.0f, groupSpace, barSpace);
+
+
 
         //自定义的MarkerView对象
         MyMarkerView mv = new MyMarkerView(mContext, R.layout.home_chart_line_markerview);

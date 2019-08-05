@@ -165,14 +165,14 @@ public class DataChartFragment extends BasisFragment {
                     showToast("开始时间和结束时间不能相同");
                     return;
                 }
-
-
+                String a = mLineCharBtn.getText().toString().trim();
                 switch (mLineCharBtn.getText().toString().trim()) {
                     case "切换柱状图":
                         getLineCharge(beginDate, endDate);
                         mLineCharBtn.setText("切换条形图");
                         lineChart.setVisibility(View.GONE);
                         barChart.setVisibility(View.VISIBLE);
+                        break;
                     default:
                         getLineCharge(beginDate, endDate);
                         mLineCharBtn.setText("切换柱状图");
@@ -224,6 +224,7 @@ public class DataChartFragment extends BasisFragment {
             public void onSuccess(Response<String> response) {
                 ChartInfoBean chartInfoBean = JSON.parseObject(response.body(), ChartInfoBean.class);
                 chartInfoBean.setChartLine(mContext, lineChart);
+                chartInfoBean.setChartBar(mContext,barChart);
             }
 
             @Override

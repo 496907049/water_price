@@ -110,5 +110,4 @@ dependencies {
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1
     implementation project(path: ':adressselectorlib')
     implementation project(path: ':MultiSelectlib')
-//    implementation project(path: ':MPChartLib')
 }
