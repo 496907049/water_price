@@ -130,7 +130,7 @@ public class VideoFragment extends BasisFragment {
 
     public void getList() {
         MediaType mediaType = MediaType.parse("application/json");
-        String param = "{\"deviceName\":\"" + isNullReturnEmpty(deviceName) + "\",\"deviceId\":\""+isNullReturnEmpty(deviceId)+"\",\"state\":\""+state+"\",\"" + BaseListBeanYL.PAGE_NAME + "\":" + mListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
+        String param = "{\"deviceName\":\"" + isNullReturnEmpty(deviceName) + "\",\"deviceId\":\""+isNullReturnEmpty(deviceId)+"\",\"state\":\""+state+"\",\"" + BaseListBeanYL.PAGE_NAME + "\":" + mListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + 16 + "}";
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
             @Override

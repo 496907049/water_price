@@ -32,7 +32,7 @@ public abstract class BaseListBeanYL extends BasisBean {
 //		return getCurrentPage() < getLast_page();
 //		return true;
 //		LogUtil.i("hasNextPage-->"+getCurrent_page()*PAGE_SIZE+"----一共>"+getRecordsTotal());
-		return getCurrent_page()*PAGE_SIZE < getRecordsTotal();
+		return (getCurrent_page()+1)*PAGE_SIZE < getRecordsTotal();
 //		return page_info.hasNextPage();
 	}
 
@@ -55,17 +55,17 @@ public abstract class BaseListBeanYL extends BasisBean {
 	private int last_page;
 
 
-	@JSONField(name="total")
+	@JSONField(name="count")
 	private int recordsTotal;
 	@JSONField(name="page")
 	private int current_page;
 
-	@JSONField(name="total")
+	@JSONField(name="count")
 	public int getRecordsTotal() {
 		return recordsTotal;
 	}
 
-	@JSONField(name="total")
+	@JSONField(name="count")
 	public void setRecordsTotal(int total) {
 		this.recordsTotal = total;
 	}
