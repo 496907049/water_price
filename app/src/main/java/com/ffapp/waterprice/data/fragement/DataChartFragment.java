@@ -1,6 +1,5 @@
 package com.ffapp.waterprice.data.fragement;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -15,7 +14,9 @@ import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisFragment;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.ChartInfoBean;
-import com.ffapp.waterprice.data.list.ListDetailActivity;
+import com.ffapp.waterprice.data.DataAnalysisActivity;
+import com.ffapp.waterprice.data.list.FlowActivity;
+import com.ffapp.waterprice.data.list.WaterActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.lzy.okgo.callback.StringCallback;
@@ -36,9 +37,9 @@ public class DataChartFragment extends BasisFragment {
 
     private String dayOrMonthOrYear;
     private String url;
+    private String title;
     private boolean[] timePickerType;
     private String formatStr;
-
 
     @BindView(R.id.line_chart)
     LineChart lineChart;
@@ -57,14 +58,15 @@ public class DataChartFragment extends BasisFragment {
      * 获取折线图接口所需要的参数
      */
     private int reportType = 1;
-    String deviceArr = null;
+    String submitArr = null;
     String dateType = "day";
 
 
-    public static DataChartFragment newInstance(String dayOrMonthOrYear, String url) {
+    public static DataChartFragment newInstance(String dayOrMonthOrYear, String url, String title) {
         DataChartFragment fragment = new DataChartFragment();
         fragment.dayOrMonthOrYear = dayOrMonthOrYear;
         fragment.url = url;
+        fragment.title = title;
         return fragment;
     }
 
@@ -97,7 +99,7 @@ public class DataChartFragment extends BasisFragment {
 
     }
 
-    public void tabChange(int position, String deviceArr, int reportType) {
+    public void tabChange(int position, String submitArr, int reportType) {
         switch (position) {
             case 0:
                 this.dateType = "day";
@@ -109,7 +111,7 @@ public class DataChartFragment extends BasisFragment {
                 this.dateType = "year";
                 break;
         }
-        this.deviceArr = deviceArr;
+        this.submitArr = submitArr;
         this.reportType = reportType;
     }
 
@@ -145,7 +147,7 @@ public class DataChartFragment extends BasisFragment {
                 endTime.show();
                 break;
             case R.id.btn_line_char:
-                if (deviceArr == null) {
+                if (submitArr == null) {
                     showToast("请选择区域地址");
                     return;
                 }
@@ -161,7 +163,7 @@ public class DataChartFragment extends BasisFragment {
                     return;
                 }
 
-                if(beginDate.equals(endDate)){
+                if (beginDate.equals(endDate)) {
                     showToast("开始时间和结束时间不能相同");
                     return;
                 }
@@ -183,7 +185,7 @@ public class DataChartFragment extends BasisFragment {
                 break;
             case R.id.btn_bar_char:
 
-                if (deviceArr == null) {
+                if (submitArr == null) {
                     showToast("请区域地址");
                     return;
                 }
@@ -197,34 +199,50 @@ public class DataChartFragment extends BasisFragment {
                     return;
                 }
 
-                if(tvStartTimme.getText().toString().trim().equals(tvEndTime.getText().toString().trim())){
+                if (tvStartTimme.getText().toString().trim().equals(tvEndTime.getText().toString().trim())) {
                     showToast("开始时间和结束时间不能相同");
                     return;
                 }
 
                 Bundle extras = new Bundle();
-                extras.putString("beginTime",tvStartTimme.getText().toString().trim());
+                extras.putString("beginTime", tvStartTimme.getText().toString().trim());
                 extras.putString("dateType", dateType);
-                extras.putString("deviceArr", deviceArr);
                 extras.putString("endTime", tvEndTime.getText().toString().trim());
-                extras.putInt("reportType",reportType);
-                extras.putString("url",url);
-                ActivityTool.skipActivity(mContext, ListDetailActivity.class, extras);
-                break;
+                extras.putInt("reportType", reportType);
+                extras.putString("url", url);
+                switch (title) {
+                    case "用水户分析":
+                        extras.putString("waterUserArr", submitArr);
+                        ActivityTool.skipActivity(mContext, WaterActivity.class, extras);
+                        break;
+                  default:
+                      extras.putString("deviceArr", submitArr);
+                      ActivityTool.skipActivity(mContext, FlowActivity.class, extras);
+                      break;
+                }
         }
     }
 
 
     private void getLineCharge(String beginTime, String endTime) {
         MediaType mediaType = MediaType.parse("application/json");
-        String param = "{\"beginTime\": \"" + beginTime + "\",\"dateType\": \"" + dateType + "\",\"deviceArr\":\"" + deviceArr + "\",\"endTime\":\"" + endTime + "\",\"reportType\":\"" + reportType + "\"}";
+        String param = null;
+        switch (title) {
+            case "用水户分析":
+                param = "{\"beginTime\": \"" + beginTime + "\",\"dateType\": \"" + dateType + "\",\"waterUser\":\"" + submitArr + "\",\"endTime\":\"" + endTime + "\",\"reportType\":\"" + reportType + "\"}";
+                break;
+            default:
+                param = "{\"beginTime\": \"" + beginTime + "\",\"dateType\": \"" + dateType + "\",\"deviceArr\":\"" + submitArr + "\",\"endTime\":\"" + endTime + "\",\"reportType\":\"" + reportType + "\"}";
+                break;
+
+        }
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, url + Constants.ANALYSIS_BASE_URL_END_PORT, body, new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
                 ChartInfoBean chartInfoBean = JSON.parseObject(response.body(), ChartInfoBean.class);
                 chartInfoBean.setChartLine(mContext, lineChart);
-                chartInfoBean.setChartBar(mContext,barChart);
+                chartInfoBean.setChartBar(mContext, barChart);
             }
 
             @Override

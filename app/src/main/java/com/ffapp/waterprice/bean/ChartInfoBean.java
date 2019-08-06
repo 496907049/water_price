@@ -529,16 +529,18 @@ public class ChartInfoBean extends BasisBean {
         }
         // create a data object with the datasets
         BarData mBarData  = new BarData(dataSets);
-//        mBarData.setBarWidth(0.4f);
-        chartBar.setData(mBarData);
-
-        float groupSpace = 0.06f;
-        float barSpace = 0.02f;
-        float barWidth = 0.25f;
-        // 设置 柱子宽度
-        mBarData.setBarWidth(barWidth);
-        chartBar.groupBars(0.0f, groupSpace, barSpace);
-
+        if(dataSets.size()>1){
+            chartBar.setData(mBarData);
+            float groupSpace = 0.06f;
+            float barSpace = 0.02f;
+            float barWidth = 0.25f;
+            // 设置 柱子宽度
+            mBarData.setBarWidth(barWidth);
+            chartBar.groupBars(0.0f, groupSpace, barSpace);
+        }else {
+            mBarData.setBarWidth(0.4f);
+            chartBar.setData(mBarData);
+        }
 
 
         //自定义的MarkerView对象

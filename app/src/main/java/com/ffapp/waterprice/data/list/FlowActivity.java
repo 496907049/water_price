@@ -29,7 +29,7 @@ import my.http.OkGoClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class ListDetailActivity extends BasisActivity {
+public class FlowActivity extends BasisActivity {
 
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;

@@ -35,7 +35,7 @@ import my.StringUtil;
 
 public class DataAnalysisActivity extends BasisActivity {
 
-    String title;
+    public static String title;
     String url;
     String siteType;
     int reportType = 1;
@@ -96,10 +96,10 @@ public class DataAnalysisActivity extends BasisActivity {
                 String[] waters = getResources().getStringArray(R.array.water_array);
                 spinner.setItems(waters);
                 break;
-            case "土壤墒情分析":
-                String[] soils = getResources().getStringArray(R.array.soil_array);
-                spinner.setItems(soils);
-                break;
+//            case "土壤墒情分析":
+//                String[] soils = getResources().getStringArray(R.array.soil_array);
+//                spinner.setItems(soils);
+//                break;
             case "环境分析":
                 String[] envirs = getResources().getStringArray(R.array.envir_array);
                 spinner.setItems(envirs);
@@ -130,9 +130,9 @@ public class DataAnalysisActivity extends BasisActivity {
         fms = new Fragment[3];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        dayFragment =  DataChartFragment.newInstance("day",url);
-        monthFragment =  DataChartFragment.newInstance("month",url);
-        yearFragment =  DataChartFragment.newInstance("year",url);
+        dayFragment =  DataChartFragment.newInstance("day",url,title);
+        monthFragment =  DataChartFragment.newInstance("month",url,title);
+        yearFragment =  DataChartFragment.newInstance("year",url,title);
         fms[0] = dayFragment;
         fms[1] = monthFragment;
         fms[2] = yearFragment;

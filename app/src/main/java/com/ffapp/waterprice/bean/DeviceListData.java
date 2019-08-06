@@ -51,6 +51,34 @@ public class DeviceListData extends BasisBean {
     private String radiation;//辐射(W/㎡)
     private String pressure;//压力(Mpa)
     private String waterTemperature;//水温(°C)
+    private String ratifiedWaterConsumption;//核定用水量
+    private String realWaterConsumption;//实际用水量
+    private String availableCount;//剩余用水量
+
+
+    public String getRatifiedWaterConsumption() {
+        return ratifiedWaterConsumption;
+    }
+
+    public void setRatifiedWaterConsumption(String ratifiedWaterConsumption) {
+        this.ratifiedWaterConsumption = ratifiedWaterConsumption;
+    }
+
+    public String getRealWaterConsumption() {
+        return realWaterConsumption;
+    }
+
+    public void setRealWaterConsumption(String realWaterConsumption) {
+        this.realWaterConsumption = realWaterConsumption;
+    }
+
+    public String getAvailableCount() {
+        return availableCount;
+    }
+
+    public void setAvailableCount(String availableCount) {
+        this.availableCount = availableCount;
+    }
 
     public int getDsfl() {
         return dsfl;
