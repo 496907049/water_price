@@ -53,7 +53,8 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/base_layout_w_w_v">
+            style="@style/base_layout_w_w_v"
+            android:visibility="invisible">
 
           <ImageView
               android:id="@+id/img_online"

@@ -55,6 +55,15 @@ public class DeviceListData extends BasisBean {
     private String realWaterConsumption;//实际用水量
     private String availableCount;//剩余用水量
 
+    private String warningType;//报警类型
+
+    public String getWarningType() {
+        return warningType;
+    }
+
+    public void setWarningType(String warningType) {
+        this.warningType = warningType;
+    }
 
     public String getRatifiedWaterConsumption() {
         return ratifiedWaterConsumption;

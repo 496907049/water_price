@@ -114,6 +114,23 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".data.list.SoilActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".data.list.EnvirsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".data.list.RainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".data.list.WarnActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name=".user.ModifyPwdActivity"
             android:screenOrientation="portrait">
         </activity>

@@ -41,7 +41,7 @@
     <Button
         android:id="@+id/btn_line_char"
         style="@style/base_btn_wrap"
-        android:text="显示图表"
+        android:text="切换柱状图"
         android:layout_width="150dp"
         android:layout_margin="@dimen/base_margin_large"
         />

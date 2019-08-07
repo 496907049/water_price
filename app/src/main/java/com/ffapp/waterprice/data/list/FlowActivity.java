@@ -13,7 +13,6 @@ import android.widget.TextView;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
-import com.ffapp.waterprice.bean.BaseListBeanBc;
 import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
@@ -174,7 +173,7 @@ public class FlowActivity extends BasisActivity {
         //创建新View，被LayoutManager所调用
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_data_item, viewGroup, false);
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_flow, viewGroup, false);
             return new ViewHolder(view);
         }
 
@@ -279,7 +278,6 @@ public class FlowActivity extends BasisActivity {
                 tvCurrentSpeed.setText((listData.getFlowVelocity() == null) ? "" : listData.getFlowVelocity());
                 tvVmean.setText((listData.getAverageFlowVelocity() == null) ? "" : listData.getAverageFlowVelocity());
                 tvWinkFlow.setText((listData.getFlow() == null) ? "" : listData.getFlow());
-                tvTotalFlow.setText((listData.getTotalFlow() == null) ? "" : listData.getTotalFlow());
                 tvTotalFlow.setText((listData.getTotalFlow() == null) ? "" : listData.getTotalFlow());
                 list_item.setTag(position);
             }

@@ -15,7 +15,11 @@ import com.ffapp.waterprice.basis.BasisFragment;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.ChartInfoBean;
 import com.ffapp.waterprice.data.DataAnalysisActivity;
+import com.ffapp.waterprice.data.list.EnvirsActivity;
 import com.ffapp.waterprice.data.list.FlowActivity;
+import com.ffapp.waterprice.data.list.RainActivity;
+import com.ffapp.waterprice.data.list.SoilActivity;
+import com.ffapp.waterprice.data.list.WarnActivity;
 import com.ffapp.waterprice.data.list.WaterActivity;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
@@ -113,6 +117,7 @@ public class DataChartFragment extends BasisFragment {
         }
         this.submitArr = submitArr;
         this.reportType = reportType;
+        getLineCharge();
     }
 
 
@@ -125,6 +130,7 @@ public class DataChartFragment extends BasisFragment {
                     public void onTimeSelect(Date date, View v) {
                         ((TextView) findViewById(R.id.tv_start_timme)).setText(TimeUtils.getTimeByDate(date, formatStr));
                         calendarStart.setTime(date);
+                        getLineCharge();
                     }
                 })
                         .setType(timePickerType)// 默认全部显示
@@ -139,6 +145,7 @@ public class DataChartFragment extends BasisFragment {
                     public void onTimeSelect(Date date, View v) {
                         ((TextView) findViewById(R.id.tv_end_time)).setText(TimeUtils.getTimeByDate(date, formatStr));
                         calendarEnd.setTime(date);
+                        getLineCharge();
                     }
                 })
                         .setType(timePickerType)// 默认全部显示
@@ -147,36 +154,13 @@ public class DataChartFragment extends BasisFragment {
                 endTime.show();
                 break;
             case R.id.btn_line_char:
-                if (submitArr == null) {
-                    showToast("请选择区域地址");
-                    return;
-                }
-
-                String beginDate = tvStartTimme.getText().toString().trim();
-                if (TextUtils.isEmpty(beginDate)) {
-                    showToast("请选择开始时间");
-                    return;
-                }
-                String endDate = tvEndTime.getText().toString().trim();
-                if (TextUtils.isEmpty(endDate)) {
-                    showToast("请选择结束时间");
-                    return;
-                }
-
-                if (beginDate.equals(endDate)) {
-                    showToast("开始时间和结束时间不能相同");
-                    return;
-                }
-                String a = mLineCharBtn.getText().toString().trim();
                 switch (mLineCharBtn.getText().toString().trim()) {
                     case "切换柱状图":
-                        getLineCharge(beginDate, endDate);
                         mLineCharBtn.setText("切换条形图");
                         lineChart.setVisibility(View.GONE);
                         barChart.setVisibility(View.VISIBLE);
                         break;
                     default:
-                        getLineCharge(beginDate, endDate);
                         mLineCharBtn.setText("切换柱状图");
                         lineChart.setVisibility(View.VISIBLE);
                         barChart.setVisibility(View.GONE);
@@ -184,7 +168,6 @@ public class DataChartFragment extends BasisFragment {
                 }
                 break;
             case R.id.btn_bar_char:
-
                 if (submitArr == null) {
                     showToast("请区域地址");
                     return;
@@ -210,21 +193,51 @@ public class DataChartFragment extends BasisFragment {
                 extras.putString("endTime", tvEndTime.getText().toString().trim());
                 extras.putInt("reportType", reportType);
                 extras.putString("url", url);
-                switch (title) {
+
+                switch (title){
+                    case "流量分析":
+                        extras.putString("deviceArr", submitArr);
+                        ActivityTool.skipActivity(mContext, FlowActivity.class, extras);
+                        break;
                     case "用水户分析":
                         extras.putString("waterUserArr", submitArr);
                         ActivityTool.skipActivity(mContext, WaterActivity.class, extras);
                         break;
-                  default:
-                      extras.putString("deviceArr", submitArr);
-                      ActivityTool.skipActivity(mContext, FlowActivity.class, extras);
-                      break;
+                    case "土壤墒情分析":
+                        extras.putString("waterUserArr", submitArr);
+                        ActivityTool.skipActivity(mContext, SoilActivity.class, extras);
+                        break;
+                    case "环境分析":
+                        extras.putString("deviceArr", submitArr);
+                        ActivityTool.skipActivity(mContext, EnvirsActivity.class, extras);
+                        break;
+                    case "降雨量分析":
+                        extras.putString("waterUserArr", submitArr);
+                        ActivityTool.skipActivity(mContext, RainActivity.class, extras);
+                        break;
+                    case "报警分析":
+                        extras.putString("waterUserArr", submitArr);
+                        ActivityTool.skipActivity(mContext, WarnActivity.class, extras);
+                        break;
                 }
         }
     }
 
 
-    private void getLineCharge(String beginTime, String endTime) {
+    private void getLineCharge() {
+
+        String beginTime =tvStartTimme.getText().toString().trim();
+        String endTime = tvEndTime.getText().toString().trim();
+
+        if (submitArr == null || TextUtils.isEmpty(beginTime) ||TextUtils.isEmpty(tvEndTime.getText().toString().trim())) {
+            return;
+        }
+
+        if (beginTime.equals(endTime)) {
+            showToast("开始时间和结束时间不能相同");
+            return;
+        }
+
         MediaType mediaType = MediaType.parse("application/json");
         String param = null;
         switch (title) {

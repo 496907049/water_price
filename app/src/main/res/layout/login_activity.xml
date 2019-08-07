@@ -7,11 +7,19 @@
     android:background="@mipmap/login_bg"
     android:orientation="vertical">
 
+    
+
     <android.support.v4.widget.NestedScrollView
         style="@style/base_scroll_style">
 
         <LinearLayout style="@style/base_layout_m_w_v"
             android:layout_gravity="center">
+            
+            <TextView
+                style="@style/base_text_content.white"
+                android:text="农业水价改革综合信息监管"
+                android:layout_gravity="center"
+                android:textSize="@dimen/base_textsize_large"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -22,14 +30,10 @@
                 android:layout_marginLeft="@dimen/base_margin_xlarge"
                 android:layout_marginRight="@dimen/base_margin_xlarge"
                 android:layout_marginTop="@dimen/base_margin_large"
-                android:layout_marginBottom="@dimen/base_margin_large"
-                >
-
-
+                android:layout_marginBottom="@dimen/base_margin_large">
 
                     <LinearLayout
-                        style="@style/base_layout_m_w_h_cv"
-                        >
+                        style="@style/base_layout_m_w_h_cv">
 
                         <ImageView
                             style="@style/login_icon"
@@ -45,12 +49,9 @@
                 <ImageView
                   style="@style/divider_hor_style.color"
                     android:background="#dddddd"
-                    android:layout_height="1px"
-                    />
+                    android:layout_height="1px" />
 
-                    <LinearLayout
-                        style="@style/base_layout_m_w_h_cv"
-                        >
+                    <LinearLayout style="@style/base_layout_m_w_h_cv">
 
                         <ImageView
                             style="@style/login_icon"

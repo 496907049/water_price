@@ -41,7 +41,7 @@ public class DataIndexActivity extends HomeBaseActivity {
 
         listEnter.getList().add(new BaseListData("","流量分析",R.mipmap.data_img_flow,0));
         listEnter.getList().add(new BaseListData("","用水户分析",R.mipmap.data_img_user,0));
-//                listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
+                listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
         listEnter.getList().add(new BaseListData("","环境分析",R.mipmap.data_img_environment,0));
         listEnter.getList().add(new BaseListData("","降雨量分析",R.mipmap.data_img_rain,0));
 //                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));
@@ -105,7 +105,7 @@ public class DataIndexActivity extends HomeBaseActivity {
                         DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_WATER);
                         break;
                     case "土壤墒情分析":
-//                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants);
+                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_SOIL);
                         break;
                     case "环境分析":
                         DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_MOTEOROLOGY);
@@ -113,11 +113,8 @@ public class DataIndexActivity extends HomeBaseActivity {
                     case "降雨量分析":
                         DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_RAIN);
                         break;
-//                    case "泵房分析":
-//                        DataAnalysisActivity.newInstant(mContext,data.getName());
-//                        break;
                     case "报警分析":
-//                        DataAnalysisActivity.newInstant(mContext,data.getName());
+                        DataAnalysisActivity.newInstant(mContext,data.getName(),Constants.URL_WARNING);
                         break;
                 }
             }

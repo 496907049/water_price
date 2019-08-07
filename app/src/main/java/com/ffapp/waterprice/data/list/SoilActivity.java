@@ -28,7 +28,7 @@ import my.http.OkGoClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 
-public class EnvirsActivity extends BasisActivity {
+public class SoilActivity extends BasisActivity {
 
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;
@@ -173,7 +173,7 @@ public class EnvirsActivity extends BasisActivity {
         //创建新View，被LayoutManager所调用
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_envirs, viewGroup, false);
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_soil, viewGroup, false);
             return new ViewHolder(view);
         }
 
@@ -193,25 +193,22 @@ public class EnvirsActivity extends BasisActivity {
 
         //自定义的ViewHolder，持有每个Item的的所有界面元素
         public class ViewHolder extends RecyclerView.ViewHolder {
-
             @BindView(R.id.tv_device_code)
             TextView tvDeviceCode;
             @BindView(R.id.tv_device_name)
             TextView tvDeviceName;
             @BindView(R.id.tv_time)
             TextView tvTime;
-            @BindView(R.id.tv_temperature)
-            TextView tvTemperature;
-            @BindView(R.id.tv_rain_fall)
-            TextView tvRainFall;
-            @BindView(R.id.tv_atmos)
-            TextView tvAtmos;
-            @BindView(R.id.tv_wind_speed)
-            TextView tvWindSpeed;
+            @BindView(R.id.tv_depth)
+            TextView tvDepth;
             @BindView(R.id.tv_soil_temperature)
             TextView tvSoilTemperature;
             @BindView(R.id.tv_soil_humidity)
             TextView tvSoilHumidity;
+            @BindView(R.id.tv_soil_salinity)
+            TextView tvSoilSalinity;
+            @BindView(R.id.tv_soil_ph)
+            TextView tvSoilPh;
             @BindView(R.id.list_item)
             LinearLayout list_item;
 
@@ -226,12 +223,11 @@ public class EnvirsActivity extends BasisActivity {
                 tvDeviceCode.setText(getString(R.string.device_code) + "  " + listData.getDeviceCode());
                 tvDeviceName.setText("" + listData.getDeviceName());
                 tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
-                tvTemperature.setText((listData.getTemperature() == null) ? "" : listData.getTemperature());
-                tvRainFall.setText((listData.getRainfall() == null) ? "" : listData.getRainfall());
-                tvAtmos.setText((listData.getAtmos() == null) ? "" : listData.getAtmos());
-                tvWindSpeed.setText((listData.getWindSpeed() == null) ? "" : listData.getWindSpeed());
+                tvDepth.setText((listData.getDepth() == null) ? "" : listData.getDepth());
                 tvSoilTemperature.setText((listData.getSoilTemperature() == null) ? "" : listData.getSoilTemperature());
                 tvSoilHumidity.setText((listData.getSoilHumidity() == null) ? "" : listData.getSoilHumidity());
+                tvSoilSalinity.setText((listData.getSoilSalinity() == null) ? "" : listData.getSoilSalinity());
+                tvSoilPh.setText((listData.getSoilPh() == null) ? "" : listData.getSoilPh());
                 list_item.setTag(position);
             }
 

@@ -1,9 +1,6 @@
 package com.ffapp.waterprice.home.list;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,38 +9,26 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListBeanBc;
-import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.bean.DeviceTypeListBean;
-import com.ffapp.waterprice.data.DataAnalysisActivity;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jaygoo.bean.Site;
-import com.jaygoo.selector.MultiSelectPopWindow;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
-import com.loopj.android.http.RequestParams;
-import com.lzy.okgo.model.HttpParams;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import my.ActivityTool;
-import my.LogUtil;
 import my.TimeUtils;
-import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
 import okhttp3.MediaType;
@@ -212,7 +197,7 @@ public class ListDataActivity extends BasisActivity {
         //创建新View，被LayoutManager所调用
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_data_item, viewGroup, false);
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.data_flow, viewGroup, false);
             return new ViewHolder(view);
         }
 

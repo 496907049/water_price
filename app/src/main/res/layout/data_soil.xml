@@ -53,7 +53,8 @@
         </LinearLayout>
 
         <LinearLayout
-            style="@style/base_layout_w_w_v">
+            style="@style/base_layout_w_w_v"
+            android:visibility="invisible">
 
           <ImageView
               android:id="@+id/img_online"
@@ -69,47 +70,18 @@
     <LinearLayout
         style="@style/base_layout_m_w_h_cv"
         android:paddingBottom="@dimen/base_padding_xsmall"
-        android:paddingTop="@dimen/base_padding_xsmall">
-        <TextView
-           style="@style/base_text_content.grey"
-            android:text="@string/temperature"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            style="@style/base_layout_w_w"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/tv_temperature"
-                style="@style/base_text_content.grey"
-                android:text="-12.1" />
-
-            <ImageView
-                style="@style/base_icon_mid"
-                android:src="@mipmap/infolist_icon_alarm"
-                android:layout_marginRight="@dimen/base_margin_large"
-                android:layout_marginLeft="@dimen/base_margin_small"
-                android:visibility="invisible"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-    <ImageView style="@style/divider_hor_style" />
-
-    <LinearLayout
-        style="@style/base_layout_m_w_h_cv"
-        android:paddingBottom="@dimen/base_padding_xsmall"
         android:paddingTop="@dimen/base_padding_xsmall"
         >
         <TextView
             style="@style/base_text_content.grey"
-            android:text="@string/rain_fall"
+            android:text="@string/depth"
             android:layout_weight="1"/>
 
         <LinearLayout
             style="@style/base_layout_w_w"
             android:gravity="center_vertical">
             <TextView
-                android:id="@+id/tv_rain_fall"
+                android:id="@+id/tv_depth"
                 style="@style/base_text_content.grey"
                 android:text="23.34" />
 
@@ -125,66 +97,6 @@
     </LinearLayout>
     <ImageView style="@style/divider_hor_style" />
 
-    <LinearLayout
-        style="@style/base_layout_m_w_h_cv"
-        android:paddingBottom="@dimen/base_padding_xsmall"
-        android:paddingTop="@dimen/base_padding_xsmall"
-        >
-        <TextView
-            style="@style/base_text_content.grey"
-            android:text="@string/atmos"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            style="@style/base_layout_w_w"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/tv_atmos"
-                style="@style/base_text_content.grey"
-                android:text="23.34" />
-
-            <ImageView
-                style="@style/base_icon_mid"
-                android:src="@mipmap/infolist_icon_alarm"
-                android:layout_marginRight="@dimen/base_margin_large"
-                android:layout_marginLeft="@dimen/base_margin_small"
-                android:visibility="invisible"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-    <ImageView style="@style/divider_hor_style" />
-
-
-    <LinearLayout
-        style="@style/base_layout_m_w_h_cv"
-        android:paddingBottom="@dimen/base_padding_xsmall"
-        android:paddingTop="@dimen/base_padding_xsmall"
-        >
-        <TextView
-            style="@style/base_text_content.grey"
-            android:text="@string/wind_speed"
-            android:layout_weight="1"/>
-
-        <LinearLayout
-            style="@style/base_layout_w_w"
-            android:gravity="center_vertical">
-            <TextView
-                android:id="@+id/tv_wind_speed"
-                style="@style/base_text_content.grey"
-                android:text="23.34" />
-
-            <ImageView
-                style="@style/base_icon_mid"
-                android:src="@mipmap/infolist_icon_alarm"
-                android:layout_marginRight="@dimen/base_margin_large"
-                android:layout_marginLeft="@dimen/base_margin_small"
-                android:visibility="invisible"
-                />
-        </LinearLayout>
-
-    </LinearLayout>
-    <ImageView style="@style/divider_hor_style" />
 
     <LinearLayout
         style="@style/base_layout_m_w_h_cv"
@@ -244,6 +156,67 @@
         </LinearLayout>
 
     </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/soil_salinity"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_soil_salinity"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+            <ImageView
+                style="@style/base_icon_mid"
+                android:src="@mipmap/infolist_icon_alarm"
+                android:layout_marginRight="@dimen/base_margin_large"
+                android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/soil_ph"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_soil_ph"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+            <ImageView
+                style="@style/base_icon_mid"
+                android:src="@mipmap/infolist_icon_alarm"
+                android:layout_marginRight="@dimen/base_margin_large"
+                android:layout_marginLeft="@dimen/base_margin_small"
+                android:visibility="invisible"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

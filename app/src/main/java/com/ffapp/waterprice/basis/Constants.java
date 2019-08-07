@@ -52,6 +52,10 @@ public class Constants {
 	public static String URL_MOTEOROLOGY= ANALYSIS_BASE_URL_STATT+"meteorology";
 	//雨量分析分页
 	public static String URL_RAIN= ANALYSIS_BASE_URL_STATT+"rainfall";
+	//土壤墒情分页
+	public static String URL_SOIL= ANALYSIS_BASE_URL_STATT+"soil";
+	//土壤墒情分页
+	public static String URL_WARNING= ANALYSIS_BASE_URL_STATT+"warning";
 
 
 

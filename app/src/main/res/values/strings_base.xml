@@ -94,6 +94,14 @@
     <string name="device_code">设备编码</string>
     <string name="temperature">温度(°C)</string>
     <string name="water_level">水位(m)</string>
+    <string name="rain_fall">降雨(mm)</string>
+    <string name="depth">埋深(mm)</string>
+    <string name="soil_salinity">土壤盐分(μS/cm)</string>;
+    <string name="atmos">大气压力(Kpa)</string>;
+    <string name="wind_speed">风速(m/s)</string>;
+    <string name="soil_ph">土壤PH值</string>;
+    <string name="soil_temperature">土壤温度(°C)</string>;
+    <string name="soil_humidity">土壤湿度(%RH)</string>;
     <string name="get_up_water_level">闸上水位(m)</string>
     <string name="get_down_water_level">闸下水位(m)</string>
     <string name="current_speed">流速(m/s)</string>
@@ -103,6 +111,7 @@
     <string name="ratified_water_consumption">核定用水量(m³)</string>
     <string name="real_water_consumption">实际用水量(m³)</string>
     <string name="available_count">剩余用水量(m³)</string>
+    <string name="warn_type">报警类型</string>
     <string name="unread_msg">%1$d条未读</string>
 
 

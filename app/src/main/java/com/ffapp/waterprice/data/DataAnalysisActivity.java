@@ -96,10 +96,10 @@ public class DataAnalysisActivity extends BasisActivity {
                 String[] waters = getResources().getStringArray(R.array.water_array);
                 spinner.setItems(waters);
                 break;
-//            case "土壤墒情分析":
-//                String[] soils = getResources().getStringArray(R.array.soil_array);
-//                spinner.setItems(soils);
-//                break;
+            case "土壤墒情分析":
+                String[] soils = getResources().getStringArray(R.array.soil_array);
+                spinner.setItems(soils);
+                break;
             case "环境分析":
                 String[] envirs = getResources().getStringArray(R.array.envir_array);
                 spinner.setItems(envirs);
