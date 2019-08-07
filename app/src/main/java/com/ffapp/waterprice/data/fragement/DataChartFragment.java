@@ -100,6 +100,8 @@ public class DataChartFragment extends BasisFragment {
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
+        lineChart.setNoDataText("暂无数据");
+        barChart.setNoDataText("暂无数据");
 
     }
 

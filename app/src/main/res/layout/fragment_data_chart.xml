@@ -67,7 +67,8 @@
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/bar_chart"
-            style="@style/base_layout_m_m">
+            style="@style/base_layout_m_m"
+            >
         </com.github.mikephil.charting.charts.BarChart>
 
 
