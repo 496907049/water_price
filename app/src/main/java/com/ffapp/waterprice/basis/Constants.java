@@ -34,6 +34,8 @@ public class Constants {
 	public static String URL_GET_WATER_USER = URL_API+"api/dashboard/getWaterUser";
 	//获取设备数
 	public static String URL_GET_TREE = URL_API+"api/area/getDeviceTree";
+	//获取设备数
+	public static String URL_GET_WATER_TREE = URL_API+"api/water/tree";
 	//获取流量列表分页数据
 	public static String URL_MONITOR_PAGE = URL_API+"api/monitor/page";
 

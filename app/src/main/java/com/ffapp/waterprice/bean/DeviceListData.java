@@ -29,6 +29,9 @@ public class DeviceListData extends BasisBean {
     private long messageAt;
     private int state;     //1是在线，其他都是不在线
 
+    private String waterUserName;
+    private String waterUserNumber;
+
     private String rainfall;//降雨量(mm)
     private String waterLevel;//水位(m)
     private String gateUp;//闸上水位(m)
@@ -437,6 +440,22 @@ public class DeviceListData extends BasisBean {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getWaterUserName() {
+        return waterUserName;
+    }
+
+    public void setWaterUserName(String waterUserName) {
+        this.waterUserName = waterUserName;
+    }
+
+    public String getWaterUserNumber() {
+        return waterUserNumber;
+    }
+
+    public void setWaterUserNumber(String waterUserNumber) {
+        this.waterUserNumber = waterUserNumber;
     }
 
 

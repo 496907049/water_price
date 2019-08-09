@@ -313,7 +313,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
     }
 
     /**
-     * 设置列表的数据源，设置后立即生效
+     * 设置列表的数据源，设置后立即生效     为了可以多选
      * */
     public void setCitiesThree(ArrayList cities) {
         if(cities == null||cities.size() <= 0)

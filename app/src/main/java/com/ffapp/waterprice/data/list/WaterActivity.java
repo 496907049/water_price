@@ -217,17 +217,17 @@ public class WaterActivity extends BasisActivity {
 
             public void bind(int position) {
                 DeviceListData listData = mListBean.getList().get(position);
-                tvDeviceCode.setText(getString(R.string.device_code) + "  " + listData.getDeviceCode());
-                tvDeviceName.setText("" + listData.getDeviceName());
+                tvDeviceCode.setText(getString(R.string.water_code) + "  " + listData.getWaterUserNumber());
+                tvDeviceName.setText("" + listData.getWaterUserName());
                 tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
-                switch (listData.getState()) {
-                    case 0:
-                        imgOnline.setBackgroundResource(R.mipmap.list_img_offline);
-                        break;
-                    case 1:
-                        imgOnline.setBackgroundResource(R.mipmap.list_img_online);
-                        break;
-                }
+//                switch (listData.getState()) {
+//                    case 0:
+//                        imgOnline.setBackgroundResource(R.mipmap.list_img_offline);
+//                        break;
+//                    case 1:
+//                        imgOnline.setBackgroundResource(R.mipmap.list_img_online);
+//                        break;
+//                }
                 tvRatifiedWaterConsumption.setText((listData.getRatifiedWaterConsumption() == null) ? "" : listData.getRatifiedWaterConsumption());
                 tvRealWaterConsumption.setText((listData.getRealWaterConsumption() == null) ? "" : listData.getRealWaterConsumption());
                 tvAvailableCount.setText((listData.getAvailableCount() == null) ? "" : listData.getAvailableCount());

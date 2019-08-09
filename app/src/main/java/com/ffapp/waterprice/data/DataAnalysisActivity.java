@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -16,15 +15,13 @@ import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.basis.MyViewPagerAdapter;
 import com.ffapp.waterprice.data.area.AreaActivity;
+import com.ffapp.waterprice.data.area.WaterActivity;
 import com.ffapp.waterprice.data.fragement.DataChartFragment;
-import com.ffapp.waterprice.home.site.SiteActivity;
-import com.ffapp.waterprice.video.VideoFragment;
 import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.jaredrummler.materialspinner.MaterialSpinner;
-import com.mic.adressselectorlib.City;
 
 import java.util.ArrayList;
 
@@ -58,7 +55,7 @@ public class DataAnalysisActivity extends BasisActivity {
 
     String deviceCodes = null;
 
-    public static void newInstant(Context mContext, String title,String url) {
+    public static void newInstant(Context mContext, String title, String url) {
         Intent intent = new Intent(mContext, DataAnalysisActivity.class);
         intent.putExtra("title", title);
         intent.putExtra("url", url);
@@ -81,13 +78,13 @@ public class DataAnalysisActivity extends BasisActivity {
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        if(extras == null){
+        if (extras == null) {
             return;
         }
         title = extras.getString("title");
         url = extras.getString("url");
-        setTitle(""+title);
-        switch (title){
+        setTitle("" + title);
+        switch (title) {
             case "流量分析":
                 String[] flows = getResources().getStringArray(R.array.flow_array);
                 spinner.setItems(flows);
@@ -117,7 +114,7 @@ public class DataAnalysisActivity extends BasisActivity {
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                reportType = position+1;
+                reportType = position + 1;
                 tabChange(currentPosition);
             }
         });
@@ -125,24 +122,24 @@ public class DataAnalysisActivity extends BasisActivity {
         setView();
     }
 
-    private  void setView(){
+    private void setView() {
 
         fms = new Fragment[3];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        dayFragment =  DataChartFragment.newInstance("day",url,title);
-        monthFragment =  DataChartFragment.newInstance("month",url,title);
-        yearFragment =  DataChartFragment.newInstance("year",url,title);
+        dayFragment = DataChartFragment.newInstance("day", url, title);
+        monthFragment = DataChartFragment.newInstance("month", url, title);
+        yearFragment = DataChartFragment.newInstance("year", url, title);
         fms[0] = dayFragment;
         fms[1] = monthFragment;
         fms[2] = yearFragment;
-        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(),fms);
+        myViewPagerAdapter = new MyViewPagerAdapter(getSupportFragmentManager(), fms);
         viewpager.setAdapter(myViewPagerAdapter);
         viewpager.setOffscreenPageLimit(2);
         mTabEntities = new ArrayList<>();
-        mTabEntities.add(new VideoIndexActivity.TabEntity("日",0,0));
-        mTabEntities.add(new VideoIndexActivity.TabEntity("月",0,0));
-        mTabEntities.add(new VideoIndexActivity.TabEntity("年",0,0));
+        mTabEntities.add(new VideoIndexActivity.TabEntity("日", 0, 0));
+        mTabEntities.add(new VideoIndexActivity.TabEntity("月", 0, 0));
+        mTabEntities.add(new VideoIndexActivity.TabEntity("年", 0, 0));
 
         String[] listTitle = new String[3];
 
@@ -184,7 +181,8 @@ public class DataAnalysisActivity extends BasisActivity {
 
         viewpager.setCurrentItem(0);
     }
-    public static  class TabEntity implements CustomTabEntity {
+
+    public static class TabEntity implements CustomTabEntity {
         public String title;
         public int selectedIcon;
         public int unSelectedIcon;
@@ -213,8 +211,16 @@ public class DataAnalysisActivity extends BasisActivity {
 
 
     @OnClick(R.id.img_address)
-    public void toAreaActvity(){
-        ActivityTool.skipActivityForResult(mContext, AreaActivity.class, Constants.AREA_CALLBACK);
+    public void toAreaActvity() {
+        switch (title) {
+            case "用水户分析":
+                ActivityTool.skipActivityForResult(mContext, WaterActivity.class, Constants.AREA_CALLBACK);
+                break;
+            default:
+                ActivityTool.skipActivityForResult(mContext, AreaActivity.class, Constants.AREA_CALLBACK);
+                break;
+        }
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -222,23 +228,23 @@ public class DataAnalysisActivity extends BasisActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Constants.AREA_CALLBACK) {
-            ArrayList<String>  deviceCodeList = data.getStringArrayListExtra("deviceCodeList");
+            ArrayList<String> deviceCodeList = data.getStringArrayListExtra("deviceCodeList");
             deviceCodes = StringUtil.listToString(deviceCodeList);
             mAddressTv.setText(data.getStringExtra("allSiteName"));
             tabChange(currentPosition);
         }
     }
 
-    private void tabChange(int position){
-        switch (position){
+    private void tabChange(int position) {
+        switch (position) {
             case 0:
-                dayFragment.tabChange(position,deviceCodes,reportType);
+                dayFragment.tabChange(position, deviceCodes, reportType);
                 break;
-            case  1:
-                monthFragment.tabChange(position,deviceCodes,reportType);
+            case 1:
+                monthFragment.tabChange(position, deviceCodes, reportType);
                 break;
             case 2:
-                yearFragment.tabChange(position,deviceCodes,reportType);
+                yearFragment.tabChange(position, deviceCodes, reportType);
                 break;
         }
     }
