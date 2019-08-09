@@ -251,6 +251,7 @@ public class DataChartFragment extends BasisFragment {
                 break;
 
         }
+        showProgress();
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, url + Constants.ANALYSIS_BASE_URL_END_PORT, body, new StringCallback() {
             @Override
