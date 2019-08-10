@@ -219,7 +219,7 @@ public class WaterActivity extends BasisActivity {
                 DeviceListData listData = mListBean.getList().get(position);
                 tvDeviceCode.setText(getString(R.string.water_code) + "  " + listData.getWaterUserNumber());
                 tvDeviceName.setText("" + listData.getWaterUserName());
-                tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
+                tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getCountDate(), "yyyy-MM-dd HH:mm:ss"));
 //                switch (listData.getState()) {
 //                    case 0:
 //                        imgOnline.setBackgroundResource(R.mipmap.list_img_offline);

@@ -27,6 +27,7 @@ public class DeviceListData extends BasisBean {
     private String deviceTypeId;
     private String id;
     private long messageAt;
+    private long countDate;
     private int state;     //1是在线，其他都是不在线
 
     private String waterUserName;
@@ -530,6 +531,14 @@ public class DeviceListData extends BasisBean {
         this.dvrCode = dvrCode;
     }
 
+    public long getCountDate() {
+        return countDate;
+    }
+
+    public void setCountDate(long countDate) {
+        this.countDate = countDate;
+    }
+
     public String getDvrCode() {
         return dvrCode;
     }
@@ -628,5 +637,7 @@ public class DeviceListData extends BasisBean {
 //		String url = String.format("rtmp://%s:%s/dvrlive/%s_%s.live",loginBean.getDvrVideoHost(),loginBean.getDvrVideoPort(),getStcd(),params+"");
         return url;
     }
+
+
 
 }

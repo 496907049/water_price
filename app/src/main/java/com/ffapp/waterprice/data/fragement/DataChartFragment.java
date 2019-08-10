@@ -206,7 +206,7 @@ public class DataChartFragment extends BasisFragment {
                         ActivityTool.skipActivity(mContext, WaterActivity.class, extras);
                         break;
                     case "土壤墒情分析":
-                        extras.putString("waterUserArr", submitArr);
+                        extras.putString("deviceArr", submitArr);
                         ActivityTool.skipActivity(mContext, SoilActivity.class, extras);
                         break;
                     case "环境分析":
@@ -214,11 +214,11 @@ public class DataChartFragment extends BasisFragment {
                         ActivityTool.skipActivity(mContext, EnvirsActivity.class, extras);
                         break;
                     case "降雨量分析":
-                        extras.putString("waterUserArr", submitArr);
+                        extras.putString("deviceArr", submitArr);
                         ActivityTool.skipActivity(mContext, RainActivity.class, extras);
                         break;
                     case "报警分析":
-                        extras.putString("waterUserArr", submitArr);
+                        extras.putString("deviceArr", submitArr);
                         ActivityTool.skipActivity(mContext, WarnActivity.class, extras);
                         break;
                 }
