@@ -17,6 +17,7 @@ import com.ffapp.waterprice.basis.MyViewPagerAdapter;
 import com.ffapp.waterprice.data.area.AreaActivity;
 import com.ffapp.waterprice.data.area.WaterActivity;
 import com.ffapp.waterprice.data.fragement.DataChartFragment;
+import com.ffapp.waterprice.video.VideoDetailActivity;
 import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
@@ -272,7 +273,9 @@ public class DataAnalysisActivity extends BasisActivity {
                 ActivityTool.skipActivityForResult(mContext, WaterActivity.class, Constants.AREA_CALLBACK);
                 break;
             default:
-                ActivityTool.skipActivityForResult(mContext, AreaActivity.class, Constants.AREA_CALLBACK);
+                Bundle extras = new Bundle();
+                extras.putSerializable("title",title);
+                ActivityTool.skipActivityForResult(mContext, AreaActivity.class,extras,Constants.AREA_CALLBACK);
                 break;
         }
 

@@ -26,6 +26,8 @@ import my.http.OkGoClient;
 
 public class AreaActivity extends BasisActivity {
 
+    String title;
+
     ArrayList<DeviceTreeListData> treeList = new ArrayList<>();
 
 
@@ -53,7 +55,7 @@ public class AreaActivity extends BasisActivity {
     @Override
     public void initData(Bundle savedInstanceState) {
         super.initData(savedInstanceState);
-
+        title = getIntent().getStringExtra("title");
         showProgress();
         OkGoClient.get(mContext, Constants.URL_GET_TREE, new MyHttpListener() {
             @Override
@@ -109,6 +111,13 @@ public class AreaActivity extends BasisActivity {
 
             @Override
             public void itemClick(AddressSelector addressSelector, ArrayList<City> cityList, String allSiteName) throws org.json.JSONException {
+
+                if(title.equals("土壤墒情分析")){
+                    if (cityList.size()>1){
+                        showToast("最多选1个");
+                        return;
+                    }
+                }
 
                 if (cityList.size()>5){
                     showToast("最多选5个");
