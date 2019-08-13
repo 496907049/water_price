@@ -95,7 +95,7 @@
     <string name="water_code">设备编码</string>
     <string name="temperature">温度(°C)</string>
     <string name="water_level">水位(m)</string>
-    <string name="rain_fall">降雨(mm)</string>
+    <string name="rain_fall">降雨量(mm)</string>
     <string name="depth">埋深(mm)</string>
     <string name="soil_salinity">土壤盐分(μS/cm)</string>;
     <string name="atmos">大气压力(Kpa)</string>;

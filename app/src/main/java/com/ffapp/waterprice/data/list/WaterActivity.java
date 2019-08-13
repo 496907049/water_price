@@ -40,7 +40,7 @@ public class WaterActivity extends BasisActivity {
     private String dateType;
     private String waterUserArr;
     private String endTime;
-    private int reportType;
+    private String reportType;
     private String url;
 
     @Override
@@ -91,7 +91,7 @@ public class WaterActivity extends BasisActivity {
         dateType = extras.getString("dateType");
         waterUserArr = extras.getString("waterUserArr");
         endTime = extras.getString("endTime");
-        reportType = extras.getInt("reportType");
+        reportType = extras.getString("reportType");
         url = extras.getString("url");
 
         mListBean = new DeviceListBean();

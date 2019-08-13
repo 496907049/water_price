@@ -61,12 +61,12 @@ public class DataChartFragment extends BasisFragment {
     /**
      * 获取折线图接口所需要的参数
      */
-    private int reportType = 1;
-    String submitArr = null;
-    String dateType = "day";
+    private String reportType;
+    private String submitArr = null;
+    private String dateType = "day";
 
 
-    public static DataChartFragment newInstance(String dayOrMonthOrYear, String url, String title) {
+    public static DataChartFragment newInstance(String dayOrMonthOrYear, String url, String title, String reportType) {
         DataChartFragment fragment = new DataChartFragment();
         fragment.dayOrMonthOrYear = dayOrMonthOrYear;
         fragment.url = url;
@@ -105,7 +105,7 @@ public class DataChartFragment extends BasisFragment {
 
     }
 
-    public void tabChange(int position, String submitArr, int reportType) {
+    public void tabChange(int position, String submitArr, String reportType) {
         switch (position) {
             case 0:
                 this.dateType = "day";
@@ -193,7 +193,7 @@ public class DataChartFragment extends BasisFragment {
                 extras.putString("beginTime", tvStartTimme.getText().toString().trim());
                 extras.putString("dateType", dateType);
                 extras.putString("endTime", tvEndTime.getText().toString().trim());
-                extras.putInt("reportType", reportType);
+                extras.putString("reportType", reportType);
                 extras.putString("url", url);
 
                 switch (title){
@@ -232,6 +232,11 @@ public class DataChartFragment extends BasisFragment {
         String endTime = tvEndTime.getText().toString().trim();
 
         if (submitArr == null || TextUtils.isEmpty(beginTime) ||TextUtils.isEmpty(tvEndTime.getText().toString().trim())) {
+            return;
+        }
+
+        if(calendarStart.after(calendarEnd)){
+            showToast("开始时间不能大于结束时间");
             return;
         }
 

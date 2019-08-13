@@ -40,7 +40,7 @@ public class SoilActivity extends BasisActivity {
     private String dateType;
     private String deviceArr;
     private String endTime;
-    private int reportType;
+    private String reportType;
     private String url;
 
     @Override
@@ -91,7 +91,7 @@ public class SoilActivity extends BasisActivity {
         dateType = extras.getString("dateType");
         deviceArr = extras.getString("deviceArr");
         endTime = extras.getString("endTime");
-        reportType = extras.getInt("reportType");
+        reportType = extras.getString("reportType");
         url = extras.getString("url");
 
         mListBean = new DeviceListBean();

@@ -34,8 +34,7 @@ public class DataAnalysisActivity extends BasisActivity {
 
     public static String title;
     String url;
-    String siteType;
-    int reportType = 1;
+    String reportType = "1";
 
     @BindView(R.id.tv_address)
     TextView mAddressTv;
@@ -106,6 +105,7 @@ public class DataAnalysisActivity extends BasisActivity {
                 spinner.setItems(rains);
                 break;
             case "报警分析":
+                reportType = "20";
                 String[] alarms = getResources().getStringArray(R.array.alarm_array);
                 spinner.setItems(alarms);
                 break;
@@ -114,7 +114,62 @@ public class DataAnalysisActivity extends BasisActivity {
         spinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
             @Override
             public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                reportType = position + 1;
+                reportType = String.valueOf(position + 1);
+                if(title.equals("报警分析")){
+                    switch (item){
+                        case "雨量":
+                            reportType = "20";
+                            break;
+                        case "水位":
+                            reportType = "39";
+                            break;
+                        case "闸上水位":
+                            reportType = "3B";
+                            break;
+                        case "闸下水位":
+                            reportType = "3A";
+                            break;
+                        case "瞬时流速":
+                            reportType = "37";
+                            break;
+                        case "平均流速":
+                            reportType = "36";
+                            break;
+                        case "瞬时流量":
+                            reportType = "27";
+                            break;
+                        case "累计流量":
+                            reportType = "30";
+                            break;
+                        case "土壤温度":
+                            reportType = "0D";
+                            break;
+                        case "土壤湿度":
+                            reportType = "18";
+                            break;
+                        case "土壤盐分":
+                            reportType = "48";
+                            break;
+                        case "土壤PH值":
+                            reportType = "46";
+                            break;
+                        case "气温":
+                            reportType = "02";
+                            break;
+                        case "水温":
+                            reportType = "03";
+                            break;
+                        case "大气压力":
+                            reportType = "08";
+                            break;
+                        case "风速":
+                            reportType = "35";
+                            break;
+                        case "风向":
+                            reportType = "33";
+                            break;
+                    }
+                }
                 tabChange(currentPosition);
             }
         });
@@ -127,9 +182,9 @@ public class DataAnalysisActivity extends BasisActivity {
         fms = new Fragment[3];
 //        HomeGrideListData data = new HomeGrideListData();
 //        data.setModuleCode("XF_BFM_WATER");
-        dayFragment = DataChartFragment.newInstance("day", url, title);
-        monthFragment = DataChartFragment.newInstance("month", url, title);
-        yearFragment = DataChartFragment.newInstance("year", url, title);
+        dayFragment = DataChartFragment.newInstance("day", url, title,reportType);
+        monthFragment = DataChartFragment.newInstance("month", url, title,reportType);
+        yearFragment = DataChartFragment.newInstance("year", url, title,reportType);
         fms[0] = dayFragment;
         fms[1] = monthFragment;
         fms[2] = yearFragment;
