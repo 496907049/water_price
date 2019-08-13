@@ -40,7 +40,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
     //列表的适配器   一行多选
     private addressAdapterThree addressAdapterThree;
     private ArrayList<City> cities;
-    private ArrayList<City> selectedCityList;
+    private ArrayList<City> selectedCityList = new ArrayList<>();;
     private OnItemClickListener onItemClickListener;
     private OnTabSelectedListener onTabSelectedListener;
     private RecyclerView list;
@@ -324,7 +324,6 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         okBtn.setVisibility(VISIBLE);
         if(cities.get(0) instanceof City){
             this.cities = cities;
-            selectedCityList = new ArrayList<>();
             if(addressAdapterThree == null){
                 addressAdapterThree = new addressAdapterThree();
                 grid.setAdapter(addressAdapterThree);
@@ -658,19 +657,23 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
+        public void onBindViewHolder(MyViewHolder holder, final int position) {
             if(listItemIcon != -1)
                 holder.img.setImageResource(listItemIcon);
             if(listTextSize != -1)
                 holder.tv.setTextSize(listTextSize);
 
-            if(selectedCityList.contains(cities.get(position))){
-                holder.img.setVisibility(View.VISIBLE);
-                holder.tv.setTextColor(listTextSelectedColor);
-            }else {
-                holder.img.setVisibility(View.INVISIBLE);
-                holder.tv.setTextColor(listTextNormalColor);
+            for (City city : selectedCityList){
+                if(city.getId().equals(cities.get(position).getId())){
+                    holder.img.setVisibility(View.VISIBLE);
+                    holder.tv.setTextColor(listTextSelectedColor);
+                    break;
+                }else {
+                    holder.img.setVisibility(View.INVISIBLE);
+                    holder.tv.setTextColor(listTextNormalColor);
+                }
             }
+
             holder.tv.setText(cities.get(position).getName());
             holder.itemView.setTag(cities.get(position));
             holder.itemView.setOnClickListener(new OnClickListener() {
@@ -681,7 +684,7 @@ public class AddressSelector extends LinearLayout implements View.OnClickListene
                     }else {
                         selectedCityList.add((City) v.getTag());
                     }
-                    addressAdapterThree.notifyDataSetChanged();
+                    addressAdapterThree.notifyItemChanged(position);
                 }
             });
         }
