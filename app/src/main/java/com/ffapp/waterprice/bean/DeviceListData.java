@@ -45,7 +45,9 @@ public class DeviceListData extends BasisBean {
     private String soilTemperature;//土壤温度(°C)
     private String soilHumidity;//土壤湿度(%RH)
     private String soilSalinity;//土壤盐分(μS/cm)
+    private String salinity;//土壤盐分(μS/cm)
     private String soilPh;//土壤PH值
+    private String ph;//土壤PH值
     private String soilWaterPotential;//土壤水势
     private String temperature;//温度(°C)
     private String humidity;//湿度(%RH)
@@ -55,6 +57,15 @@ public class DeviceListData extends BasisBean {
     private String radiation;//辐射(W/㎡)
     private String pressure;//压力(Mpa)
     private String waterTemperature;//水温(°C)
+    private String signalIntensity;//信号强度
+    private String voltage;//电压电量
+    private String ext1;//TD11
+    private String ext2;//TD12
+    private String ext3;//TD13
+    private String ext4;//TD14
+    private String ext5;//TD15
+    private String ext6;//TD16
+    private String ext7;//TD17
     private String ratifiedWaterConsumption;//核定用水量
     private String realWaterConsumption;//实际用水量
     private String availableCount;//剩余用水量
@@ -105,6 +116,15 @@ public class DeviceListData extends BasisBean {
         return waterLevel;
     }
 
+    public String getSalinity() {
+        return salinity;
+    }
+
+    public void setSalinity(String salinity) {
+        this.salinity = salinity;
+    }
+
+
     public void setWaterLevel(String waterLevel) {
         this.waterLevel = waterLevel;
     }
@@ -139,6 +159,70 @@ public class DeviceListData extends BasisBean {
 
     public void setAverageFlowVelocity(String averageFlowVelocity) {
         this.averageFlowVelocity = averageFlowVelocity;
+    }
+
+    public String getExt1() {
+        return ext1;
+    }
+
+    public String getPh() {
+        return ph;
+    }
+
+    public void setPh(String ph) {
+        this.ph = ph;
+    }
+
+    public void setExt1(String ext1) {
+        this.ext1 = ext1;
+    }
+
+    public String getExt2() {
+        return ext2;
+    }
+
+    public void setExt2(String ext2) {
+        this.ext2 = ext2;
+    }
+
+    public String getExt3() {
+        return ext3;
+    }
+
+    public void setExt3(String ext3) {
+        this.ext3 = ext3;
+    }
+
+    public String getExt4() {
+        return ext4;
+    }
+
+    public void setExt4(String ext4) {
+        this.ext4 = ext4;
+    }
+
+    public String getExt5() {
+        return ext5;
+    }
+
+    public void setExt5(String ext5) {
+        this.ext5 = ext5;
+    }
+
+    public String getExt6() {
+        return ext6;
+    }
+
+    public void setExt6(String ext6) {
+        this.ext6 = ext6;
+    }
+
+    public String getExt7() {
+        return ext7;
+    }
+
+    public void setExt7(String ext7) {
+        this.ext7 = ext7;
     }
 
     public String getFlow() {
@@ -277,8 +361,6 @@ public class DeviceListData extends BasisBean {
         this.signalIntensity = signalIntensity;
     }
 
-    private String signalIntensity;//信号强度
-    private String voltage;//电压电量
 
 
     public void setCreateDate(long createDate) {

@@ -41,7 +41,7 @@ public class DataIndexActivity extends HomeBaseActivity {
 
         listEnter.getList().add(new BaseListData("","流量分析",R.mipmap.data_img_flow,0));
         listEnter.getList().add(new BaseListData("","用水户分析",R.mipmap.data_img_user,0));
-                listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
+        listEnter.getList().add(new BaseListData("","土壤墒情分析",R.mipmap.data_img_soil,0));
         listEnter.getList().add(new BaseListData("","环境分析",R.mipmap.data_img_environment,0));
         listEnter.getList().add(new BaseListData("","降雨量分析",R.mipmap.data_img_rain,0));
 //                listEnter.getList().add(new BaseListData("","泵房分析",R.mipmap.data_img_pumproom,0));

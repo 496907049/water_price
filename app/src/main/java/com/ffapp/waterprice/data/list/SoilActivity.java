@@ -224,10 +224,10 @@ public class SoilActivity extends BasisActivity {
                 tvDeviceName.setText("" + listData.getDeviceName());
                 tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
                 tvDepth.setText((listData.getDepth() == null) ? "" : listData.getDepth());
-                tvSoilTemperature.setText((listData.getSoilTemperature() == null) ? "" : listData.getSoilTemperature());
-                tvSoilHumidity.setText((listData.getSoilHumidity() == null) ? "" : listData.getSoilHumidity());
-                tvSoilSalinity.setText((listData.getSoilSalinity() == null) ? "" : listData.getSoilSalinity());
-                tvSoilPh.setText((listData.getSoilPh() == null) ? "" : listData.getSoilPh());
+                tvSoilTemperature.setText((listData.getTemperature() == null) ? "" : listData.getTemperature());
+                tvSoilHumidity.setText((listData.getHumidity() == null) ? "" : listData.getHumidity());
+                tvSoilSalinity.setText((listData.getSalinity() == null) ? "" : listData.getSalinity());
+                tvSoilPh.setText((listData.getPh() == null) ? "" : listData.getPh());
                 list_item.setTag(position);
             }
 

@@ -172,46 +172,6 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
                 break;
             case R.id.img_layer:
 
-                ArrayList<Site> siteArrayList = new ArrayList<>();
-                Site site = new Site();
-                site.setId(1);
-                site.setName("水流流量站");
-                siteArrayList.add(site);
-                site = new Site();
-                site.setId(2);
-                site.setName("土壤墒情站");
-                siteArrayList.add(site);
-                site = new Site();
-                site.setId(3);
-                site.setName("气象站");
-                siteArrayList.add(site);
-                site = new Site();
-                site.setId(4);
-                site.setName("雨量站");
-                siteArrayList.add(site);
-                site = new Site();
-                site.setId(5);
-                site.setName("视频测试站");
-                siteArrayList.add(site);
-
-                new MultiSelectPopWindow.Builder(this)
-                        .setArray(siteArrayList)
-                        .setConfirmListener(new MultiSelectPopWindow.OnConfirmClickListener() {
-                            @Override
-                            public void onClick(ArrayList<Integer> indexList, ArrayList<Site> selectedList) {
-                                String siteName ="";
-                                for (Site site : selectedList){
-                                    siteName += site.getName()+",";
-                                }
-                                Toast.makeText(getApplication(), ""+siteName, Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setCancel("取消")
-                        .setConfirm("完成")
-                        .setTitle("选择图层")
-                        .build()
-                        .show(findViewById(R.id.mBottom));
-
                 break;
             case R.id.img_zoom_in:
                 finish();

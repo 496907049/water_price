@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:orientation="vertical"
+    android:layout_marginTop="@dimen/base_margin_small"
+    android:layout_marginBottom="@dimen/base_margin_xsmall"
+    android:padding="@dimen/base_padding_small"
+    android:background="@color/white">
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:layout_marginBottom="@dimen/base_margin_small">
+
+        <LinearLayout
+           style="@style/base_layout_m_w_v"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_device_code"
+                style="@style/base_text_content"
+                android:text="@string/device_code"/>
+
+            <LinearLayout
+               style="@style/base_layout_w_w_h"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/base_margin_xsmall">
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@mipmap/info_icon_point"/>
+
+                <TextView
+                    android:id="@+id/tv_device_name"
+                   style="@style/base_text_content.small.grey"
+                    android:layout_marginLeft="@dimen/base_margin_xsmall"
+                    android:text="演示站点"/>
+
+                <ImageView
+                    style="@style/base_icon_wrap"
+                    android:src="@mipmap/info_icon_date"
+                    android:layout_marginLeft="@dimen/base_margin_large"/>
+
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/base_text_content.small.grey"
+                    android:text="2018/01/23 11:00:23"
+                    android:layout_marginLeft="@dimen/base_margin_xsmall"/>
+
+            </LinearLayout>
+            
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_temperature"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall">
+        <TextView
+           style="@style/base_text_content.grey"
+            android:text="@string/temperature"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_temperature"
+                style="@style/base_text_content.grey"
+                android:text="-12.1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall">
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/humidity"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_humidity"
+                style="@style/base_text_content.grey"
+                android:text="-12.1" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_water_level"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/water_level"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_water_level"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_get_up_water_level"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/rain_fall"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_rain_fall"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_get_down_water_level"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/depth"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_depth"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_current_speed"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/current_speed"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_current_speed"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_vmean"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/soilWaterPotential"
+            android:layout_weight="1"/>
+v
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_soil_water_potential"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/soil_ph"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_soil_ph"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/get_up_water_level"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_get_up_water_level"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/signalIntensity"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_signal_intensity"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/atmos"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_atmos"
+                style="@style/base_text_content.grey"
+                android:text="23.34" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <ImageView style="@style/divider_hor_style" />
+
+    <LinearLayout
+        android:id="@+id/ll_total_flow"
+        style="@style/base_layout_m_w_h_cv"
+        android:paddingBottom="@dimen/base_padding_xsmall"
+        android:paddingTop="@dimen/base_padding_xsmall"
+        >
+        <TextView
+            style="@style/base_text_content.grey"
+            android:text="@string/total_flow"
+            android:layout_weight="1"/>
+
+        <LinearLayout
+            style="@style/base_layout_w_w"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/tv_total_flow"
+                style="@style/base_text_content.grey"
+                android:text="32154564" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
