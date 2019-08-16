@@ -28,6 +28,7 @@ import com.amap.api.maps2d.model.MarkerOptions;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.AreaBean;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DataOverviewBean;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
@@ -247,7 +248,12 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     private void getCoordinateById(String areaId,String deviceId){
         MediaType mediaType = MediaType.parse("application/json");
-        String param = "{\"areaId\":\"" + isNullOrEmpty(areaId) + "\",\"deviceId\":\""+isNullOrEmpty(deviceId)+"\"}";
+
+//        String param = "{\"areaId\": \"" + areaId + "\",\"deviceCode\": \"" + keyword + "\",\"deviceTypeId\":\"" + deviceTypeId + "\",\"deviceId\":\"" + deviceId + "\"," +
+//                "\"" + BaseListBeanYL.PAGE_NAME + "\":" + mListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
+
+        String param = "{\"areaId\":\"" + isNullOrEmpty(areaId) + "\",\"deviceId\":\""+isNullOrEmpty(deviceId)+"\","+
+                "\"" + BaseListBeanYL.PAGE_NAME + "\":0,\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":40}";
         RequestBody body = RequestBody.create(mediaType, param);
         OkGoClient.post(mContext, Constants.URL_DEVICE_PAGE, body, new MyHttpListener() {
             @Override
