@@ -26,6 +26,8 @@ import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +43,6 @@ public class ListDataActivity extends BasisActivity {
 
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;
-
     @BindView(R.id.spinner)
     MaterialSpinner spinner;
     @BindView(R.id.edit_search)
@@ -228,56 +229,42 @@ public class ListDataActivity extends BasisActivity {
             TextView tvDeviceName;
             @BindView(R.id.tv_time)
             TextView tvTime;
-            @BindView(R.id.tv_temperature)
-            TextView tvTemperature;
-            @BindView(R.id.tv_humidity)
-            TextView tvHumidity;
-            @BindView(R.id.tv_water_level)
-            TextView tvWaterLevel;
-            @BindView(R.id.tv_rain_fall)
-            TextView tvRainFall;
-            @BindView(R.id.tv_depth)
-            TextView tvDepth;
-            @BindView(R.id.tv_current_speed)
-            TextView tvCurrentSpeed;
-            @BindView(R.id.tv_soil_water_potential)
-            TextView tvSoilWaterPotential;
-            @BindView(R.id.tv_soil_ph)
-            TextView tvSoilPh;
-            @BindView(R.id.tv_get_up_water_level)
-            TextView tvGetUpWaterLevel;
-            @BindView(R.id.tv_signal_intensity)
-            TextView tvSignalIntensity;
-            @BindView(R.id.tv_atmos)
-            TextView tvAtmos;
-            @BindView(R.id.tv_total_flow)
-            TextView tvTotalFlow;
+            @BindView(R.id.recyclerview)
+            RecyclerView recyclerview;
             @BindView(R.id.list_item)
             LinearLayout list_item;
+            MyChildAdapter childAdapter;
+            List<String> keyList;
+            List<String> valueList;
 
 
             public ViewHolder(View view) {
                 super(view);
                 ButterKnife.bind(this, view);
+                LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+                layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerview.setLayoutManager(layoutManager);
             }
 
             public void bind(int position) {
                 DeviceListData listData = mListBean.getList().get(position);
                 tvDeviceCode.setText(getString(R.string.device_code) + "  " + listData.getDeviceCode());
-                tvDeviceName.setText("" + listData.getDeviceName());
-                tvTime.setText(TimeUtils.getTimeLongToStrByFormat(listData.getMessageAt(), "yyyy-MM-dd HH:mm:ss"));
-                tvTemperature.setText((listData.getTemperature() == null) ? "" : listData.getTemperature());
-                tvWaterLevel.setText((listData.getWaterLevel() == null) ? "" : listData.getWaterLevel());
-                tvGetUpWaterLevel.setText((listData.getGateUp() == null) ? "" : listData.getGateUp());
-                tvHumidity.setText((listData.getHumidity() == null) ? "" : listData.getHumidity());
-                tvCurrentSpeed.setText((listData.getFlowVelocity() == null) ? "" : listData.getFlowVelocity());
-                tvSoilWaterPotential.setText((listData.getSoilWaterPotential() == null) ? "" : listData.getSoilWaterPotential());
-                tvRainFall.setText((listData.getRainfall() == null) ? "" : listData.getRainfall());
-                tvTotalFlow.setText((listData.getTotalFlow() == null) ? "" : listData.getTotalFlow());
-                tvSoilPh.setText((listData.getSoilPh() == null) ? "" : listData.getSoilPh());
-                tvDepth.setText((listData.getDepth() == null) ? "" : listData.getDepth());
-                tvSignalIntensity.setText((listData.getSignalIntensity() == null) ? "" : listData.getSignalIntensity());
-                tvAtmos.setText((listData.getAtmos() == null) ? "" : listData.getAtmos());
+                tvDeviceName.setText("" + listData.getTitle());
+                Map<String,String> map = listData.getContent();
+                keyList = new ArrayList<>();
+                valueList = new ArrayList<>();
+                for(Map.Entry<String, String> entry : map.entrySet()){
+                    String key = entry.getKey();
+                    String value = entry.getValue();
+                    if(key.equals("时间")){
+                        tvTime.setText(""+value);
+                    }else {
+                        keyList.add(key);
+                        valueList.add(value);
+                    }
+                }
+                childAdapter = new MyChildAdapter(keyList,valueList);
+                recyclerview.setAdapter(childAdapter);
                 list_item.setTag(position);
             }
 
@@ -291,6 +278,67 @@ public class ListDataActivity extends BasisActivity {
 //                extras.putSerializable("stcd", deviceListData.getStcd());
 //                extras.putSerializable("title", deviceListData.getStnm());
 //                ActivityTool.skipActivity(mContext, VideoInfoActivity.class, extras);
+            }
+        }
+    }
+
+    public class MyChildAdapter extends RecyclerView.Adapter<MyChildAdapter.ViewHolder> {
+
+        List<String> keyList;
+        List<String> valueList;
+
+        public MyChildAdapter() {
+        }
+
+        public MyChildAdapter(List<String> keyList,List<String> valueList) {
+            this.keyList = keyList;
+            this.valueList = valueList;
+        }
+
+        //创建新View，被LayoutManager所调用
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_data_child_item, viewGroup, false);
+            return new ViewHolder(view);
+        }
+
+
+        //将数据与界面进行绑定的操作
+        @Override
+        public void onBindViewHolder(ViewHolder viewHolder, int position) {
+
+            viewHolder.bind(position);
+        }
+
+        //获取数据的数量
+        @Override
+        public int getItemCount() {
+            return keyList == null ? 0 : keyList.size();
+        }
+
+        //自定义的ViewHolder，持有每个Item的的所有界面元素
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            @BindView(R.id.tv_key)
+            TextView tvKey;
+            @BindView(R.id.tv_value)
+            TextView tvValue;
+            @BindView(R.id.iv_line)
+            ImageView lineImg;
+
+
+            public ViewHolder(View view) {
+                super(view);
+                ButterKnife.bind(this, view);
+            }
+
+            public void bind(int position) {
+                tvKey.setText(keyList.get(position));
+                tvValue.setText(valueList.get(position));
+                if(position == keyList.size()-1){
+                    lineImg.setVisibility(View.GONE);
+                }else {
+                    lineImg.setVisibility(View.VISIBLE);
+                }
             }
         }
     }

@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.amap.api.maps2d.model.LatLng;
 import com.ffapp.waterprice.R;
 
+import java.util.Map;
+
 public class DeviceListData extends BasisBean {
 
     /**
@@ -721,5 +723,26 @@ public class DeviceListData extends BasisBean {
     }
 
 
+    /**
+     * 获取流量列表分页数据
+     */
 
+    private String title;
+    private Map<String,String> content;
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public Map<String, String> getContent() {
+        return content;
+    }
+
+    public void setContent(Map<String, String> content) {
+        this.content = content;
+    }
 }
