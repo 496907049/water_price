@@ -146,7 +146,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         tvSiteNum.setText("" + bean.getSumDevice());
         tvOlNum.setText("" + bean.getSumLineDevice());
         tvWaterUser.setText("" + bean.getSumWaterUser());
-        tvWaterNum.setText("" + bean.getSumRatifiedWaterConsumption());
+        tvWaterNum.setText("" + bean.getSumRatifiedWaterConsumption()+ "万m³");
         tvActualNum.setText(bean.getSumRealWaterConsumption() + "万m³");
         tvWaterSurplus.setText("" + bean.getLastWaterConsumption() + "万m³");
     }
