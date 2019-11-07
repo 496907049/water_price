@@ -263,10 +263,10 @@ public class ChartInfoBean extends BasisBean {
         if(resLineColor != 0){
             listColor.add(resLineColor);
         }else{
+            listColor.add(mContext.getResources().getColor(R.color.base_text_red));
             listColor.add(Color.parseColor("#FF1CE2FF"));
             listColor.add(Color.parseColor("#FFAA99FD"));
             listColor.add(Color.parseColor("#FF7AB4FF"));
-            listColor.add(mContext.getResources().getColor(R.color.base_text_red));
             listColor.add(mContext.getResources().getColor(R.color.base_text_yellow));
             listColor.add(mContext.getResources().getColor(R.color.base_text_black));
             listColor.add(mContext.getResources().getColor(R.color.base_text_blue));

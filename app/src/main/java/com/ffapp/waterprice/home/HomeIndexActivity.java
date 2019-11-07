@@ -217,24 +217,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
     @SuppressLint("StaticFieldLeak")
     void refreshData() {
-        new AsyncTask<String, String, Object>() {
-            @Override
-            protected Object doInBackground(String... strings) {
-                try {
-                    Thread.sleep(4000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Object o) {
-                super.onPostExecute(o);
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        }.execute("");
-
         getWeather();
     }
 
@@ -319,6 +301,23 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             @Override
             public void onFinish() {
                 super.onFinish();
+                new AsyncTask<String, String, Object>() {
+                    @Override
+                    protected Object doInBackground(String... strings) {
+                        try {
+                            Thread.sleep(4000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Object o) {
+                        super.onPostExecute(o);
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }.execute("");
             }
         }, 0, WeatherInfoData.class);
     }

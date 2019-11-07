@@ -57,7 +57,6 @@ public class VideoFragment extends BasisFragment {
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 3);
         mRecyclerView.setVerticalScrollBarEnabled(true);
         mRecyclerView.setLayoutManager(layoutManager);
-//        mRecyclerView.setEmptyView(findViewById(R.id.refresh_view));
         mRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
         mRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
