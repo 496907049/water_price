@@ -1,0 +1,37 @@
+密码123456
+
+密钥库类型: JKS
+密钥库提供方: SUN
+
+您的密钥库包含 1 个条目
+
+别名: key0
+创建日期: 2019-11-15
+条目类型: PrivateKeyEntry
+证书链长度: 1
+证书[1]:
+所有者: CN=asd, OU=asd
+发布者: CN=asd, OU=asd
+序列号: 54a5aac2
+有效期开始日期: Fri Nov 15 14:27:31 CST 2019, 截止日期: Tue Nov 08 14:27:31 CST 2044
+证书指纹:
+         MD5: 79:9C:4E:16:26:7D:35:8F:E7:55:BD:36:FE:EB:6C:8D
+         SHA1: FE:08:F1:74:02:28:D2:4D:A0:BC:CB:0E:7D:E0:58:BB:AA:73:AF:9F
+         SHA256: 24:6D:CB:20:1A:63:3F:EE:1D:7A:7D:37:0A:4C:74:66:EE:AF:7D:49:B4:BB:4C:C4:B8:68:A4:4F:C5:F2:D6:F9
+         签名算法名称: SHA256withRSA
+         版本: 3
+
+扩展:
+
+#1: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 81 0A 46 D6 63 DB BD FB   98 A8 39 57 D9 EA F5 11  ..F.c.....9W....
+0010: 9A 93 99 A7                                        ....
+]
+]
+
+
+
+*******************************************
+*******************************************
