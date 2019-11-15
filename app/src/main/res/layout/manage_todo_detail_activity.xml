@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <android.support.v4.widget.NestedScrollView style="@style/base_scroll_style">
+
+        <LinearLayout
+            style="@style/base_layout_m_w_v"
+            android:background="@color/white">
+            <ImageView style="@style/common_list_item_divider" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/base_btn_match.margin"
+                android:layout_marginTop="50dp"
+                android:visibility="visible"
+                android:text="执行"
+                />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</LinearLayout>

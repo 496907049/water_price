@@ -37,8 +37,9 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
-        tools:replace="android:name"
+        tools:replace="android:name,theme"
         android:resizeableActivity="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
@@ -46,10 +47,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/welcomeTheme">
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
 
         </activity>
 
@@ -152,6 +150,31 @@
         </activity>
 
         <activity
+            android:name=".manage.ManageIndexActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".manage.todo.TodoListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".manage.todo.TodoDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".manage.patrol.PatrolListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".manage.patrol.PatrolPostActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
             android:name=".other.WebViewX5Activity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="false"
@@ -190,6 +213,12 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <meta-data
+            android:name="com.tianditu.apikey"
+            android:value="894af949936a104fe9f71ccb7252ac4e" />
+
+        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
     </application>
 

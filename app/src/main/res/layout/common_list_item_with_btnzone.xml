@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        style="@style/list_item_bg_white_round"
+        android:background="@drawable/base_bg_white_round_with_shadow">
+
+        <LinearLayout
+            android:id="@+id/view_title_zone"
+            style="@style/base_layout_m_w_h_cv"
+            android:paddingLeft="@dimen/base_padding_mid"
+            android:paddingTop="@dimen/base_margin_small"
+            android:paddingRight="@dimen/base_padding_mid">
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/base_text_content"
+                android:layout_weight="1.0"
+                android:text="巡检计划"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_status"
+                style="@style/base_text_content.small"
+                android:visibility="gone"
+                android:background="@drawable/base_btn_blue"
+                android:gravity="center"
+                android:paddingLeft="@dimen/base_padding_small"
+                android:paddingTop="@dimen/base_padding_xxsmall"
+                android:paddingRight="@dimen/base_padding_small"
+                android:paddingBottom="@dimen/base_padding_xxsmall"
+                android:layout_marginLeft="@dimen/base_margin_small"
+                android:text="未处理" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            style="@style/base_recyclerview_style"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            ></android.support.v7.widget.RecyclerView>
+        <ImageView
+            android:id="@+id/img_divider_hor"
+            style="@style/divider_hor_style.color"
+            android:layout_marginTop="@dimen/base_margin_small"
+            />
+
+        <LinearLayout
+            android:id="@+id/view_btn_zone"
+            style="@style/base_layout_m_w_h_cv">
+            <TextView
+                android:id="@+id/view_file"
+                style="@style/common_list_btntext"
+                android:layout_weight="1.0"
+                android:text="查看附件" />
+            <ImageView
+                android:id="@+id/img_divider_ver"
+                style="@style/divider_ver_style.color" />
+            <TextView
+                android:id="@+id/view_detail"
+                style="@style/common_list_btntext"
+                android:layout_weight="1.0"
+                android:text="查看详情" />
+            <ImageView
+                android:id="@+id/img_divider_ver3"
+                style="@style/divider_ver_style.color"
+                android:visibility="gone"
+                />
+            <TextView
+                android:id="@+id/view_btn_three"
+                style="@style/common_list_btntext"
+                android:visibility="gone"
+                android:layout_weight="1.0"
+                android:text="查看详情" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -2,8 +2,6 @@ package com.ffapp.waterprice.bean;
 
 import android.app.Activity;
 
-import com.ffapp.waterprice.util.MyUtils;
-
 public class BannerListData extends BasisBean {
 
 	/**
@@ -25,7 +23,7 @@ public class BannerListData extends BasisBean {
 	private String title;
 	private String open_type;
 	private String open_content;
-	private String image_url;
+	private Object image_url;
 
 	public String getTitle() {
 		return title;
@@ -51,17 +49,17 @@ public class BannerListData extends BasisBean {
 		this.open_content = open_content;
 	}
 
-	public String getImage_url() {
+	public Object getImage_url() {
 		return image_url;
 	}
-	public String getImage_url75x40() {
-		return MyUtils.getImageUrlBySize(image_url,750,400);
-	}
-	public String getImage_url75x30() {
-		return MyUtils.getImageUrlBySize(image_url,750,300);
-	}
+//	public String getImage_url75x40() {
+//		return MyUtils.getImageUrlBySize(image_url,750,400);
+//	}
+//	public String getImage_url75x30() {
+//		return MyUtils.getImageUrlBySize(image_url,750,300);
+//	}
 
-	public void setImage_url(String image_url) {
+	public void setImage_url(Object image_url) {
 		this.image_url = image_url;
 	}
 

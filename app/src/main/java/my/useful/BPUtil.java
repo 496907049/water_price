@@ -88,8 +88,8 @@ public class BPUtil {
         for (int i = 0; i < line_number; i++) {
             drawLine(c, paint);
         }
-
-        c.save(Canvas.ALL_SAVE_FLAG);//保存
+        c.save();
+//        c.save(Canvas.ALL_SAVE_FLAG);//保存
         c.restore();//
         return bp;
     }

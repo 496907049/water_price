@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <include layout="@layout/base_top_bar" />
+
+    <ScrollView
+        style="@style/base_scroll_style">
+
+        <LinearLayout
+            style="@style/base_layout_m_w_v"
+            android:layout_marginBottom="@dimen/base_margin_xlarge"
+            android:background="@color/white">
+
+            <ImageView style="@style/detail_item_divider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/view_patrol_result"
+                style="@style/common_detail_edit_item_style">
+
+                <TextView
+                    style="@style/common_detail_edit_item_text_title"
+                    android:text="巡检结论" />
+
+                <TextView
+                    android:id="@+id/text_patrol_result_text"
+                    style="@style/common_detail_edit_item_text_des"
+                    android:hint="请选择"
+                    android:text="" />
+
+                <ImageView style="@style/base_item_img_tag" />
+            </LinearLayout>
+
+            <ImageView style="@style/detail_item_divider" />
+
+            <LinearLayout
+                style="@style/common_detail_edit_item_style"
+                >
+
+                <ImageView
+                    style="@style/base_icon_fitxy"
+                    android:layout_width="5dp"
+                    android:layout_height="15dp"
+                    android:layout_marginRight="@dimen/base_padding_mid"
+                    android:visibility="gone"
+                    android:background="@color/base_color_red"
+                    />
+
+                <TextView
+                    style="@style/common_detail_edit_item_text_title"
+                    android:text="巡检图片" />
+
+            </LinearLayout>
+            <ImageView style="@style/detail_item_divider" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerview_pic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btn_save"
+                style="@style/base_btn_match.margin"
+                android:layout_marginTop="60dp"
+                android:text="@string/app_save"/>
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/base_btn_match.margin"
+                android:layout_marginTop="@dimen/base_margin_mid"
+                android:layout_marginBottom="@dimen/base_margin_large"
+                android:text="@string/app_post"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
