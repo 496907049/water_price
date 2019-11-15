@@ -39,6 +39,13 @@ public class Constants {
 	//获取流量列表分页数据
 	public static String URL_MONITOR_PAGE = URL_API+"api/monitor/page";
 
+	//提交轨迹
+	public static String URL_PATROL_TRACK_ADD =  "http://222.80.32.65:19008/api.php/PatrolTrack/add";
+	//获取巡检记录
+	public static String URL_PATROL_TRACK_INDEX =  "http://222.80.32.65:19008/api.php/PatrolTrack/index";
+	//巡检列表
+	public static String URL_PATROL_LIST =  "http://222.80.32.65:19008/api.php/InspectionPlan/index";
+
 	/**
 	 * 分析接口
 	 */

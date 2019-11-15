@@ -56,10 +56,9 @@
 
                 <TextView
                     style="@style/common_detail_edit_item_text_title"
-                    android:text="巡检图片" />
+                    android:text="上传图片" />
 
             </LinearLayout>
-            <ImageView style="@style/detail_item_divider" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerview_pic"

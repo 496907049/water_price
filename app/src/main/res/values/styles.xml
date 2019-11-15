@@ -403,4 +403,23 @@
     </style>
     <style name="detail_item_divider" parent="@style/divider_hor_style.color">
     </style>
+
+    <style name="map_group_test_image_btn_icon" parent="@style/base_icon_fitxy">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">40dp</item>
+    </style>
+    <style name="map_group_test_image_btn" parent="@style/base_layout_m_w_v_cv">
+        <item name="android:background">@drawable/base_item_shadow_selector</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/base_padding_small</item>
+        <item name="android:paddingBottom">@dimen/base_padding_small</item>
+    </style>
+    <style name="map_group_test_image_btn_text" parent="@style/base_text_content">
+        <item name="android:textColor">@drawable/group_test_img_btn_textcolor</item>
+        <item name="android:layout_marginTop">@dimen/base_margin_small</item>
+    </style>
+
 </resources>

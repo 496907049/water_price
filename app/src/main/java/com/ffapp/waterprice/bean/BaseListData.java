@@ -159,4 +159,29 @@ public class BaseListData extends BasisBean {
 		dataListBean.getList().add(new BaseListData("A站点，A渠系","巡检情况"));
 		return  dataListBean;
 	}
+
+	public BaseListDataListBean getListInfoMaintain(){
+		BaseListDataListBean dataListBean = new BaseListDataListBean();
+		dataListBean.getList().add(new BaseListData("1号路线巡检任务","维护任务"));
+		dataListBean.getList().add(new BaseListData("2019-9-12","开始时间"));
+		dataListBean.getList().add(new BaseListData("张三","执行人"));
+		dataListBean.getList().add(new BaseListData("软件维护","维护类型"));
+		dataListBean.getList().add(new BaseListData("等待执行","执行状态"));
+		return  dataListBean;
+	}
+
+	public BaseListDataListBean getListInfoMaintain_Detail(){
+		BaseListDataListBean dataListBean = new BaseListDataListBean();
+		dataListBean.getList().add(new BaseListData("123","维护名称"));
+		dataListBean.getList().add(new BaseListData("软件运维","维护类型"));
+		dataListBean.getList().add(new BaseListData(" 4号机井站、12号机井站、13号机井站巡检","维护任务内容"));
+		dataListBean.getList().add(new BaseListData("2019-07-19 ~09-19 ","维护时间周期"));
+		dataListBean.getList().add(new BaseListData(" 是多少 ","维护人"));
+		dataListBean.getList().add(new BaseListData("2","维护次数"));
+		dataListBean.getList().add(new BaseListData("  2019-07-19 15:53","维护时间"));
+		dataListBean.getList().add(new BaseListData("维护内容12123","维护内容"));
+		dataListBean.getList().add(new BaseListData("2019-07-19 15:53","结束时间"));
+		dataListBean.getList().add(new BaseListData("2h","维护时长"));
+		return  dataListBean;
+	}
 }

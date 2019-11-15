@@ -47,7 +47,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/welcomeTheme">
 
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
 
@@ -152,10 +155,6 @@
         <activity
             android:name=".manage.ManageIndexActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".manage.todo.TodoListActivity"
@@ -173,6 +172,20 @@
             android:name=".manage.patrol.PatrolPostActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".manage.maintain.MaintainListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".manage.maintain.MaintainDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".manage.MapTianActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <service
+            android:name=".manage.BackService" />
 
         <activity
             android:name=".other.WebViewX5Activity"
@@ -216,7 +229,7 @@
 
         <meta-data
             android:name="com.tianditu.apikey"
-            android:value="894af949936a104fe9f71ccb7252ac4e" />
+            android:value="010729393bbbb9ae47596b932787364e" />
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 

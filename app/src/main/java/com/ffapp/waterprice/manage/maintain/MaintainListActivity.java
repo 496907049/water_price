@@ -23,7 +23,6 @@ import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.common.AdapterCommonListRecylerIn;
 import com.ffapp.waterprice.common.PopFilterCommon;
-import com.ffapp.waterprice.manage.patrol.PatrolPostActivity;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -77,7 +76,7 @@ public class MaintainListActivity extends BasisActivity {
         mRecyclerView.setPullRefreshEnabled(true);
         mRecyclerView.setLoadingMoreEnabled(true);
 
-        setTitle("巡检管理");
+        setTitle("维护管理");
         setTitleLeftButton(null);
 
         findViewById(R.id.view_filter_zone).setVisibility(View.VISIBLE);
@@ -336,7 +335,7 @@ public class MaintainListActivity extends BasisActivity {
 
             public void bind(int position) {
                 BaseListData data = mListBean.getList().get(position);
-                myAdapterListChild.setData(data.getListInfoTodo());
+                myAdapterListChild.setData(data.getListInfoMaintain());
 
                 view_file.setTag(position);
                 list_item.setTag(position);
@@ -350,7 +349,7 @@ public class MaintainListActivity extends BasisActivity {
                 BaseListData data = mListBean.getList().get(position);
                 Bundle extras = new Bundle();
                 extras.putSerializable("data",data);
-                ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class,extras,1);
+                ActivityTool.skipActivityForResult(mContext, MaintainDetailActivity.class,extras,1);
             }
         }
     }
@@ -360,7 +359,7 @@ public class MaintainListActivity extends BasisActivity {
         BaseListData data;
         data = new BaseListData("9", "全部设备");
         mListBean.getList().add(data);
-        data = new BaseListData("1", "未完成任务");
+        data = new BaseListData("1", "当前任务");
         mListBean.getList().add(data);
         data = new BaseListData("2", "历史任务");
         mListBean.getList().add(data);

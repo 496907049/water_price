@@ -18,6 +18,7 @@ import com.ffapp.waterprice.bean.BannerListData;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.home.HomeBaseActivity;
+import com.ffapp.waterprice.manage.maintain.MaintainListActivity;
 import com.ffapp.waterprice.manage.patrol.PatrolListActivity;
 import com.ffapp.waterprice.manage.todo.TodoListActivity;
 import com.ffapp.waterprice.view.GlideImageLoader;
@@ -76,6 +77,7 @@ public class ManageIndexActivity extends HomeBaseActivity {
         listEnter.getList().add(new BaseListData("", "待办任务", R.drawable.alarm_icon_enter_monitor, 0));
         listEnter.getList().add(new BaseListData("", "巡检管理", R.drawable.alarm_icon_enter_alarm, 0));
         listEnter.getList().add(new BaseListData("", "维护管理", R.drawable.alarm_icon_enter_manage, 0));
+        listEnter.getList().add(new BaseListData("", "巡查轨迹", R.drawable.alarm_icon_enter_operate_manage, 0));
         recyclerview_enter.setAdapter(new AdapterEnter(listEnter));
 
         swipeRefreshLayout.setRefreshing(true);
@@ -216,6 +218,12 @@ public class ManageIndexActivity extends HomeBaseActivity {
                         break;
                     case "巡检管理":
                         ActivityTool.skipActivity(mContext, PatrolListActivity.class);
+                        break;
+                    case "维护管理":
+                        ActivityTool.skipActivity(mContext, MaintainListActivity.class);
+                        break;
+                    case "巡查轨迹":
+                        ActivityTool.skipActivity(mContext, MapTianActivity.class);
                         break;
                     default:
                         showToast(R.string.app_building);

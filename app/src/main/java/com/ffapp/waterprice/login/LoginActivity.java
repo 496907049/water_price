@@ -19,7 +19,6 @@ import com.ffapp.waterprice.basis.BasisApp;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
-import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.LoginBean;
 import com.ffapp.waterprice.bean.UserBean;
 import com.ffapp.waterprice.home.HomeTabActivity;
@@ -27,12 +26,7 @@ import com.ffapp.waterprice.jpush.TagAliasOperatorHelper;
 import com.ffapp.waterprice.util.MyUtils;
 import com.ffapp.waterprice.util.StringListChooseActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
-import com.lzy.okgo.OkGo;
 import com.lzy.okgo.callback.StringCallback;
-import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
@@ -42,13 +36,9 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.HttpEntity;
 import my.ActivityTool;
 import my.DialogUtils;
 import my.MySharedPreferences;
-import my.http.HttpRestClient;
-import my.http.MyBaseBean;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
 import okhttp3.MediaType;
@@ -326,11 +316,17 @@ public class LoginActivity extends BasisActivity {
             return;
         }
 
-        HttpParams params = new HttpParams();
-        params.put("username", userName);
-        params.put("password", password);
-        showProgress();
-        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
+        LoginBean loginBean = new LoginBean();
+        loginBean.setUuid("test");
+        loginBean.setUsername("test");
+//        loginBean.save();
+        onLoginSuccess(loginBean);
+
+//        HttpParams params = new HttpParams();
+//        params.put("username", userName);
+//        params.put("password", password);
+//        showProgress();
+//        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
 
     }
 

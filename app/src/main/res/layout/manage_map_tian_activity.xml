@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <include
+        layout="@layout/base_top_bar"
+        />
+
+
+    <com.tianditu.android.maps.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        >
+    </com.tianditu.android.maps.MapView>
+
+        <LinearLayout
+            style="@style/base_layout_m_w_h_cv"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/btn_begin"
+                style="@style/map_group_test_image_btn">
+                <ImageView
+                    android:id="@+id/img_begin"
+                    style="@style/map_group_test_image_btn_icon"
+                    android:src="@drawable/group_test_icon_begin"
+                    />
+                <TextView
+                    style="@style/map_group_test_image_btn_text"
+                    android:text="开始巡查"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_sign"
+                style="@style/map_group_test_image_btn">
+                <ImageView
+                    style="@style/map_group_test_image_btn_icon"
+                    android:src="@drawable/group_test_icon_sign"
+                    />
+                <TextView
+                    style="@style/map_group_test_image_btn_text"
+                    android:text="签到"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_post"
+                style="@style/map_group_test_image_btn">
+                <ImageView
+                    style="@style/map_group_test_image_btn_icon"
+                    android:src="@drawable/group_test_icon_post"
+                    />
+                <TextView
+                    style="@style/map_group_test_image_btn_text"
+                    android:text="险情上报"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/btn_end"
+                style="@style/map_group_test_image_btn">
+                <ImageView
+                    style="@style/map_group_test_image_btn_icon"
+                    android:src="@drawable/group_test_icon_end"
+                    />
+                <TextView
+                    style="@style/map_group_test_image_btn_text"
+                    android:text="结束巡查"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+</LinearLayout>

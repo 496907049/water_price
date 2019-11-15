@@ -116,7 +116,7 @@ public class MaintainDetailActivity extends BasisActivity {
         }
 
 
-        recyclerview_detail.setAdapter(new AdapterCommonDetail(mContext,mListData.getListInfoPatrol_Detail()));
+        recyclerview_detail.setAdapter(new AdapterCommonDetail(mContext,mListData.getListInfoMaintain_Detail()));
     }
 
 
