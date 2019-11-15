@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+     >
+    <LinearLayout
+        style="@style/common_list_des_item_style">
+
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/common_list_des_item_title"
+            android:text="设备编号" />
+
+        <TextView
+            android:id="@+id/text_value"
+            style="@style/common_list_des_item_des"
+            android:text="" />
+    </LinearLayout>
+</RelativeLayout>

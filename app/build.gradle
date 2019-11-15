@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.ffapp.waterprice"
-        minSdkVersion 17
+        minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
         versionName "2.1.0"
@@ -50,6 +50,11 @@ android {
     }
 }
 
+//compileOptions {
+//    sourceCompatibility 1.8
+//    targetCompatibility 1.8
+//}
+
 dependencies {
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
@@ -83,7 +88,8 @@ dependencies {
     //    compile 'com.orhanobut:logger:2.1.1'
     implementation 'com.youth.banner:banner:1.4.10'
 //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
-    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
+//    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
+    api 'com.tencent.tbs.tbssdk:sdk:43697'
     implementation files('libs/Amap_2DMap_V5.2.0_20170627.jar')
     implementation files('libs/AMap_Location_V4.3.0_20181016.jar')
     implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
@@ -110,4 +116,8 @@ dependencies {
     androidTestImplementation 'junit:junit:4.12'//汉字转拼音1
     implementation project(path: ':adressselectorlib')
     implementation project(path: ':MultiSelectlib')
+
+    implementation files('libs/tiandituapi3.0.jar')
+//    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.9'
+
 }

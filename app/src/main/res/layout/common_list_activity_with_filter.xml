@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/base_bg_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/view_title_zone"
+        style="@style/base_layout_m_w_v">
+
+        <include layout="@layout/base_top_bar" />
+
+        <LinearLayout
+            android:id="@+id/view_filter_zone"
+            style="@style/base_layout_m_w_v">
+        <LinearLayout
+            style="@style/base_layout_m_w_h_cv">
+
+            <LinearLayout
+                android:id="@+id/view_filter_1"
+                style="@style/alarm_filter_item">
+
+                <TextView
+                    android:id="@+id/text_filter_1"
+                    style="@style/alarm_filter_item_text"
+                    android:text="" />
+
+                <ImageView style="@style/alarm_filter_item_icon_drop" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/img_divider_ver"
+                style="@style/alarm_filter_item_divider" />
+
+            <LinearLayout
+                android:id="@+id/view_filter_2"
+                style="@style/alarm_filter_item">
+
+                <TextView
+                    android:id="@+id/text_filter_2"
+                    style="@style/alarm_filter_item_text"
+                    android:text="" />
+
+                <ImageView style="@style/alarm_filter_item_icon_drop" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+        <ImageView
+            style="@style/divider_hor_style.color"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/view_search_zone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/top_bar_bg"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <LinearLayout
+            style="@style/base_layout_m_w_h_cv"
+            android:layout_marginLeft="@dimen/base_padding_mid"
+            android:layout_marginTop="@dimen/base_padding_small"
+            android:layout_marginBottom="@dimen/base_padding_small"
+            android:layout_weight="1.0"
+            android:background="@drawable/bg_grey_stroke_roundcorner">
+
+            <ImageView
+                android:id="@+id/img_search"
+                style="@style/base_icon_fitxy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginLeft="@dimen/base_margin_small"
+                android:background="@drawable/base_item_shadow_selector"
+                android:padding="8dp"
+                android:src="@drawable/top_icon_search" />
+
+            <EditText
+                android:id="@+id/edit_search"
+                style="@style/base_edit"
+                android:layout_weight="1.0"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textSize="@dimen/base_textsize_small" />
+
+            <ImageView
+                android:id="@+id/img_cancel"
+                style="@style/base_icon_fitxy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="@dimen/base_margin_small"
+                android:background="@drawable/base_item_shadow_selector"
+                android:padding="5dp"
+                android:src="@drawable/icon_close_white" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_cancel"
+            style="@style/base_title_right_text"
+            android:text="取消" />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0">
+
+        <com.jcodecraeer.xrecyclerview.XRecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <include layout="@layout/base_refresh_view" />
+    </RelativeLayout>
+</LinearLayout>

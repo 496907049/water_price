@@ -231,7 +231,7 @@ public class BasisApp extends MultiDexApplication {
         Glide.with(mContext)
 //				.asBitmap()
                 .load(imgurl)
-                .asBitmap()
+//                .asBitmap()
                 .placeholder(res_default)
 //				.apply(new RequestOptions().placeholder(res_default).error(res_default))
                 .into(imageView);

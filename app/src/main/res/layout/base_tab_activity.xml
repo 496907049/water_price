@@ -131,7 +131,7 @@
                     <TextView
                         android:id="@+id/main_tab_text_4"
                         style="@style/base_tab_item_text"
-                        android:text="我的"
+                        android:text="运维管理"
                         />
                 </LinearLayout>
 
@@ -139,7 +139,6 @@
                 <LinearLayout
                     android:id="@+id/main_tab_but_5"
                     style="@style/base_tab_item"
-                    android:visibility="gone"
                      >
 
                     <ImageView

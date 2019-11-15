@@ -378,4 +378,29 @@
         <item name="android:background">@drawable/detail_edit_bg</item>
         <item name="android:layout_weight">1.0</item>
     </style>
+
+
+    <style name="alarm_filter_item" parent="@style/base_layout_m_w_h_cv" >
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:background">@drawable/base_item_shadow_white_selctor</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingTop">@dimen/base_padding_small_ex</item>
+        <item name="android:paddingBottom">@dimen/base_padding_small_ex</item>
+    </style>
+
+    <style name="alarm_filter_item_icon_drop">
+        <item name="android:layout_width">10dp</item>
+        <item name="android:layout_height">10dp</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="android:src">@drawable/base_icon_droplist</item>
+        <item name="android:layout_marginLeft">@dimen/base_margin_small</item>
+    </style>
+    <style name="alarm_filter_item_text" parent="@style/base_text_content.small">
+    </style>
+    <style name="alarm_filter_item_divider" parent="@style/divider_ver_style.color">
+        <item name="android:layout_marginTop">@dimen/base_padding_small_ex</item>
+        <item name="android:layout_marginBottom">@dimen/base_padding_small_ex</item>
+    </style>
+    <style name="detail_item_divider" parent="@style/divider_hor_style.color">
+    </style>
 </resources>

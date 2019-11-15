@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/list_item"
+    android:orientation="vertical" >
+
+	<LinearLayout
+		style="@style/list_item_bg_white_round"
+		android:background="@drawable/base_bg_white_round_with_shadow"
+		>
+		<LinearLayout
+			style="@style/base_layout_m_w_h_cv"
+			android:paddingLeft="@dimen/base_padding_mid"
+			android:paddingTop="@dimen/base_margin_small"
+			android:paddingRight="@dimen/base_padding_mid">
+
+			<TextView
+				android:id="@+id/text_title"
+				style="@style/base_text_content"
+				android:text="设备档案"
+				android:textStyle="bold" />
+		</LinearLayout>
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/recyclerview"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="@dimen/base_margin_small"
+			/>
+	</LinearLayout>
+</LinearLayout>

@@ -758,4 +758,102 @@
         <item name="android:maxLines">1</item>
         <item name="android:text">@string/app_ok</item>
     </style>
+
+    <style name="common_list_item_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_marginTop">@dimen/base_padding_small</item>
+        <item name="android:layout_marginLeft">@dimen/base_padding_small</item>
+        <item name="android:layout_marginRight">@dimen/base_padding_small</item>
+        <item name="android:layout_marginBottom">@dimen/base_padding_small</item>
+    </style>
+
+    <style name="common_list_des_item_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingLeft">@dimen/base_padding_mid</item>
+        <item name="android:paddingRight">@dimen/base_padding_mid</item>
+        <item name="android:layout_marginTop">@dimen/base_margin_small</item>
+    </style>
+
+    <style name="common_list_des_item_title" parent="@style/base_text_content.small.grey">
+        <item name="android:minWidth">80dp</item>
+        <item name="android:textColor">@color/base_text_grey</item>
+    </style>
+
+    <style name="common_list_des_item_des" parent="@style/base_text_content.small">
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:textColor">@color/base_text_black</item>
+    </style>
+
+    <style name="common_list_item_divider" parent="@style/divider_hor_style.color">
+        <item name="android:background">@color/base_divider</item>
+    </style>
+    <style name="common_list_btntext" parent="@style/base_text_content.small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/base_text_red</item>
+        <item name="android:background">@drawable/base_item_shadow_selector</item>
+        <item name="android:paddingTop">@dimen/base_padding_small</item>
+        <item name="android:paddingBottom">@dimen/base_padding_small</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+
+    <style name="common_detail_edit_item_style" parent="@style/base_layout_m_w_h">
+        <item name="android:paddingLeft">@dimen/base_padding_small</item>
+        <item name="android:paddingRight">@dimen/base_padding_small</item>
+        <item name="android:paddingTop">@dimen/base_padding_xxsmall</item>
+        <item name="android:paddingBottom">@dimen/base_padding_xxsmall</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="common_detail_edit_item_content_zone" parent="@style/base_layout_m_w_h">
+        <item name="android:paddingLeft">@dimen/base_padding_small</item>
+        <item name="android:paddingRight">@dimen/base_padding_small</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="common_detail_edit_item_text_title" parent="@style/base_text_content.grey">
+        <item name="android:minWidth">75dp</item>
+        <item name="android:paddingTop">@dimen/base_margin_small</item>
+        <item name="android:paddingBottom">@dimen/base_margin_small</item>
+    </style>
+
+    <style name="common_detail_edit_item_text_des" parent="@style/base_text_content">
+        <item name="android:layout_marginRight">@dimen/base_margin_small</item>
+        <item name="android:layout_weight">1.0</item>
+        <item name="android:gravity">right</item>
+        <item name="android:paddingTop">@dimen/base_margin_small</item>
+        <item name="android:paddingBottom">@dimen/base_margin_small</item>
+    </style>
+
+    <style name="common_detail_edit_item_img_star" parent="@style/base_text_content">
+        <item name="android:layout_width">14dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/red</item>
+        <item name="android:text">*</item>
+    </style>
+
+    <style name="common_detail_edit_item_edit" parent="@style/base_edit">
+        <item name="android:layout_marginTop">@dimen/base_padding_xxsmall</item>
+        <item name="android:layout_marginBottom">@dimen/base_padding_xxsmall</item>
+        <item name="android:paddingTop">@dimen/base_margin_small</item>
+        <item name="android:paddingBottom">@dimen/base_margin_small</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:gravity">right</item>
+        <item name="android:layout_weight">1.0</item>
+    </style>
+
+    <style name="common_detail_edit_item_img_tag_drop" parent="@style/base_icon_adjust">
+        <item name="android:src">@drawable/base_icon_droplist</item>
+        <item name="android:layout_width">15dp</item>
+        <item name="android:layout_height">15dp</item>
+    </style>
+
 </resources>

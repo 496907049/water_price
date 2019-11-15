@@ -24,4 +24,5 @@
     <color name="loading_bg">#6cb3e2</color>
 
     <color name="video_pause_bg">#22000000</color>
+    <color name="top_bar_bg">#FFFBFBFB</color>
 </resources>

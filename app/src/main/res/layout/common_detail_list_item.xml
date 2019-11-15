@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+     >
+
+    <LinearLayout
+        android:id="@+id/list_item"
+        style="@style/common_detail_edit_item_style">
+        <TextView
+            android:id="@+id/text_name"
+            style="@style/common_detail_edit_item_text_title"
+            android:text="标题" />
+        <TextView
+            android:id="@+id/text_value"
+            style="@style/common_detail_edit_item_text_des"
+            android:text="" />
+
+        <ImageView
+            android:id="@+id/img_tag"
+            style="@style/base_item_img_tag"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+    <ImageView
+        style="@style/common_list_item_divider"/>
+
+</LinearLayout>
