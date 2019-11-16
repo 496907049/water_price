@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -17,34 +18,43 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
-import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
+import com.ffapp.waterprice.bean.ManagePatrolListBean;
+import com.ffapp.waterprice.bean.ManagePatrolListData;
 import com.ffapp.waterprice.common.AdapterCommonListRecylerIn;
+import com.ffapp.waterprice.common.PopFilterCommon;
+import com.ffapp.waterprice.home.HomeBaseActivity;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.loopj.android.http.RequestParams;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
+import my.http.HttpRestClient;
+import my.http.MyHttpListener;
 
 /**
- * 检测管理-检测计划列表
+ * 运维管理-待办任务列表
  */
-public class TodoListActivity extends BasisActivity {
+public class TodoListActivity extends HomeBaseActivity {
 
 
     @BindView(R.id.recyclerview)
     XRecyclerView mRecyclerView;
 
     private MyAdapterList mAdapter;
-    private BaseListDataListBean mListBean;
+    private ManagePatrolListBean mListBean;
 
     @BindView(R.id.edit_search)
     EditText edit_search;
     String searchkey = "";
     boolean isSearch = false;
+
+    BaseListData mParamsStatus;
 
     @Override
     public void initViews() {
@@ -73,12 +83,12 @@ public class TodoListActivity extends BasisActivity {
         mRecyclerView.setLoadingMoreEnabled(true);
 
         setTitle("待办任务");
-        setTitleLeftButton(null);
+//        setTitleLeftButton(null);
 
-        findViewById(R.id.view_filter_zone).setVisibility(View.GONE);
-//        findViewById(R.id.view_filter_2).setVisibility(View.GONE);
-//        findViewById(R.id.img_divider_ver).setVisibility(View.GONE);
-//        ((TextView)findViewById(R.id.text_filter_1)).setHint("全部");
+        findViewById(R.id.view_filter_zone).setVisibility(View.VISIBLE);
+        findViewById(R.id.view_filter_2).setVisibility(View.GONE);
+        findViewById(R.id.img_divider_ver).setVisibility(View.GONE);
+        ((TextView)findViewById(R.id.text_filter_1)).setHint("全部");
 
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -117,7 +127,7 @@ public class TodoListActivity extends BasisActivity {
 
 
         }
-        mListBean = new BaseListDataListBean();
+        mListBean = new ManagePatrolListBean();
 //        BaseListData data;
 //        for(int i = 0,l = 10; i < l ;i ++){
 //            data = new BaseListData("日常巡查","日常巡查",R.drawable.manage_icon_daily,R.drawable.manage_bg_item_1);
@@ -133,15 +143,15 @@ public class TodoListActivity extends BasisActivity {
 //        getFromCache();
     }
 
-    void addFake(){
-        mListBean = new BaseListDataListBean();
-        BaseListData data;
-        for(int i = 0,l = 10; i < l ;i ++){
-            data = new BaseListData("日常巡查","日常巡查");
-            mListBean.getList().add(data);
-        }
-        onListViewComplete();
-    }
+//    void addFake(){
+//        mListBean = new ManagePatrolListBean();
+//        BaseListData data;
+//        for(int i = 0,l = 10; i < l ;i ++){
+//            data = new BaseListData("日常巡查","日常巡查");
+//            mListBean.getList().add(data);
+//        }
+//        onListViewComplete();
+//    }
 
     @OnClick(R.id.img_search)
     void search() {
@@ -199,7 +209,21 @@ public class TodoListActivity extends BasisActivity {
     }
 
     private void getList() {
-        addFake();
+//        addFake();
+        RequestParams params = new RequestParams();
+        HttpRestClient.get(Constants.URL_PATROL_LIST, params, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                mListBean = (ManagePatrolListBean) result;
+                setListView();
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                onListViewComplete();
+            }
+        }, 0, ManagePatrolListBean.class);
+
 //        MyParams params = new MyParams();
 //        showProgress();
 //        if(isSearch){
@@ -330,8 +354,8 @@ public class TodoListActivity extends BasisActivity {
             }
 
             public void bind(int position) {
-                BaseListData data = mListBean.getList().get(position);
-                myAdapterListChild.setData(data.getListInfoTodo());
+                ManagePatrolListData data = mListBean.getList().get(position);
+                myAdapterListChild.setData(data.getListInfo());
 
                 view_file.setTag(position);
                 list_item.setTag(position);
@@ -342,39 +366,39 @@ public class TodoListActivity extends BasisActivity {
             @OnClick({R.id.list_item,R.id.recyclerview,R.id.view_file})
             public void onItemClick(View v) {
                 int position = (int) v.getTag();
-                BaseListData data = mListBean.getList().get(position);
+                ManagePatrolListData data = mListBean.getList().get(position);
                 Bundle extras = new Bundle();
-                extras.putSerializable("data",data);
+                extras.putSerializable("data",new BaseListData());
                 ActivityTool.skipActivityForResult(mContext, TodoDetailActivity.class,extras,1);
             }
         }
     }
-//    @OnClick(R.id.view_filter_1)
-//    void filterDevicetype(View v) {
-//        BaseListDataListBean mListBean = new BaseListDataListBean();
-//        BaseListData data;
-//        data = new BaseListData("9", "全部设备");
-//        mListBean.getList().add(data);
-//        data = new BaseListData("1", "待签字");
-//        mListBean.getList().add(data);
-//        data = new BaseListData("2", "已签字");
-//        mListBean.getList().add(data);
-//
-//        PopFilterCommon popFilter = new PopFilterCommon(mContext, mListBean, new PopFilterCommon.FilterStatusListener() {
-//            @Override
-//            public void onTypeChoose(BaseListData type) {
-//                mParamsStatus = type;
-//                ((TextView) findViewById(R.id.text_filter_1)).setText(mParamsStatus.getName());
-//                mRecyclerView.refresh();
-//            }
-//        });
-//        popFilter
-//                .showAnim(null)
-//                .dismissAnim(null)
-////                .dimEnabled(true)
-//                .anchorView(v)
-//                .gravity(Gravity.BOTTOM)
-//                .show();
-//    }
+    @OnClick(R.id.view_filter_1)
+    void filterDevicetype(View v) {
+        BaseListDataListBean mListBean = new BaseListDataListBean();
+        BaseListData data;
+        data = new BaseListData("9", "全部");
+        mListBean.getList().add(data);
+        data = new BaseListData("1", "未完成任务");
+        mListBean.getList().add(data);
+        data = new BaseListData("2", "历史任务");
+        mListBean.getList().add(data);
+
+        PopFilterCommon popFilter = new PopFilterCommon(mContext, mListBean, new PopFilterCommon.FilterStatusListener() {
+            @Override
+            public void onTypeChoose(BaseListData type) {
+                mParamsStatus = type;
+                ((TextView) findViewById(R.id.text_filter_1)).setText(mParamsStatus.getName());
+                mRecyclerView.refresh();
+            }
+        });
+        popFilter
+                .showAnim(null)
+                .dismissAnim(null)
+//                .dimEnabled(true)
+                .anchorView(v)
+                .gravity(Gravity.BOTTOM)
+                .show();
+    }
 
 }

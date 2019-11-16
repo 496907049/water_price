@@ -228,7 +228,6 @@ public class MaintainDetailActivity extends BasisActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PIC) {
 //            List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 //            for (int i = 0, l = selectList.size(); i < l; i++) {
 //                adapter_post.mListBean.add(new UploadImgData("", selectList.get(i).getPath()));
@@ -245,7 +244,6 @@ public class MaintainDetailActivity extends BasisActivity {
                 }
                 return;
             }
-        }
     }
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {

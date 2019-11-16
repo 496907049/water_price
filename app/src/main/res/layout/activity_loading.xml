@@ -26,7 +26,7 @@
             android:src="@mipmap/icon_loading" />
         <TextView
             style="@style/base_text_content.white"
-            android:text="农业水价改革综合信息监管"
+            android:text="@string/app_name"
             />
     </LinearLayout>
 

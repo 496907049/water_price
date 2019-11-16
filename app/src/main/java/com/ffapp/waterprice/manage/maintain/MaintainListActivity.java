@@ -18,11 +18,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
-import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
 import com.ffapp.waterprice.common.AdapterCommonListRecylerIn;
 import com.ffapp.waterprice.common.PopFilterCommon;
+import com.ffapp.waterprice.home.HomeBaseActivity;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -34,7 +34,7 @@ import my.ActivityTool;
 /**
  * 维护管理-列表
  */
-public class MaintainListActivity extends BasisActivity {
+public class MaintainListActivity extends HomeBaseActivity {
 
 
     @BindView(R.id.recyclerview)
@@ -77,7 +77,7 @@ public class MaintainListActivity extends BasisActivity {
         mRecyclerView.setLoadingMoreEnabled(true);
 
         setTitle("维护管理");
-        setTitleLeftButton(null);
+//        setTitleLeftButton(null);
 
         findViewById(R.id.view_filter_zone).setVisibility(View.VISIBLE);
         findViewById(R.id.view_filter_2).setVisibility(View.GONE);

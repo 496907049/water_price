@@ -44,7 +44,7 @@
                 style="@style/map_group_test_image_btn">
                 <ImageView
                     style="@style/map_group_test_image_btn_icon"
-                    android:src="@drawable/group_test_icon_sign"
+                    android:src="@drawable/manage_icon_calendar_grey"
                     />
                 <TextView
                     style="@style/map_group_test_image_btn_text"
@@ -56,11 +56,11 @@
                 style="@style/map_group_test_image_btn">
                 <ImageView
                     style="@style/map_group_test_image_btn_icon"
-                    android:src="@drawable/group_test_icon_post"
+                    android:src="@drawable/manage_icon_upload_grey"
                     />
                 <TextView
                     style="@style/map_group_test_image_btn_text"
-                    android:text="险情上报"
+                    android:text="巡查上报"
                     />
             </LinearLayout>
             <LinearLayout

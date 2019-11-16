@@ -12,7 +12,9 @@ import android.text.TextUtils;
 
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.LoginBean;
-import com.ffapp.waterprice.map.AMapLocUtil;
+import com.ffapp.waterprice.bean.ManageLocationListBean;
+import com.ffapp.waterprice.map.AndroidLocUtil;
+import com.ffapp.waterprice.map.GPSUtil;
 import com.loopj.android.http.RequestParams;
 
 import java.util.Calendar;
@@ -36,10 +38,12 @@ public class BackService extends Service {
 
 //	private static Timer mTimer;
 //	private final static int TIME_PERIOD = 5000;
-	AMapLocUtil mapLocUtil;
+AndroidLocUtil mapLocUtil;
 
 	private int count_for_upload = 0;
 	private final static int TRIGER_COUNT_UPLOAD = 1 ;//单位每5分钟触发一次 定位和上传.
+
+
 
 	public static final BackService getInstance() {
 
@@ -102,7 +106,10 @@ public class BackService extends Service {
 	void locateAndUpload(){
 		if(LoginBean.getInstance() == null)return;
 		LogUtil.i(tag,"locateAndUpload");
-		if(AMapLocUtil.mLocation != null){
+		if(AndroidLocUtil.mLocation != null){
+			double[] realpoints = GPSUtil.gcj02_To_Gps84(AndroidLocUtil.mLocation.getLatitude(), AndroidLocUtil.mLocation.getLongitude());
+//			ManageLocationListBean.addLocation(realpoints[0],realpoints[1]);
+			ManageLocationListBean.addLocation(AndroidLocUtil.mLocation.getLatitude(),AndroidLocUtil.mLocation.getLongitude());
 			RequestParams params = new RequestParams();
 			params.put("user_id",LoginBean.getInstance() .getUuid());
 			params.put("patrol_data","");
@@ -133,7 +140,7 @@ public class BackService extends Service {
 		if(mapLocUtil != null){
 //			mapLocUtil.stop();
 		}else {
-			mapLocUtil = new AMapLocUtil(this);
+			mapLocUtil = new AndroidLocUtil(this);
 		}
 //		mapLocUtil.setGPSonly(true);
 		mapLocUtil.starLocation();
@@ -145,7 +152,7 @@ public class BackService extends Service {
 		IntentFilter intentFilter = new IntentFilter(ACTION_ONTOUCH);
 		intentFilter.addAction(ACTION_ONE_MINIT);
 		intentFilter.addAction(Intent.ACTION_TIME_TICK);
-		intentFilter.addAction(ACTION_UPDATA_DOWNLOAD);
+		intentFilter.addAction(ACTION_LOCATION_AND_UPLOAD);
 		registerReceiver(myReceiver, intentFilter);
 	}
 
@@ -238,4 +245,9 @@ public class BackService extends Service {
 	}
 
 
+	public static class EventLocation{
+		public EventLocation (){
+
+		}
+	}
 }

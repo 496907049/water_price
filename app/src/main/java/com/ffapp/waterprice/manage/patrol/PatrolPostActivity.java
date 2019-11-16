@@ -19,11 +19,14 @@ import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bumptech.glide.Glide;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
+import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.basis.GlideImageLoaderForimgpickup;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
+import com.ffapp.waterprice.bean.ManagePatrolListData;
 import com.ffapp.waterprice.bean.UploadImgData;
 import com.ffapp.waterprice.common.AdapterCommonDetail;
+import com.loopj.android.http.RequestParams;
 import com.lzy.imagepicker.ImagePicker;
 import com.lzy.imagepicker.bean.ImageItem;
 import com.lzy.imagepicker.ui.ImageGridActivity;
@@ -37,6 +40,8 @@ import butterknife.OnClick;
 import my.DialogUtils;
 import my.LogUtil;
 import my.ViewUtils;
+import my.http.HttpRestClient;
+import my.http.MyHttpListener;
 
 /**
  * 运维管理-巡检-详情
@@ -44,7 +49,7 @@ import my.ViewUtils;
 public class PatrolPostActivity extends BasisActivity {
 
 
-    BaseListData mListData;
+    ManagePatrolListData mListData;
 
 
     @BindView(R.id.recyclerview_pic)
@@ -92,17 +97,36 @@ public class PatrolPostActivity extends BasisActivity {
         imagePicker.setOutPutX(1000);//保存文件的宽度。单位像素
         imagePicker.setOutPutY(1000);//保存文件的高度。单位像素
 
-        mListData = (BaseListData) getIntent().getSerializableExtra("data");
+        mListData = (ManagePatrolListData) getIntent().getSerializableExtra("data");
         if (mListData == null) {
-            mListData = new BaseListData();
-            setViews();
+//            mListData = new ManagePatrolListData();
+//            setViews();
+            finish();
+            return;
         } else {
 //            setTitle("");
             isNew = false;
             setViews();
         }
+        getDetail();
+    }
 
+    void getDetail(){
+        showLoading();
+        RequestParams params = new RequestParams();
+        params.put("id",mListData.getId());
+        HttpRestClient.get(Constants.URL_PATROL_DETAIL, params, new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                mListData = (ManagePatrolListData) result;
+                setViews();
+            }
 
+            @Override
+            public void onFinish(int httpWhat) {
+                hideLoading();
+            }
+        }, 0, ManagePatrolListData.class);
     }
 
     private void setViews() {
@@ -228,7 +252,6 @@ public class PatrolPostActivity extends BasisActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_PIC) {
 //            List<LocalMedia> selectList = PictureSelector.obtainMultipleResult(data);
 //            for (int i = 0, l = selectList.size(); i < l; i++) {
 //                adapter_post.mListBean.add(new UploadImgData("", selectList.get(i).getPath()));
@@ -245,7 +268,6 @@ public class PatrolPostActivity extends BasisActivity {
                 }
                 return;
             }
-        }
     }
 
     public class MyAdapterList extends RecyclerView.Adapter<MyAdapterList.ViewHolder> {

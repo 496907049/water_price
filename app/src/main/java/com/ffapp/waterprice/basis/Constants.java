@@ -45,6 +45,8 @@ public class Constants {
 	public static String URL_PATROL_TRACK_INDEX =  "http://222.80.32.65:19008/api.php/PatrolTrack/index";
 	//巡检列表
 	public static String URL_PATROL_LIST =  "http://222.80.32.65:19008/api.php/InspectionPlan/index";
+	//巡检列表-巡检计划详情
+	public static String URL_PATROL_DETAIL =  "http://222.80.32.65:19008/api.php/InspectionPlan/detail";
 
 	/**
 	 * 分析接口

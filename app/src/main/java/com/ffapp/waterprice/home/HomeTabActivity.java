@@ -17,10 +17,11 @@ import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisApp;
-import com.ffapp.waterprice.data.DataIndexActivity;
-import com.ffapp.waterprice.manage.ManageIndexActivity;
+import com.ffapp.waterprice.manage.MapTianActivity;
+import com.ffapp.waterprice.manage.maintain.MaintainListActivity;
+import com.ffapp.waterprice.manage.patrol.PatrolListActivity;
+import com.ffapp.waterprice.manage.todo.TodoListActivity;
 import com.ffapp.waterprice.user.UserIndexActivity;
-import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.gyf.barlibrary.ImmersionBar;
 import com.loopj.android.http.RequestParams;
@@ -173,7 +174,8 @@ public class HomeTabActivity extends TabActivity implements
                 });
 
 
-        mMainTabBut1.performClick();
+//        mMainTabBut1.performClick();
+        mMainTabBut4.performClick();
 //        Intent intent = getIntent();
 //        String fromLogin = intent.getStringExtra("FROM_LOGIN");
 //        if (fromLogin != null && fromLogin.equals("fromLogin")) {
@@ -235,11 +237,16 @@ public class HomeTabActivity extends TabActivity implements
     }
 
     private void setupIntent() {
-        mIntentFirst = new Intent(this, HomeIndexActivity.class);
+//        mIntentFirst = new Intent(this, HomeIndexActivity.class);
+//        mIntentSecond = new Intent(this, VideoIndexActivity.class);
+//        mIntentThird = new Intent(this, DataIndexActivity.class);
+//        mIntentFourth = new Intent(this, ManageIndexActivity.class);
 
-        mIntentSecond = new Intent(this, VideoIndexActivity.class);
-        mIntentThird = new Intent(this, DataIndexActivity.class);
-        mIntentFourth = new Intent(this, ManageIndexActivity.class);
+        mIntentFirst = new Intent(this, TodoListActivity.class);
+        mIntentSecond = new Intent(this, PatrolListActivity.class);
+        mIntentThird = new Intent(this, MaintainListActivity.class);
+        mIntentFourth = new Intent(this, MapTianActivity.class);
+
         mIntentFive = new Intent(this, UserIndexActivity.class);
 
         mTabHost = getTabHost();

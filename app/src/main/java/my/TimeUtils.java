@@ -2,8 +2,6 @@ package my;
 
 import android.annotation.SuppressLint;
 
-import com.nostra13.universalimageloader.utils.L;
-
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -255,6 +253,27 @@ public class TimeUtils {
         }
         return days;
     }
+
+    /**
+     * 两个时间之间相差距离多少天
+     *
+     * @param time1 时间参数 1：
+     * @param time2 时间参数 2：
+     * @return 相差天数
+     */
+    public static long getDistanceDays(long time1, long time2) {
+        long days = 0;
+            long diff;
+            if (time1 < time2) {
+                diff = time2 - time1;
+            } else {
+                diff = time1 - time2;
+            }
+            days = diff / (1000 * 60 * 60 * 24);
+            LogUtil.i("getDistanceDays--->"+days);
+        return days;
+    }
+
 
     /**
      * 两个时间相差距离多少天多少小时多少分多少秒

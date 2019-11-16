@@ -1,5 +1,7 @@
 package my.http;
 
+import android.text.TextUtils;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
 public class MyBaseBean {
@@ -8,8 +10,8 @@ public class MyBaseBean {
 	private String resultData;
 	
 //	/** 数据 */
-//	@JsonName("result")
-//	private String otherResultData;
+	@JSONField(name="result")
+	private String otherResultData;
 
 	/** 借口反馈信息 */
 	private String statusInfo;
@@ -38,6 +40,10 @@ public class MyBaseBean {
 	
 	@JSONField(name="data")
 	public String getResultData() {
+
+		if(!TextUtils.isEmpty(otherResultData)){
+			return otherResultData;
+		}
 		return resultData;
 	}
 
@@ -70,15 +76,15 @@ public class MyBaseBean {
 		return statusCode == CODE_OK;
 	}
 //	
-//	@JSONField(name="data")  
-//	public String getOtherResultData() {
-//		return otherResultData;
-//	}
-//
-//	@JSONField(name="data")  
-//	public void setOtherResultData(String otherResultData) {
-//		this.otherResultData = otherResultData;
-//	}
+	@JSONField(name="result")
+	public String getOtherResultData() {
+		return otherResultData;
+	}
+
+	@JSONField(name="result")
+	public void setOtherResultData(String otherResultData) {
+		this.otherResultData = otherResultData;
+	}
 
 	public int getErrCode() {
 		return errCode;

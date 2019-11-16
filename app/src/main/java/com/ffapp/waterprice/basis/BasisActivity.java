@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ffapp.waterprice.R;
 import com.gyf.barlibrary.ImmersionBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
-import com.ffapp.waterprice.R;
 
 import cn.jiguang.analytics.android.api.JAnalyticsInterface;
 import my.LogUtil;
@@ -91,6 +91,7 @@ public class BasisActivity extends BaseActivity {
         super.initConfig(savedInstanceState);
         mContext = this;
         initDataS();
+
     }
 
     @Override
@@ -115,6 +116,7 @@ public class BasisActivity extends BaseActivity {
     private void initDataS() {
 //		mLoadingDialog = new LoadingDialog(mContext);
         mLoadingDialog = KProgressHUD.create(mContext, KProgressHUD.Style.SPIN_INDETERMINATE).setSize(75, 75).setCancellable(true);
+
     }
 
     @Override
