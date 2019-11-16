@@ -24,6 +24,14 @@
                 android:visibility="visible"
                 android:text="执行"
                 />
+            <TextView
+                android:id="@+id/btn_post"
+                style="@style/base_btn_match.margin"
+                android:layout_marginTop="@dimen/base_margin_mid"
+                android:layout_marginBottom="@dimen/base_margin_mid"
+                android:visibility="visible"
+                android:text="提交"
+                />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -34,6 +34,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
+import my.MySharedPreferences;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 
@@ -55,6 +56,9 @@ public class TodoListActivity extends HomeBaseActivity {
     boolean isSearch = false;
 
     BaseListData mParamsStatus;
+
+    boolean isExcute = false;
+    boolean isPost = false;
 
     @Override
     public void initViews() {
@@ -210,6 +214,10 @@ public class TodoListActivity extends HomeBaseActivity {
 
     private void getList() {
 //        addFake();
+
+        isExcute = new MySharedPreferences(mContext).getBoolean("excute",false);
+        isPost = new MySharedPreferences(mContext).getBoolean("post",false);
+
         RequestParams params = new RequestParams();
         HttpRestClient.get(Constants.URL_PATROL_LIST, params, new MyHttpListener() {
             @Override
@@ -355,7 +363,7 @@ public class TodoListActivity extends HomeBaseActivity {
 
             public void bind(int position) {
                 ManagePatrolListData data = mListBean.getList().get(position);
-                myAdapterListChild.setData(data.getListInfo());
+                myAdapterListChild.setData(data.getListInfoTODO(isExcute,isPost));
 
                 view_file.setTag(position);
                 list_item.setTag(position);

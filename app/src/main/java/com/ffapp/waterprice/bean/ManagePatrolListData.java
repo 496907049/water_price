@@ -143,6 +143,20 @@ public class ManagePatrolListData extends BasisBean {
 		return  dataListBean;
 	}
 
+	public BaseListDataListBean getListInfoTODO ( boolean isExcute,boolean isPost){
+		BaseListDataListBean dataListBean = new BaseListDataListBean();
+		dataListBean.getList().add(new BaseListData(patrol_name,"任务名称"));
+		dataListBean.getList().add(new BaseListData(TimeUtils.getTimeLongToStrByFormat(begin_time*1000,"yyyy-MM-dd HH:mm:ss"),"开始时间"));
+		dataListBean.getList().add(new BaseListData(duty_person_name,"执行人"));
+		if(!isExcute){
+			dataListBean.getList().add(new BaseListData("等待执行","执行状态"));
+		}else  if(!isPost){
+			dataListBean.getList().add(new BaseListData("正在执行","执行状态"));
+		}else {
+			dataListBean.getList().add(new BaseListData("已执行","执行中"));
+		}
+		return  dataListBean;
+	}
 	public BaseListDataListBean getListInfoPatrol_Detail(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData(patrol_name,"巡检名称"));

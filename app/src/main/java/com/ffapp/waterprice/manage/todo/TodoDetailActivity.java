@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.manage.todo;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import com.ffapp.waterprice.common.AdapterCommonDetail;
 import butterknife.BindView;
 import butterknife.OnClick;
 import my.DialogUtils;
+import my.MySharedPreferences;
 
 /***
  * 运维管理-待办任务-详情
@@ -25,6 +27,8 @@ public class TodoDetailActivity extends BasisActivity {
     @BindView(R.id.recyclerview_detail)
     RecyclerView recyclerview_detail;
 
+    boolean isExcute = false;
+    boolean isPost = false;
 
     @Override
     public void initViews() {
@@ -44,6 +48,10 @@ public class TodoDetailActivity extends BasisActivity {
         mListData = (BaseListData) getIntent().getSerializableExtra("data");
         setViews();
 //        getDetail();
+
+        isExcute = new MySharedPreferences(mContext).getBoolean("excute",false);
+        isPost = new MySharedPreferences(mContext).getBoolean("post",false);
+        setBtnViews();
     }
 
 
@@ -55,8 +63,31 @@ public class TodoDetailActivity extends BasisActivity {
         recyclerview_detail.setAdapter(adapterCommonDetail);
     }
 
+    void setBtnViews(){
+        findViewById(R.id.btn_ok).setEnabled(!isExcute);
+        findViewById(R.id.btn_post).setEnabled(!isPost);
+    }
+
     @OnClick(R.id.btn_ok)
     void okClick(){
-        DialogUtils.DialogOKmsgFinish(mContext,"执行任务成功");
+        if(isExcute)return;
+        isExcute = true;
+        new MySharedPreferences(mContext).putBoolean("excute",true);
+        setBtnViews();
+        DialogUtils.DialogOkMsg(mContext,"执行任务成功");
+        setResult(Activity.RESULT_OK);
+    }
+    @OnClick(R.id.btn_post)
+    void onPostClick(){
+        if(!isExcute){
+            DialogUtils.DialogOkMsg(mContext,"请先执行任务");
+            return;
+        }
+        if(isPost)return;
+        isPost = true;
+        new MySharedPreferences(mContext).putBoolean("post",true);
+        setBtnViews();
+        DialogUtils.DialogOKmsgFinish(mContext,"提交任务成功");
+        setResult(Activity.RESULT_OK);
     }
 }
