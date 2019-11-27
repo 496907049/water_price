@@ -7,11 +7,11 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.ManageLocationListBean;
 import com.ffapp.waterprice.bean.ManageLocationListData;
-import com.ffapp.waterprice.bean.ManagePatrolListBean;
-import com.ffapp.waterprice.home.HomeBaseActivity;
+import com.ffapp.waterprice.bean.ManagePatrolListBeanOld;
 import com.loopj.android.http.RequestParams;
 import com.tianditu.android.maps.GeoPoint;
 import com.tianditu.android.maps.MapView;
@@ -33,7 +33,7 @@ import my.LogUtil;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 
-public class MapTianActivity extends HomeBaseActivity {
+public class MapTianActivity extends BasisActivity {
 
 
     @BindView(R.id.mapview)
@@ -120,7 +120,7 @@ public class MapTianActivity extends HomeBaseActivity {
         HttpRestClient.get(Constants.URL_PATROL_LIST, params, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
-                ManagePatrolListBean listBean = (ManagePatrolListBean) result;
+                ManagePatrolListBeanOld listBean = (ManagePatrolListBeanOld) result;
                 if (listBean.getList().size() <= 0) {
                     DialogUtils.DialogOkMsg(mContext, "当前无巡检任务");
                 } else {
@@ -134,7 +134,7 @@ public class MapTianActivity extends HomeBaseActivity {
             public void onFinish(int httpWhat) {
 
             }
-        }, 0, ManagePatrolListBean.class);
+        }, 0, ManagePatrolListBeanOld.class);
 
 
     }

@@ -27,6 +27,7 @@ import com.ffapp.waterprice.util.MyUtils;
 import com.ffapp.waterprice.util.StringListChooseActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.lzy.okgo.callback.StringCallback;
+import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
@@ -147,8 +148,13 @@ public class LoginActivity extends BasisActivity {
         data = new BaseListData("http://192.168.25.245:8081/", "测试环境");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
-        listServers.getList().add(data);
+//        data = new BaseListData("http://192.168.25.48:5480/", "测试环境");
+//        data.setTenant("app");
+//        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
+//        data.setTenant("test");
+//        data.setAccessKey("e982564349e34384b359b18600aaace4");
 
+        listServers.getList().add(data);
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
         if (dataCurrent != null) {
             text_servername.setText(dataCurrent.getName());
@@ -189,7 +195,11 @@ public class LoginActivity extends BasisActivity {
         if (TextUtils.isEmpty(msp.getUser())) {
             edit_user.setText("root");
             edit_pwd.setText("123456");
+//            edit_user.setText("asdasds");
+//            edit_pwd.setText("123456");
         }
+//        edit_user.setText("asdasds");
+//        edit_pwd.setText("123456");
 
 //        edit_user.setText("admin");
 //        edit_pwd.setText("111111");
@@ -316,17 +326,17 @@ public class LoginActivity extends BasisActivity {
             return;
         }
 
-        LoginBean loginBean = new LoginBean();
-        loginBean.setUuid("test");
-        loginBean.setUsername("test");
+//        LoginBean loginBean = new LoginBean();
+//        loginBean.setUuid("test");
+//        loginBean.setUsername("test");
 //        loginBean.save();
-        onLoginSuccess(loginBean);
+//        onLoginSuccess(loginBean);
 
-//        HttpParams params = new HttpParams();
-//        params.put("username", userName);
-//        params.put("password", password);
-//        showProgress();
-//        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
+        HttpParams params = new HttpParams();
+        params.put("username", userName);
+        params.put("password", password);
+        showProgress();
+        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
 
     }
 

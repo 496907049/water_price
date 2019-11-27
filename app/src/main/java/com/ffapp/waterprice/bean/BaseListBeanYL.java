@@ -58,7 +58,7 @@ public abstract class BaseListBeanYL extends BasisBean {
 	@JSONField(name="count")
 	private int recordsTotal;
 	@JSONField(name="page")
-	private int current_page;
+	private int current_page = INIT_PAGE;
 
 	@JSONField(name="count")
 	public int getRecordsTotal() {

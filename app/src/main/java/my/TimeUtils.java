@@ -1,6 +1,7 @@
 package my;
 
 import android.annotation.SuppressLint;
+import android.text.TextUtils;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -40,6 +41,7 @@ public class TimeUtils {
     }
 
     public static long getLongTimeByFormat(String strTime, String format) {
+        if(TextUtils.isEmpty(strTime))return 0;
         SimpleDateFormat formatS = new SimpleDateFormat(format);
         long time = 0;
         try {
@@ -351,8 +353,8 @@ public class TimeUtils {
     /**
      * 两个时间相差距离多少天多少小时多少分多少秒
      *
-     * @param str1 时间参数 1 格式：1990-01-01 12:00:00
-     * @param str2 时间参数 2 格式：2009-01-01 12:00:00
+     * @param nowtime 时间参数 1 格式：1990-01-01 12:00:00
+     * @param futuretime 时间参数 2 格式：2009-01-01 12:00:00
      * @return String 返回值为：xx天xx小时xx分xx秒
      */
     public static String getDistanceTimeFuture(long nowtime, long futuretime) {
@@ -377,14 +379,20 @@ public class TimeUtils {
         hour = (diff / (60 * 60 * 1000) - day * 24);
         min = ((diff / (60 * 1000)) - day * 24 * 60 - hour * 60);
         sec = (diff / 1000 - day * 24 * 60 * 60 - hour * 60 * 60 - min * 60);
-        return day + "天" + hour + "小时" + min + "分" + sec + "秒";
+        StringBuilder builder = new StringBuilder();
+        if(day !=0){
+            builder.append(day + "天");
+        }
+        builder.append(hour + "小时" + min + "分" + sec + "秒");
+//        return day + "天" + hour + "小时" + min + "分" + sec + "秒";
+        return builder.toString();
     }
 
     /**
      * 两个时间相差距离多少天多少小时多少分多少秒
      *
-     * @param str1 时间参数 1 格式：1990-01-01 12:00:00
-     * @param str2 时间参数 2 格式：2009-01-01 12:00:00
+     * @param nowtime 时间参数 1 格式：1990-01-01 12:00:00
+     * @param futuretime 时间参数 2 格式：2009-01-01 12:00:00
      * @return String 返回值为：xx小时
      */
     public static String getDistanceTimeFutureHour(long nowtime, long futuretime) {

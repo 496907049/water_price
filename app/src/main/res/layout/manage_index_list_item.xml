@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_item"
+    style="@style/base_layout_w_w"
+    android:gravity="center">
+
+    <FrameLayout
+        style="@style/base_layout_w_w"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/img_icon"
+            style="@style/base_icon_adjust"
+            android:layout_width="match_parent"
+            android:src="@drawable/manage_index_bg_blue" />
+
+        <LinearLayout
+            style="@style/base_layout_w_w_v"
+            android:layout_marginLeft="@dimen/base_margin_large"
+            android:layout_marginTop="@dimen/base_margin_large">
+
+            <TextView
+                android:id="@+id/text_title"
+                style="@style/base_text_content.white"
+                android:text="待办任务"
+                android:textSize="@dimen/base_textsize_mid_18"
+                android:textStyle="bold" />
+
+            <ImageView
+                style="@style/base_icon_fitxy"
+                android:layout_width="25dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="@dimen/base_margin_small"
+                android:background="@color/white" />
+        </LinearLayout>
+
+    </FrameLayout>
+</LinearLayout>

@@ -13,22 +13,33 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
+import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.basis.Constants;
+import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.BaseListData;
 import com.ffapp.waterprice.bean.BaseListDataListBean;
+import com.ffapp.waterprice.bean.BasisBean;
 import com.ffapp.waterprice.bean.ManagePatrolListBean;
 import com.ffapp.waterprice.bean.ManagePatrolListData;
+import com.ffapp.waterprice.bean.ManagePatrolListDataOld;
+import com.ffapp.waterprice.bean.ManageTodoListBean;
+import com.ffapp.waterprice.bean.ManageTodoListData;
 import com.ffapp.waterprice.common.AdapterCommonListRecylerIn;
 import com.ffapp.waterprice.common.PopFilterCommon;
-import com.ffapp.waterprice.home.HomeBaseActivity;
+import com.ffapp.waterprice.manage.maintain.MaintainDetailActivity;
+import com.flyco.dialog.listener.OnOperItemClickL;
+import com.flyco.dialog.widget.NormalListDialog;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.loopj.android.http.RequestParams;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,11 +47,14 @@ import butterknife.OnClick;
 import my.ActivityTool;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
+import my.http.MyParams;
+import my.http.OkGoClient;
+import okhttp3.RequestBody;
 
 /**
  * 运维管理-巡检-列表
  */
-public class PatrolListActivity extends HomeBaseActivity {
+public class PatrolListActivity extends BasisActivity {
 
 
     @BindView(R.id.recyclerview)
@@ -83,12 +97,12 @@ public class PatrolListActivity extends HomeBaseActivity {
         mRecyclerView.setLoadingMoreEnabled(true);
 
         setTitle("巡检管理");
-//        setTitleLeftButton(null);
+        setTitleLeftButton(null);
 
         findViewById(R.id.view_filter_zone).setVisibility(View.VISIBLE);
         findViewById(R.id.view_filter_2).setVisibility(View.GONE);
         findViewById(R.id.img_divider_ver).setVisibility(View.GONE);
-        ((TextView)findViewById(R.id.text_filter_1)).setHint("全部");
+        ((TextView)findViewById(R.id.text_filter_1)).setHint("状态");
 
         edit_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -209,57 +223,31 @@ public class PatrolListActivity extends HomeBaseActivity {
     }
 
     private void getList() {
-//        addFake();
-        RequestParams params = new RequestParams();
-        HttpRestClient.get(Constants.URL_PATROL_LIST, params, new MyHttpListener() {
+        MyParams params = new MyParams();
+        params.put("pageNo", mListBean.getNextPage());
+        params.put("pageSize", BaseListBeanYL.PAGE_SIZE);
+
+        if (mParamsStatus != null) {
+            params.put("state", mParamsStatus.getId());
+        }
+
+        RequestBody body = params.getOkGoRequestBody();
+        showProgress();
+        OkGoClient.post(mContext, Constants.URL_MANAGE_PATROL_LIST, body, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
-               mListBean = (ManagePatrolListBean) result;
+                ManagePatrolListBean listBean = (ManagePatrolListBean) result;
+                mListBean.addListBean(listBean);
                 setListView();
             }
 
             @Override
             public void onFinish(int httpWhat) {
+                dismissProgress();
                 onListViewComplete();
             }
         }, 0, ManagePatrolListBean.class);
 
-//        MyParams params = new MyParams();
-//        showProgress();
-//        if(isSearch){
-//            params.put("keyWord", searchkey);
-//        }else {
-//            params.put("keyWord", "");
-//
-//        }
-//        params.put("s_begindate","");
-//        params.put("s_enddate", "");
-//
-//        params.put(BaseListBeanYL.PAGE_NAME, mListBean.getNextPage());
-//        params.put(BaseListBeanYL.PAGE_SIZE_NAME, BaseListBeanYL.PAGE_SIZE);
-//
-//        HttpRestClient.post(Constants.URL_CHECK_CHECKPLAN_LIST, params, new MyHttpListener() {
-//                    @Override
-//                    public void onSuccess(int httpWhat, Object result) {
-//                        CheckPlanListBean bean = (CheckPlanListBean) result;
-//                        mListBean.addListBean(bean);
-//                        setListView();
-//                    }
-//
-//                    @Override
-//                    public void onFailure(int httpWhat, Object result) {
-//                        super.onFailure(httpWhat, result);
-////            mListBean = new ServiceNewListBean();
-//                        setListView();
-//                    }
-//
-//                    @Override
-//                    public void onFinish(int httpWhat) {
-//                        hideLoading();
-//                        onListViewComplete();
-//                    }
-//                },
-//                0, CheckPlanListBean.class);
 
     }
 
@@ -367,21 +355,76 @@ public class PatrolListActivity extends HomeBaseActivity {
             public void onItemClick(View v) {
                 int position = (int) v.getTag();
                 ManagePatrolListData data = mListBean.getList().get(position);
-                Bundle extras = new Bundle();
-                extras.putSerializable("data",data);
-                ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class,extras,1);
+                onMaintainClick(data.getId(),data.getState());
+//                Bundle extras = new Bundle();
+//                extras.putSerializable("data",data);
+//                ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class,extras,1);
             }
         }
     }
+
+    void onMaintainClick(final String taskId,int taskStatus) {
+        if (taskStatus== ManageTodoListData.STATUS_WAIT) {
+            String[] items = new String[]{"执行", "查看"};
+
+            final NormalListDialog dialog = new NormalListDialog(mContext, items);
+            dialog.setTitle("");
+            dialog.title("请选择操作");
+            dialog.setOnOperItemClickL(new OnOperItemClickL() {
+                @Override
+                public void onOperItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Bundle extras = new Bundle();
+                    if (position == 0) {
+                        onMaintainExcute(taskId);
+                    } else {
+                        extras.putSerializable("id", taskId);
+                        extras.putSerializable("edit", false);
+                        ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class, extras, 1);
+                    }
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        } else {
+            Bundle extras = new Bundle();
+            extras.putSerializable("id", taskId);
+            ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class, extras, 1);
+        }
+    }
+    void onMaintainExcute(final String  taskId){
+        MyParams params = new MyParams();
+        params.put("id", taskId);
+        params.put("state", ManageTodoListData.STATUS_DOING);
+        params.put("executionTime", Calendar.getInstance().getTimeInMillis());
+        showProgress();
+        OkGoClient.post(mContext, Constants.URL_MANAGE_PATROL_UPDATE, params.getOkGoRequestBody(), new MyHttpListener() {
+            @Override
+            public void onSuccess(int httpWhat, Object result) {
+                Bundle extras = new Bundle();
+                extras.putSerializable("id", taskId);
+                ActivityTool.skipActivityForResult(mContext, PatrolPostActivity.class, extras, 1);
+                mRecyclerView.refresh();
+            }
+
+            @Override
+            public void onFinish(int httpWhat) {
+                dismissProgress();
+            }
+        }, 0, BasisBean.class);
+    }
+
+
     @OnClick(R.id.view_filter_1)
     void filterDevicetype(View v) {
         BaseListDataListBean mListBean = new BaseListDataListBean();
         BaseListData data;
-        data = new BaseListData("9", "全部");
+        data = new BaseListData("", "全部");
         mListBean.getList().add(data);
-        data = new BaseListData("1", "未完成任务");
+        data = new BaseListData("3", "待执行");
         mListBean.getList().add(data);
-        data = new BaseListData("2", "历史任务");
+        data = new BaseListData("4", "执行中");
+        mListBean.getList().add(data);
+        data = new BaseListData("5", "已完成");
         mListBean.getList().add(data);
 
         PopFilterCommon popFilter = new PopFilterCommon(mContext, mListBean, new PopFilterCommon.FilterStatusListener() {
@@ -400,5 +443,6 @@ public class PatrolListActivity extends HomeBaseActivity {
                 .gravity(Gravity.BOTTOM)
                 .show();
     }
+
 
 }

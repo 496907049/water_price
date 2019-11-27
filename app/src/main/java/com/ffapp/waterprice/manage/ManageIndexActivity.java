@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.manage;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -22,6 +23,7 @@ import com.ffapp.waterprice.manage.maintain.MaintainListActivity;
 import com.ffapp.waterprice.manage.patrol.PatrolListActivity;
 import com.ffapp.waterprice.manage.todo.TodoListActivity;
 import com.ffapp.waterprice.view.GlideImageLoader;
+import com.ffapp.waterprice.view.RecyclerSpace;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerListener;
@@ -56,8 +58,10 @@ public class ManageIndexActivity extends HomeBaseActivity {
         super.initViews();
         setContentView(R.layout.manage_index_activity);
 
-        recyclerview_enter.setLayoutManager(new GridLayoutManager(mContext, 4));
+        setTitle("运维管理");
 
+        recyclerview_enter.setLayoutManager(new GridLayoutManager(mContext, 2));
+        recyclerview_enter.addItemDecoration(new RecyclerSpace(20, Color.parseColor("#ffffff")));
         swipeRefreshLayout.setColorSchemeResources(R.color.base_blue, R.color.base_text_green);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -74,17 +78,21 @@ public class ManageIndexActivity extends HomeBaseActivity {
 
 
         BaseListDataListBean listEnter = new BaseListDataListBean();
-        listEnter.getList().add(new BaseListData("", "待办任务", R.drawable.alarm_icon_enter_monitor, 0));
-        listEnter.getList().add(new BaseListData("", "巡检管理", R.drawable.alarm_icon_enter_alarm, 0));
-        listEnter.getList().add(new BaseListData("", "维护管理", R.drawable.alarm_icon_enter_manage, 0));
-        listEnter.getList().add(new BaseListData("", "巡查轨迹", R.drawable.alarm_icon_enter_operate_manage, 0));
+        listEnter.getList().add(new BaseListData("", "待办任务", R.drawable.manage_index_bg_blue, 0));
+        listEnter.getList().add(new BaseListData("", "巡检管理", R.drawable.manage_index_bg_green, 0));
+        listEnter.getList().add(new BaseListData("", "维护管理", R.drawable.manage_index_bg_yellow, 0));
+//        listEnter.getList().add(new BaseListData("", "巡查轨迹", R.drawable.alarm_icon_enter_operate_manage, 0));
         recyclerview_enter.setAdapter(new AdapterEnter(listEnter));
 
         swipeRefreshLayout.setRefreshing(true);
         refreshData();
     }
 
-
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getImmersionBar().statusBarDarkFont(true).init();
+    }
     void refreshData() {
 //        getNews();
         getBanner();
@@ -94,10 +102,10 @@ public class ManageIndexActivity extends HomeBaseActivity {
     private void getBanner() {
 
         mBannerList = new BannerListBean();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1; i++) {
             BannerListData bannerListData = new BannerListData();
 //            bannerListData.setImage_url("http://img0.imgtn.bdimg.com/it/u=3215222857,1774393785&fm=26&gp=0.jpg");
-            bannerListData.setImage_url(R.drawable.test_alarm_img_banner);
+            bannerListData.setImage_url(R.drawable.home_main_bg_map);
             mBannerList.getList().add(bannerListData);
         }
         setBannerView();
@@ -169,7 +177,7 @@ public class ManageIndexActivity extends HomeBaseActivity {
         //创建新View，被LayoutManager所调用
         @Override
         public AdapterEnter.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.manage_enter_grid_item, viewGroup, false);
+            View view = LayoutInflater.from(mContext).inflate(R.layout.manage_index_list_item, viewGroup, false);
             return new AdapterEnter.ViewHolder(view);
         }
 
@@ -191,8 +199,8 @@ public class ManageIndexActivity extends HomeBaseActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             @BindView(R.id.list_item)
             public View list_item;
-            @BindView(R.id.text_name)
-            public TextView text_name;
+            @BindView(R.id.text_title)
+            public TextView text_title;
             @BindView(R.id.img_icon)
             public ImageView img_icon;
 
@@ -203,7 +211,7 @@ public class ManageIndexActivity extends HomeBaseActivity {
 
             public void bind(int position) {
                 BaseListData data = mListBean.getList().get(position);
-                text_name.setText(data.getName());
+                text_title.setText(data.getName());
                 img_icon.setImageResource(data.getResid());
                 list_item.setTag(position);
             }

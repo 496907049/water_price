@@ -1,5 +1,7 @@
 package com.ffapp.waterprice.bean;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class BaseListData extends BasisBean {
 
 	/**
@@ -123,6 +125,7 @@ public class BaseListData extends BasisBean {
 		isClick = click;
 	}
 
+	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoTodo(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData("1号路线巡检任务","任务名称"));
@@ -131,6 +134,7 @@ public class BaseListData extends BasisBean {
 		dataListBean.getList().add(new BaseListData("等待执行","执行状态"));
 		return  dataListBean;
 	}
+	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoTodo_Detail(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData("1号路线巡检任务","任务名称"));
@@ -145,6 +149,7 @@ public class BaseListData extends BasisBean {
 		return  dataListBean;
 	}
 
+	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoPatrol_Detail(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData("123","巡检名称"));
@@ -160,6 +165,7 @@ public class BaseListData extends BasisBean {
 		return  dataListBean;
 	}
 
+	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoMaintain(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData("1号路线巡检任务","维护任务"));
@@ -170,6 +176,7 @@ public class BaseListData extends BasisBean {
 		return  dataListBean;
 	}
 
+	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoMaintain_Detail(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData("123","维护名称"));

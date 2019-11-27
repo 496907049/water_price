@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">智能水资源综合管理平台</string>
+<!--    <string name="app_name">智能水资源综合管理平台</string>-->
+    <string name="app_name">农业水价</string>
+    <string name="loading_name">农业水价改革综合信息监管</string>
     <string name="login_hint_mobile">手机号码</string>
     <string name="login_hint_pwd">登录密码</string>
     <string name="regist_pwd_hint">设置登录密码</string>

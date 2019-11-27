@@ -39,6 +39,23 @@ public class Constants {
 	//获取流量列表分页数据
 	public static String URL_MONITOR_PAGE = URL_API+"api/monitor/page";
 
+	//运维管理-获取待办任务分页数据
+	public static String URL_MANAGE_TODO_LIST  = URL_API+"api/todo/page";
+	//运维管理-获取巡检任务分页数据
+	public static String URL_MANAGE_PATROL_LIST  = URL_API+"api/patrol/page";
+	//运维管理-获取运维任务分页数据
+	public static String URL_MANAGE_MAINTAIN_LIST  = URL_API+"api/maintenance/page";
+	//运维管理-获取巡检任务详情
+	public static String URL_MANAGE_PATROL_DETAIL  = URL_API+"api/patrol/";
+	//运维管理-编辑、保存、执行巡检任务
+	public static String URL_MANAGE_PATROL_UPDATE = URL_API+"api/patrol/update";
+	//运维管理-获取维保任务详情
+	public static String URL_MANAGE_MAINTAIN_DETAIL = URL_API+"api/maintenance/";
+	//运维管理-编辑、保存、执行维保-运维-任务
+	public static String URL_MANAGE_MAINTAIN_UPDATE = URL_API+"api/maintenance/update";
+
+
+
 	//提交轨迹
 	public static String URL_PATROL_TRACK_ADD =  "http://222.80.32.65:19008/api.php/PatrolTrack/add";
 	//获取巡检记录

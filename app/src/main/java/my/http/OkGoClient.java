@@ -81,6 +81,8 @@ public class OkGoClient {
                 .cacheTime(5000)
                 .headers("Authorization","Bearer\""+LoginBean.getUserToken()+"\"")
                 .execute(new OkGoCallBack(mListener,what,class1));
+
+        LogUtil.i(tag,"Bearer\""+LoginBean.getUserToken()+"\"");
     }
 
     public static void post(Context context, String url,

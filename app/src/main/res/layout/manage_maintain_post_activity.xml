@@ -25,13 +25,37 @@
                 style="@style/base_layout_m_w_v"
                 android:visibility="gone"
                 >
+
+                <LinearLayout
+                    android:id="@+id/view_replace_machine_zone"
+                    style="@style/common_detail_edit_item_style"
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        style="@style/common_detail_edit_item_text_title"
+                        android:text="替换器件" />
+
+                    <EditText
+                        android:id="@+id/edit_replace_machine"
+                        style="@style/common_detail_edit_item_edit"
+                        android:background="@drawable/detail_edit_bg"
+                        android:hint="请填写替换器件"
+                        android:text="" />
+
+                </LinearLayout>
+                <ImageView
+                    android:id="@+id/divider_replace_machine"
+                    style="@style/detail_item_divider"
+                    android:visibility="gone"
+                    />
                 <LinearLayout
                     android:id="@+id/view_patrol_time"
                     style="@style/common_detail_edit_item_style">
 
                     <TextView
                         style="@style/common_detail_edit_item_text_title"
-                        android:text="巡检时间" />
+                        android:text="维护时间" />
 
                     <TextView
                         android:id="@+id/text_patrol_time_text"
@@ -43,67 +67,28 @@
                 </LinearLayout>
 
 
-
-                <ImageView style="@style/detail_item_divider" />
-                <LinearLayout
-                    style="@style/common_detail_edit_item_style"
-                    >
-
-                    <TextView
-                        style="@style/common_detail_edit_item_text_title"
-                        android:text="巡检地址" />
-
-                    <EditText
-                        android:id="@+id/edit_address"
-                        style="@style/common_detail_edit_item_edit"
-                        android:background="@drawable/detail_edit_bg"
-                        android:hint="请填写巡检地址"
-                        android:gravity="left"
-                        android:text="" />
-
-                </LinearLayout>
-
-
-
                 <ImageView style="@style/detail_item_divider" />
 
                 <LinearLayout
                     style="@style/common_detail_edit_item_style"
-                    >
+                    android:gravity="top">
 
                     <TextView
                         style="@style/common_detail_edit_item_text_title"
-                        android:text="巡检情况" />
+                        android:text="维护情况" />
 
                     <EditText
                         android:id="@+id/edit_content"
                         style="@style/common_detail_edit_item_edit"
                         android:background="@drawable/detail_edit_bg"
                         android:gravity="top|left"
-                        android:hint="请填写巡检情况"
+                        android:hint="请填写维护情况"
+                        android:minLines="2"
                         android:text="" />
 
                 </LinearLayout>
-                <ImageView
-                    style="@style/detail_item_divider"
-                    />
-                <LinearLayout
-                    android:id="@+id/view_patrol_result"
-                    style="@style/common_detail_edit_item_style">
 
-                    <TextView
-                        style="@style/common_detail_edit_item_text_title"
-                        android:text="巡检结论" />
 
-                    <TextView
-                        android:id="@+id/text_patrol_result_text"
-                        style="@style/common_detail_edit_item_text_des"
-                        android:hint="请选择"
-                        android:text="" />
-
-                    <ImageView style="@style/base_item_img_tag" />
-                </LinearLayout>
-                <ImageView style="@style/detail_item_divider" />
                 <TextView
                     android:id="@+id/btn_save"
                     style="@style/base_btn_match.margin"
