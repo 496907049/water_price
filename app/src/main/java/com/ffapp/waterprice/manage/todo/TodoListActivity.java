@@ -101,8 +101,8 @@ public class TodoListActivity extends BasisActivity {
         setTitleLeftButton(null);
 
         findViewById(R.id.view_filter_zone).setVisibility(View.VISIBLE);
-        findViewById(R.id.view_filter_2).setVisibility(View.GONE);
-        findViewById(R.id.img_divider_ver).setVisibility(View.GONE);
+        findViewById(R.id.view_filter_2).setVisibility(View.VISIBLE);
+        findViewById(R.id.img_divider_ver).setVisibility(View.VISIBLE);
         ((TextView) findViewById(R.id.text_filter_1)).setHint("类型");
         ((TextView) findViewById(R.id.text_filter_2)).setHint("状态");
 
@@ -229,10 +229,13 @@ public class TodoListActivity extends BasisActivity {
         MyParams params = new MyParams();
         params.put("pageNo", mListBean.getNextPage());
         params.put("pageSize", BaseListBeanYL.PAGE_SIZE);
-//        if (mParamsStatus != null) {
-//            params.put("state", mParamsStatus.getId());
-//        }
-        params.put("state", ManageTodoListData.STATUS_WAIT);
+        if (mParamsStatus != null) {
+            params.put("state", mParamsStatus.getId());
+        }else {
+            params.put("state","3,4");
+
+        }
+//        params.put("state", ManageTodoListData.STATUS_WAIT);
         if (mParamsType != null) {
             params.put("type", mParamsType.getId());
         }
@@ -508,14 +511,14 @@ public class TodoListActivity extends BasisActivity {
     void filterStatusClick(View v) {
         BaseListDataListBean mListBean = new BaseListDataListBean();
         BaseListData data;
-        data = new BaseListData("", "全部");
+        data = new BaseListData("3,4", "全部");
         mListBean.getList().add(data);
         data = new BaseListData("3", "待执行");
         mListBean.getList().add(data);
         data = new BaseListData("4", "执行中");
         mListBean.getList().add(data);
-        data = new BaseListData("5", "已完成");
-        mListBean.getList().add(data);
+//        data = new BaseListData("5", "已完成");
+//        mListBean.getList().add(data);
 
         PopFilterCommon popFilter = new PopFilterCommon(mContext, mListBean, new PopFilterCommon.FilterStatusListener() {
             @Override

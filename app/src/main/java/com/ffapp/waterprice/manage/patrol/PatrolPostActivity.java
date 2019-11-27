@@ -59,6 +59,7 @@ public class PatrolPostActivity extends BasisActivity {
     @Override
     public void initViews() {
         // TODO Auto-generated method stub
+        setDefautTrans(false);
         super.initViews();
         setContentView(R.layout.manage_patrol_post_activity);
         setTitle("巡检管理");

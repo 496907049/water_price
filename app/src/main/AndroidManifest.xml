@@ -162,7 +162,9 @@
         </activity>
         <activity
             android:name=".manage.todo.TodoDetailActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
         </activity>
         <activity
             android:name=".manage.patrol.PatrolListActivity"
@@ -170,7 +172,9 @@
         </activity>
         <activity
             android:name=".manage.patrol.PatrolPostActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
         </activity>
         <activity
             android:name=".manage.maintain.MaintainListActivity"
@@ -178,7 +182,9 @@
         </activity>
         <activity
             android:name=".manage.maintain.MaintainDetailActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"
+            >
         </activity>
         <activity
             android:name=".manage.MapTianActivity"
@@ -230,6 +236,12 @@
         <meta-data
             android:name="com.tianditu.apikey"
             android:value="010729393bbbb9ae47596b932787364e" />
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="c7209b0249868118b8e6906b2dada13e" />
+        <!-- 定位需要的服务 使用2.0的定位需要加上这个 -->
+        <service android:name="com.amap.api.location.APSService"></service>
 
         <uses-library android:name="org.apache.http.legacy" android:required="false" />
 

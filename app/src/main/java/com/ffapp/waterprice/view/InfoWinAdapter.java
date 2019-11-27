@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.model.LatLng;
-import com.amap.api.maps2d.model.Marker;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.ffapp.waterprice.R;
 
 

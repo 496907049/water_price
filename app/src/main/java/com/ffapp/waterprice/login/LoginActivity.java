@@ -119,10 +119,10 @@ public class LoginActivity extends BasisActivity {
 
     @Override
     public void initViews() {
-        super.initViews();
         setDefautTrans(false);
+        super.initViews();
         setContentView(R.layout.login_activity);
-        setTitleBg(R.drawable.base_transparent);
+//        setTitleBg(R.drawable.base_transparent);
         setTitle("");
         edit_pwd.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -148,13 +148,14 @@ public class LoginActivity extends BasisActivity {
         data = new BaseListData("http://192.168.25.245:8081/", "测试环境");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
-//        data = new BaseListData("http://192.168.25.48:5480/", "测试环境");
-//        data.setTenant("app");
-//        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
+        listServers.getList().add(data);
+        data = new BaseListData("http://192.168.25.48:5480/", "测试环境-钟-电脑");
+        data.setTenant("app");
+        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
 //        data.setTenant("test");
 //        data.setAccessKey("e982564349e34384b359b18600aaace4");
-
         listServers.getList().add(data);
+
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
         if (dataCurrent != null) {
             text_servername.setText(dataCurrent.getName());

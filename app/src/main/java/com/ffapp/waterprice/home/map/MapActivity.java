@@ -1,5 +1,8 @@
 package com.ffapp.waterprice.home.map;
 
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,14 +14,16 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.CameraUpdateFactory;
-import com.amap.api.maps2d.LocationSource;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.LatLngBounds;
-import com.amap.api.maps2d.model.Marker;
-import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
 import com.ffapp.waterprice.bean.DeviceListBean;
@@ -65,6 +70,9 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
             finish();
         }
         mDeviceListBean = (DeviceListBean) extras.getSerializable("mDeviceListBean");
+        if(mDeviceListBean == null){
+            mDeviceListBean = new DeviceListBean();
+        }
         initMap();
         setMapView();
     }
@@ -83,6 +91,24 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
             });// 设置amap加载成功事件监听器
             //去掉高德地图右下角隐藏的缩放按钮
             aMap.getUiSettings().setZoomControlsEnabled(false);
+            aMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+            // 自定义系统定位小蓝点
+            MyLocationStyle myLocationStyle = new MyLocationStyle();
+//            myLocationStyle.radiusFillColor(getResources().getColor(R.color.blue));
+            myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式
+//            myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.map_location_marker));
+//            myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.map_location_marker)));
+            aMap.setMyLocationStyle(myLocationStyle);
+            aMap.setLocationSource(this);// 设置定位监听
+            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+
+//            activate(new OnLocationChangedListener() {
+//                @Override
+//                public void onLocationChanged(Location location) {
+//
+//                }
+//            });
         }
     }
 
@@ -97,6 +123,7 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
                     .fromResource(DeviceListData.getMapMarkerResid()))
                     .position(DeviceListData.getLatlng())
                     .title(DeviceListData.getStnm())
+                    .zIndex(-1)
                     .snippet(DeviceListData.getStlc());
             Marker marker = aMap.addMarker(markerOption);
             marker.setObject(DeviceListData);
@@ -107,6 +134,7 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
         aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
     }
 
+    boolean isFirstLocation = true;
     /**
      * 定位成功后回调函数
      */
@@ -116,6 +144,10 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+                if(isFirstLocation){
+                    aMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude())));
+                    isFirstLocation = false;
+                }
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);
@@ -179,6 +211,47 @@ public class MapActivity extends BasisActivity implements AMapLocationListener, 
             case R.id.img_back:
                 finish();
                 break;
+        }
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mapView.onPause();
+        deactivate();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+        if (null != mlocationClient) {
+            mlocationClient.onDestroy();
         }
     }
 

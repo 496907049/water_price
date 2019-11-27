@@ -2,7 +2,7 @@ package com.ffapp.waterprice.bean;
 
 import android.text.TextUtils;
 
-import com.amap.api.maps2d.model.LatLng;
+import com.amap.api.maps.model.LatLng;
 import com.ffapp.waterprice.R;
 
 import java.util.Map;

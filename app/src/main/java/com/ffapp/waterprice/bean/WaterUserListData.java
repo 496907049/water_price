@@ -14,7 +14,7 @@ import java.util.List;
 
 public class WaterUserListData extends BasisBean {
     @JSONField(name = "list")
-    private List<DataBean> data;
+    private List<DataBean> data = new ArrayList<>();
 
     public List<DataBean> getData() {
         return data;

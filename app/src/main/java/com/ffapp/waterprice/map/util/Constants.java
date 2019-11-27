@@ -1,6 +1,7 @@
 package com.ffapp.waterprice.map.util;
 
-import com.amap.api.maps2d.model.LatLng;
+
+import com.amap.api.maps.model.LatLng;
 
 public class Constants {
 

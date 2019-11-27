@@ -52,6 +52,7 @@ public class MaintainDetailActivity extends BasisActivity {
     @Override
     public void initViews() {
         // TODO Auto-generated method stub
+        setDefautTrans(false);
         super.initViews();
         setContentView(R.layout.manage_maintain_post_activity);
         setTitle("运维任务详情");

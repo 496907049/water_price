@@ -54,6 +54,7 @@ public class TimeUtils {
     }
 
     public static String getTimeLongToStrByFormat(long time, String fomatStr) {
+        if(time == 0)return "";
         SimpleDateFormat format = new SimpleDateFormat(fomatStr);
         // Long time = new Long(new Date().getTime());
         String d = format.format(time);

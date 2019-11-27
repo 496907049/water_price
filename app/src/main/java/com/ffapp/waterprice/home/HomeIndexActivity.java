@@ -17,14 +17,16 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps2d.AMap;
-import com.amap.api.maps2d.CameraUpdateFactory;
-import com.amap.api.maps2d.LocationSource;
-import com.amap.api.maps2d.MapView;
-import com.amap.api.maps2d.model.BitmapDescriptorFactory;
-import com.amap.api.maps2d.model.LatLngBounds;
-import com.amap.api.maps2d.model.Marker;
-import com.amap.api.maps2d.model.MarkerOptions;
+import com.amap.api.maps.AMap;
+import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
+import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.Constants;
 import com.ffapp.waterprice.bean.AreaBean;
@@ -51,6 +53,7 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.OnClick;
 import my.ActivityTool;
+import my.LogUtil;
 import my.TimeUtils;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
@@ -90,7 +93,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     private AMap aMap;
     @BindView(R.id.map_view)
     MapView mapView;
-    private OnLocationChangedListener mListener;
+    private LocationSource.OnLocationChangedListener mListener;
     private AMapLocationClient mlocationClient;
     private AMapLocationClientOption mLocationOption;
 
@@ -186,6 +189,17 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             });// 设置amap加载成功事件监听器
             //去掉高德地图右下角隐藏的缩放按钮
             aMap.getUiSettings().setZoomControlsEnabled(false);
+            aMap.getUiSettings().setMyLocationButtonEnabled(true);
+
+            // 自定义系统定位小蓝点
+            MyLocationStyle myLocationStyle = new MyLocationStyle();
+//            myLocationStyle.radiusFillColor(getResources().getColor(R.color.blue));
+            myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE_NO_CENTER);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式
+//            myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.map_location_marker));
+//            myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.map_location_marker)));
+            aMap.setMyLocationStyle(myLocationStyle);
+            aMap.setLocationSource(this);// 设置定位监听
+            aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
         }
     }
 
@@ -209,10 +223,45 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
     }
 
 
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mapView.onPause();
+        deactivate();
+    }
+
+    /**
+     * 方法必须重写
+     */
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mapView.onSaveInstanceState(outState);
+    }
+
+    /**
+     * 方法必须重写
+     */
     @Override
     protected void onDestroy() {
         super.onDestroy();
-//        EventBus.getDefault().unregister(this);
+        mapView.onDestroy();
+        if (null != mlocationClient) {
+            mlocationClient.onDestroy();
+        }
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -270,6 +319,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                         .fromResource(deviceListData.getMapMarkerResid()))
                         .position(deviceListData.getLatlng())
                         .title(deviceListData.getStnm())
+                        .zIndex(-1)
                         .snippet(deviceListData.getStlc());
                 Marker marker = aMap.addMarker(markerOption);
                 marker.setObject(deviceListData);
@@ -278,6 +328,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         }
         LatLngBounds bounds = builder.build();
         aMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 15));
+
     }
 
     void getWeather() {    //获取天气
@@ -285,6 +336,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         OkGoClient.get(mContext, Constants.URL_HOME_WEATHER, params, new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
+                LogUtil.i("getWeather--onSuccess-->"+response.body());
                 WeatherInfoData weatherData = JSON.parseObject(response.body(), WeatherInfoData.class);
                 setWeatherView(weatherData);
                 getDataOverview();//  获取数据概况数据
@@ -294,6 +346,7 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
 
             @Override
             public void onError(Response<String> response) {
+                LogUtil.i("getWeather--onError-->"+response);
                 super.onError(response);
 
             }
@@ -334,6 +387,8 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
         ((TextView) findViewById(R.id.text_weather_wind_power)).setText(weatherData.getWindLevelDay() + "级");
     }
 
+    boolean isFirstLocation = true;
+
     /**
      * 定位成功后回调函数
      */
@@ -343,6 +398,10 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             if (amapLocation != null
                     && amapLocation.getErrorCode() == 0) {
                 mListener.onLocationChanged(amapLocation);// 显示系统小蓝点
+                if(isFirstLocation){
+                    aMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude())));
+                    isFirstLocation = false;
+                }
             } else {
                 String errText = "定位失败," + amapLocation.getErrorCode() + ": " + amapLocation.getErrorInfo();
                 Log.e("AmapErr", errText);

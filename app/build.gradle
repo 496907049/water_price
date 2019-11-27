@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('E:\\GitProjects\\water_price\\water_price.jks')
+            storePassword '123456'
+            keyAlias = 'key0'
+            keyPassword '123456'
+        }
+    }
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.ffapp.waterprice"
@@ -90,8 +98,9 @@ dependencies {
 //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 //    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
     api 'com.tencent.tbs.tbssdk:sdk:43697'
-    implementation files('libs/Amap_2DMap_V5.2.0_20170627.jar')
-    implementation files('libs/AMap_Location_V4.3.0_20181016.jar')
+    implementation files('libs/Android_Map3D_SDK_V7.1.0_20191030.jar')
+//    implementation files('libs/Amap_2DMap_V6.0.0_20191106.jar')
+    implementation files('libs/AMap_Location_V4.7.0_20190708.jar')
     implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
     implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。

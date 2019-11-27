@@ -31,6 +31,7 @@ public class ManageTodoListData extends BasisBean {
 	private String taskId;
 	private String taskName;
 	private String taskUser;
+	private String taskUserName ;
 	private int type;
 	private int taskState;
 	private long updateTime;
@@ -103,7 +104,7 @@ public class ManageTodoListData extends BasisBean {
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
 		dataListBean.getList().add(new BaseListData(taskName,"任务名称"));
 		dataListBean.getList().add(new BaseListData(TimeUtils.getTimeLongToStrByFormat(startTime,"yyyy-MM-dd HH:mm:ss"),"开始时间"));
-		dataListBean.getList().add(new BaseListData(taskUser,"执行人"));
+		dataListBean.getList().add(new BaseListData(taskUserName,"执行人"));
 			dataListBean.getList().add(new BaseListData(getTaskState_STR(),"执行状态"));
 		return  dataListBean;
 	}
@@ -138,5 +139,13 @@ public class ManageTodoListData extends BasisBean {
 				return "已完成";
 		}
 		return "";
+	}
+
+	public String getTaskUserName() {
+		return taskUserName;
+	}
+
+	public void setTaskUserName(String taskUserName) {
+		this.taskUserName = taskUserName;
 	}
 }
