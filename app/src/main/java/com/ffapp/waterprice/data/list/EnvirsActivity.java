@@ -212,6 +212,8 @@ public class EnvirsActivity extends BasisActivity {
             TextView tvSoilTemperature;
             @BindView(R.id.tv_soil_humidity)
             TextView tvSoilHumidity;
+            @BindView(R.id.img_online)
+            ImageView imgOnline;
             @BindView(R.id.list_item)
             LinearLayout list_item;
 
@@ -232,6 +234,14 @@ public class EnvirsActivity extends BasisActivity {
                 tvWindSpeed.setText((listData.getWindSpeed() == null) ? "" : listData.getWindSpeed());
                 tvSoilTemperature.setText((listData.getSoilTemperature() == null) ? "" : listData.getSoilTemperature());
                 tvSoilHumidity.setText((listData.getSoilHumidity() == null) ? "" : listData.getSoilHumidity());
+                switch (listData.getState()){
+                    case 0:
+                        imgOnline.setBackgroundResource(R.mipmap.list_img_offline);
+                        break;
+                    case 1:
+                        imgOnline.setBackgroundResource(R.mipmap.list_img_online);
+                        break;
+                }
                 list_item.setTag(position);
             }
 
