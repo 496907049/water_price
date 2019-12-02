@@ -145,6 +145,12 @@ public class LoginActivity extends BasisActivity {
         listServers = new BaseListDataListBean();
         BaseListData data;
 
+        data = new BaseListData("http://218.85.131.36:7219/", "外网环境");
+        data.setTenant("app");
+        data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");
+        listServers.getList().add(data);
+
+
         data = new BaseListData("http://192.168.25.245:8081/", "测试环境");
         data.setTenant("app");
         data.setAccessKey("45bd5cc0c8694cdc92c43a6edc094089");

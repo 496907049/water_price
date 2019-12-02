@@ -316,9 +316,13 @@ public class ManageMaintainDetailBean extends BasisBean {
 			dataListBean.getList().add(new BaseListData(TimeUtils.getDistanceTimeFutureHour(executionTime,finishTime),"维护时长"));
 		}
 		if(!isEdit){
+			if(type == TYPE_MACHINE){
+				dataListBean.getList().add(new BaseListData(updateDevice,"替换器件"));
+			}
 			if(executionTime != 0){
 				dataListBean.getList().add(new BaseListData(TimeUtils.getTimeLongToStrByFormat(executionTime,"yyyy-MM-dd HH:mm:ss"),"维护时间"));
 			}
+
 			if(!TextUtils.isEmpty(situation)){
 				dataListBean.getList().add(new BaseListData(situation,"维护情况"));
 			}

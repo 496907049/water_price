@@ -199,7 +199,7 @@ public class ManageMaintainListData extends BasisBean {
 	@JSONField(serialize = false)
 	public BaseListDataListBean getListInfoMaintain(){
 		BaseListDataListBean dataListBean = new BaseListDataListBean();
-		dataListBean.getList().add(new BaseListData(content,"维护任务"));
+		dataListBean.getList().add(new BaseListData(name,"维护名称"));
 		dataListBean.getList().add(new BaseListData(TimeUtils.getTimeLongToStrByFormat(startTime,"yyyy-MM-dd HH:mm:ss"),"开始时间"));
 
 		dataListBean.getList().add(new BaseListData(declaration,"执行人"));
