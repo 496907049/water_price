@@ -164,12 +164,19 @@ public class LoginActivity extends BasisActivity {
 
         BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
         if (dataCurrent != null) {
-            text_servername.setText(dataCurrent.getName());
+//            text_servername.setText(dataCurrent.getName());
+            text_servername.setText("自定义服务器");
             MyUtils.putSerciceData(dataCurrent);
         } else {
-            dataCurrent = listServers.getList().get(0);
-            MyUtils.putSerciceData(data);
-            text_servername.setText(dataCurrent.getName());
+            text_servername.setText("自定义服务器");
+            if (TextUtils.isEmpty(MyUtils.getIp())) {
+                dataCurrent = listServers.getList().get(0);
+                MyUtils.putSerciceData(dataCurrent);
+//                text_servername.setText(dataCurrent.getName());
+            }
+//            dataCurrent = listServers.getList().get(0);
+//            MyUtils.putSerciceData(data);
+//            text_servername.setText(dataCurrent.getName());
         }
 
         Acp.getInstance(this).request(new AcpOptions.Builder()
@@ -217,6 +224,7 @@ public class LoginActivity extends BasisActivity {
     public static final int REQUEST_REGISTER = 11;
     private final int REQUEST_FOGET = 13;
     private final int REQUEST_SERVER_CHOOSE = 14;
+    private final int REQUEST_SERVER_EDIT = 15;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -248,6 +256,10 @@ public class LoginActivity extends BasisActivity {
                     }
                 }
                 break;
+            case REQUEST_SERVER_EDIT:
+                text_servername.setText("自定义服务器");
+
+                break;
             default:
                 break;
         }
@@ -261,7 +273,8 @@ public class LoginActivity extends BasisActivity {
 
     @OnClick(R.id.view_server)
     void server_choose() {
-        StringListChooseActivity.toStringListChoose(mContext, "请选择运行环境", listServers.getListString(), REQUEST_SERVER_CHOOSE);
+//        StringListChooseActivity.toStringListChoose(mContext, "请选择运行环境", listServers.getListString(), REQUEST_SERVER_CHOOSE);
+        ActivityTool.skipActivityForResult(mContext,SeverSettingActivity.class,REQUEST_SERVER_EDIT);
     }
 
 
@@ -277,11 +290,11 @@ public class LoginActivity extends BasisActivity {
         startActivityForResult(intent, REQUEST_REGISTER);
     }
 
-    @OnClick(R.id.text_forgetpwd)
-    void fogetpwd() {
-        Intent intent = new Intent(this, ForgetPwdActivity.class);
-        startActivityForResult(intent, REQUEST_FOGET);
-    }
+//    @OnClick(R.id.text_forgetpwd)
+//    void fogetpwd() {
+//        Intent intent = new Intent(this, ForgetPwdActivity.class);
+//        startActivityForResult(intent, REQUEST_FOGET);
+//    }
 
 
     @BindView(R.id.img_check_usere)
@@ -343,7 +356,7 @@ public class LoginActivity extends BasisActivity {
         params.put("username", userName);
         params.put("password", password);
         showProgress();
-        OkGoClient.post(mContext,Constants.URL_LOGIN, params,myHttpListener, HTTP_LOGIN, UserBean.class);
+        OkGoClient.post(mContext, Constants.URL_LOGIN, params, myHttpListener, HTTP_LOGIN, UserBean.class);
 
     }
 
@@ -356,7 +369,7 @@ public class LoginActivity extends BasisActivity {
                 case HTTP_LOGIN:
                     UserBean userBean = (UserBean) result;
                     MyUtils.putUserName(userBean.getRealname());
-                  getToken();
+                    getToken();
                     break;
 //                case HTTP_SMS:
 ////                    showToast("短信验证码获取成功");
@@ -406,15 +419,15 @@ public class LoginActivity extends BasisActivity {
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
 
         showProgress();
-        OkGoClient.post(mContext,Constants.URL_GET_TOKEN, body, new StringCallback() {
+        OkGoClient.post(mContext, Constants.URL_GET_TOKEN, body, new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                String a =response.body();
+                String a = response.body();
                 LoginBean bean = JSON.parseObject(a, LoginBean.class);
-                if(bean.getAccessToken() == null){
-                    showToast(""+bean.getMessage());
+                if (bean.getAccessToken() == null) {
+                    showToast("" + bean.getMessage());
                     return;
-                }else {
+                } else {
                     onLoginSuccess(bean);
                 }
             }

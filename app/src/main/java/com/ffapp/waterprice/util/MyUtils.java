@@ -132,6 +132,9 @@ public class MyUtils {
 
     public static BaseListData  getSerciceData(){
         MySharedPreferences msp = new MySharedPreferences(BasisApp.getInstance());
+        if(TextUtils.isEmpty(msp.getString(SP_IP))){
+            return null;
+        }
         BaseListData data = new BaseListData();
         data.setAccessKey(msp.getString(SP_ACCESSKEY));
         data.setTenant(msp.getString(SP_TENANT));

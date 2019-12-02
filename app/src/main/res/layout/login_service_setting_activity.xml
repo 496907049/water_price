@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:background="@mipmap/login_bg"
+    android:orientation="vertical">
+
+
+
+    <android.support.v4.widget.NestedScrollView
+        style="@style/base_scroll_style">
+
+        <LinearLayout style="@style/base_layout_m_w_v"
+            android:layout_gravity="center">
+
+            <TextView
+                style="@style/base_text_content.white"
+                android:text="服务器设置"
+                android:layout_gravity="center"
+                android:textSize="@dimen/base_textsize_large"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/login_shape_white_round_bg"
+                android:layout_marginLeft="@dimen/base_margin_xlarge"
+                android:layout_marginRight="@dimen/base_margin_xlarge"
+                android:layout_marginTop="@dimen/base_margin_large"
+                android:layout_marginBottom="@dimen/base_margin_large">
+
+
+                <LinearLayout
+                    style="@style/base_layout_m_w_h_cv"
+                    >
+
+                    <ImageView
+                        style="@style/login_icon"
+                        android:src="@mipmap/login_icon_ip" />
+
+                    <EditText
+                        android:id="@+id/edit_service"
+                        style="@style/login_edit"
+                        android:layout_weight="1.0"
+                        android:singleLine="true"
+                        android:hint="服务器IP地址(包含端口)"
+                        />
+                </LinearLayout>
+                <ImageView
+                    style="@style/divider_hor_style.color"
+                    android:background="#dddddd"
+                    android:layout_height="1px"
+                    />
+                <LinearLayout
+                    style="@style/base_layout_m_w_h_cv"
+                    >
+
+                    <ImageView
+                        style="@style/login_icon"
+                        android:src="@mipmap/login_icon_ip" />
+
+                    <EditText
+                        android:id="@+id/edit_tenant"
+                        style="@style/login_edit"
+                        android:layout_weight="1.0"
+                        android:singleLine="true"
+                        android:hint="Tenant"
+                        />
+                </LinearLayout>
+                <ImageView
+                    style="@style/divider_hor_style.color"
+                    android:background="#dddddd"
+                    android:layout_height="1px"
+                    />
+                <LinearLayout
+                    style="@style/base_layout_m_w_h_cv"
+                    >
+
+                    <ImageView
+                        style="@style/login_icon"
+                        android:src="@mipmap/login_icon_ip" />
+
+                    <EditText
+                        android:id="@+id/edit_accesskey"
+                        style="@style/login_edit"
+                        android:layout_weight="1.0"
+                        android:singleLine="true"
+                        android:hint="AccessKey"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/btn_ok"
+                style="@style/login_btn"
+                android:layout_marginTop="@dimen/base_margin_large"
+                android:text="@string/app_ok" />
+
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+</LinearLayout>
