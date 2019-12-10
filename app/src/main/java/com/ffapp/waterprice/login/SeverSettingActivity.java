@@ -78,7 +78,9 @@ public class SeverSettingActivity extends BasisActivity {
             return;
         }
 
-
+        if(!ip.startsWith("http")){
+            ip = "http://"+ip;
+        }
         if(!ip.endsWith("/")){
            ip = ip+"/";
         }
