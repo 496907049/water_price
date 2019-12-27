@@ -49,11 +49,15 @@ public class SeverSettingActivity extends BasisActivity {
             edit_tenant.setText(serciceData.getTenant());
             edit_accesskey.setText(serciceData.getAccessKey());
         }else {
-            edit_ip.setText("http://218.85.131.36:7219/");
-            edit_tenant.setText("app");
-            edit_accesskey.setText("45bd5cc0c8694cdc92c43a6edc094089");
+//            edit_ip.setText("http://218.85.131.36:7219/");
+//            edit_tenant.setText("app");
+//            edit_accesskey.setText("45bd5cc0c8694cdc92c43a6edc094089");
 
         }
+
+//        edit_ip.setText("http://47.112.178.65:5001/");
+//        edit_tenant.setText("app");
+//        edit_accesskey.setText("81142101244c4308a5532ecb4e007d47");
     }
 
 

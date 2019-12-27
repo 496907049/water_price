@@ -207,13 +207,11 @@ public class LoginActivity extends BasisActivity {
         }
 
         if (TextUtils.isEmpty(msp.getUser())) {
-            edit_user.setText("root");
-            edit_pwd.setText("123456");
+//            edit_user.setText("root");
+//            edit_pwd.setText("123456");
 //            edit_user.setText("asdasds");
 //            edit_pwd.setText("123456");
         }
-//        edit_user.setText("asdasds");
-//        edit_pwd.setText("123456");
 
 //        edit_user.setText("admin");
 //        edit_pwd.setText("111111");
@@ -334,6 +332,11 @@ public class LoginActivity extends BasisActivity {
 
     void doLogin() {
 
+       if(MyUtils.getSerciceData() == null){
+           showToast("请设置自定义服务器");
+           server_choose();
+           return;
+       }
         userName = edit_user.getText().toString().trim();
         if (TextUtils.isEmpty(userName)) {
             showToast(R.string.user_user_empty);
@@ -411,7 +414,9 @@ public class LoginActivity extends BasisActivity {
     }
 
     void getToken() {
-        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
+//        BaseListData dataCurrent = listServers.getDataById(MyUtils.getIp());
+//        dataCurrent.setAccount(userName);
+        BaseListData dataCurrent = MyUtils.getSerciceData();
         dataCurrent.setAccount(userName);
 
         MediaType mediaType = MediaType.parse("application/json");

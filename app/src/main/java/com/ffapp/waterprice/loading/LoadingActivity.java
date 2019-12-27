@@ -90,6 +90,9 @@ public class    LoadingActivity extends BasisOtherActivity {
         BasisApp.isProgramExit = false;
         initPush();
 
+        if(MyUtils.getSerciceData() == null){
+            LoginBean.logout();
+        }
         mSp = new MySharedPreferences(mContext);
 //		autoLogin();
         mHandler.sendEmptyMessageDelayed(HANDLER_LOADING_DONE, LOADING_PAUSE_TIME);

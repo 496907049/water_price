@@ -67,7 +67,7 @@
                         style="@style/login_edit"
                         android:layout_weight="1.0"
                         android:singleLine="true"
-                        android:hint="Tenant"
+                        android:hint="租户名称"
                         />
                 </LinearLayout>
                 <ImageView
