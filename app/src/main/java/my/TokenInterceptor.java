@@ -83,9 +83,13 @@ public class TokenInterceptor implements Interceptor {
 //        CacheManager.saveLoginInfo(loginInfo);
         String b = response.body().string();
         LoginBean bean = JSON.parseObject(b, LoginBean.class);
-        LoginBean.getInstance().setAccessToken(bean.getToken());
-        LoginBean.getInstance().save();
-        return bean.getToken();
+        if(bean.getAccessToken() != null && !bean.getMessage().contains("租户信息不存在")){
+            LoginBean.getInstance().setAccessToken(bean.getToken());
+            LoginBean.getInstance().save();
+            return bean.getToken();
+        }
+
+        return "";
     }
 
 }
