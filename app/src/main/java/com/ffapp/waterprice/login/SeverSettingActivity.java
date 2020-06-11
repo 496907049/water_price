@@ -3,6 +3,7 @@ package com.ffapp.waterprice.login;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisActivity;
@@ -19,9 +20,9 @@ public class SeverSettingActivity extends BasisActivity {
     @BindView(R.id.edit_service)
     EditText edit_ip;
     @BindView(R.id.edit_tenant)
-    EditText edit_tenant;
+    TextView edit_tenant;
     @BindView(R.id.edit_accesskey)
-    EditText edit_accesskey;
+    TextView edit_accesskey;
 
 
     @Override
@@ -43,11 +44,14 @@ public class SeverSettingActivity extends BasisActivity {
 //        edit_ip.setText("192.168.25.48:12400");
 
 //        edit_port.setText("12400");
+        edit_tenant.setText("app");
+        edit_accesskey.setText("09b40a8892444fabbc72a0f35f068066");
+
         BaseListData serciceData = MyUtils.getSerciceData();
         if(serciceData != null){
             edit_ip.setText(serciceData.getId());
-            edit_tenant.setText(serciceData.getTenant());
-            edit_accesskey.setText(serciceData.getAccessKey());
+//            edit_tenant.setText(serciceData.getTenant());
+//            edit_accesskey.setText(serciceData.getAccessKey());
         }else {
 //            edit_ip.setText("http://218.85.131.36:7219/");
 //            edit_tenant.setText("app");
@@ -72,15 +76,15 @@ public class SeverSettingActivity extends BasisActivity {
             return;
         }
 
-        if (CheckUtils.isStrEmpty(tenant)) {
-            showToast("请输入tenant");
-            return;
-        }
-
-        if (CheckUtils.isStrEmpty(accesskey)) {
-            showToast("请输入accesskey");
-            return;
-        }
+//        if (CheckUtils.isStrEmpty(tenant)) {
+//            showToast("请输入tenant");
+//            return;
+//        }
+//
+//        if (CheckUtils.isStrEmpty(accesskey)) {
+//            showToast("请输入accesskey");
+//            return;
+//        }
 
         if(!ip.startsWith("http")){
             ip = "http://"+ip;

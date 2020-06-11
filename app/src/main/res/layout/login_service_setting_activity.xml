@@ -60,9 +60,17 @@
 
                     <ImageView
                         style="@style/login_icon"
-                        android:src="@mipmap/login_icon_ip" />
+                        android:src="@mipmap/login_icon_ip"
+                        android:visibility="gone"
+                        />
 
-                    <EditText
+                    <TextView
+                        style="@style/base_text_content.small"
+                        android:layout_marginLeft="@dimen/base_margin_small"
+                        android:text="Tenant:"
+                        />
+
+                    <TextView
                         android:id="@+id/edit_tenant"
                         style="@style/login_edit"
                         android:layout_weight="1.0"
@@ -81,13 +89,21 @@
 
                     <ImageView
                         style="@style/login_icon"
-                        android:src="@mipmap/login_icon_ip" />
+                        android:src="@mipmap/login_icon_ip"
+                        android:visibility="gone"
+                        />
 
-                    <EditText
+                    <TextView
+                        style="@style/base_text_content.small"
+                        android:layout_marginLeft="@dimen/base_margin_small"
+                        android:text="AccessKey:"
+                        />
+
+                    <TextView
                         android:id="@+id/edit_accesskey"
                         style="@style/login_edit"
                         android:layout_weight="1.0"
-                        android:singleLine="true"
+                        android:singleLine="false"
                         android:hint="AccessKey"
                         />
                 </LinearLayout>

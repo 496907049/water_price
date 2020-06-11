@@ -37,15 +37,15 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/MyTheme"
-        tools:replace="android:name,theme"
         android:resizeableActivity="true"
         android:networkSecurityConfig="@xml/network_security_config"
-        tools:ignore="GoogleAppIndexingWarning">
+        tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity">
 
         <activity
             android:name="com.ffapp.waterprice.loading.LoadingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/welcomeTheme">
+            android:theme="@style/welcomeTheme"
+          >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -146,7 +146,8 @@
         </activity>
         <activity
             android:name=".video.VideoDetailActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity" />
 
         <activity
             android:name=".home.HomeTabActivity"

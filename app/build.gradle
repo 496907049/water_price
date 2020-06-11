@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-            storeFile file('E:\\GitProjects\\water_price\\water_price.jks')
-            storePassword '123456'
-            keyAlias = 'key0'
-            keyPassword '123456'
+//            storeFile file('E:\\GitProjects\\water_price\\water_price.jks')
+//            storePassword '123456'
+//            keyAlias = 'key0'
+//            keyPassword '123456'
         }
     }
     compileSdkVersion 28
