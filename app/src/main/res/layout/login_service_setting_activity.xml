@@ -53,9 +53,11 @@
                     style="@style/divider_hor_style.color"
                     android:background="#dddddd"
                     android:layout_height="1px"
+                    android:visibility="gone"
                     />
                 <LinearLayout
                     style="@style/base_layout_m_w_h_cv"
+                    android:visibility="gone"
                     >
 
                     <ImageView
@@ -82,9 +84,11 @@
                     style="@style/divider_hor_style.color"
                     android:background="#dddddd"
                     android:layout_height="1px"
+                    android:visibility="gone"
                     />
                 <LinearLayout
                     style="@style/base_layout_m_w_h_cv"
+                    android:visibility="gone"
                     >
 
                     <ImageView
