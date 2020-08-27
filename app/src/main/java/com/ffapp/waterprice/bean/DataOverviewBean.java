@@ -1,5 +1,7 @@
 package com.ffapp.waterprice.bean;
 
+import android.text.TextUtils;
+
 public class DataOverviewBean extends BasisBean{
     private int sumWaterUser;     //用水户数量
     private int sumLineDevice;          //在线数量
@@ -25,6 +27,9 @@ public class DataOverviewBean extends BasisBean{
         this.sumRatifiedWaterConsumption = sumRatifiedWaterConsumption;
     }
     public String getSumRatifiedWaterConsumption() {
+        if(TextUtils.isEmpty(sumRatifiedWaterConsumption)){
+            return "0";
+        }
         return sumRatifiedWaterConsumption;
     }
 
@@ -32,6 +37,9 @@ public class DataOverviewBean extends BasisBean{
         this.sumRealWaterConsumption = sumRealWaterConsumption;
     }
     public String getSumRealWaterConsumption() {
+        if(TextUtils.isEmpty(sumRealWaterConsumption)){
+            return "0";
+        }
         return sumRealWaterConsumption;
     }
 
@@ -39,6 +47,9 @@ public class DataOverviewBean extends BasisBean{
         this.lastWaterConsumption = lastWaterConsumption;
     }
     public String getLastWaterConsumption() {
+        if(TextUtils.isEmpty(lastWaterConsumption)){
+            return "0";
+        }
         return lastWaterConsumption;
     }
 
