@@ -339,9 +339,6 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
                 LogUtil.i("getWeather--onSuccess-->"+response.body());
                 WeatherInfoData weatherData = JSON.parseObject(response.body(), WeatherInfoData.class);
                 setWeatherView(weatherData);
-                getDataOverview();//  获取数据概况数据
-                initPicChart();//获取用水情况
-                getArea();//获取个人区域信息
             }
 
             @Override
@@ -354,6 +351,9 @@ public class HomeIndexActivity extends HomeBaseActivity implements AMapLocationL
             @Override
             public void onFinish() {
                 super.onFinish();
+                getDataOverview();//  获取数据概况数据
+                initPicChart();//获取用水情况
+                getArea();//获取个人区域信息
                 new AsyncTask<String, String, Object>() {
                     @Override
                     protected Object doInBackground(String... strings) {
