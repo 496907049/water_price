@@ -93,7 +93,18 @@ public class AreaActivity extends BasisActivity {
                         addressSelector.setCities(getCityList(cities2,city.getCityChildren()));
                         break;
                     case 1:
-                        addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
+                        if(city.getCityChildren() == null){
+                            ArrayList<String> deviceCodeList = new ArrayList<>();
+                            deviceCodeList.add(city.getDeviceCode());
+                            Intent data = new Intent();
+                            data.putStringArrayListExtra("deviceCodeList",deviceCodeList);
+                            data.putExtra("allSiteName",city.getCityName());
+                            setResult(Constants.AREA_CALLBACK,data);
+                            finish();
+                        }else {
+                            addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
+                        }
+
                         break;
                     case 2:
                         if(city.getCityChildren() == null){
