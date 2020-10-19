@@ -94,13 +94,13 @@ public class SiteActivity extends BasisActivity {
             public void itemClick(AddressSelector addressSelector, CityInterface city,int position, int tabPosition) throws JSONException {
                 switch (tabPosition) {
                     case 0:
-                        addressSelector.setCities(getCityList(cities2,city.getCityChildren()));
+                        goToChildren(city,cities2);
                         break;
                     case 1:
-                        addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
+                        goToChildren(city,cities3);
                         break;
                     case 2:
-                        addressSelector.setCitiesTwo(getCityList(cities4,city.getCityChildren()));
+                        goToChildren(city,cities4);
                         break;
                     case 3:
                         Intent data = new Intent();
@@ -142,6 +142,17 @@ public class SiteActivity extends BasisActivity {
 
             }
         });
+    }
+
+    void goToChildren(CityInterface city,ArrayList<City> nextCityList){
+        if(city.getCityChildren() == null){
+            Intent data = new Intent();
+            data.putExtra("id",city.getAreaId());
+            setResult(Constants.SITE_CALLBACK,data);
+            finish();
+        }else {
+            addressSelector.setCities(getCityList(nextCityList,city.getCityChildren()));
+        }
     }
 
     private ArrayList<City> getCityList(ArrayList<City> cityList,ArrayList<DeviceTreeChildListData> currentTreeList){

@@ -90,34 +90,13 @@ public class AreaActivity extends BasisActivity {
             public void itemClick(AddressSelector addressSelector, CityInterface city,int position, int tabPosition) throws JSONException {
                 switch (tabPosition) {
                     case 0:
-                        addressSelector.setCities(getCityList(cities2,city.getCityChildren()));
+                        goToChildren(city,cities2);
                         break;
                     case 1:
-                        if(city.getCityChildren() == null){
-                            ArrayList<String> deviceCodeList = new ArrayList<>();
-                            deviceCodeList.add(city.getDeviceCode());
-                            Intent data = new Intent();
-                            data.putStringArrayListExtra("deviceCodeList",deviceCodeList);
-                            data.putExtra("allSiteName",city.getCityName());
-                            setResult(Constants.AREA_CALLBACK,data);
-                            finish();
-                        }else {
-                            addressSelector.setCities(getCityList(cities3,city.getCityChildren()));
-                        }
-
+                        goToChildren(city,cities3);
                         break;
                     case 2:
-                        if(city.getCityChildren() == null){
-                            ArrayList<String> deviceCodeList = new ArrayList<>();
-                            deviceCodeList.add(city.getDeviceCode());
-                            Intent data = new Intent();
-                            data.putStringArrayListExtra("deviceCodeList",deviceCodeList);
-                            data.putExtra("allSiteName",city.getCityName());
-                            setResult(Constants.AREA_CALLBACK,data);
-                            finish();
-                        }else {
-                            addressSelector.setCitiesThree(getCityList(cities4,city.getCityChildren()));
-                        }
+                        goToChildren(city,cities4);
                         break;
                     case 3:
 
@@ -196,5 +175,20 @@ public class AreaActivity extends BasisActivity {
             cityList.add(children);
         }
         return cityList;
+    }
+
+
+    void goToChildren(CityInterface city,ArrayList<City> nextCityList){
+        if(city.getCityChildren() == null){
+            ArrayList<String> deviceCodeList = new ArrayList<>();
+            deviceCodeList.add(city.getDeviceCode());
+            Intent data = new Intent();
+            data.putStringArrayListExtra("deviceCodeList",deviceCodeList);
+            data.putExtra("allSiteName",city.getCityName());
+            setResult(Constants.AREA_CALLBACK,data);
+            finish();
+        }else {
+            addressSelector.setCities(getCityList(nextCityList,city.getCityChildren()));
+        }
     }
 }
