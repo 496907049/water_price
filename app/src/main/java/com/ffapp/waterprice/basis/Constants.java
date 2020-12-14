@@ -85,7 +85,12 @@ public class Constants {
 	//土壤墒情分页
 	public static String URL_WARNING= ANALYSIS_BASE_URL_STATT+"warning";
 
-
+	//海康视频
+	public static String HK_SERVICE_IP  = "218.75.178.16";
+	public static String HK_SERVICE_PORT  = "8000";
+	public static String HK_SERVICE_USERNAME  = "admin";
+	public static String HK_SERVICE_PWD = "12345abc";
+	public static String HK_SERVICE_NAME = "TieShan";
 
 
 

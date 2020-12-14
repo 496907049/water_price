@@ -27,6 +27,8 @@ import com.ffapp.waterprice.user.UserIndexActivity;
 import com.ffapp.waterprice.video.VideoIndexActivity;
 import com.flyco.dialog.listener.OnBtnClickL;
 import com.gyf.barlibrary.ImmersionBar;
+import com.hcnetsdk.Control.DevManageGuider;
+import com.hcnetsdk.Control.SDKGuider;
 import com.loopj.android.http.RequestParams;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
@@ -448,6 +450,7 @@ public class HomeTabActivity extends TabActivity implements
         // TODO Auto-generated method stub
         super.onDestroy();
         EventBus.getDefault().unregister(this);
+        SDKGuider.g_sdkGuider.m_comDMGuider.logout_jna(0);
     }
 
     @Override

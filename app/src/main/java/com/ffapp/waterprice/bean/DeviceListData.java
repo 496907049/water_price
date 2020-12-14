@@ -562,6 +562,7 @@ public class DeviceListData extends BasisBean {
     private String appAddress;
     private String typeId;
     private String watershed;
+    private String haikangUid;
 
     public void setAddress(String address) {
         this.address = address;
@@ -744,5 +745,13 @@ public class DeviceListData extends BasisBean {
 
     public void setContent(Map<String, String> content) {
         this.content = content;
+    }
+
+    public String getHaikangUid() {
+        return haikangUid;
+    }
+
+    public void setHaikangUid(String haikangUid) {
+        this.haikangUid = haikangUid;
     }
 }

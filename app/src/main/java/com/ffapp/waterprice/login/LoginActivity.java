@@ -32,6 +32,7 @@ import com.lzy.okgo.model.Response;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
+import com.nostra13.universalimageloader.utils.L;
 
 import java.util.List;
 
@@ -39,6 +40,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import my.ActivityTool;
 import my.DialogUtils;
+import my.LogUtil;
 import my.MySharedPreferences;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
@@ -422,12 +424,13 @@ public class LoginActivity extends BasisActivity {
         MediaType mediaType = MediaType.parse("application/json");
 //        RequestBody body = RequestBody.create(mediaType, "{ \"accessKey\": \"45bd5cc0c8694cdc92c43a6edc094089\", \"account\": \"admin\", \"tenant\": \"app\"}");
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(dataCurrent));
-
+//        LogUtil.i("getToken---->"+ JSON.toJSONString(dataCurrent));
         showProgress();
         OkGoClient.post(mContext, Constants.URL_GET_TOKEN, body, new StringCallback() {
             @Override
             public void onSuccess(Response<String> response) {
-                String a = response.body();
+               String a = response.body();
+//                LogUtil.i("getToken---->"+ a);
                 LoginBean bean = JSON.parseObject(a, LoginBean.class);
                 if (bean.getAccessToken() == null) {
                     showToast("" + bean.getMessage());

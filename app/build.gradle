@@ -14,7 +14,7 @@ android {
         applicationId "com.ffapp.waterprice"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 2
+        versionCode 3
         versionName "2.2.0"
         multiDexEnabled true
         manifestPlaceholders = [
@@ -64,6 +64,7 @@ android {
 //}
 
 dependencies {
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     implementation 'com.android.support:design:26.1.0'
@@ -127,6 +128,10 @@ dependencies {
     implementation project(path: ':MultiSelectlib')
 
     implementation files('libs/tiandituapi3.0.jar')
+    implementation files('libs/jna.jar')
+    implementation files('libs/PlayerSDK_hcnetsdk.jar')
+    implementation files('libs/HCNetSDK.jar')
+    implementation files('libs/HCNetSDK_E.jar')
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.9'
 
 }

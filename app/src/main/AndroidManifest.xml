@@ -148,7 +148,10 @@
             android:name=".video.VideoDetailActivity"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
-
+        <activity
+            android:name=".video.HKVideoDetailActivity"
+            android:screenOrientation="landscape"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".home.HomeTabActivity"
             android:screenOrientation="portrait">

@@ -1,5 +1,6 @@
 package com.ffapp.waterprice.video;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ffapp.waterprice.R;
 import com.ffapp.waterprice.basis.BasisFragment;
@@ -19,14 +21,21 @@ import com.ffapp.waterprice.bean.BaseListBeanYL;
 import com.ffapp.waterprice.bean.DeviceListBean;
 import com.ffapp.waterprice.bean.DeviceListData;
 import com.ffapp.waterprice.other.WebViewX5Activity;
+import com.hcnetsdk.Control.DevManageGuider;
+import com.hcnetsdk.Control.SDKGuider;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.loopj.android.http.RequestParams;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import my.ActivityTool;
+import my.DialogUtils;
+import my.DisplayUtil;
+import my.LogUtil;
 import my.http.HttpRestClient;
 import my.http.MyHttpListener;
 import my.http.OkGoClient;
@@ -221,11 +230,64 @@ public class VideoFragment extends BasisFragment {
             @OnClick(R.id.list_item)
             public void viewFile(View v) {
                 DeviceListData data = (DeviceListData) v.getTag();
-                Bundle extras = new Bundle();
-                extras.putSerializable("url",data.getVideoUrl());
-                ActivityTool.skipActivity(mContext,VideoDetailActivity.class,extras);
+                if(!TextUtils.isEmpty(data.getCameraType()) && data.getCameraType().equals("3")){
+                    onHkCamereClick(data);
+                }else {
+                    if(TextUtils.isEmpty(data.getAppAddress())){
+                        DialogUtils.DialogOkMsg(mContext,"视频地址未配置");
+                    }else {
+                        Bundle extras = new Bundle();
+                        extras.putSerializable("url",data.getVideoUrl());
+                        ActivityTool.skipActivity(mContext,VideoDetailActivity.class,extras);
+                    }
+
+                }
+
 //                WebViewX5Activity.toWebView(mContext,url,getTitle());
             }
         }
+    }
+
+    DeviceListData currentDeviceListData;
+    void onHkCamereClick(DeviceListData deviceListData){
+        currentDeviceListData = deviceListData;
+        DevManageGuider.DeviceItem m_deviceInfo = SDKGuider.g_sdkGuider.m_comDMGuider.getCurrSelectDev();
+
+        if(m_deviceInfo == null || m_deviceInfo.m_struDevState.m_iLogState != 1) {
+            LogUtil.i("海康平台未登录--》");
+            SDKGuider.g_sdkGuider.m_comDMGuider.setDevList(new ArrayList<DevManageGuider.DeviceItem>());
+            loginHkPlatForm();
+        }else {
+            LogUtil.i("海康平台已登录--》到视频去");
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("id",deviceListData.getHaikangUid());
+            ActivityTool.skipActivity(mContext,HKVideoDetailActivity.class,bundle);
+        }
+    }
+
+    void loginHkPlatForm(){
+        DevManageGuider.DeviceItem deviceItem = SDKGuider.g_sdkGuider.m_comDMGuider.new DeviceItem();
+        deviceItem.m_szDevName = Constants.HK_SERVICE_NAME;
+        deviceItem.m_struNetInfo = SDKGuider.g_sdkGuider.m_comDMGuider.new DevNetInfo(
+                Constants.HK_SERVICE_IP,
+                Constants.HK_SERVICE_PORT,
+                Constants.HK_SERVICE_USERNAME,
+                Constants.HK_SERVICE_PWD);
+
+        showLoading();
+        if (SDKGuider.g_sdkGuider.m_comDMGuider.login_v40_jna(deviceItem.m_szDevName, deviceItem.m_struNetInfo)) {
+          LogUtil.i("海康平台登录成功");
+//            ArrayList<DevManageGuider.DeviceItem> alDevList = new ArrayList<>();
+//            alDevList.add(deviceItem);
+//            SDKGuider.g_sdkGuider.m_comDMGuider.setDevList(alDevList);
+            SDKGuider.g_sdkGuider.m_comDMGuider.setCurrSelectDevIndex(0);
+           hideLoading();
+            onHkCamereClick(currentDeviceListData);
+        } else {
+            hideLoading();
+            LogUtil.i("add device failed with "+ SDKGuider.g_sdkGuider.GetLastError_jni());
+            DialogUtils.DialogOkMsg(mContext,"海康平台登录失败");
+        }
+
     }
 }
