@@ -22,6 +22,11 @@ android {
                 JPUSH_APPKEY : "643f48ec7fc14998ce4689f2", //JPush 上注册的包名对应的 Appkey.
                 JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
         ]
+
+        ndk { //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters  "armeabi","armeabi-v7a"
+//       "armeabi"   , "armeabi-v7a", "arm64-v8a", "x86","arm64-v8a","x86_64"
+        }
     }
     lintOptions {
         checkReleaseBuilds false
@@ -99,10 +104,10 @@ dependencies {
 //    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.28'
 //    implementation files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604_sharewithdownload_withoutGame_obfs_20180211_105126.jar')
     api 'com.tencent.tbs.tbssdk:sdk:43697'
-    implementation files('libs/Android_Map3D_SDK_V7.1.0_20191030.jar')
-//    implementation files('libs/Amap_2DMap_V6.0.0_20191106.jar')
-    implementation files('libs/AMap_Location_V4.7.0_20190708.jar')
-    implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
+//    implementation files('libs/Android_Map3D_SDK_V7.1.0_20191030.jar')
+////    implementation files('libs/Amap_2DMap_V6.0.0_20191106.jar')
+//    implementation files('libs/AMap_Location_V4.7.0_20190708.jar')
+//    implementation files('libs/AMap_Search_V6.5.0_20180930.jar')
     implementation 'cn.jiguang.sdk:jpush:3.1.6'  // 此处以JPush 3.1.6 版本为例。
     implementation 'cn.jiguang.sdk:jcore:1.2.5'  // 此处以JCore 1.2.5 版本为例。
     implementation 'cn.jiguang.sdk:janalytics:1.1.1' // 此处以JAnalytics 1.1.1 版本为例。
@@ -133,5 +138,10 @@ dependencies {
     implementation files('libs/HCNetSDK.jar')
     implementation files('libs/HCNetSDK_E.jar')
 //    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.9'
+
+    implementation 'com.amap.api:3dmap:latest.integration'//地图3D
+    implementation 'com.amap.api:location:latest.integration'//定位功能
+    implementation 'com.amap.api:search:latest.integration' //搜索功能
+//    implementation 'com.amap.api:navi-3dmap:latest.integration' //导航功能
 
 }

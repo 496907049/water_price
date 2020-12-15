@@ -105,7 +105,7 @@ public class ManageIndexActivity extends HomeBaseActivity {
         for (int i = 0; i < 1; i++) {
             BannerListData bannerListData = new BannerListData();
 //            bannerListData.setImage_url("http://img0.imgtn.bdimg.com/it/u=3215222857,1774393785&fm=26&gp=0.jpg");
-            bannerListData.setImage_url(R.drawable.home_main_bg_map);
+//            bannerListData.setImage_url(R.drawable.home_main_bg_map);
             mBannerList.getList().add(bannerListData);
         }
         setBannerView();
