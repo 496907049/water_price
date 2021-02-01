@@ -67,6 +67,7 @@ public class AreaActivity extends BasisActivity {
                     city = new City();
                     city.setName(children.getName());
                     city.setId(children.getValue());
+                    city.setCode(children.getCode());
                     city.setChildren(children.getChildren());
                     cities1.add(city);
                 }

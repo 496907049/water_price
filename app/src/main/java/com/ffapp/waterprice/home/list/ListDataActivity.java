@@ -24,6 +24,7 @@ import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.jaygoo.bean.Site;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.lzy.okgo.model.HttpParams;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,7 @@ import butterknife.OnClick;
 import my.ActivityTool;
 import my.TimeUtils;
 import my.http.MyHttpListener;
+import my.http.MyParams;
 import my.http.OkGoClient;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
@@ -117,6 +119,7 @@ public class ListDataActivity extends BasisActivity {
                     public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
 //                        showToast(siteList.get(position).getName()+"====id=="+);
                         deviceTypeId = String.valueOf(siteList.get(position).getId());
+                        mRecyclerView.refresh();
                     }
                 });
                 deviceTypeId = String.valueOf(siteList.get(0).getId());
@@ -167,11 +170,16 @@ public class ListDataActivity extends BasisActivity {
 
     private void getList() {
         keyword = mSearchEt.getText().toString().trim();
-        MediaType mediaType = MediaType.parse("application/json");
-        String param = "{\"areaId\": \"" + areaId + "\",\"deviceCode\": \"" + keyword + "\",\"deviceTypeId\":\"" + deviceTypeId + "\",\"deviceId\":\"" + deviceId + "\"," +
-                "\"" + BaseListBeanYL.PAGE_NAME + "\":" + mListBean.getNextPage() + ",\"" + BaseListBeanYL.PAGE_SIZE_NAME + "\":" + BaseListBeanYL.PAGE_SIZE + "}";
-        RequestBody body = RequestBody.create(mediaType, param);
+        MyParams params = new MyParams();
+        params.put("areaId",areaId);
+        params.put("deviceCode",keyword);
+        params.put("deviceTypeId",deviceTypeId);
+        params.put("deviceId",deviceId);
+        params.put(BaseListBeanYL.PAGE_NAME,mListBean.getNextPage());
+        params.put(BaseListBeanYL.PAGE_SIZE_NAME,BaseListBeanYL.PAGE_SIZE);
+        RequestBody body = params.getOkGoRequestBody();
         showProgress();
+
         OkGoClient.post(mContext, Constants.URL_MONITOR_PAGE, body, new MyHttpListener() {
             @Override
             public void onSuccess(int httpWhat, Object result) {
@@ -260,7 +268,11 @@ public class ListDataActivity extends BasisActivity {
                         tvTime.setText(""+value);
                     }else {
                         keyList.add(key);
-                        valueList.add(value);
+                        if(value.equals("--")){
+                            valueList.add("0");
+                        }else {
+                            valueList.add(value);
+                        }
                     }
                 }
                 childAdapter = new MyChildAdapter(keyList,valueList);

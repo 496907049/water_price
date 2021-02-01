@@ -62,7 +62,7 @@ public class DataChartFragment extends BasisFragment {
      * 获取折线图接口所需要的参数
      */
     private String reportType;
-    private String submitArr = null;
+    private String submitArr;
     private String dateType = "day";
 
 
@@ -170,7 +170,7 @@ public class DataChartFragment extends BasisFragment {
                 }
                 break;
             case R.id.btn_bar_char:
-                if (submitArr == null) {
+                if (TextUtils.isEmpty(submitArr)) {
                     showToast("请区域地址");
                     return;
                 }
@@ -231,7 +231,12 @@ public class DataChartFragment extends BasisFragment {
         String beginTime =tvStartTimme.getText().toString().trim();
         String endTime = tvEndTime.getText().toString().trim();
 
-        if (submitArr == null || TextUtils.isEmpty(beginTime) ||TextUtils.isEmpty(tvEndTime.getText().toString().trim())) {
+        if (TextUtils.isEmpty(submitArr) ) {
+            return;
+        }
+
+        if(TextUtils.isEmpty(beginTime) ||TextUtils.isEmpty(tvEndTime.getText().toString().trim())){
+            showToast("请选择开始时间或者结束时间");
             return;
         }
 
